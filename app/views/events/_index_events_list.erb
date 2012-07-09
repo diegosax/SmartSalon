@@ -1,0 +1,101 @@
+<div class="calendar-container" id="calendar-div">
+
+  <table class="fc-header">
+    <tbody>
+      <tr>
+        <td class="fc-header-left">
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="fc-button-prev fc-state-default fc-corner-left fc-no-right">
+                    <%=link_to :month => (@date.beginning_of_month-1).strftime("%Y-%m-01"),:class=>"btn btn-small btn-grey previous" do%>
+                      <span>&nbsp;◄&nbsp;</span>
+                    <%end%>
+                  </div>
+                </td>
+                <td>
+                  <div class="fc-button-next fc-state-default fc-corner-right">
+                    <%=link_to :month => (@date.end_of_month+1).strftime("%Y-%m-01"),:class=>"btn btn-small btn-grey previous" do%>
+                      <span>&nbsp;►&nbsp;</span>
+                    <%end%>
+                  </div>
+                </td>
+                <td>
+                  <span class="fc-header-space"></span>
+                </td>
+                <td>
+                  <div class="fc-button-today fc-state-default fc-corner-left fc-corner-right fc-state-disabled">
+                    <a>
+                      <span>hoje</span>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+        <td class="fc-header-center">
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <h2 class="fc-header-title"><%=l @date, :format => :month_year%></h2>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+        <td class="fc-header-right">
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="fc-button-month fc-state-default fc-corner-left fc-no-right fc-state-active">
+                    <a href="#mes">
+                      <span>m&ecirc;s</span>
+                    </a>
+                  </div>
+                </td>
+                <td>
+                  <div class="fc-button-agendaWeek fc-state-default fc-no-right">
+                    <a>
+                      <span>semana</span>
+                    </a>
+                  </div>
+                </td>
+                <td>
+                  <div class="fc-button-agendaDay fc-state-default fc-corner-right">
+                    <a href="#dia">
+                      <span>dia</span>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="event-content">
+
+    <%= calendar_for @events, :year => @date.year, :month => @date.month, :html => {:class => "calendar"} do |calendar| %>
+      <%= calendar.head('Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado') %>
+      <% calendar.day(:day_method => :start_at) do |date, events| %>
+        <div class="day_number" data-date="<%=date%>">
+          <%= date.day %>
+          <%=link_to image_tag("ico/add.png"), new_event_path(:day => date.strftime("%Y-%m-%d")), :remote => :true%>
+
+
+        </div>
+
+
+        <% for event in events %>
+          <%= render event %>
+
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

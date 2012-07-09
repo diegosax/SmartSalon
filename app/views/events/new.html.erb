@@ -1,0 +1,15 @@
+<div class="box corners shadow">
+  <div class="box-header">
+    <h2>Eventos</h2>
+  </div>
+
+  <div class="box-content" id="contacts-1">
+    <%if isClient?%>
+      <%= render :partial => "new_event_calendar",:locals => { :eventos => @events, :lawyer => @lawyer} %>
+    <%else%>
+      <%= render 'form', :event=>@event %>
+    <%end%>
+
+  </div><!-- END ".box-content" -->
+</div><!-- END ".box" -->
+

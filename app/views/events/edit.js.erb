@@ -1,0 +1,13 @@
+var conteudo = "<%=escape_javascript(render :partial => "modal_form", :locals => {:event => @event}, :layout => false)%>";
+conteudo = conteudo + "";
+$.nyroModalManual({    
+      content: conteudo
+    });
+$("div[data-id=<%=@event.id%>]").btOff();
+function loadDateTimePicker(){
+          var data = "<%=@event.start_at.strftime("%d-%m-%Y %H:%M")%>";
+          
+          $('#datetime_from').datetime({value: data,format: 'dd-mm-yy hh:ii',altField: '#datetime_from_alt', altFormat: "d 'de' MM yy 'às' hh:ii", chainTo: '#datetime_to', chainOptions: { value: '' } });
+          $('#datetime_to').datetime({value:"<%=@event.end_at.strftime("%d-%m-%Y %H:%M")%>" ,format: 'dd-mm-yy hh:ii',altField: '#datetime_to_alt', altFormat: "d 'de' MM yy 'às' hh:ii", });
+    }
+    loadDateTimePicker();

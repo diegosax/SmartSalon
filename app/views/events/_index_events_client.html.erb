@@ -1,0 +1,44 @@
+<div class="inbox-sf">
+  <input type="text" name="" onfocus="if(this.value=='Search for a ticket(s)')this.value='';" onblur="if(this.value=='')this.value='Search for a ticket(s)';" value="Search for a ticket(s)" class="input-1" />
+  <input type="submit" name="" value="Search" class="inbox-sf-search-btn" style="padding-top: 2px; "/>
+  <input type="submit" name="" value="Add" id="open-ticket-dialog-btn" class="inbox-sf-add-btn tip" title="Open an dialog to add a new ticket" style="padding-top: 2px; ">
+</div>
+<ul class="tickets-head-1">
+  <li class="tickets-head-1-select"><input type="checkbox" class="toggle-all-cbox" name="select-all-1"></li>
+  <li class="tickets-head-1-ticket">Data</li>
+  <li class="tickets-head-1-date" style="width: 20em">Com Quem</li>
+  <li class="tickets-head-1-subject">Assunto</li>
+  <li class="tickets-head-1-status">Ações</li>
+</ul>
+<ul class="tickets-content-1">
+  <% @events.each do |event| %>
+      <li>
+        <div class="tickets-content-1-select">
+          <input type="checkbox" name="field-10">
+        </div>
+        <div class="tickets-content-1-ticket">
+          <img src="images/icons/16/ascii.png" alt=""><a href="#"><%=event.start_at.strftime("%d/%m/%Y às %H:%M")%></a>
+        </div>
+        <div class="tickets-content-1-date" style="width: 20em">
+          <%=event.lawyer.nome%>
+        </div>
+        <div class="tickets-content-1-subject">
+          <a href="#"><%=event.title%></a>
+        </div>
+        <div class="tickets-content-1-department">
+          <%=link_to "Remarcar", edit_event_path(event), :class=>"edit-contact gradient-btn"%>
+          <%= link_to 'Cancelar', event, :confirm => 'Esta ação é irreversível. Tem certeza que deseja cancelar esse evento?', :method => :delete,:class=>"delete-contact gradient-btn" %>
+        </div>
+
+      </li>
+  <% end %>
+</ul><!-- END ".tickets-content-1" -->
+<ul class="tickets-head-1 no-border-top">
+  <li class="tickets-head-1-select"><input type="checkbox" class="toggle-all-cbox" name="select-all-1" /></li>
+  <li class="tickets-head-1-ticket">Data</li>
+  <li class="tickets-head-1-date" style="width: 20em">Com Quem</li>
+  <li class="tickets-head-1-subject">Assunto</li>
+  <li class="tickets-head-1-status">Ações</li>
+</ul>
+<%#ill_paginate @events, :previous_label => "Anterior", :next_label => "Próxima" %>
+                    

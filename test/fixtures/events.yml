@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  description: MyText
+  client_id: 1
+  professional_id: 1
+  status: MyString
+  start_at: 2012-06-24 06:24:15
+  duration: 1
+  changeable: false
+
+two:
+  title: MyString
+  description: MyText
+  client_id: 1
+  professional_id: 1
+  status: MyString
+  start_at: 2012-06-24 06:24:15
+  duration: 1
+  changeable: false

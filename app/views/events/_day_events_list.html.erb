@@ -1,0 +1,36 @@
+<div id="day_events">
+  <div style="position: relative;overflow: hidden">
+       <table>
+      <tbody>
+        <%myDate = dia ? dia.to_date : Date.today
+        myDate = DateTime.new(myDate.year,myDate.month,myDate.day)
+        day = myDate.day
+        %>
+        <%while day == myDate.day%>
+          <tr>
+            <th style="width: 3em"><%=myDate.strftime("%H:%M")%></th>
+            <td>
+              <ul>
+                <%events.blank? ? myEvents = [] : myEvents = events.where("start_at = ?", myDate)
+                if !myEvents.blank?
+                  myEvents.each do |event|
+                  %>
+                    <li>
+                      <a href="#" name="<%=myDate.strftime("%H:%M")%>"><%=event.title%></a>
+                    </li>
+                  <%end%>
+                <%else%>
+                  <li>
+                    <a href="#" name="<%=myDate.strftime("%H:%M")%>"></a>
+
+                  </li>
+                <%end%>
+              </ul>
+            </td>
+          </tr>
+          <%myDate = myDate + 30.minutes%>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+</div>

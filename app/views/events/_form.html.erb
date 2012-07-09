@@ -1,0 +1,47 @@
+<%= form_for(event,:html => {:class => "form label-inline"}) do |f| %>
+
+  <div class="set-row-2">
+    <%= f.label :title,:class => ("error" unless !event.errors[:title].any?) %>
+    <%= f.text_field :title, :class => "input-2", :size => "50" %>
+    <%if event.errors[:title].any?%>
+      <div class="form-msg-error-advanced"><%= "O Título "+event.errors[:title][0] %> </div>
+    <%end%>
+  </div>
+  <div class="set-row-2">
+    <%= f.label :description,:class => ("error" unless !event.errors[:description].any?) %>
+    <%= f.text_area :description, :class => "textarea-2", :size => "40" %>
+    <%if event.errors[:description].any?%>
+      <p class="error"><%= event.errors[:title][0] %> </p>
+    <%end%>
+  </div>
+  <div class="set-row-2">
+    <%= f.label :client_nome,:class => ("error" unless !event.errors[:client_id].any?) %>
+    <%= f.text_field :client_nome, :autocomplete => autocomplete_client_nome_events_path ,:class => "input-2", :size => "50" %>
+  </div>
+  <%if event.errors[:client_id].any?%>
+    <div class="form-msg-error-advanced"><%= event.errors[:client_id][0] %> </div>
+  <%end%>
+  <div class="set-row-2">
+    <%= f.label :start_at,:class => ("error" unless !event.errors[:start_at].any?) %>
+    <%= f.text_field :start_at, :id => "datetime_from",:class => "input-2" %>
+    <input class="friendly_date" id="datetime_from_alt" disabled="disabled" />
+    <%if event.errors[:start_at].any?%>
+      <div class="form-msg-error-advanced"><%= "O início " + event.errors[:start_at][0] %> </div>
+
+    <%end%>
+  </div>
+  <div class="set-row-2">
+    <%= f.label :end_at,:class => ("error" unless !event.errors[:end_at].any?) %>
+    <%= f.text_field :end_at, :id => "datetime_to",:class => "input-2" %><input class="friendly_date" id="datetime_to_alt" disabled="disabled" />
+    <%if event.errors[:end_at].any?%>
+      <div class="form-msg-error-advanced"><%= "O Fim " + event.errors[:end_at][0] %> </div>
+    <%end%>
+  </div>
+  <div class="submit-box">
+    <input type="reset" name="reset" value="Reset" />
+    <%= f.submit "Salvar", :class => "delete-contact gradient-btn" %>
+  </div>
+
+
+
+<% end %>

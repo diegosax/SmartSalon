@@ -1,0 +1,2 @@
+$("#event-content").html("<%=escape_javascript(render :partial => "day_events_list", :locals =>{:events => @events, :dia => @mes})%>");
+window.location.hash = "<%=escape_javascript(DateTime.now.strftime("%H:00"))%>";

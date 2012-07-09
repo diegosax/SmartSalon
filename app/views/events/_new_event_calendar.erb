@@ -1,0 +1,28 @@
+<%=render "events_left_menu"%>
+<div id="calendar">
+<h1>Mostrando eventos do advogado: <%= @professional.nome %></h1>
+<h2 id="month">
+    <%= link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y-%m-01") %>
+    <%=h @date.strftime("%B %Y") %>
+    <%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y-%m-01") %>
+</h2>
+<% calendar_for @events, :year => @date.year, :month => @date.month do |calendar| %>
+    <%= calendar.head('Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado') %>
+    <% calendar.day(:day_method => :start_at) do |date, events| %>
+      <%= date.day %>
+      <%puts "Testando se existe sessao: #{session[:end_date]}"%>
+      <%if session[:end_date] == nil%>
+        <%puts "Nao existe sessao, carregando normal!!!"%>
+        <%if date >= Date.today && date.month == @date.month%>
+          <%=raw isavailable(events,date,@professional)%>
+        <% end %>
+      <%else%>
+        <%puts "Opa! Existe sessao! testando se o dia atual(#{date.day}) eh igual ao dia da sessao(#{session[:end_date]})"%>
+        <%if session[:end_date].day == date.day%>
+          <%puts "Eh igual, carregando com a data sendo: #{session[:end_date]}"%>        
+          <%=raw isavailable(events,session[:end_date],@professional)%>
+        <%end%>
+      <%end%>
+    <% end %>
+  <% end %>
+</div>

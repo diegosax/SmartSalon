@@ -1,0 +1,48 @@
+<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+  <span class="ui-dialog-title" id="ui-dialog-title-add-contacts-dialog">Criar Evento</span>
+  <a href="#" class="ui-dialog-titlebar-close ui-corner-all nyroModalClose" role="button"><span class="ui-icon ui-icon-closethick">fechar</span></a>
+</div>
+
+<%= form_for(event,:html => {:class => "form label-inline"},:remote=>true) do |f| %>
+
+  <div class="set-row-2">
+    <%= f.label :title,:class => ("error" unless !event.errors[:title].any?) %>
+    <%= f.text_field :title, :class => "input-2", :size => "50" %>
+    <%if event.errors[:title].any?%>
+      <p class="error"><%= "O Título "+event.errors[:title][0] %> </p>
+    <%end%>
+  </div>
+  <div class="set-row-2">
+    <%= f.label :description,:class => ("error" unless !event.errors[:description].any?) %>
+    <%= f.text_area :description, :class => "textarea-2", :size => "40" %>
+    <%if event.errors[:description].any?%>
+      <p class="error"><%= event.errors[:title][0] %> </p>
+    <%end%>
+  </div>
+  <div class="set-row-2">
+    <%= f.label :client_nome,:class => ("error" unless !event.errors[:client_id].any?) %>
+    <%= f.text_field :client_nome, :autocomplete => autocomplete_client_nome_events_path ,:class => "input-2", :size => "50" %>
+  </div>
+  <%if event.errors[:client_id].any?%>
+    <p class="error"><%= event.errors[:client_id][0] %> </p>
+  <%end%>
+  <div class="set-row-2">
+    <%= f.label :start_at,:class => ("error" unless !event.errors[:start_at].any?) %>
+    <%= f.text_field :start_at, :id => "datetime_from",:class => "input-2" %>
+    <input class="friendly_date" id="datetime_from_alt" disabled="disabled" />
+    <%if event.errors[:start_at].any?%>
+      <p class="error"><%= event.errors[:start_at][0] %> </p>
+    <%end%>
+  </div>
+  <div class="set-row-2">
+    <%= f.label :end_at,:class => ("error" unless !event.errors[:end_at].any?) %>
+    <%= f.text_field :end_at, :id => "datetime_to",:class => "input-2" %><input class="friendly_date" id="datetime_to_alt" disabled="disabled" />
+    <%if event.errors[:end_at].any?%>
+      <p class="error"><%= "O Fim " + event.errors[:end_at][0] %> </p>
+    <%end%>
+  </div>
+  <div class="actions">
+    <button class="nyroModalClose delete-contact gradient-btn">Cancelar</button>
+    <%= f.submit "Salvar", :class => "delete-contact gradient-btn" %>
+  </div>
+<% end %>

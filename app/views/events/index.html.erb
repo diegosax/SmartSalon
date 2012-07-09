@@ -1,0 +1,8 @@
+<div class="span12">
+  <h2 class="heading">Calendar</h2>
+  <%if isClient?%>
+  <%= render :partial => "index_events_client", :locals => {:events => @events}%>
+  <%else%>
+  <%=render :partial => "index_events_list", :locals => {:events => @events, :date => @month}%>
+  <%end%>
+</div>
