@@ -28,10 +28,10 @@
 			}
 		});
 		//* tooltips
-		gebo_tips.init();
+		//gebo_tips.init();
         if(!is_touch_device()){
 		    //* popovers
-            gebo_popOver.init();
+            //gebo_popOver.init();
         }
 		//* sidebar
         gebo_sidebar.init();

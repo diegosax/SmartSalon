@@ -1,6 +1,12 @@
 Smartsalon::Application.routes.draw do
 
-  resources :professionals
+  resources :services
+
+  devise_for :users
+
+  namespace :professionals do
+    resources :events
+  end
 
   resources :clients do
     resources :events
@@ -8,7 +14,7 @@ Smartsalon::Application.routes.draw do
 
   resources :events
   
-  devise_for :users
+  
 
   resources :users
 

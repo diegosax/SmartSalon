@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class EventsController < ApplicationController
   # GET /events
   # GET /events.xml
@@ -5,16 +7,8 @@ class EventsController < ApplicationController
   #autocomplete :client, :nome, :full => true
   before_filter :authenticate_user!
 
-  def index
-    if current_user.is_client?
-      @events = current_user.events.order("start_at").includes(:professional).paginate(:per_page => 10, :page => params[:page])
-    else
-      @events = Event.order("start_at").includes(:client,:professional).all
-      @month = params[:month] ? Date.parse(params[:month]) : Date.today
-      @date = @month
-      #@shown_month = Date.civil(@year, @month)
-      #@event_strips = Event.event_strips_for_month(@shown_month)
-    end
+  def index    
+    @events = current_user.events.order("start_at").includes(:professional)#.paginate(:per_page => 10, :page => params[:page])
     respond_to do |format|
       format.js
       format.html # index.html.erb
@@ -37,20 +31,27 @@ class EventsController < ApplicationController
   # GET /events/new
   # GET /events/new.xml
   def new
-
-    #Se nao for cliente
-    if current_user.class != Client
-      @event = Event.new
-      minutos = (60 - (DateTime.now.min))%5
-      @event.start_at = params[:day] + " " + DateTime.now.strftime("%H:%M") unless params[:day].nil?
-      @event.start_at+=minutos.minutes
-
-    #Se for cliente
-    else
-      @professional = params[:professional] ? Professional.find(params[:professional]) : Professional.first
-      puts @professional.inspect
-      @events = Event.find(:all,:conditions => ["(start_at >= ? OR end_at >= ?) and professional_id = ?", Date.today.to_datetime, Date.today.to_datetime,@professional.id],:order => "start_at")
-      @date = params[:month] ? Date.parse(params[:month]) : Date.today
+    @services = Service.all
+    if params[:service]
+      @service = Service.find(params[:service])
+      if !params[:professionals].blank?
+        if params[:professionals] == "any"
+          @professionals = @service.professionals
+        else
+          @professionals = Professional.find(params[:professionals])
+        end
+        @events = Event.find(
+          :all,
+          :conditions => ["
+            (start_at >= ? OR end_at >= ?) AND professional_id in (?)", 
+            Date.today.to_datetime, 
+            Date.today.to_datetime, 
+            @professionals],
+            :order => "start_at")
+        @date = params[:month] ? Date.parse(params[:month]) : Date.today            
+      else
+        @professionals = @service.professionals
+      end   
     end
     
     respond_to do |format|
@@ -68,29 +69,18 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.xml
   def create
-    if isClient?
-      @event = Event.new(:end_at => params[:end_at], :start_at => params[:start_at],:professional_id => params[:professional])
-      @event.title = "Reuniao com o cliente"
-      @event.description = "Reuniao marcada pelo cliente pela internet, na: #{l DateTime.now, :format => :default}"
-      @event.client = current_user
-    else
-      @event = Event.new(params[:event])
-      
-      if isSecretary?
-        params[:professional] ? @event.professional_id = params[:professional] : @event.professional = Professional.first
-      else
-        @event.professional = current_user
-      end
-    end
-    
-    
+    @event = current_user.events.new(:end_at => params[:end_at], :start_at => params[:start_at],:professional_id => params[:professionals])
+    service = Service.find(params[:service])    
+    @event.title = service.name
+    @event.description = "#{service.name} marcado(a) pelo cliente via internet, 
+    na: #{l DateTime.now, :format => :default}"
+    @event.service = service
     respond_to do |format|
       if @event.save
         format.js
         format.html { redirect_to(@event, :notice => 'Event was successfully created.') }
         format.xml  { render :xml => @event, :status => :created, :location => @event }
       else
-        @professional = params[:professional] ? Professional.find(params[:professional]) : (current_user ? Professional.find(current_user) : Professional.first)
         puts @event.errors
         format.html { render :action => "new" }
         format.xml  { render :xml => @event.errors, :status => :unprocessable_entity }

@@ -31,6 +31,10 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 gem 'devise'
 
+gem 'quiet_assets', :group => :development
+
+gem 'thin'
+
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 

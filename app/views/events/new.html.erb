@@ -1,15 +1,33 @@
+<div class="modal hide fade" id="confirmation-modal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>Confirmação</h3>
+  </div>
+  <div class="modal-body">
+    <p></p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn">Fechar</a>
+    <a href="#" class="btn btn-primary">Salvar Evento</a>
+  </div>
+</div>
+
 <div class="box corners shadow">
   <div class="box-header">
-    <h2>Eventos</h2>
+    <h2 class="heading">Novo Agendamento</h2>
   </div>
 
-  <div class="box-content" id="contacts-1">
-    <%if isClient?%>
-      <%= render :partial => "new_event_calendar",:locals => { :eventos => @events, :lawyer => @lawyer} %>
-    <%else%>
-      <%= render 'form', :event=>@event %>
-    <%end%>
-
-  </div><!-- END ".box-content" -->
-</div><!-- END ".box" -->
-
+  <div class="row-fluid">
+    <div class="span12">
+      <%= form_tag({}, {:method => :get, :id => "new-event-form",:remote => true}) do %>
+      
+      <div class="formSep" id="choose-service">
+        <div class="row-fluid">
+          <p><span class="label label-inverse">Selecione o serviço desejado:</span></p>
+          <%= select_tag(:service, options_for_select(@services.collect{ |s| [s.name, s.id] }),:include_blank => true, :class => "chzn_a", "data-placeholder" => "Selecione um serviço") %>
+        </div>
+      </div>
+      <%end%>
+    </div>    
+  </div>
+</div>

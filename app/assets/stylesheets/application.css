@@ -13,8 +13,12 @@
  *= require bootstrap-responsive.min
  *= require dark
  *= require jBreadcrumbs/css/BreadCrumb
+ *= require jquery-ui-1.8.21.custom
  *= require qtip2/jquery.qtip.min
  *= require fullcalendar/fullcalendar_gebo
+ *= require jquery.ui.datetime
+ *= require tipped
+ *= require chosen
  *= require style
 */
 
@@ -126,8 +130,10 @@ table.calendar td
 
 table.calendar td:hover{
     background-color: #fff89d;
+}
 
-
+table.calendar td.notmonth:hover, table.calendar td.weekend:hover{
+    background-color: #F1F1F1;
 }
 
 table.calendar td img{
@@ -226,4 +232,129 @@ input.friendly_date{
     text-align: center;
     padding: 0.5em 0.5em 0.5em 1em;
 
+}
+
+.ui-timepicker-div .ui-widget-header{ margin-bottom: 8px; }
+.ui-timepicker-div dl{ text-align: left; }
+.ui-timepicker-div dl dt{ height: 25px; }
+.ui-timepicker-div dl dd{ margin: -25px 0 10px 65px; }
+.ui-timepicker-div td { font-size: 90%; }
+
+label.control-label{
+    width:70px !important;
+}
+
+div.controls{
+    margin-left: 100px !important;
+}
+
+.modal{
+    overflow: visible !important;
+}
+
+.event-modal-footer {
+    padding:7px 15px 8px;
+    margin-bottom: 0;
+    text-align: right;
+    background-color: whiteSmoke;
+    border-top: 1px solid #DDD;
+    -webkit-border-radius: 0 0 6px 6px;
+    -moz-border-radius: 0 0 6px 6px;
+    border-radius: 0 0 6px 6px;
+    -webkit-box-shadow: inset 0 1px 0 #fff;
+    -moz-box-shadow: inset 0 1px 0 #fff;
+    box-shadow: inset 0 1px 0 #fff;
+    color: #333;
+}
+
+.event-modal {
+    width:350px;
+}
+.event-modal-header {
+    background:#e4e4e4;
+    border-color:#d4d4d4;
+    padding:5px 15px;
+    border-bottom: 1px solid #EEE;
+}
+.event-modal-body{
+    padding:20px 15px;
+    font-size:11px;
+}
+
+.text_line{
+    width:65%;
+    max-height:150px;
+    overflow: auto;
+}
+
+.t_Content_light{
+    
+}
+
+.t_Content_light .btn{
+    display: inline-block;
+    padding: 4px 10px 4px;
+    margin-bottom: 0;
+    font-size: 13px;
+    line-height: 18px;
+    color: #333;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: whiteSmoke;
+    background-image: -ms-linear-gradient(top,white,#E6E6E6);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(white),to(#E6E6E6));
+    background-image: -webkit-linear-gradient(top,white,#E6E6E6);
+    background-image: -o-linear-gradient(top,white,#E6E6E6);
+    background-image: linear-gradient(top,white,#E6E6E6);
+    background-image: -moz-linear-gradient(top,white,#E6E6E6);
+    background-repeat: repeat-x;
+    border: 1px solid #CCC;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    border-color: #E6E6E6 #E6E6E6 #BFBFBF;
+    border-bottom-color: #B3B3B3;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffffff',endColorstr='#e6e6e6',GradientType=0);
+    filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+}
+
+.t_Content_light .btn:hover, .t_Content_light a:hover{
+    background-color: #e6e6e6 !important;
+    display: inline-block;
+    padding: 4px 10px 4px;
+    margin-bottom: 0;
+    font-size: 13px;
+    line-height: 18px;
+    color: #333;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid #CCC;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    border-color: #E6E6E6 #E6E6E6 #BFBFBF;
+    border-bottom-color: #B3B3B3;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffffff',endColorstr='#e6e6e6',GradientType=0);
+    filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    *background-color: #d9d9d9 !important;
+}
+ 
+.t_Content_light a:hover{
+    text-decoration:none !important;
+}
+
+.ov_boxes .ov_text, .dshb_icoNav li a, .table th, .fc thead th {
+    text-shadow: 0px 0px 0 white !important;
 }

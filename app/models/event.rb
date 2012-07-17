@@ -1,7 +1,8 @@
 class Event < ActiveRecord::Base
-	attr_accessible :changeable, :client_id, :description, :duration, :professional_id, :start_at, :status, :title
+	attr_accessible :changeable, :client_id, :description, :duration, :professional_id, :service_id, :start_at, :status, :title, :end_at
 	belongs_to :client
 	belongs_to :professional
+	belongs_to :service
 	validates :title, :presence => true
 	#validates :start_at, :isbusy => true
 	#validates :end_at, :range => true
