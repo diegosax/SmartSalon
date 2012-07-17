@@ -1,0 +1,11 @@
+var conteudo = "<%=escape_javascript(render :partial => "new_modal", :locals => {:event => @event}, :layout => false)%>";
+conteudo = conteudo + "";
+$.nyroModalManual({    
+      content: conteudo
+    });
+function loadDateTimePicker(){
+          var data = "<%=@event.start_at.strftime("%d-%m-%Y %H:%M")%>";
+          $('#datetime_from').datetime({value: data,format: 'dd-mm-yy hh:ii',altField: '#datetime_from_alt', altFormat: "d 'de' MM yy 'às' hh:ii", chainTo: '#datetime_to', chainOptions: { value: '' } });
+          $('#datetime_to').datetime({format: 'dd-mm-yy hh:ii',altField: '#datetime_to_alt', altFormat: "d 'de' MM yy 'às' hh:ii", });
+    }
+    loadDateTimePicker();

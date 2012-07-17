@@ -1,0 +1,44 @@
+<div class="fc">
+  <div class="fc-header" style="width:100%">
+    <div class="fc-header-left">
+      <span class="fc-btn fc-button-prev fc-corner-left fc-corner-right">
+        <%=link_to :month => (@date.beginning_of_month-1).strftime("%Y-%m-01") do%>
+          <i class="icon-chevron-left cal_prev"></i>
+        <%end%>
+        
+      </span>
+      <span class="fc-header-space"></span>
+      <span class="fc-btn fc-button-next fc-corner-left fc-corner-right">
+        <%=link_to :month => (@date.end_of_month+1).strftime("%Y-%m-01") do%>
+          <i class="icon-chevron-right cal_next"></i>
+        <%end%>
+      </span>
+    </div>
+    <div class="fc-header-center">
+      <span class="fc-header-title">
+        <h2><%=l @date, :format => :month_year%></h2>
+      </span>
+      <span class="fc-btn fc-button-today fc-corner-left fc-corner-right fc-state-disabled">today</span>
+    </div>
+    <div class="fc-header-right"><span class="fc-btn fc-button-month fc-corner-left fc-state-active">month</span><span class="fc-btn fc-button-agendaWeek">week</span><span class="fc-btn fc-button-agendaDay fc-corner-right">day</span></div>
+                  
+                  
+  </div>
+  <div id="event-content">
+
+    <%= calendar_for @events, :year => @date.year, :month => @date.month, :html => {:class => "calendar"} do |calendar| %>
+      <%= calendar.head('Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado') %>
+      <% calendar.day(:day_method => :start_at) do |date, events| %>
+        <div class="day_number" data-date="<%=date%>">
+          <%= date.day %>
+          <%=link_to image_tag("ico/add.png"), "##{date.strftime("%d-%m-%Y")}"%>
+        </div>
+
+        <% for event in events %>
+          <%= render event %>
+        <% end %>
+
+      <% end %>
+    <% end %>
+  </div>
+</div>

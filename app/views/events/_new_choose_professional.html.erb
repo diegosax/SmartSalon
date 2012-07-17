@@ -1,0 +1,6 @@
+<div class="formSep" id="choose-professional">
+	<div class="row-fluid">
+		<p><span class="label label-inverse">Selecione os profissionais desejados:</span></p>
+		<%= select_tag(:professionals, options_for_select(@professionals.collect{ |s| [s.name, s.id] }),:include_blank => true, :class => "chzn_a", "data-placeholder" => "Selecione um ou mais profissionais") %>
+	</div>
+</div>

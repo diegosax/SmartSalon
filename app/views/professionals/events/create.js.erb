@@ -1,0 +1,2 @@
+$("#newEvent").modal("hide");
+$("div[data-date=<%=@event.start_at.strftime('%Y-%m-%d')%>]").parent().append("<%=escape_javascript(render :partial => 'event', :locals => {:event => @event})%>");
