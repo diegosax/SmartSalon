@@ -16,6 +16,7 @@
 //= require jquery.debouncedresize.min
 //= require jquery.actual.min
 //= require jquery.cookie.min
+//= require jquery.validate
 //= require chosen.jquery
 //= require bootstrap/js/bootstrap.min
 //= require qtip2/jquery.qtip.min

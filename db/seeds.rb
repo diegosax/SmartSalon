@@ -7,36 +7,36 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-#Professional.create(
-#	:name => "Jessica Almeida",
-#	:email => "jessica@instanap.com",
-#	:password => "123456",
-#	:password_confirmation => "123456"
-#)
-#Professional.create(
-#	:name => "Vanessa Alves",
-#	:email => "vanessa@instanap.com",
-#	:password => "123456",
-#	:password_confirmation => "123456"
-#)
-#Professional.create(
-#	:name => "Carla Mendes",
-#	:email => "carla@instanap.com",
-#	:password => "123456",
-#	:password_confirmation => "123456"
-#)
-#Professional.create(
-#	:name => "Roberta Justus",
-#	:email => "roberta@instanap.com",
-#	:password => "123456",
-#	:password_confirmation => "123456"
-#)
-#Professional.create(
-#	:name => "Karen Something",
-#	:email => "karen@instanap.com",
-#	:password => "123456",
-#	:password_confirmation => "123456"
-#)
+Professional.create(
+	:name => "Jessica Almeida",
+	:email => "jessica@instanap.com",
+	:password => "123456",
+	:password_confirmation => "123456"
+)
+Professional.create(
+	:name => "Vanessa Alves",
+	:email => "vanessa@instanap.com",
+	:password => "123456",
+	:password_confirmation => "123456"
+)
+Professional.create(
+	:name => "Carla Mendes",
+	:email => "carla@instanap.com",
+	:password => "123456",
+	:password_confirmation => "123456"
+)
+Professional.create(
+	:name => "Roberta Justus",
+	:email => "roberta@instanap.com",
+	:password => "123456",
+	:password_confirmation => "123456"
+)
+Professional.create(
+	:name => "Karen Something",
+	:email => "karen@instanap.com",
+	:password => "123456",
+	:password_confirmation => "123456"
+)
 
 Service.create(
 	:name => "Corte Masculino",
@@ -65,6 +65,36 @@ Service.create(
 Service.create(
 	:name => "Hidratação",
 	:duration => 120
+)
+
+Service.create(
+	:name => "Coloração",
+	:duration => 150
+)
+
+Service.create(
+	:name => "Baby Lis",
+	:duration => 45
+)
+
+Service.create(
+	:name => "Depilação",
+	:duration => 60
+)
+
+Service.create(
+	:name => "Barba",
+	:duration => 20
+)
+
+Service.create(
+	:name => "Maquiagem",
+	:duration => 45
+)
+
+Service.create(
+	:name => "Massagem",
+	:duration => 30
 )
 
 professionals = Professional.all

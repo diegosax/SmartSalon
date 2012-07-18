@@ -1,17 +1,148 @@
-<h2>Sign in</h2>
+ <!DOCTYPE html>
+ <html>
+ <head>
+ 	<title>Instanap - Beauty</title>
+ 	<%= stylesheet_link_tag    "application", :media => "all" %>
+ 	<%= javascript_include_tag "application" %>
+ 	<%= csrf_meta_tags %>
+ </head>
+ <body class="login_page">		
+ 	<div class="login_box">			
+ 		<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:id => "login_form"}) do |f| %>
+ 		<div class="top_b">Login</div>				
+ 		<div class="cnt_b">
+ 			<div class="formRow">
+ 				<div class="input-prepend">
+ 					<span class="add-on">
+ 						<i class="icon-user"></i>
+ 					</span>
+ 					<%=f.text_field :email, :placeholder => "Email"%>
+ 				</div>
+ 			</div>
+ 			<div class="formRow">
+ 				<div class="input-prepend">
+ 					<span class="add-on"><i class="icon-lock"></i></span>
+ 					<%=f.password_field :password, :id=> "password", :placeholder => "Senha"%>
+ 				</div>
+ 			</div>
+ 			<div class="formRow clearfix">
+ 				<% if devise_mapping.rememberable? -%>
+ 				<label class="checkbox">    					
+ 					<%= f.check_box :remember_me %> Me manter conectado    					
+ 				</div>
+ 				<% end -%>
+ 			</div>
+ 			<div class="btm_b clearfix">
+ 				<%=f.submit "Login", :class => "btn btn-inverse pull-right"%>
+ 				<span class="link_reg">
+ 					<a href="#reg_form">Não possui cadastro? Crie sua conta agora!</a>
+ 				</span>
+ 			</div>  
+ 			<%end%>
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+ 			<%puts "CLIENTTTT: #{@client.inspect}"%>
+ 			<%= form_for(@client, :html => { :method => :post, :id => "pass_form", :style => "display:none" }) do |f| %>
+ 			<div class="top_b">Não consegue fazer login?</div>    
+ 			<div class="alert alert-info alert-login">
+ 				Por favor, digite seu email e você receberá instruções para recuperar sua senha
+ 			</div>
+ 			<div class="cnt_b">
+ 				<div class="formRow clearfix">
+ 					<div class="input-prepend">
+ 						<span class="add-on">@</span>
+ 						<%=f.email_field :email, :placeholder => "Digite seu email"%>
+ 					</div>
+ 				</div>
+ 			</div>
+ 			<div class="btm_b tac">
+ 				<%=f.submit "Recuperar Senha", :class => "btn btn-inverse"%>
+ 			</div>  
+ 			<%end%>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+ 			<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:style => "display:none", :id => "reg_form"}) do |f| %>
+ 				<div class="top_b">Crie sua conta</div>
+ 				<div class="cnt_b">
+ 					<div class="formRow">
+ 						<div class="input-prepend">
+ 							<span class="add-on"><i class="icon-user"></i></span>
+ 							<%=f.text_field :name, :placeholder => "Nome Completo"%>
+ 						</div>
+ 					</div>
+ 					<div class="formRow">
+ 						<div class="input-prepend">
+ 							<span class="add-on">@</span>
+ 							<%=f.email_field :email, :placeholder => "Email"%>
+ 						</div>
+ 					</div>
+ 					<div class="formRow">
+ 						<div class="input-prepend">
+ 							<span class="add-on"><i class="icon-lock"></i></span>
+ 							<%=f.password_field :password, :placeholder => "Senha"%>
+ 						</div>
+ 					</div>
+ 					<div class="formRow">
+ 						<div class="input-prepend">
+ 							<span class="add-on"><i class="icon-lock"></i></span>
+ 							<%=f.password_field :password_confirmation, :placeholder => "Confirme sua Senha"%>
+ 						</div>
+ 					</div>    				
+ 				</div>
+ 				<div class="btm_b tac">
+ 					<%=f.submit "Criar Conta", :class => "btn btn-inverse"%>
+ 				</div>  
+ 				<%end%>
 
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
+ 			</div>
 
-  <div><%= f.submit "Sign in" %></div>
-<% end %>
+ 			<div class="links_b links_btm clearfix">
+ 				<span class="linkform"><a href="#pass_form">Esqueci Minha Senha</a></span>
+ 				<span class="linkform" style="display:none"><a href="#login_form">Voltar a tela de login</a></span>
+ 			</div>  
 
-<%= render :partial => "devise/shared/links" %>
+ 			<script>
+ 			$(document).ready(function(){
+
+				//* boxes animation
+				form_wrapper = $('.login_box');
+				$('.linkform a,.link_reg a').on('click',function(e){
+					var target	= $(this).attr('href'),
+					target_height = $(target).actual('height');
+					$(form_wrapper).css({
+						'height'		: form_wrapper.height()
+					});	
+					$(form_wrapper.find('form:visible')).fadeOut(400,function(){
+						form_wrapper.stop().animate({
+							height	: target_height
+						},500,function(){
+							$(target).fadeIn(400);
+							$('.links_btm .linkform').toggle();
+							$(form_wrapper).css({
+								'height'		: ''
+							});	
+						});
+					});
+					e.preventDefault();
+				});
+				
+				//* validation
+				$('#login_form').validate({
+					onkeyup: false,
+					errorClass: 'error',
+					validClass: 'valid',
+					rules: {
+						username: { required: true, minlength: 3 },
+						password: { required: true, minlength: 3 }
+					},
+					highlight: function(element) {
+						$(element).closest('div').addClass("f_error");
+					},
+					unhighlight: function(element) {
+						$(element).closest('div').removeClass("f_error");
+					},
+					errorPlacement: function(error, element) {
+						$(element).closest('div').append(error);
+					}
+				});
+			});
+ </script>
+</body>

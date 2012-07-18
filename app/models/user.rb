@@ -9,11 +9,11 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
   def is_client?
-  	self.type == "Client"
+  	self.is_a?(Client)
   end
 
   def is_professional?
-  	self.type == "Professional"
+  	self.is_a?(Professional)
   end
 
 end

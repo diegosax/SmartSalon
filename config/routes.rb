@@ -2,9 +2,14 @@ Smartsalon::Application.routes.draw do
 
   resources :services
 
-  devise_for :users
+  devise_for :users, :controllers => 
+  { 
+    :registrations => "registrations" ,
+    :sessions => "sessions"
+  }
 
   namespace :professionals do
+    root :to => "professionals/events#index"
     resources :events
   end
 
@@ -18,7 +23,7 @@ Smartsalon::Application.routes.draw do
 
   resources :users
 
-  root :to => "users#index"
+  root :to => "events#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
