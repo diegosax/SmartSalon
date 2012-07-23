@@ -1,3 +1,4 @@
+removeLoading();
 <%if @events%>
 	if ($("#calendar").length > 0)
 		$("#calendar").remove();
@@ -14,7 +15,7 @@
 		var html = "<%=escape_javascript(render :partial => "new_choose_professional")%>";
 		$("#new-event-form").append(html);
 		$("#choose-professional .chzn_a").chosen().change(function(){			
-			$("#new-event-form").submit();
+			onChooseProfessionalChange();
 		});
 	<%end%>
 <%end%>
