@@ -8,6 +8,11 @@ $(document).ready(function(){
     //Fim da preparacao da requisicao ajax
 	//----------------------------------------------------------------------------------------------------
 
+	window.onpopstate = function(e) { 
+	    if (!(typeof e.state == 'undefined')) { 
+	       //$.getScript(location.href);
+	    } 
+	}
 
 	function loadDateTimePicker(){
         var minu = (60 - (new Date().getMinutes()))%5;
@@ -68,19 +73,38 @@ $(document).ready(function(){
 	$("#choose-service .chzn_a").chosen().change(function(){
 		$("#choose-professional select option[value='']").attr('selected',true);
 		$("#new-event-form").submit();
+		history.pushState(null,"",$("#new-event-form").attr("action") + "?" + $("#new-event-form").serialize());
 	});
 
 	$("#choose-professional .chzn_a").chosen().change(function(){
-		$("#choose-service select option[value='']").attr('selected',true);
+		//$("#choose-service select option[value='']").attr('selected',true);
 		$("#new-event-form").submit();
+		history.pushState(null,"",$("#new-event-form").attr("action") + "?" + $("#new-event-form").serialize());
+	});
+
+	$("#new-event-form").on("submit",function(){
+		history.pushState(null,"",$(this).attr("action") + "?" + $(this).serialize());
 	});
 
 	$(".new-event-link").live('click',function(event){
 		event.preventDefault();
-		//$("#confirmation-modal .modal-body p").html($(this).attr("data-message"));
-		//$("#confirmation-modal").modal('show');
-		$.post($(this).attr("href"),{},"html");
-	});	
+		$(this).parent("li").attr("class","remove");
+		$("#confirmation-modal .modal-body p").html($(this).attr("data-message"));
+		$("#confirmation-modal .link").attr("data-link",$(this).attr("href"));
+		$("#confirmation-modal").modal('show');
+	});
+
+	$("#save-event-btn").live("click",function(event){
+		event.preventDefault();
+		$("#confirmation-modal .modal-body p").html("Processando, por favor aguarde...<br /><img src='/assets/ajax_loader.gif'></img>");
+		$.post($("#confirmation-modal .link").attr("data-link"),{},"html");		
+	});
+
+	$("#confirmation-modal").on("hide", function(){
+		$("#calendar li.remove").removeClass("remove");
+		$("#confirmation-modal .modal-footer").html("<a href='#'' class='btn' data-dismiss = 'modal'>" + 
+			"Fechar</a><a href='#'' class='btn btn-primary' id='save-event-btn'>Salvar Evento</a>");
+	});
 
 });
 

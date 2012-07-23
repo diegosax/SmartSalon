@@ -2,6 +2,11 @@ Smartsalon::Application.routes.draw do
 
   resources :services
 
+  devise_for :clients, :controllers =>
+  {
+    :registrations => "registrations"
+  }
+
   devise_for :users, :controllers => 
   { 
     :registrations => "registrations" ,

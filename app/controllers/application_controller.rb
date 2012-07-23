@@ -2,17 +2,16 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   layout :layout
 
-  def registration_redirect(resource)
-    puts "registration_redirect"
+  def go_to_root(resource)
     if (resource.is_a?(Client))
       return events_url
     elsif (resource.is_a?(Professional))
       return professionals_events_url
     end
   end
-  def after_sign_in_path_for(resource)
-    registration_redirect(resource)
 
+  def after_sign_in_path_for(resource)
+    go_to_root(resource)
   end
 
   private

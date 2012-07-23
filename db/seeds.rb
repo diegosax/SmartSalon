@@ -7,6 +7,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Professional.destroy_all
+Service.destroy_all
+Event.destroy_all
+Client.destroy_all
+
 Professional.create(
 	:name => "Jessica Almeida",
 	:email => "jessica@instanap.com",
@@ -100,8 +105,8 @@ Service.create(
 professionals = Professional.all
 services = Service.all
 i = 0
-max = services.count
-professionals.each do |p|
-	p.services.push services[i%max]
+max = professionals.count
+services.each do |p|
+	p.professionals.push professionals[i%max]
 	i=i+1
 end

@@ -1,47 +1,61 @@
-<div class="span12" id="user-list">
-	<h3 class="heading">Meus Agendamentos </h3>
-	<div class="row-fluid">
-		<div class="input-prepend">
-			<span class="add-on ad-on-icon"><i class="icon-user"></i></span><input type="text" class="user-list-search search" placeholder="Buscar">
-		</div>
-		<ul class="nav nav-pills line_sep">
-			<li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-					Ordenar por 
-					<b class="caret"></b>
-				</a>
-				<ul class="dropdown-menu sort-by">
-					<li>
-						<a href="javascript:void(0)" class="sort" data-sort="sl_name">por serviço
-						</a>
-					</li>
-					<li><a href="javascript:void(0)" class="sort" data-sort="sl_status">by status</a></li>
-				</ul>
-			</li>
-			<li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Exibir apenas <b class="caret"></b></a>
-				<ul class="dropdown-menu filter">
-					<li class="active"><a href="javascript:void(0)" id="filter-none">Todos</a></li>
-					<li><a href="javascript:void(0)" id="filter-online">Eventos Passados</a></li>
-					<li><a href="javascript:void(0)" id="filter-offline">Eventos Futuros</a></li>
-					<li><a href="javascript:void(0)" id="filter-offline">Eventos Cancelados</a></li>
-				</ul>
-			</li>
-		</ul>
-	</div>
-	<ul class="list user_list">
-		<%@events.each do |e|%>
+<div class="row-fluid">
+	<div class="span12">
+		<ul class="dshb_icoNav clearfix">
 			<li>
-				<a href="#" class="btn btn-mini pull-right btn-danger">
+				<%=link_to "Agendar", new_event_path, :style=> "background-image: url(/assets/gCons/add-item.png)"%>
+			</li>
+			<li>
+				<a href="javascript:void(0)" style="background-image: url(/assets/gCons/copy-item.png)"> Add New Page</a></li>				
+			</ul>
+		</div>
+	</div>
+	<div class="span12" id="user-list">
+		<h3 class="heading">Meus Agendamentos </h3>
+		<div class="row-fluid">
+			<div class="input-prepend">
+				<span class="add-on ad-on-icon">
+					<i class="icon-search"></i>
+				</span>
+				<input type="text" class="user-list-search search" placeholder="Buscar">
+			</div>
+			<ul class="nav nav-pills line_sep">
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						Ordenar por 
+						<b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu sort-by">
+						<li>
+							<a href="javascript:void(0)" class="sort" data-sort="sl_name">por serviço
+							</a>
+						</li>
+						<li><a href="javascript:void(0)" class="sort" data-sort="sl_status">by status</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">Exibir apenas <b class="caret"></b></a>
+					<ul class="dropdown-menu filter">
+						<li class="active"><a href="javascript:void(0)" id="filter-none">Todos</a></li>
+						<li><a href="javascript:void(0)" id="filter-online">Eventos Passados</a></li>
+						<li><a href="javascript:void(0)" id="filter-offline">Eventos Futuros</a></li>
+						<li><a href="javascript:void(0)" id="filter-offline">Eventos Cancelados</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<ul class="list user_list">
+			<%@events.each do |e|%>
+			<li>
+				<%=link_to e, :method => :delete, :class => "btn btn-mini pull-right btn-danger" do%>
 					<i class="icon-trash"></i>
 					Cancelar
-				</a>
+				<%end%>
 				<a href="#" class="btn btn-mini pull-right btn-warning">
-					<i class="splashy-tag_edit"></i>
+					<i class="icon-edit"></i>
 					Remarcar
 				</a>
-				<span class="label label-success pull-right sl_status">
-					<%=e.start_at.strftime("%d de %B")%>
+				<span class="label label-success sl_status">
+					<%=e.start_at.strftime("%d de %B às %H:%M")%>
 				</span>
 				
 				<a href="#" class="sl_name">
@@ -53,7 +67,7 @@
 				</small>
 
 			</li>
-		<%end%>
-	</ul>
-	<div class="pagination"><ul class="paging bottomPaging"><li id=""><div class="page"><a class="active" href='javascript:function Z(){Z=""}Z()'>1</a></div></li></ul></div>
-</div>
+			<%end%>
+		</ul>
+		<div class="pagination"><ul class="paging bottomPaging"><li id=""><div class="page"><a class="active" href='javascript:function Z(){Z=""}Z()'>1</a></div></li></ul></div>
+	</div>

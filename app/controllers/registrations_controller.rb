@@ -2,10 +2,13 @@ class RegistrationsController < Devise::RegistrationsController
   protected
 
   def after_sign_up_path_for(resource)
-  	if (resource.is_a?(Client))
-      return events_url
-    elsif (resource.is_a?(Professional))
-      return professionals_events_url
+  	puts resource.inspect
+  	if resource.type == "Professional"
+      redirection = professionals_events_url
+  	else
+  	  redirection = events_url
     end
+    puts "REDIRECTION:::::::::::::: #{redirection} - #{resource.type}"
+    redirection
   end
 end

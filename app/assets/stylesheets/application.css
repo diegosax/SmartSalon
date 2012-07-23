@@ -358,3 +358,30 @@ div.controls{
 .ov_boxes .ov_text, .dshb_icoNav li a, .table th, .fc thead th {
     text-shadow: 0px 0px 0 white !important;
 }
+
+.user_list .label-success{
+    margin-right: 1em;
+}
+
+.user_list .btn-mini{
+    margin:1em 0.3em;
+}
+
+
+
+
+
+
+.user_list li{
+    padding: 8px !important;
+    margin:0 !important;
+}
+
+.user_list li:hover{
+    background-color: #FEF;
+}
+
+
+
+
+

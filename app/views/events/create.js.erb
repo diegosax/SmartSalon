@@ -1,3 +1,4 @@
-$.nyroModalRemove();
-$("div[data-date=<%=@event.start_at.strftime('%Y-%m-%d')%>]").parent().append("<%=escape_javascript(render :partial => 'event', :locals => {:event => @event})%>");
-
+$("#calendar li.remove").fadeOut("slow");
+$("#confirmation-modal .modal-body p").html("<div class='alert alert-success'> Agendamento concluído com sucesso!</div><p>O que você deseja fazer agora?</p>");
+$("#confirmation-modal .modal-footer").html("<a href='#'' class='btn' data-dismiss = 'modal'>Fechar</a>" + 
+	"<%=escape_javascript(link_to 'Ir para meus agendamentos', events_url, :class => 'btn btn-primary')%>");

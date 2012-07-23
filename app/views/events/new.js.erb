@@ -1,7 +1,7 @@
 <%if @events%>
 	if ($("#calendar").length > 0)
 		$("#calendar").remove();
-	var html = "<%=escape_javascript(render :partial => "new_event_calendar")%>";
+	var html = "<%=escape_javascript(render :partial => 'new_event_calendar')%>";
 	
 	$("#new-event-form").append(html);	
 	
@@ -11,9 +11,9 @@
 			$("#choose-professional").remove();		
 		if ($("#calendar").length > 0)
 			$("#calendar").remove();
-		var html = "<%=escape_javascript(render :partial => "new_choose_professional")%>";		
+		var html = "<%=escape_javascript(render :partial => "new_choose_professional")%>";
 		$("#new-event-form").append(html);
-		$("#choose-professional .chzn_a").chosen().change(function(){
+		$("#choose-professional .chzn_a").chosen().change(function(){			
 			$("#new-event-form").submit();
 		});
 	<%end%>

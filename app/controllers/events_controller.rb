@@ -36,9 +36,10 @@ class EventsController < ApplicationController
       @service = Service.find(params[:service])
       if !params[:professionals].blank?
         if params[:professionals] == "any"
-          @professionals = @service.professionals
+          @service_professionals = @service.professionals
         else
-          @professionals = Professional.find(params[:professionals])
+          @service_professionals = Professional.find(params[:professionals])
+          puts "PROFESSIONAL: #{@service_professionals.inspect}"
         end
         @events = Event.find(
           :all,
@@ -46,16 +47,15 @@ class EventsController < ApplicationController
             (start_at >= ? OR end_at >= ?) AND professional_id in (?)", 
             Date.today.to_datetime, 
             Date.today.to_datetime, 
-            @professionals],
+            @service_professionals],
             :order => "start_at")
         @date = params[:month] ? Date.parse(params[:month]) : Date.today            
-      else
-        @professionals = @service.professionals
-      end   
+      end
+      @professionals = @service.professionals   
     end
     
     respond_to do |format|
-      format.html # new.html.erb
+      format.html
       format.js
       format.xml  { render :xml => @event }
     end
@@ -74,7 +74,7 @@ class EventsController < ApplicationController
     @event.title = service.name
     @event.description = "#{service.name} marcado(a) pelo cliente via internet, 
     na: #{l DateTime.now, :format => :default}"
-    @event.service = service
+    @event.service = service    
     respond_to do |format|
       if @event.save
         format.js
