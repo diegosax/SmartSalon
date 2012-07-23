@@ -75,7 +75,7 @@ $(document).ready(function(){
 
 	$("a[data-remote=true]").live("click",function(event){
 		$(this).closest("div").remove().fadeOut("fast");
-		addLoading($("new-event-form"));
+		addLoading($("#new-event-form"));
 	});
 
 	$("#newEvent").on('shown',function(){
