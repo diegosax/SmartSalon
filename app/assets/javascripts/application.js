@@ -29,4 +29,5 @@
 //=	require spinners.min
 //=	require tipped 
 //= require gebo_common
+//= require confirmation_modal
 //= require main.js

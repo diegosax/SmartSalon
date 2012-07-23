@@ -89,9 +89,9 @@ $(document).ready(function(){
 	$(".new-event-link").live('click',function(event){
 		event.preventDefault();
 		$(this).parent("li").attr("class","remove");
-		$("#confirmation-modal .modal-body p").html($(this).attr("data-message"));
-		$("#confirmation-modal .link").attr("data-link",$(this).attr("href"));
-		$("#confirmation-modal").modal('show');
+		//$("#confirmation-modal .modal-body p").html($(this).attr("data-message"));
+		//$("#confirmation-modal .link").attr("data-link",$(this).attr("href"));
+		//$("#confirmation-modal").modal('show');
 	});
 
 	$("#save-event-btn").live("click",function(event){
@@ -102,9 +102,6 @@ $(document).ready(function(){
 
 	$("#confirmation-modal").on("hide", function(){
 		$("#calendar li.remove").removeClass("remove");
-		$("#confirmation-modal .modal-footer").html("<a href='#'' class='btn' data-dismiss = 'modal'>" + 
-			"Fechar</a><a href='#'' class='btn btn-primary' id='save-event-btn'>Salvar Evento</a>");
+		
 	});
-
 });
-

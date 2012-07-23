@@ -71,7 +71,7 @@ module EventsHelper
                                     
                               {
                                     "data-message" => "Deseja realmente marcar um(a) <b>#{service.name}</b> com <b>#{professionals.name}</b> para #{time.strftime('%A, dia %d de %B às %H:%M')}?",
-                                    :class => "new-event-link"
+                                    :class => "new-event-link confirmable"
                               } 
                         )
                   html << "</li>"
