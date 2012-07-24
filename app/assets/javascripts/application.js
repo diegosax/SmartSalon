@@ -12,13 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require jquery-ui
 //= require jquery.debouncedresize.min
 //= require jquery.actual.min
 //= require jquery.cookie.min
 //= require jquery.validate
 //= require chosen.jquery
-//= require bootstrap/js/bootstrap.min
 //= require qtip2/jquery.qtip.min
 //= require jBreadcrumbs/js/jquery.jBreadCrumb.1.1.min
 //= require sticky/sticky.min
@@ -28,6 +28,7 @@
 //= require ui.datetimepicker
 //=	require spinners.min
 //=	require tipped 
-//= require gebo_common
+//= require list_js/list.js
+//= require list_js/plugins/paging/list.paging
 //= require confirmation_modal
 //= require main.js

@@ -1,4 +1,6 @@
-class Professionals::EventsController < EventsController
+class Admin::EventsController < Admin::ApplicationController
+  before_filter :authenticate_professional!
+
 	def index
 		@events = Event.order("start_at").includes(:client,:professional).all
 		@month = params[:month] ? Date.parse(params[:month]) : Date.today

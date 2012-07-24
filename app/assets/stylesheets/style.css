@@ -136,9 +136,20 @@
 		.btn_menu {display:none}
 
 	/* main content */
-		#maincontainer {background-image: url(/assets/main_bg.gif);background-repeat:repeat-y;min-height:100%}
-        #contentwrapper{float: left;width: 100%}
-		.main_content{padding:64px 30px 30px;background:#fff;border-left:1px solid transparent;margin-left:240px}
+        #contentwrapper{
+        	float: left;
+        	width: 100%;
+        	background: url(/assets/blue3.jpg) repeat;
+        	min-height:100%;
+        }
+
+		#container-body{
+			background: url(/assets/header.png) repeat;
+			padding:20px 30px 30px;
+			background:#fff;
+			border-radius:15px;
+			margin:5%;
+		}
 		.main_content li{line-height:22px}
 	
 	/* sidebar */

@@ -5,6 +5,7 @@
 	<%= stylesheet_link_tag    "application", :media => "all" %>
 	<%= javascript_include_tag "application" %>
 	<%= csrf_meta_tags %>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
@@ -28,7 +29,7 @@
 		<header>
 			<div class="navbar navbar-fixed-top">
 				<div class="navbar-inner">
-					<div class="container-fluid">
+					<div class="container">
 						<%=link_to root_url, :class => "brand" do%>
 						<i class="icon-home icon-white"></i>
 						Instanap - Beauty
@@ -69,55 +70,21 @@
 		
 		<!-- main content -->
 		<div id="contentwrapper">
-			<div class="main_content">
+			<div class="container" id="container-body">
 				<div class="row-fluid">
-					<%= yield %>			
-				</div>
-			</div>
-		</div>
-
-		<!-- sidebar -->
-		<a href="javascript:void(0)" class="sidebar_switch on_switch ttip_r" title="Hide Sidebar">Sidebar switch</a>
-		<div class="sidebar">
-			<div class="antiScroll">
-				<div class="antiscroll-inner">
-					<div class="antiscroll-content">
-						<div class="sidebar_inner">
-							<div id="side_accordion" class="accordion">
-								<div class="accordion-group">
-									<div class="accordion-heading sdb_h_active">
-										<a href="#collapseOne" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-											<i class="icon-folder-close"></i> Agendamentos
-										</a>
-									</div>
-									<div class="accordion-body in collapse" id="collapseOne" style="height: auto; ">
-										<div class="accordion-inner">
-											<ul class="nav nav-list">
-												<li><%=link_to "Meus Agendamentos", events_path%></li>
-												<li><%=link_to "Novo", new_event_path%></li>				
-											</ul>
-										</div>
-									</div>
-								</div>
-								<div class="accordion-group">
-									<div class="accordion-heading sdb_h_active">
-										<a href="#collapseTwo" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-											<i class="icon-folder-close"></i> Meu Cadastro
-										</a>
-									</div>
-									<div class="accordion-body in collapse" id="collapseTwo" style="height: auto; ">
-										<div class="accordion-inner">
-											<ul class="nav nav-list">
-												<li><%=link_to "Alterar Perfil", current_user%></li>
-												<li><%=link_to "Sair", destroy_user_session_path%></li>				
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="push"></div>
+					<div class="row-fluid">
+						<div class="span12">
+							<ul class="dshb_icoNav clearfix">
+								<li>
+									<%=link_to "Agendar", new_event_path, :style=> "background-image: url(/assets/gCons/add-item.png)"%>
+								</li>
+								<li>
+									<%=link_to "Meus Eventos", events_path, :style=> "background-image: url(/assets/gCons/copy-item.png)"%>
+								</li>
+							</ul>
 						</div>
 					</div>
+					<%= yield %>			
 				</div>
 			</div>
 		</div>

@@ -1,23 +1,14 @@
-<div class="row-fluid">
-	<div class="span12">
-		<ul class="dshb_icoNav clearfix">
-			<li>
-				<%=link_to "Agendar", new_event_path, :style=> "background-image: url(/assets/gCons/add-item.png)"%>
-			</li>
-			<li>
-				<a href="javascript:void(0)" style="background-image: url(/assets/gCons/copy-item.png)"> Add New Page</a></li>				
-			</ul>
+
+<div class="span12" id="user-list">
+	<h3 class="heading">Meus Agendamentos </h3>
+	<div class="row-fluid">
+		<div class="input-prepend">
+			<span class="add-on ad-on-icon">
+				<i class="icon-search"></i>
+			</span>
+			<input type="text" class="user-list-search search" placeholder="Buscar">
 		</div>
-	</div>
-	<div class="span12" id="user-list">
-		<h3 class="heading">Meus Agendamentos </h3>
-		<div class="row-fluid">
-			<div class="input-prepend">
-				<span class="add-on ad-on-icon">
-					<i class="icon-search"></i>
-				</span>
-				<input type="text" class="user-list-search search" placeholder="Buscar">
-			</div>
+			<!-- Sorting
 			<ul class="nav nav-pills line_sep">
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -26,10 +17,15 @@
 					</a>
 					<ul class="dropdown-menu sort-by">
 						<li>
+							<a href="javascript:void(0)" class="sort" data-sort="sl_status">por data</a>
+						</li>
+						<li>
 							<a href="javascript:void(0)" class="sort" data-sort="sl_name">por serviço
 							</a>
 						</li>
-						<li><a href="javascript:void(0)" class="sort" data-sort="sl_status">by status</a></li>
+						<li>
+							<a href="javascript:void(0)" class="sort" data-sort="default">por profissional</a>
+						</li>
 					</ul>
 				</li>
 				<li class="dropdown">
@@ -42,32 +38,39 @@
 					</ul>
 				</li>
 			</ul>
-		</div>
-		<ul class="list user_list">
-			<%@events.each do |e|%>
-			<li>
-				<%=link_to e, :method => :delete, :class => "btn btn-mini pull-right btn-danger confirmable" do%>
-					<i class="icon-trash"></i>
-					Cancelar
-				<%end%>
-				<a href="#" class="btn btn-mini pull-right btn-warning">
-					<i class="icon-edit"></i>
-					Remarcar
-				</a>
-				<span class="label label-success sl_status">
-					<%=e.start_at.strftime("%d de %B às %H:%M")%>
-				</span>
-				
-				<a href="#" class="sl_name">
-					<%=e.service.name if e.service%>
-				</a>
-				<br>
-				<small class="s_color"><b>com: </b>
-					<%=e.professional.name if e.professional%>
+		-->
+	</div>
+	<ul class="list user_list">
+		<%@events.each do |e|%>
+		<li id="<%=e.id%>">
+			<span style="display:none" class="sl_id">
+				<%=e.id%>
+			</span>
+			<%=link_to e, 
+			"data-method-type" => :delete, 
+			:class => "btn btn-mini pull-right btn-danger confirmable",
+			"data-message" => "Deseja realmente cancelar este agendamento?" do%>
+			<i class="icon-trash"></i>
+			Cancelar
+			<%end%>
+			<a href="#" class="btn btn-mini pull-right btn-warning">
+				<i class="icon-edit"></i>
+				Remarcar
+			</a>
+			<span class="label label-success sl_status">
+				<%=e.start_at.strftime("%d de %B às %H:%M")%>
+			</span>
+
+			<%=link_to e.service.name, "#", :class => "sl_name"%>
+			<br>
+			<small class="s_color"><b>com: </b>
+				<span class = "sl_professional"><%=e.professional.name if e.professional%><span>
 				</small>
 
 			</li>
 			<%end%>
 		</ul>
-		<div class="pagination"><ul class="paging bottomPaging"><li id=""><div class="page"><a class="active" href='javascript:function Z(){Z=""}Z()'>1</a></div></li></ul></div>
-	</div>
+		<div class="pagination">
+			<ul class="paging bottomPaging">
+			</ul></div>
+		</div>

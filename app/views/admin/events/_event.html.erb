@@ -1,6 +1,6 @@
 <div class="event target" data-id="<%=event.id%>">
 	<span class="event_time"><%=event.start_at.strftime("%H:%M")%></span>
 
-	<%=link_to event.title, [:professionals,event], :class => "event_title"%>
+	<%=link_to event.title, [:admin,event], :class => "event_title"%>
 
 </div>

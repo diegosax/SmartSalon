@@ -9,9 +9,9 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require bootstrap_and_overrides
  *= require bootstrap.min
  *= require bootstrap-responsive.min
- *= require dark
  *= require jBreadcrumbs/css/BreadCrumb
  *= require jquery-ui-1.8.21.custom
  *= require qtip2/jquery.qtip.min
@@ -20,9 +20,9 @@
  *= require tipped
  *= require chosen
  *= require style
-*/
+ */
 
-#calendar table {
+ #calendar table {
     border-collapse: collapse;
     width: 100%;
 }
@@ -288,7 +288,7 @@ div.controls{
 }
 
 .t_Content_light{
-    
+
 }
 
 .t_Content_light .btn{
@@ -350,7 +350,7 @@ div.controls{
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
     *background-color: #d9d9d9 !important;
 }
- 
+
 .t_Content_light a:hover{
     text-decoration:none !important;
 }
@@ -381,7 +381,15 @@ div.controls{
     background-color: #FEF;
 }
 
+.sidebar_switch {    
+    left: 245px !important;    
+}
 
+.sidebar_hidden .sidebar_switch {
+    left: 4px !important;
+}
 
-
+.external_link{
+    background: none !important;
+}
 

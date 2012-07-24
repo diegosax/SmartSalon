@@ -13,9 +13,19 @@ Smartsalon::Application.routes.draw do
     :sessions => "sessions"
   }
 
-  namespace :professionals do
-    root :to => "professionals/events#index"
+  devise_for :professionals, 
+  :controllers => 
+  { 
+    :registrations => "registrations" ,
+    :sessions => "admin/sessions"
+  },
+  :module => 'admin'
+
+  namespace :admin do    
     resources :events
+    devise_for :professionals
+    resources :professionals
+    root :to => "events#index"
   end
 
   resources :clients do
