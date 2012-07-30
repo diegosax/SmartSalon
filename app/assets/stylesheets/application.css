@@ -22,27 +22,27 @@
  *= require style
  */
 
- #calendar table {
+#client_calendar table {
     border-collapse: collapse;
     width: 100%;
 }
 
-#calendar td,
-#calendar th {
+#client_calendar td,
+#client_calendar th {
     font-family: "Lucida Grande",arial,helvetica,sans-serif;
     font-size: 10px;
     padding: 6px;
     border: 1px solid #999;
 }
 
-#calendar th {
+#client_calendar th {
     background: #DDD;
     color: #666;
     text-align: center;
     width: 14.2857142857143%;
 }
 
-#calendar td {
+#client_calendar td {
     background: #FFF;
     color: #777;
     height: 80px;
@@ -50,39 +50,46 @@
     font-size: 16px;
 }
 
-#calendar .notmonth {
+#client_calendar .notmonth {
     color: #CCC;
 }
 
-#calendar #month {
+#client_calendar #month {
     margin: 0;
     padding-top: 10px;
     padding-bottom: 10px;
     text-align: center;
 }
 
-#calendar #month a, #calendar #month a:hover {
+#client_calendar #month a, #client_calendar #month a:hover {
     text-decoration: none;
     padding: 0 10px;
     color: #999;
 }
 
-#calendar .today {
+#client_calendar .today {
     background-color: #D7F2FF;
 }
 
-#calendar ul {
+#client_calendar ul {
     margin: 0;
     margin-top: 5px;
     padding: 0;
     list-style: none;
 }
 
-#calendar li {
+#client_calendar li {
     margin: 0;
     padding: 0;
     font-size: 11px;
     text-align: center;
+}
+
+#client_calendar td.unavailable{
+    background-color: #E0E0E0;
+    opacity: 0.5;
+    -moz-opacity: 0.5;
+    filter:alpha(opacity=5);
 }
 
 table.calendar
@@ -188,7 +195,6 @@ h2.calendar_header button:hover { color: #FFF !important; }
 
 h2.calendar_header button.previous { right: 25px; }
 h2.calendar_header button.next { left: 25px; }
-
 input.friendly_date{
     margin-left: 1em;
     width:15em;
@@ -393,3 +399,10 @@ div.controls{
     background: none !important;
 }
 
+.event div:hover{
+    background-color:#08C !important;
+}
+
+.clear{
+    clear:both;
+}

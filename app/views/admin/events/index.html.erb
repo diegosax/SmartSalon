@@ -1,9 +1,11 @@
 <%=render "new_modal"%>
 <div class="row-fluid">
 	<div clas="span12">
-		<h3 class="heading">
+		<h2 class="heading">
 			Eventos
-		</h3>
-		<%=render :partial => "index_events_list", :locals => {:events => @events, :date => @month}%>
+		</h2>
+		<div id="calendar">
+		</div>
+		<%#=render :partial => "index_events_list", :locals => {:events => @events, :date => @month}%>
 	</div>
 </div>

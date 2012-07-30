@@ -7,10 +7,10 @@ class Admin::SessionsController < Devise::SessionsController
 		respond_with(resource, serialize_options(resource))
 	end
 
-	def go_to_root(resource)
+	def go_to_root(resource)		
 		if (resource.is_a?(Client))
 			return events_url
-		elsif (resource.is_a?(Professional))
+		elsif (resource.is_a?(Professional))			
 			return admin_events_url
 		end
 	end

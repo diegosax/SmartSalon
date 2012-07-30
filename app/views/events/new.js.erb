@@ -1,7 +1,7 @@
 removeLoading();
 <%if @events%>
-	if ($("#calendar").length > 0)
-		$("#calendar").remove();
+	if ($("#client_calendar").length > 0)
+		$("#client_calendar").remove();
 	var html = "<%=escape_javascript(render :partial => 'new_event_calendar')%>";
 	
 	$("#new-event-form").append(html);	
@@ -10,8 +10,8 @@ removeLoading();
 	<%if @professionals%>	
 		if ($("#choose-professional").length > 0)
 			$("#choose-professional").remove();		
-		if ($("#calendar").length > 0)
-			$("#calendar").remove();
+		if ($("#client_calendar").length > 0)
+			$("#client_calendar").remove();
 		var html = "<%=escape_javascript(render :partial => "new_choose_professional")%>";
 		$("#new-event-form").append(html);
 		$("#choose-professional .chzn_a").chosen().change(function(){			
@@ -19,3 +19,5 @@ removeLoading();
 		});
 	<%end%>
 <%end%>
+
+prettyCalendar();

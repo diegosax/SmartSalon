@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120715140748) do
+ActiveRecord::Schema.define(:version => 20120727123445) do
 
   create_table "events", :force => true do |t|
     t.string   "title"
@@ -36,12 +36,29 @@ ActiveRecord::Schema.define(:version => 20120715140748) do
     t.datetime "updated_at",      :null => false
   end
 
+  create_table "salons", :force => true do |t|
+    t.string   "name"
+    t.string   "username"
+    t.string   "fone"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zipcode"
+    t.string   "complement"
+    t.string   "email"
+    t.string   "logo"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "neighborhood"
+  end
+
   create_table "services", :force => true do |t|
     t.string   "name"
     t.integer  "duration"
     t.float    "price"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "salon_id"
   end
 
   create_table "users", :force => true do |t|
@@ -65,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20120715140748) do
     t.string   "landphone"
     t.string   "celphone"
     t.string   "type",                   :default => "Client", :null => false
+    t.integer  "salon_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

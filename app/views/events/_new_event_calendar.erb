@@ -1,6 +1,6 @@
 <%if @events%>
 
-  <div id="calendar">
+  <div id="client_calendar">
     <h2 id="month">
         <%= link_to "<", params.merge(:month => (@date.beginning_of_month-1).strftime("%Y-%m-01")), :remote => true %>
         <%=h @date.strftime("%B %Y") %>

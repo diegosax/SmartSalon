@@ -39,7 +39,6 @@ class EventsController < ApplicationController
           @service_professionals = @service.professionals
         else
           @service_professionals = Professional.find(params[:professionals])
-          puts "PROFESSIONAL: #{@service_professionals.inspect}"
         end
         @events = Event.find(
           :all,
@@ -73,7 +72,7 @@ class EventsController < ApplicationController
     service = Service.find(params[:service])    
     @event.title = service.name
     @event.description = "#{service.name} marcado(a) pelo cliente via internet, 
-    na: #{l DateTime.now, :format => :default}"
+    na: #{DateTime.now.strftime("%A, %d de %B às %H:%M")}"
     @event.service = service    
     respond_to do |format|
       if @event.save

@@ -1,6 +1,15 @@
 Smartsalon::Application.routes.draw do
 
-  resources :services
+  namespace :admin do    
+    root :to => "events#index"
+    resources :services      
+    resources :events do
+      collection do
+        get 'get_events'
+      end
+    end
+    resources :professionals
+  end
 
   devise_for :clients, :controllers =>
   {
@@ -18,23 +27,16 @@ Smartsalon::Application.routes.draw do
   { 
     :registrations => "registrations" ,
     :sessions => "admin/sessions"
-  },
-  :module => 'admin'
+  }
 
-  namespace :admin do    
-    resources :events
-    devise_for :professionals
-    resources :professionals
-    root :to => "events#index"
-  end
 
   resources :clients do
     resources :events
   end
 
   resources :events
-  
-  
+
+
 
   resources :users
 

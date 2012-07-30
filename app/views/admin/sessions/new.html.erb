@@ -40,8 +40,7 @@
  			</div>  
  			<%end%>
 
- 			<%puts "PROFESSIONAL: #{@professional.inspect}"%>
- 			<%= form_for(:resource, :html => { :method => :post, :id => "pass_form", :style => "display:none" }) do |f| %>
+ 			<%= form_for(@professional, :html => { :method => :post, :id => "pass_form", :style => "display:none" }) do |f| %>
  			<div class="top_b">Não consegue fazer login?</div>    
  			<div class="alert alert-info alert-login">
  				Por favor, digite seu email e você receberá instruções para recuperar sua senha

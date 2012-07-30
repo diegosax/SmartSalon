@@ -1,3 +1,23 @@
+function prettyCalendar(){
+	if ($("#client_calendar").length > 0){
+		$("#client_calendar tr td").addClass("unavailable");
+		$("#client_calendar tr td.future").removeClass("unavailable").addClass("full");	
+		$("#client_calendar tr td.future").removeClass("unavailable").addClass("full");
+		var htmlWrapper = "<div class='btn-group' />";
+		var htmlButton = "<button data-toggle='dropdown' class='btn dropdown-toggle btn-gebo'> \
+		Escolher horário \
+		<span class='caret'></span></button>";
+		var free_dates = $("#client_calendar tr td ul").parent();
+		free_dates.each(function(i){
+			$(this).find("ul").wrap(htmlWrapper);
+			$(this).removeClass("unavailable").addClass("free");
+			$(this).find("ul").addClass("dropdown-menu");
+			$(this).find(".btn-group").prepend(htmlButton);
+		});
+
+	}	
+}
+
 function addLoading(element){
 	var html = "<div class = 'loading'>Processando, por favor aguarde...<br /><img src='/assets/ajax_loader.gif'></img>"
 	$(element).append(html).fadeIn("slow");
@@ -14,7 +34,7 @@ function loadDateTimePicker(){
 }
 
 function onChooseProfessionalChange(){
-	$("#calendar").remove().fadeOut("fast");		
+	$("#client_calendar").remove().fadeOut("fast");		
 	addLoading($("#new-event-form"));
 	$("#new-event-form").submit();
 	history.pushState(null,"",$("#new-event-form").attr("action") + "?" + $("#new-event-form").serialize());
@@ -72,6 +92,7 @@ $(document).ready(function(){
 	});
 
 	$('.event a').live("click",function(event){
+		console.log("Link Clicked")
 		event.preventDefault();
 	});
 
@@ -94,7 +115,7 @@ $(document).ready(function(){
 	});	
 
 	$("#choose-service .chzn_a").chosen().change(function(){
-		$("#calendar").remove().fadeOut("fast");
+		$("#client_calendar").remove().fadeOut("fast");
 		$("#choose-professional").remove().fadeOut("fast");
 		addLoading($("#new-event-form"));
 		$("#choose-professional select option[value='']").attr('selected',true);
@@ -125,7 +146,7 @@ $(document).ready(function(){
 	});
 
 	$("#confirmation-modal").on("hide", function(){
-		$("#calendar li.remove").removeClass("remove");
+		$("#client_calendar li.remove").removeClass("remove");
 		
 	});
 
@@ -137,13 +158,13 @@ $(document).ready(function(){
 		var search_professional = $(this).find('.sl_professional').text();
 		list_source.push(search_name);
 	});
-	*/
+*/
 	//$('.user-list-search').typeahead({source: list_source, items:10});	
 
 	var pagingOptions = {};
 	var options = {
 		valueNames: [ 'sl_id','sl_name', 'sl_professional'],
-		page: 6,
+		page: 10,
 		plugins: [
 		[ 'paging', {
 			pagingClass	: "bottomPaging",
@@ -197,4 +218,9 @@ $(document).ready(function(){
 	);
 
 	//------------End OF User Events List ------------------------//
+
+	prettyCalendar();
+
+	
+
 });

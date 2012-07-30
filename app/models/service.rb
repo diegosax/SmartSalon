@@ -3,4 +3,5 @@ class Service < ActiveRecord::Base
   has_many :professional_services
   has_many :professionals, :through => :professional_services
   has_many :events
+  belongs_to :salon
 end

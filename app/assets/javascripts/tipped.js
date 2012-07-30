@@ -6,7 +6,7 @@
  *
  * License: http://projects.nickstakenburg.com/tipped/license
  */
-;var Tipped = { version: '2.5.5' };
+var Tipped = { version: '2.5.5' };
 
 Tipped.Skins = {
   // base skin, don't modify! (create custom skins in a seperate file)

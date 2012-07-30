@@ -37,6 +37,8 @@ gem 'quiet_assets', :group => :development
 
 gem 'thin'
 
+gem 'simple_form'
+
 group :production do
 	gem "pg"
 end

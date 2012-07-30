@@ -64,7 +64,7 @@
 
 		
 		<!-- main content -->
-		<div id="contentwrapper">
+		<div id="admin-contentwrapper">
 			<div class="main_content">
 				<div class="row-fluid">
 					<%= yield %>			
@@ -107,7 +107,7 @@
 										<div class="accordion-inner">
 											<ul class="nav nav-list">
 												<li><%=link_to "Alterar Perfil", [:admin,current_professional]%></li>
-												<li><%=link_to "Sair", destroy_admin_professional_session_path, :method => :delete%></li>				
+												<li><%=link_to "Sair", destroy_professional_session_path, :method => :delete%></li>				
 											</ul>
 										</div>
 									</div>

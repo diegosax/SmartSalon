@@ -1,7 +1,7 @@
 /* [ ---- Gebo Admin Panel - calendar ---- ] */
 
-	$(document).ready(function() {
-		gebo_calendar.init();
+$(document).ready(function() {
+	gebo_calendar.init();
 		//* resize elements on window resize
 		var lastWindowHeight = $(window).height();
 		var lastWindowWidth = $(window).width();
@@ -14,7 +14,7 @@
 			}
 		});
 	});
-	
+
 	//* calendar
 	gebo_calendar = {
 		init: function() {
@@ -35,76 +35,72 @@
 				aspectRatio: 1.5,
 				selectable: true,
 				selectHelper: true,
-				select: function(start, end, allDay) {
+				/*select: function(start, end, allDay) {
 					var title = prompt('Event Title:');
 					if (title) {
 						calendar.fullCalendar('renderEvent',
-							{
-								title: title,
-								start: start,
-								end: end,
-								allDay: allDay
-							},
+						{
+							title: title,
+							start: start,
+							end: end,
+							allDay: allDay
+						},
 							true // make the event "stick"
-						);
+							);
 					}
 					calendar.fullCalendar('unselect');
 				},
+				
 				editable: true,
+				*/
 				theme: false,
-				events: [
-					{
-						title: 'All Day Event',
-						start: new Date(y, m, 1),
-                        color: '#aedb97',
-                        textColor: '#3d641b'
-					},
-					{
-						title: 'Long Event',
-						start: new Date(y, m, d-5),
-						end: new Date(y, m, d-2)
-					},
-					{
-						id: 999,
-						title: 'Repeating Event',
-						start: new Date(y, m, d+8, 16, 0),
-						allDay: false
-					},
-					{
-						id: 999,
-						title: 'Repeating Event',
-						start: new Date(y, m, d+15, 16, 0),
-						allDay: false
-					},
-					{
-						title: 'Meeting',
-						start: new Date(y, m, d+12, 15, 0),
-						allDay: false,
-                        color: '#aedb97',
-                        textColor: '#3d641b'
-					},
-					{
-						title: 'Lunch',
-						start: new Date(y, m, d, 12, 0),
-						end: new Date(y, m, d, 14, 0),
-						allDay: false
-					},
-					{
-						title: 'Birthday Party',
-						start: new Date(y, m, d+1, 19, 0),
-						end: new Date(y, m, d+1, 22, 30),
-						allDay: false,
-                        color: '#cea97e',
-                        textColor: '#5e4223'
-					},
-					{
-						title: 'Click for Google',
-						start: new Date(y, m, 28),
-						end: new Date(y, m, 29),
-						url: 'http://google.com/'
-					}
-				],
-				eventColor: '#bcdeee'
+				events: {
+					url: "/admin/events/get_events",
+					className: "event target"
+				},
+				slotMinutes: 15,
+				allDaySlot: false,
+				firstHour: 8,
+				maxTime:22,
+				//timeFormat: 'h:mm t{ - h:mm t} ',
+				eventColor: '#bcdeee',
+				eventAfterRender: function(event, element, view ) { 
+					/*element.find('span.fc-event-title').html(
+						event.shown_title
+					);
+					*/
+
+					Tipped.create(element,element.attr("href") + ".js", {
+						ajax: true,
+						closeButton: true,
+						hideOn: 'click-outside',
+						closeButtonSkin: 'light',
+						hideOthers: true,
+						showOn: 'click',
+						spinner: {
+							radii:     [32, 42],
+							color:     '#808080',
+							dashWidth: 1,
+							dashes:    75,
+							speed:     .75
+						},
+						hook: {
+							target: 'rightmiddle',
+							tooltip: 'lefttop'
+						},
+						skin: 'light'			
+					});
+				},
+				eventClick: function(event) {
+					console.log(event);
+					return false;
+				},
+				dayClick: function() {
+        			$("#calendar").fullCalendar('changeView', "basicDay" )
+    			}
 			})
-		}
-	};
+	}
+
+
+
+};

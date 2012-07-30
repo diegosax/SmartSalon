@@ -26,6 +26,9 @@
 //= require forms/jquery.ui.touch-punch.min
 //= require jquery.ui.datetime.min
 //= require ui.datetimepicker
+//= require fullcalendar/fullcalendar
+//= require fullcalendar/gcal
+//= require gebo_calendar
 //=	require spinners.min
 //=	require tipped 
 //= require list_js/list.js

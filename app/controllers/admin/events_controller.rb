@@ -8,10 +8,33 @@ class Admin::EventsController < Admin::ApplicationController
     @event = Event.new
 		respond_to do |format|
 			format.js
-      		format.html # index.html.erb
-      		format.xml  { render :xml => @events }
-      	end
+      format.json
+      format.html # index.html.erb
+      format.xml  { render :xml => @events }
     end
+  end
+
+  def get_events
+    @events = current_professional.events.where(
+      "start_at >= ? and end_at <= ?",
+      Time.at(params['start'].to_i).to_formatted_s(:db),
+      Time.at(params['end'].to_i).to_formatted_s(:db) 
+      )
+    events = [] 
+    @events.each do |event|
+      events << {
+        :id => event.id, 
+        :title => event.title, 
+        :description => event.description,
+        :url => url_for(:controller => 'admin/events', :action => "show", :id => event.id),
+        :start => "#{event.start_at.iso8601}", 
+        :end => "#{event.end_at.iso8601}",
+        :allDay => false,
+        :shown_title => "<b>#{event.start_at.strftime('%H:%M')}</b> - #{event.title}"
+      }
+    end
+    render :text => events.to_json
+  end
 
     def new
   		@event = Event.new
@@ -51,7 +74,6 @@ class Admin::EventsController < Admin::ApplicationController
 
   def show
     @event = Event.find(params[:id])
-
     respond_to do |format|
       format.html {render :layout => false}
       format.js
