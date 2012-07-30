@@ -92,6 +92,10 @@
     filter:alpha(opacity=5);
 }
 
+#client_calendar .btn-group{
+    padding:15px;
+}
+
 table.calendar
 {
     margin:18px 0 12px;
