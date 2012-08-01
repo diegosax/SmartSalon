@@ -127,7 +127,6 @@ $(document).ready(function(){
 	});
 
 	$('.event a').live("click",function(event){
-		console.log("Link Clicked")
 		event.preventDefault();
 	});
 

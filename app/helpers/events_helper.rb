@@ -11,8 +11,9 @@ module EventsHelper
                   session[:new_start_date].year == myDate.year
                   )
 
-                        start_time = session[:new_start_date].hour
+                        start_time = session[:new_start_date].hour + service.duration.minutes
                         session[:new_start_date] = nil
+
             end
             
             end_time = 18
@@ -37,7 +38,11 @@ module EventsHelper
                               actual_date += intervalInMinutes.minutes
                         end
                   else
-                        actual_date = events[i].end_at
+                        if (events[i].end_at.minus_with_coercion(actual_date)/60).to_i > 0
+                              actual_date = events[i].end_at      
+                        else
+                              actual_date += intervalInMinutes.minutes
+                        end                        
                         i+=1
                   end
             end
