@@ -3,6 +3,7 @@ function addToHourList(item,period,calendarItem){
 }
 
 function prettyCalendar(){
+	console.log("prettyCalendar Chamado");
 	if ($("#client_calendar").length > 0){
 		$("#client_calendar tr td").addClass("unavailable");
 		$("#client_calendar tr td.future").removeClass("unavailable").addClass("full");	
@@ -253,7 +254,7 @@ $(document).ready(function(){
 
 	//------------End OF User Events List ------------------------//
 
-	prettyCalendar();
+	//prettyCalendar();
 
 	
 
