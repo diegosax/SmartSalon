@@ -10,6 +10,7 @@
       <%= calendar.head('Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado') %>
       <% calendar.day(:day_method => :start_at) do |date, events| %>
         <%= date.day %>
+        <br>
         <%if session[:new_start_date] == nil%>
           <%if date >= Date.today && date.month == @date.month%>
             <%=raw isavailable_mod(events,date,@service_professionals,@service)%>

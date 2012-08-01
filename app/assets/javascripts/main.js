@@ -1,18 +1,53 @@
+function addToHourList(item,period,calendarItem){	
+	$(calendarItem).find("div." + period + " ul").append(item);
+}
+
 function prettyCalendar(){
 	if ($("#client_calendar").length > 0){
 		$("#client_calendar tr td").addClass("unavailable");
 		$("#client_calendar tr td.future").removeClass("unavailable").addClass("full");	
 		$("#client_calendar tr td.future").removeClass("unavailable").addClass("full");
-		var htmlWrapper = "<div class='btn-group' />";
-		var htmlButton = "<button data-toggle='dropdown' class='btn dropdown-toggle btn-gebo'> \
-		Escolher horário \
-		<span class='caret'></span></button>";
-		var free_dates = $("#client_calendar tr td ul").parent();
+		
+		var htmlButtonMorning = "<div class='btn-group morning'> \
+		<button data-toggle='dropdown' class='btn dropdown-toggle btn-mini'> \
+		Manhã \
+		</button><ul class='dropdown-menu morning'></ul></div>";
+		var htmlButtonAfternoon = "<div class='btn-group afternoon'> \
+		<button data-toggle='dropdown' class='btn dropdown-toggle btn-mini'> \
+		Tarde \
+		</button><ul class='dropdown-menu afternoon'></ul></div>";
+		var htmlButtonNight = "<div class='btn-group night'> \
+		<button data-toggle='dropdown' class='btn dropdown-toggle btn-mini'> \
+		Noite \
+		</button><ul class='dropdown-menu night'></ul></div>";
+		var free_dates = $("#client_calendar tr td ul");
 		free_dates.each(function(i){
-			$(this).find("ul").wrap(htmlWrapper);
-			$(this).removeClass("unavailable").addClass("free");
-			$(this).find("ul").addClass("dropdown-menu");
-			$(this).find(".btn-group").prepend(htmlButton);
+			var calendarItem = $(this).closest("td");
+			$(calendarItem).removeClass("unavailable").addClass("free");
+			$(calendarItem).append(htmlButtonMorning);
+			$(calendarItem).append(htmlButtonAfternoon);
+			$(calendarItem).append(htmlButtonNight);
+			var hours = $(this).find("li");
+			hours.each(function(){
+				var hour = parseFloat($(this).text());
+				if (hour >=0 && hour < 12){
+					addToHourList($(this),"morning",calendarItem);
+				} else if (hour >= 12 && hour < 18){
+					addToHourList($(this),"afternoon",calendarItem);
+				} else{
+					addToHourList($(this),"night",calendarItem);
+				}
+			});			
+			$(this).remove();
+			$(calendarItem).find("ul").each(function(){
+				if ($(this).find("li").length == 0){
+					//$(this).closest("div").remove();
+					$(this).parent().find("button").attr("disabled",true);
+				}
+			});
+
+			$(calendarItem).find(".btn-group").wrapAll("<div class='btn-actions' />")
+			
 		});
 
 	}	
