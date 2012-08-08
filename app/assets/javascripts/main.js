@@ -136,18 +136,7 @@ $(document).ready(function(){
 		addLoading($("#new-event-form"));
 	});
 
-	$("#newEvent").on('shown',function(){
-		var now = new Date();
-		var minute = now.getMinutes();
-		if (minute < 10){
-			minute = "0" + minute;
-		}
-		var hora = now.getHours() + ":" + minute;
-		var date = document.URL.split('#')[1] + " " + hora;
-		
-		$('#datetime_from').datetime({value: date,format: 'dd-mm-yy hh:ii',altField: '#datetime_from_alt', altFormat: "d 'de' MM yy 'às' hh:ii", chainTo: '#datetime_to', chainOptions: { value: '' } });
-		$('#datetime_to').datetime({format: 'dd-mm-yy hh:ii',altField: '#datetime_to_alt', altFormat: "d 'de' MM yy 'às' hh:ii", });
-	});	
+	
 
 	$("#choose-service .chzn_a").chosen().change(function(){
 		$("#client_calendar").remove().fadeOut("fast");

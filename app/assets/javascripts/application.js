@@ -34,4 +34,6 @@
 //= require list_js/list.js
 //= require list_js/plugins/paging/list.paging
 //= require confirmation_modal
+//= require date
+//= require main_admin
 //= require main.js

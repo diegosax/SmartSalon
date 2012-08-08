@@ -52,10 +52,11 @@ class Admin::EventsController < Admin::ApplicationController
 
   def create
     @event = Event.new(params[:event])    
+    puts "PARAMS PROFESSIONAL: #{params[:professional]}"
     if params[:professional] 
       @event.professional_id = params[:professional]
     else
-      @event.professional = current_user
+      @event.professional = current_professional
     end
     
     respond_to do |format|

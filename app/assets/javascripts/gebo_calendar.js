@@ -65,11 +65,6 @@ $(document).ready(function() {
 				//timeFormat: 'h:mm t{ - h:mm t} ',
 				eventColor: '#bcdeee',
 				eventAfterRender: function(event, element, view ) { 
-					/*element.find('span.fc-event-title').html(
-						event.shown_title
-					);
-					*/
-
 					Tipped.create(element,element.attr("href") + ".js", {
 						ajax: true,
 						closeButton: true,
@@ -92,7 +87,6 @@ $(document).ready(function() {
 					});
 				},
 				eventClick: function(event) {
-					console.log(event);
 					return false;
 				},
 				dayClick: function() {
@@ -100,7 +94,4 @@ $(document).ready(function() {
     			}
 			})
 	}
-
-
-
 };
