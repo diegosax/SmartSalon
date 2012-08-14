@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  work_on_sundays: false
+  work_on_saturdays: false
+  opening_time: 
+  closing_time: 
+  searchable: false
+  client_can_schedule: false
+
+two:
+  work_on_sundays: false
+  work_on_saturdays: false
+  opening_time: 
+  closing_time: 
+  searchable: false
+  client_can_schedule: false

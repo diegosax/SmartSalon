@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Work on sundays:</b>
+  <%= @setting.work_on_sundays %>
+</p>
+
+<p>
+  <b>Work on saturdays:</b>
+  <%= @setting.work_on_saturdays %>
+</p>
+
+<p>
+  <b>Opening time:</b>
+  <%= @setting.opening_time %>
+</p>
+
+<p>
+  <b>Closing time:</b>
+  <%= @setting.closing_time %>
+</p>
+
+<p>
+  <b>Searchable:</b>
+  <%= @setting.searchable %>
+</p>
+
+<p>
+  <b>Client can schedule:</b>
+  <%= @setting.client_can_schedule %>
+</p>
+
+
+<%= link_to 'Edit', edit_setting_path(@setting) %> |
+<%= link_to 'Back', settings_path %>

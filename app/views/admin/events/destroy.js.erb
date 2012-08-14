@@ -1,0 +1,4 @@
+$("#confirmation-modal").modal("hide");
+$("#<%=escape_javascript(@event.id.to_s)%>").hide("slow", function(){
+	//userList.remove("sl_id",<%=escape_javascript(@event.id.to_s)%>);	
+});

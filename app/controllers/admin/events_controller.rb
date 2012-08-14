@@ -1,14 +1,14 @@
 class Admin::EventsController < Admin::ApplicationController
   before_filter :authenticate_professional!
 
-	def index
-		@events = Event.order("start_at").includes(:client,:professional).all
-		@month = params[:month] ? Date.parse(params[:month]) : Date.today
-		@date = @month
+  def index
+    @events = Event.order("start_at").includes(:client,:professional).all
+    @month = params[:month] ? Date.parse(params[:month]) : Date.today
+    @date = @month
     @event = Event.new
-		respond_to do |format|
-			format.js
-      format.json
+    respond_to do |format|
+     format.js
+     format.json
       format.html # index.html.erb
       format.xml  { render :xml => @events }
     end
@@ -36,19 +36,30 @@ class Admin::EventsController < Admin::ApplicationController
     render :text => events.to_json
   end
 
-    def new
-  		@event = Event.new
-  		delay = (60 - (DateTime.now.min))%5
-      if !params[:day].nil?
-  		  @event.start_at = params[:day] + " " + DateTime.now.strftime("%H:%M") unless params[:day].nil?
-  		  @event.start_at+=minutes.delay
-      end
-  		respond_to do |format|
+  def search
+    @events = Event.order("start_at").includes(:client,:professional).where("start_at >= ?", Date.today)
+    puts @events.first.inspect
+    respond_to do |format|
+      format.js
+      format.json
+      format.html # index.html.erb
+      format.xml  { render :xml => @events }
+    end
+  end
+
+  def new
+    @event = Event.new
+    delay = (60 - (DateTime.now.min))%5
+    if !params[:day].nil?
+      @event.start_at = params[:day] + " " + DateTime.now.strftime("%H:%M") unless params[:day].nil?
+      @event.start_at+=minutes.delay
+    end
+    respond_to do |format|
       format.html # new.html.erb
       format.js
       format.xml  { render :xml => @event }
-  		end
-	end
+    end
+  end
 
   def create
     @event = Event.new(params[:event])    
@@ -79,6 +90,19 @@ class Admin::EventsController < Admin::ApplicationController
       format.html {render :layout => false}
       format.js
       format.xml  { render :xml => @event }
+    end
+  end
+
+  # DELETE /events/1
+  # DELETE /events/1.xml
+  def destroy
+    @event = Event.find(params[:id])
+    @event.destroy
+
+    respond_to do |format|
+      format.html { redirect_to(events_url) }
+      format.js
+      format.xml  { head :ok }
     end
   end
 end

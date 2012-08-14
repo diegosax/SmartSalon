@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     if (resource.is_a?(Client))
       return events_url
     elsif (resource.is_a?(Professional))
-      return professionals_events_url
+      return admin_events_url
     end
   end
 

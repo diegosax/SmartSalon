@@ -5,6 +5,7 @@
 	<%= stylesheet_link_tag    "application", :media => "all" %>
 	<%= javascript_include_tag "application" %>
 	<%= csrf_meta_tags %>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
@@ -38,88 +39,89 @@
 								<%if current_professional%>
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 									<%=current_professional.email%> <b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<li><a href="user_profile.html">My Profile</a></li>
-									<li><a href="javascrip:void(0)">Another action</a></li>
-									<li class="divider"></li>
-									<li>
-										<%=link_to "Sair", destroy_professional_session_path, :method => :delete%>
-									</li>
-								</ul>
-								<%else%>
-								<%=link_to "Login", new_admin_professional_session_path, :class => "dropdown-toggle"%>
-								<%end%>								
-							</li>
-						</ul>
-						<a data-target=".nav-collapse" data-toggle="collapse" class="btn_menu">
-							<span class="icon-align-justify icon-white"></span>
-						</a>						
+									<ul class="dropdown-menu">
+										<li><a href="user_profile.html">My Profile</a></li>
+										<li><a href="javascrip:void(0)">Another action</a></li>
+										<li class="divider"></li>
+										<li>
+											<%=link_to "Sair", destroy_professional_session_path, :method => :delete%>
+										</li>
+									</ul>
+									<%else%>
+									<%=link_to "Login", new_admin_professional_session_path, :class => "dropdown-toggle"%>
+									<%end%>								
+								</li>
+							</ul>
+							<a data-target=".nav-collapse" data-toggle="collapse" class="btn_menu">
+								<span class="icon-align-justify icon-white"></span>
+							</a>						
+						</div>
+					</div>
+				</div>
+				<% flash.each do |name, msg| %>
+				<%= content_tag :div, msg, id: "flash_#{name}" %>
+				<% end %>
+			</header>
+
+
+			<!-- main content -->
+			<div id="admin-contentwrapper">
+				<div class="main_content">
+					<div class="row-fluid">
+						<%= yield %>			
 					</div>
 				</div>
 			</div>
-			<% flash.each do |name, msg| %>
-			<%= content_tag :div, msg, id: "flash_#{name}" %>
-			<% end %>
-		</header>
 
-		
-		<!-- main content -->
-		<div id="admin-contentwrapper">
-			<div class="main_content">
-				<div class="row-fluid">
-					<%= yield %>			
-				</div>
-			</div>
-		</div>
-
-		<!-- sidebar -->
-		<a href="javascript:void(0)" class="sidebar_switch on_switch ttip_r" title="Hide Sidebar">
-			Sidebar switch
-		</a>
-		<div class="sidebar">
-			<div class="antiScroll">
-				<div class="antiscroll-inner">
-					<div class="antiscroll-content">
-						<div class="sidebar_inner">
-							<div id="side_accordion" class="accordion">
-								<div class="accordion-group">
-									<div class="accordion-heading sdb_h_active">
-										<a href="#collapseOne" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-											<i class="icon-folder-close"></i> Agendamentos
-										</a>
+			<!-- sidebar -->
+			<a href="javascript:void(0)" class="sidebar_switch on_switch ttip_r" title="Esconder Menu">
+				Esconder Menu
+			</a>
+			<div class="sidebar">
+				<div class="antiScroll">
+					<div class="antiscroll-inner">
+						<div class="antiscroll-content">
+							<div class="sidebar_inner">
+								<div id="side_accordion" class="accordion">
+									<div class="accordion-group">
+										<div class="accordion-heading sdb_h_active">
+											<a href="#collapseOne" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
+												<i class="icon-folder-close"></i> Agendamentos
+											</a>
+										</div>
+										<div class="accordion-body in collapse" id="collapseOne" style="height: auto; ">
+											<div class="accordion-inner">
+												<ul class="nav nav-list">
+													<li><%=link_to "Agendamentos", search_admin_events_path%>
+													<li><%=link_to "Ver Calendário", admin_events_path%></li>
+													<li><%=link_to "Criar Agendamento", new_admin_event_path%></li>				
+												</ul>
+											</div>
+										</div>
 									</div>
-									<div class="accordion-body in collapse" id="collapseOne" style="height: auto; ">
-										<div class="accordion-inner">
-											<ul class="nav nav-list">
-												<li><%=link_to "Meus Agendamentos", events_path%></li>
-												<li><%=link_to "Novo", new_event_path%></li>				
-											</ul>
+									<div class="accordion-group">
+										<div class="accordion-heading sdb_h_active">
+											<a href="#collapseTwo" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
+												<i class="icon-folder-close"></i> Meu Cadastro
+											</a>
+										</div>
+										<div class="accordion-body in collapse" id="collapseTwo" style="height: auto; ">
+											<div class="accordion-inner">
+												<ul class="nav nav-list">
+													<li><%=link_to "Alterar Perfil", [:admin,current_professional]%></li>
+													<li><%=link_to "Sair", destroy_professional_session_path, :method => :delete%></li>				
+												</ul>
+											</div>
 										</div>
 									</div>
 								</div>
-								<div class="accordion-group">
-									<div class="accordion-heading sdb_h_active">
-										<a href="#collapseTwo" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-											<i class="icon-folder-close"></i> Meu Cadastro
-										</a>
-									</div>
-									<div class="accordion-body in collapse" id="collapseTwo" style="height: auto; ">
-										<div class="accordion-inner">
-											<ul class="nav nav-list">
-												<li><%=link_to "Alterar Perfil", [:admin,current_professional]%></li>
-												<li><%=link_to "Sair", destroy_professional_session_path, :method => :delete%></li>				
-											</ul>
-										</div>
-									</div>
-								</div>
+								<div class="push"></div>
 							</div>
-							<div class="push"></div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</body>
+	</body>
 
-</html>
+	</html>

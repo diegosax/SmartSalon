@@ -89,7 +89,10 @@ $(document).ready(function() {
 				eventClick: function(event) {
 					return false;
 				},
-				dayClick: function() {
+				dayClick: function(e) {
+					$("#calendar").fullCalendar(
+					 	'gotoDate', e
+					);	
         			$("#calendar").fullCalendar('changeView', "basicDay" )
     			}
 			})

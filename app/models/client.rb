@@ -1,4 +1,4 @@
 class Client < User
-  # attr_accessible :title, :body
   has_many :events
+  validates :name, :presence => true
 end
