@@ -1,4 +1,4 @@
-<%= form_for(@service) do |f| %>
+<%= form_for([:admin, @service]) do |f| %>
   <% if @service.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h2>
@@ -18,10 +18,6 @@
   <div class="field">
     <%= f.label :duration %><br />
     <%= f.number_field :duration %>
-  </div>
-  <div class="field">
-    <%= f.label :professional_id %><br />
-    <%= f.number_field :professional_id %>
   </div>
   <div class="field">
     <%= f.label :price %><br />

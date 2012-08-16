@@ -3,8 +3,8 @@ class CreateSettings < ActiveRecord::Migration
     create_table :settings do |t|
       t.boolean :work_on_sundays
       t.boolean :work_on_saturdays
-      t.DateTime :opening_time
-      t.DateTime :closing_time
+      t.datetime :opening_time
+      t.datetime :closing_time
       t.boolean :searchable
       t.boolean :client_can_schedule
 
