@@ -20,6 +20,7 @@
 //= require jquery.validate
 //= require jquery.dataTables.min
 //= require jquery.dataTables.sorting
+//= require jquery.flexslider-min
 //= require chosen.jquery
 //= require qtip2/jquery.qtip.min
 //= require jBreadcrumbs/js/jquery.jBreadCrumb.1.1.min
@@ -39,4 +40,5 @@
 //= require confirmation_modal
 //= require date
 //= require main_admin
+//= require custom
 //= require main.js

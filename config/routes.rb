@@ -1,6 +1,12 @@
 Smartsalon::Application.routes.draw do
+  
 
   resources :settings
+
+  namespace :landing do
+    root :to => "pages#index"
+    get "pages/index"
+  end
 
   namespace :admin do    
     root :to => "events#index"
