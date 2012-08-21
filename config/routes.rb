@@ -10,7 +10,12 @@ Smartsalon::Application.routes.draw do
 
   namespace :admin do    
     root :to => "events#index"
-    resources :services      
+    resources :services do
+      collection do
+        get 'get_services'
+        get 'search'
+      end
+    end      
     resources :events do
       collection do
         get 'get_events'

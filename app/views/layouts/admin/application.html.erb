@@ -99,13 +99,28 @@
 											</div>
 										</div>
 									</div>
-									<div class="accordion-group">
+<div class="accordion-group">
 										<div class="accordion-heading sdb_h_active">
 											<a href="#collapseTwo" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-												<i class="icon-folder-close"></i> Meu Cadastro
+												<i class="icon-folder-close"></i> Serviços
 											</a>
 										</div>
 										<div class="accordion-body in collapse" id="collapseTwo" style="height: auto; ">
+											<div class="accordion-inner">
+												<ul class="nav nav-list">
+													<li><%=link_to "Serviços", admin_services_path%>
+												</ul>
+											</div>
+										</div>
+									</div>
+																		
+<div class="accordion-group">
+										<div class="accordion-heading sdb_h_active">
+											<a href="#collapseThree" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
+												<i class="icon-folder-close"></i> Meu Cadastro
+											</a>
+										</div>
+										<div class="accordion-body in collapse" id="collapseThree" style="height: auto; ">
 											<div class="accordion-inner">
 												<ul class="nav nav-list">
 													<li><%=link_to "Alterar Perfil", [:admin,current_professional]%></li>

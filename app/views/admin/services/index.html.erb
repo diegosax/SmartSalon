@@ -1,0 +1,40 @@
+<div class="row-fluid">
+	<div class="span12">
+		<ul class="dshb_icoNav clearfix">
+			<li>
+				<%=link_to "Novo", "#", :style=> "background-image: url(/assets/gCons/add-item.png)", :class => "new_remote_event"%>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="row-fluid">
+	<div clas="span12">
+		<h2 class="heading">
+			Serviços
+		</h2>
+<div id="main_services">
+		</div>
+	    <table>
+  <tr>
+    <th>Name</th>
+    <th>Duration</th>
+    <th>Professional</th>
+    <th>Price</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @services.each do |service| %>
+  <tr>
+    <td><%= service.name %></td>
+    <td><%= service.duration %></td>
+    <td><%= service.price %></td>
+    <td><%= link_to 'Show', admin_service_path(service) %></td>
+    <td><%= link_to 'Edit', edit_admin_service_path(service) %></td>
+    <td><%= link_to 'Destroy', admin_service_path(service), confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+	</div>
+</div>
