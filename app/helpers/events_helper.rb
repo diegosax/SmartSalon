@@ -17,13 +17,12 @@ module EventsHelper
             end
             
             end_time = 18
-            intervalInMinutes = service.duration
-            actual_date = Time.zone.local(myDate.year,myDate.month,myDate.day, start_time, 0)
-            end_date = Time.zone.local(myDate.year,myDate.month,myDate.day, end_time, 0)
+            intervalInMinutes = service.duration            
+            actual_date = Time.zone.local(myDate.year,myDate.month,myDate.day, start_time, 0)            
+            end_date = Time.zone.local(myDate.year,myDate.month,myDate.day, end_time, 0)            
             if actual_date.to_date == Date.today
                   actual_date += (DateTime.now.hour - start_time).hours + service.duration.minutes
             end
-
 
             valid_times = []
             i = 0;

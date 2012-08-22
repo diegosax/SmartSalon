@@ -156,7 +156,7 @@ em {
 /*----------------------------------------*/
 /*----- 1.4 Button Styles -----*/
 /*----------------------------------------*/
-.btn span {
+a.btnlike span {
 	background: url(/assets/cta-btn.png) no-repeat 0 0 transparent;
 	padding: 17px 0 17px 20px;
 	font-family: 'Open Sans', sans-serif;
@@ -168,7 +168,7 @@ em {
 	display: inline-block;
 	text-transform: uppercase;
 }
-.btn {
+a.btnlike {
 	background: url(/assets/cta-btn-span.png) no-repeat top right transparent;
 	height: 50px;
 	padding-right: 20px;
@@ -179,10 +179,10 @@ em {
 	text-decoration: none;
 	float: left;
 }
-.btn:hover span {
+a.btnlike:hover span {
 	background-position: 0 -49px;
 }
-.btn:hover {
+a.btnlike:hover {
 	background-position: right -49px;
 	text-decoration: none;
 }

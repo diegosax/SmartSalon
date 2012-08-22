@@ -12,7 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="/assets/favicon.png"/>
   <title>Instanap</title>
-  <%= stylesheet_link_tag "landing-style", "flexslider", "skeleton" %>
+  <%= stylesheet_link_tag "bootstrap-forms","landing-style", "flexslider", "skeleton" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <!--google web font-->
@@ -47,7 +47,7 @@
           <p>
             Com o Instanap você será capaz de localizar os salões de beleza mais próximos de onde você está, selecionar, escolher o horário e pronto! Você já está agendado e será notificado sobre qualquer alteração de horário ou disponibilidade.
           </p>
-          <a href="#" class="btn"><span>Agende Agora</span></a></div>
+          <a href="#" class="btnlike"><span>Agende Agora</span></a></div>
           <!--header-middle ends--> 
 
           <!--header-bottom starts-->
@@ -175,7 +175,7 @@
                   Cadastre-se agora e após o período de teste você pode confirmar ou cancelar sua assinatura
                 </p>
 
-                <a href="#" class="btn">
+                <a href="#" class="btnlike">
                   <span>
                     Iniciar cadastro
                   </span>
@@ -211,30 +211,7 @@
               <!--features starts-->
               <div class="two-thirds column">
                 <h2>Efetue seu cadastro e agende seu horário agora!</h2>
-                <form  id="contactform" method="post" action="submit-form.php">
-                  <fieldset>
-                    <div class="four columns alpha">
-                      <p>
-                        <input name="name" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'Name':this.value;" value="Name"/>
-                      </p>
-                      <p>
-                        <input name="email" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'Email':this.value;" value="Email" class="required email"/>
-                      </p>
-                      <p>
-                        <input name="subject" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'Subject':this.value;" value="Subject">
-                      </p>
-                    </div>
-                    <div class="four columns omega">
-                      <p>
-                        <textarea name="message" id="message" class="required"></textarea>
-                      </p>
-                      <p>
-                        <input class="submit" type="submit" value="Submit Message"/>
-                      </p>
-                      <div id="result"></div>
-                    </div>
-                  </fieldset>
-                </form>
+                <%=render "new_client"%>
               </div>
               <!--features ends--> 
 
