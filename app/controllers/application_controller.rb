@@ -1,19 +1,19 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   layout :layout
-  #before_filter :check_logged
-
-  def check_logged
-    puts "ApplicationController check_logged"
-    if (current_professional)
-      redirect_to admin_root_url
-    end
-  end
 
   def go_to_root(resource)
     if (resource.is_a?(Client))
+      if !current_user
+        sign_out :professional
+        sign_in :user, resource
+      end
       return events_url
     elsif (resource.is_a?(Professional))
+      if !current_professional
+        sign_out :user
+        sign_in :professional, resource
+      end
       return admin_events_url
     end
   end

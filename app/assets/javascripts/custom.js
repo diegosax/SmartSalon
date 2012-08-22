@@ -82,7 +82,7 @@ $(document).ready(function() {
 	});
 	$("body").click(function(){
         if(!mouse_is_inside){
-        	$(".login_box").fadeOut("fast");	
+        	$(".client_login_box, .salon_login_box").fadeOut("fast");	
         } 
     });
 

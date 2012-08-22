@@ -1,15 +1,16 @@
  <!DOCTYPE html>
  <html>
  <head>
- 	<title>Instanap - Beauty</title>
+ 	<title>InstaBeauty - Login - Salão</title>
  	<%= stylesheet_link_tag    "application", :media => "all" %>
  	<%= javascript_include_tag "application" %>
  	<%= csrf_meta_tags %>
+ 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
  </head>
  <body class="login_page">		
  	<div class="login_box">			
  		<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:id => "login_form"}) do |f| %>
- 		<div class="top_b">Login</div>				
+ 		<div class="top_b">Login - Salão</div>				
  		<div class="cnt_b">
  			<div class="formRow">
  				<div class="input-prepend">
@@ -40,7 +41,6 @@
  			</div>  
  			<%end%>
 
- 			<%puts "PROFESSIONAL: #{@professional.inspect}"%>
  			<%= form_for(:resource, :html => { :method => :post, :id => "pass_form", :style => "display:none" }) do |f| %>
  			<div class="top_b">Não consegue fazer login?</div>    
  			<div class="alert alert-info alert-login">

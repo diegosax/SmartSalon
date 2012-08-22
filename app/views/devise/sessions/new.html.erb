@@ -41,7 +41,7 @@
  			</div>  
  			<%end%>
 
- 			<%puts "CLIENTTTT: #{@client.inspect}"%>
+ 			<%@client = Client.new%>
  			<%= form_for(@client, :html => { :method => :post, :id => "pass_form", :style => "display:none" }) do |f| %>
  			<div class="top_b">Não consegue fazer login?</div>    
  			<div class="alert alert-info alert-login">
