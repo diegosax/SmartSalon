@@ -14,11 +14,14 @@
 		var lastWindowHeight = $(window).height();
 		var lastWindowWidth = $(window).width();
 		$(window).on("debouncedresize",function() {
+			console.log("RESIZED")
 			if($(window).height()!=lastWindowHeight || $(window).width()!=lastWindowWidth){
-				lastWindowHeight = $(window).height();
+				$(".chzn-done").show();
+				lastWindowHeight = $(window).height();				
 				lastWindowWidth = $(window).width();
 				if(!is_touch_device()){
                     $('.sidebar_switch').qtip('hide');
+                    
                 }
 			}
 		});
@@ -66,6 +69,7 @@
             } else {
                 $('body').addClass('sidebar_hidden');
                 $('.sidebar_switch').removeClass('on_switch').addClass('off_switch');
+                $(".chzn-done").show();
             }
 
 			gebo_sidebar.info_box();

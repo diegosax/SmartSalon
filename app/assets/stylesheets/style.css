@@ -703,6 +703,12 @@
     	.btn_menu {display:block;clear:both;padding:8px 0 6px;border-top:1px solid rgba(255,255,255,.2);box-shadow: 0 -1px 0 rgba(0,0,0,.2);text-align:center;position:relative;top:4px;cursor:pointer}
     	.btn_menu span {opacity:.8}
     	.style_switcher {top:72px}
+        .chzn-done{
+            display: inline-block;
+        }
+        .chzn-container{
+            display: none;
+        }
     }
 
     @media (max-width: 767px) {
@@ -726,6 +732,12 @@
     	.login_page .login_box {width:100%}
     	.login_page .cnt_b {padding:20px 0;width:68%;margin:0 auto}
     	.-list-container {height:300px}
+        .chzn-done{
+            display: inline-block;
+        }
+        .chzn-container{
+            display: none;
+        }
     }
 
     @media (min-width: 1681px) {

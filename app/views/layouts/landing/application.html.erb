@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="description" content="corporate, business software, app" />
+  <meta name="keywords" content="corporate, software, app, business, marketing, landing page, web marketing, internate marketing, seo"/>
+  <meta name="author" content="Tansh" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="/assets/favicon.png"/>
+  <title>Instanap</title>
+  <%= stylesheet_link_tag "landing-style", "flexslider", "skeleton" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <!--google web font-->
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,300italic' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+
+  <!--wrapper starts-->
+  <div id="wrapper"> 
+
+    <!--header-left starts-->
+    <div id="header-left" class="equal_columns"> 
+
+      <!--logo wrapper starts-->
+      <div class="logo-wrapper clearfix">
+        <h1 class="logo">
+          <a href="#"><img src="/assets/logo.png" width="172" height="70" alt="logo"></a></h1>      
+        </div>
+        <!--logo wrapper ends--> 
+
+        <!--header-middle starts-->
+        <div class="header-middle clearfix">
+          <h3>
+            Não espere o salão abrir! Agende seu horário agora!
+          </h3>
+          <ul class="companies">
+            <li><img src="/assets/icons/icon-app.png" width="64" height="64" alt="icon">app</li>
+            <li><img src="/assets/icons/icon-made.png" width="64" height="64" alt="icon">made</li>
+            <li class="omega"><img src="/assets/icons/icon-easy.png" width="64" height="64" alt="icon">easy</li>
+          </ul>
+          <p>
+            Com o Instanap você será capaz de localizar os salões de beleza mais próximos de onde você está, selecionar, escolher o horário e pronto! Você já está agendado e será notificado sobre qualquer alteração de horário ou disponibilidade.
+          </p>
+          <a href="#" class="btn"><span>Agende Agora</span></a></div>
+          <!--header-middle ends--> 
+
+          <!--header-bottom starts-->
+          <div class="header-bottom clearfix">
+            <ul class="list-horizon">
+              <li>Fácil de usar</li>
+              <li>Grátis</li>
+              <li class="omega">Disponível 24 x 7</li>
+            </ul>
+          </div>
+          <!--header-bottom ends-->
+
+          <div class="clear"></div>
+        </div>
+        <!--header-left ends--> 
+
+        <!--header-right starts-->
+        <div id="header-right" class="equal_columns"> 
+          <div id="client_login_box" class="login_box">
+            <div id="tab">
+              <%=link_to new_user_session_path, :class => "login_btn client_login_btn inner_login_btn" do%>              
+                <span>Login Cliente</span>
+                <div class="triangle">
+                </div>
+              <%end%>
+            </div>
+            <div id="login_box_content">
+              <%= form_for("user", :url => user_session_path, :html => {:id => "login_form"}) do |f| %>
+                <%= f.text_field :email, :placeholder => "Email" %>
+                <%= f.password_field :password, :placeholder => "Senha" %>
+                <%= f.check_box :remember_me %>
+                <%= f.label :remember_me, "Me manter conectado" %>
+                <%= f.submit 'Login' %>
+                <%= link_to "Esqueci minha senha", new_password_path('user') %>
+              <% end %>
+            </div>
+          </div>
+          <div id="salon_login_box" class="login_box">
+            <div id="tab">
+              <%=link_to new_professional_session_path, :class => "login_btn salon_login_btn inner_login_btn" do%>              
+                <span>Login Salão</span>
+                <div class="triangle">
+                </div>
+              <%end%>
+            </div>
+            <div id="login_box_content">
+              <%= form_for("professional", :url => professional_session_path, :html => {:id => "login_form"}) do |f| %>
+                <%= f.text_field :email, :placeholder => "Email" %>
+                <%= f.password_field :password, :placeholder => "Senha" %>
+                <%= f.check_box :remember_me %>
+                <%= f.label :remember_me, "Me manter conectado" %>
+                <%= f.submit 'Login' %>
+                <%= link_to "Esqueci minha senha", new_password_path('user') %>
+              <% end %>
+            </div>
+          </div>
+          <!--contact-top starts-->
+          <div class="contact-top clearfix">      
+            <ul class="nav nav-pills right">
+              <li>
+                <a href="#" class="login_btn salon_login_btn">Login Salão</a>
+              </li>
+              <li>
+                <a href="#" class="login_btn client_login_btn">Login Cliente</a>
+              </li>              
+            </ul>
+          </div>
+          <!--contact-top ends--> 
+
+          <!--image slider starts-->
+          <div class="flexslider slider-image">
+            <ul class="slides">
+              <li> <img src="/assets/preview/slide-1.jpg" width="490" height="320" alt="image"> </li>
+              <li> <img src="/assets/preview/slide-2.jpg" width="490" height="320" alt="image"> </li>
+              <li> <img src="/assets/preview/slide-3.jpg" width="490" height="320" alt="image"> </li>
+            </ul>
+          </div>
+          <!--image slider ends-->
+
+          <div class="clear"></div>
+
+          <!--testimonial slider starts-->
+          <div class="flexslider slider-testimonial"> <img src="/assets/icons/icon-quote.png" width="32" height="32" class="icon_bg quote-icon" align="icon">
+            <ul class="slides">
+              <li> Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis feugait nulla facilisi. <span>John Doe / CEO / Soft Solutions</span> </li>
+              <li> Ut wisi enim minim veniam, quis nostrud exerci nulla facilisis at est usus legentis vero eros. We lorem ipsum dolor sit amet elit highly recommend! <span>Jenny / Marketing Executive / ABC Solutions.</span> </li>
+              <li> Eodem modo typieleifend option congue nihil imperdiet, qui nunc nobis videntur parum clari, fiant sollemnes est usus legentis in iis qui facit in futurum. <span>Alizee Anderson / Potential buyer</span> </li>
+            </ul>
+          </div>
+          <!--testimonial slider ends-->
+
+          <div class="clear"></div>
+        </div>
+        <!--header-right ends--> 
+
+
+        <!--row starts-->
+        <div class="row">
+          <div class="container"> 
+
+            <!--first column starts-->
+            <div class="eight columns">
+              <h4>Para o seu salão</h4>
+              <div class="four columns alpha">
+                <p>
+                  Não deixe seu salão de fora, cadastre-o agora e seja visto por todos os usuários cadastrados
+                </p>
+                <a href="#" class="link-style">Cadastrar meu salão</a> </div>
+                <div class="four columns omega">
+                  <ul class="list-arrow">
+                    <li>Sistema de agendamento online</li>
+                    <li>Gerenciamento dos agendamentos e serviços</li>
+                    <li>Fácil de usar</li>
+                    <li>Disponível 24 x 7</li>
+                  </ul>
+                </div>
+              </div>
+              <!--first column ends--> 
+
+              <!--subscribe column starts-->
+              <div class="eight columns">
+                <h1>Ganhe 2 mêses para testar! </h1>
+                <h5>Cadastre seu salão agora, sem compromisso</h5>
+                <p>
+                  Cadastre-se agora e após o período de teste você pode confirmar ou cancelar sua assinatura
+                </p>
+
+                <a href="#" class="btn">
+                  <span>
+                    Iniciar cadastro
+                  </span>
+                </a>
+
+              </div>
+              <!--subscribe column ends--> 
+
+            </div>
+            <div class="clear"></div>
+          </div>
+          <!--row ends--> 
+
+          <!--row-color starts-->
+          <div class="row-color">
+            <div class="container"> 
+
+              <!--box starts-->
+              <div class="one-third column">
+                <div class="box">
+                  <h4>O que oferecemos</h4>
+                  <ul class="list-checkmark">
+                    <li>Agendamento online instantâneo</li>
+                    <li>Verifique o horário disponível do seu profissional favorito</li>
+                    <li>Disponível para Iphone e Android</li>
+                    <li>Encontre seu salão predileto</li>
+                    <li>Reagende ou cancele com facilidade</li>
+                  </ul>
+                </div>
+              </div>
+              <!--box ends--> 
+
+              <!--features starts-->
+              <div class="two-thirds column">
+                <h2>Efetue seu cadastro e agende seu horário agora!</h2>
+                <form  id="contactform" method="post" action="submit-form.php">
+                  <fieldset>
+                    <div class="four columns alpha">
+                      <p>
+                        <input name="name" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'Name':this.value;" value="Name"/>
+                      </p>
+                      <p>
+                        <input name="email" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'Email':this.value;" value="Email" class="required email"/>
+                      </p>
+                      <p>
+                        <input name="subject" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'Subject':this.value;" value="Subject">
+                      </p>
+                    </div>
+                    <div class="four columns omega">
+                      <p>
+                        <textarea name="message" id="message" class="required"></textarea>
+                      </p>
+                      <p>
+                        <input class="submit" type="submit" value="Submit Message"/>
+                      </p>
+                      <div id="result"></div>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+              <!--features ends--> 
+
+            </div>
+            <div class="clear"></div>
+          </div>
+          <!--row-color starts--> 
+
+          <!--row starts-->
+          <div class="row">
+            <div class="container"> 
+
+              <!--payment starts-->
+              <div class="four columns">
+                <h4>Payment method</h4>
+                <p>Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.</p>
+                <ul class="payment">
+                  <li><img src="/assets/icons/mastercard.png" width="32" height="32" align="icon"></li>
+                  <li><img src="/assets/icons/paypal.png" width="32" height="32" align="icon"></li>
+                  <li><img src="/assets/icons/visa.png" width="32" height="32" align="icon"></li>
+                </ul>
+              </div>
+              <!--payment ends--> 
+
+              <!--twitter starts-->
+              <div class="four columns">
+                <h4>Twitter feed</h4>
+                <div id="twitter"> </div>
+                <p class="icon-intext left"><a href="#">Follow us on twitter<img src="/assets/icons/icon-twitter2.png" width="32" height="32" class="icon_bg right" align="icon"></a></p>
+              </div>
+              <!--twitter ends--> 
+
+              <!--contact starts-->
+              <div class="eight columns">
+                <h4>Get in touch</h4>
+                <form  id="contactform" method="post" action="submit-form.php">
+                  <fieldset>
+                    <div class="four columns alpha">
+                      <p>
+                        <input name="name" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'Name':this.value;" value="Name"/>
+                      </p>
+                      <p>
+                        <input name="email" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'Email':this.value;" value="Email" class="required email"/>
+                      </p>
+                      <p>
+                        <input name="subject" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'Subject':this.value;" value="Subject">
+                      </p>
+                    </div>
+                    <div class="four columns omega">
+                      <p>
+                        <textarea name="message" id="message" class="required"></textarea>
+                      </p>
+                      <p>
+                        <input class="submit" type="submit" value="Submit Message"/>
+                      </p>
+                      <div id="result"></div>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+              <!--contact ends--> 
+
+            </div>
+            <div class="clear"></div>
+          </div>
+          <!--row ends--> 
+
+          <!--copyright starts-->
+          <div id="copyright">
+            <div class="container">
+              <div class="sixteen columns">
+                <p>© Copyright 2012 younic</p>
+                <ul>
+                  <li><a href="#">Terms</a></li>
+                  <li><a href="#">Privacy</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <!--copyright ends-->
+
+          <div class="clear"></div>
+        </div>
+        <!--wrapper ends--> 
+      </body>
+      </html>

@@ -1,3 +1,11 @@
+function forceResize(){
+	if($(window).width() <= 979){
+		$(".chzn-done").show();
+	} else{
+		$(".chzn-done").hide();
+	}
+}
+
 function addToHourList(item,period,calendarItem){	
 	$(calendarItem).find("div." + period + " ul").append(item);
 }
@@ -245,6 +253,12 @@ $(document).ready(function(){
 
 	//prettyCalendar();
 
+	$(window).on("debouncedresize",function() {
+		forceResize();
+	});
 	
+	if($(window).width() <= 979){ 
+		$(".chzn-done").show();
+	}
 
 });
