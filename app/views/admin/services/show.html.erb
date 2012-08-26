@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nome:</b>
+  <%= @service.name %>
+</p>
+
+<p>
+  <b>Duração:</b>
+  <%= @service.duration %>
+</p>
+
+<p>
+  <b>Preço:</b>
+  <%= @service.price %>
+</p>
+
+
+<%= link_to 'Editar', edit_admin_service_path(@service) %> |
+<%= link_to 'Voltar', admin_services_path %>

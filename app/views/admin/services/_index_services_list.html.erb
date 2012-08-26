@@ -27,3 +27,47 @@
 </table>
   </div>
 </div>
+
+
+
+<div class="row-fluid">
+	<div class="span12">
+		<h2 class="heading">Serviços</h2>
+		<table class="table table-bordered table-striped table_vam" id="dt_gal">
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>Duração</th>
+					<th>Preço</th>
+					<th>Ação</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<%@events.each do |event|%>
+				<tr>					
+					<td>
+						<%= service.name %>
+					</td>
+					<td>
+						<%= service.duration %>
+					</td>
+					<td>
+						<%= service.price %>
+					</td>
+					<td>
+						<%=link_to [:admin,service], 
+						"data-method-type" => :delete, 
+						:class => "btn btn-mini pull-right btn-danger confirmable",
+						"data-message" => "Deseja realmente excluir este serviço?" do%>
+						<i class="icon-trash"></i>
+						Excluir
+						<%end%>
+					</td>
+				</tr>
+				<%end%>
+			</tbody>
+		</table>
+
+	</div>
+</div>
