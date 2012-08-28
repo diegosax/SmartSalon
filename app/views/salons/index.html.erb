@@ -82,10 +82,10 @@
     
     
     <div id="large_grid" class="wmk_grid">
-      <ul>
+      <ul>        
         <%@salons.each do |salon| %>
         <li class="thumbnail">
-          <%=link_to new_event_url(:salon => salon) do%>                        
+          <%=link_to new_event_url(:salon => salon) do%>                                  
           <%=image_tag salon.logo.url(:thumb)%>
           <%end%>
           <p>

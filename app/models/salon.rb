@@ -10,4 +10,5 @@ class Salon < ActiveRecord::Base
   def full_address
   	self.address + ", " + self.city + " - " + self.state + " - " + (self.zipcode ? self.zipcode : "")
   end
+
 end
