@@ -21,6 +21,8 @@
 //= require jquery.dataTables.min
 //= require jquery.dataTables.sorting
 //= require jquery.flexslider-min
+//= require jquery.imagesloaded.min
+//= require jquery.wookmark
 //= require chosen.jquery
 //= require qtip2/jquery.qtip.min
 //= require jBreadcrumbs/js/jquery.jBreadCrumb.1.1.min
@@ -33,6 +35,7 @@
 //= require fullcalendar/gcal
 //= require gebo_calendar
 //= require gebo_tables
+//= require gebo_gallery
 //=	require spinners.min
 //=	require tipped 
 //= require list_js/list.js

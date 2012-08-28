@@ -75,6 +75,9 @@
 						<div class="span12">
 							<ul class="dshb_icoNav clearfix">
 								<li>
+									<%=link_to "Salões", salons_path, :style=> "background-image: url(/assets/gCons/bookmark.png)"%>
+								</li>
+								<li>
 									<%=link_to "Agendar", new_event_path, :style=> "background-image: url(/assets/gCons/add-item.png)"%>
 								</li>
 								<li>
@@ -88,5 +91,5 @@
 			</div>
 	</div>
 </body>
-
+<%= yield :scripts %>
 </html>

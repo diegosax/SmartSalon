@@ -1,41 +1,229 @@
-<h1>Listing salons</h1>
+<div class="row-fluid">  
+  <div class="span4">
+    <h3 class="heading">Meus Salões | Favoritos</h3>
+    <div id="mini_grid" class="wmk_grid">
+      <ul>
+        <%@salons.each do |salon| %>
+        <li class="thumbnail">
+          <%=link_to new_event_url(:salon => salon) do%>                        
+          <%=image_tag salon.logo.url(:thumb)%>
+          <%end%>
+          <p>
+            <a href="javascript:void(0)" title="Remove"><i class="icon-trash"></i></a>
+            <a href="javascript:void(0)" title="Edit"><i class="icon-pencil"></i></a>
+            <%=link_to new_event_url(:salon => salon), :style => "float:left" do%>
+            <span><strong><%=salon.name%></strong></span>
+            <%end%>
+            <br>    
+            <%=link_to "Ver Detalhes", salon%>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Username</th>
-    <th>Fone</th>
-    <th>Address</th>
-    <th>City</th>
-    <th>State</th>
-    <th>Zipcode</th>
-    <th>Complement</th>
-    <th>Email</th>
-    <th>Logo</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+          </p>
+        </li>                
+        <%end%>
+      </ul>
+    </div>
+  </div>
+  <div class="span8">
+    <h3 class="heading">
+      Buscar Salões
+    </h3>    
+    <ul class="nav nav-tabs" id="search-tabs">
+      <li>
+        <a href="#name-search-tab" data-toggle="tab">
+          Buscar por nome
+        </a>
+      </li>
+      <li>
+        <a href="#address-search-tab" data-toggle="tab">
+          Buscar por endereço
+        </a>
+      </li>
+      <li>
+        <a href="#location-search-tab" data-toggle="tab">
+          Encontrar os mais próximos
+        </a>
+      </li>
+    </ul>
 
-<% @salons.each do |salon| %>
-  <tr>
-    <td><%= salon.name %></td>
-    <td><%= salon.username %></td>
-    <td><%= salon.fone %></td>
-    <td><%= salon.address %></td>
-    <td><%= salon.city %></td>
-    <td><%= salon.state %></td>
-    <td><%= salon.zipcode %></td>
-    <td><%= salon.complement %></td>
-    <td><%= salon.email %></td>
-    <td><%= salon.logo %></td>
-    <td><%= link_to 'Show', salon %></td>
-    <td><%= link_to 'Edit', edit_salon_path(salon) %></td>
-    <td><%= link_to 'Destroy', salon, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
+    <div class="tab-content">
+      <div class="tab-pane" id="name-search-tab">
+        <div class="well well-large salon_search" id="name_search_well">
+          <h3>Busque o seu salão preferido</h3>
+          <div class="input-append">
+            <input class="span5" id="appendedInputButton" size="16" type="text">
+            <button class="btn" type="button">Buscar</button>
+            <span class="help-block">
+              Digite parte do nome ou da descrição do salão
+              ou <a href="#">encontrar o salão mais próximo</a>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="address-search-tab">
+        <div class="well well-large salon_search" id="address_search_well">
+          <h3>Encontre o salão mais próximo de onde você está!</h3>
+          <%= form_tag salons_path, :method => :get do %>
+          <div class="input-append">
+            <%= text_field_tag :address, params[:address], :class=> "span5", :size => 16 %>
+            <%= submit_tag "Buscar", :name => nil, :class=> "btn" %>
+            <span class="help-block">
+              Digite parte do endereço, bairro, cidade, estado ou cep de onde você está
+              ou <a href="#">buscar pelo nome</a>
+            </span>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="tab-pane" id="location-search-tab">
+        <div class="well well-small" id="geolocation_info">
+        </div>
+      </div>
+    </div>
+    
+    
+    <div id="large_grid" class="wmk_grid">
+      <ul>
+        <%@salons.each do |salon| %>
+        <li class="thumbnail">
+          <%=link_to new_event_url(:salon => salon) do%>                        
+          <%=image_tag salon.logo.url(:thumb)%>
+          <%end%>
+          <p>
+            <a href="javascript:void(0)" title="Remove"><i class="icon-trash"></i></a>
+            <a href="javascript:void(0)" title="Edit"><i class="icon-pencil"></i></a>
+            <%=link_to new_event_url(:salon => salon), :style => "float:left" do%>
+            <span><strong><%=salon.name%></strong></span>
+            <%end%>
+            <br>    
+            <%=link_to "Ver Detalhes", salon%>
 
-<br />
+          </p>
+        </li>                
+        <%end%>
+      </ul>
+    </div>
 
-<%= link_to 'New Salon', new_salon_path %>
+  </div>
+  
+</div>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+  function successGeocoded(address){    
+    $("#geolocation_info").html(
+      "<p>Localização aproximada encontrada: <br><strong>" + address.formatted_address + "</strong></p>"
+      );
+  }
+
+  function errorGeocoded(){
+
+  }
+
+  function mapThisGoogle(latitude,longitude,callback){    
+    // Start up a new reverse geocoder for addresses?
+    geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(latitude, longitude);
+    geocoder.geocode({'latLng': latlng}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        if (results[1]) {
+          successGeocoded(results[0]);
+        } else {
+          errorGeocoded()
+        }
+      } else {
+        errorGeocoded();
+      }
+      callback();
+    });
+  }
+
+  function addSearchLink(){
+    var html="<a href='#' id='address_search'>Desejo buscar por outra localização</a>" + " ou " + 
+    "<a href='#' id='name_search'>buscar pelo nome do salão</a>";
+    $("#geolocation_info").append(html);
+  }
+
+  function success(position){    
+    mapThisGoogle(position.coords.latitude,position.coords.longitude, addSearchLink);    
+  }
+
+  function error(type){
+    $("#geolocation_info").html("<p>Me desculpe, mas sua localização não pôde ser determinada. Por favor, utilize uma das opções de busca abaixo</p>");
+  }
+
+  function locationSearch(){
+    if (navigator.geolocation) {
+      $("#geolocation_info").html("Obtendo sua localização para encontrar os salões mais próximos <%=escape_javascript(image_tag '/assets/ajax_loader.gif')%>").slideDown("fast");
+      navigator.geolocation.getCurrentPosition(success, error);
+    } else {
+      error('not supported');
+    }  
+  }
+
+  
+
+  $('a[href="#location-search-tab"]').on('shown', function (e) {
+    locationSearch();  
+  });
+
+  
+
+/*
+  function search_box_toogle(search_type){
+    if ($("#address_search_well").is(":visible")){      
+      $("#address_search_well").fadeOut("fast",function(){
+        $("#name_search_well").fadeIn("fast");
+      });
+    } else if ($("#name_search_well").is(":visible")){      
+      $("#name_search_well").fadeOut("fast",function(){
+        $("#address_search_well").fadeIn("fast");
+      });
+    } else{
+      switch (search_type){
+        //case 1: Address Search
+        case 1:         
+        $("#address_search_well").slideDown();
+        break;
+        //case 1: Name Search
+        case 2:          
+        $("#name_search_well").slideDown();
+        break;        
+      }
+      
+      $("#geolocation_info").fadeOut("fast",function(){
+        $(this).before("<a href='#' id='location_search_link'>Buscar salões pela minha localização atual</a>");
+      });      
+    }
+  }
+
+  $("#location_search_link").live("click", function(event){
+    $("#address_search_well, #name_search_well").fadeOut("fast",function(){
+      $("#location_search_link").remove();      
+      locationSearch();        
+    });
+  });
+
+  $("#address_search").live("click",function(event){    
+    event.preventDefault();
+    console.log('address_search');
+    search_box_toogle(1);
+  });
+  $("#name_search").live("click",function(event){   
+    event.preventDefault();
+    search_box_toogle(2);
+  });
+
+  $(".salon_search a").click(function(e){   
+    e.preventDefault();
+    search_box_toogle(0);
+    return false;
+  }); 
+*/
+
+});
+
+</script>

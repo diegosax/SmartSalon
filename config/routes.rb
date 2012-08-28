@@ -48,9 +48,10 @@ Smartsalon::Application.routes.draw do
     resources :events
   end
 
+  resources :salons do
+  end
+
   resources :events
-
-
 
   resources :users
 

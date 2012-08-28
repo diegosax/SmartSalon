@@ -1,4 +1,4 @@
-<%= form_for(@salon) do |f| %>
+<%= form_for @salon, :html => {:multipart => true} do |f| %>
   <% if @salon.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@salon.errors.count, "error") %> prohibited this salon from being saved:</h2>
@@ -49,7 +49,7 @@
   </div>
   <div class="field">
     <%= f.label :logo %><br />
-    <%= f.text_field :logo %>
+    <%= f.file_field :logo %>
   </div>
   <div class="actions">
     <%= f.submit %>

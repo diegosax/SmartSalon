@@ -754,3 +754,10 @@
     .fc-widget-content:hover{
         background: #FFFAD7;
     }
+
+    .input-prepend span, .input-prepend button, .input-prepend .btn{
+        margin-right:-5px !important;
+    }
+    .input-append span, .input-append button, .input-append .btn{
+        margin-left:-5px !important;
+    }

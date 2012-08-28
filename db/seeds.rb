@@ -14,9 +14,48 @@ Event.destroy_all
 Client.destroy_all
 
 Salon.create(
+	:name => "Open Hair",
+	:username => "openhair",
+	:fone => "01135010199",
+	:address => "Av Giovanni Gronchi, 3363",
+	:neighborhood => "Morumbi",
+	:city => "São Paulo",
+	:state => "SP",
+	:zipcode => "05651001",
+	:email => "contato@openhair.com.br",
+	:remote_logo_url => "http://www.openhair.com.br/logoopen.jpg"
+)
+
+Salon.create(
+	:name => "Soho Academy Pinheiros",
+	:username => "sohoacademy",
+	:fone => "01138133834",
+	:address => "Rua dos Pinheiros, 1376",
+	:neighborhood => "Pinheiros",
+	:city => "São Paulo",
+	:state => "SP",
+	:zipcode => "05422002",
+	:email => "sohoacademy@sohohair.com.br",
+	:remote_logo_url => "http://www.sohohair.com.br/site/wp-content/themes/soho2009/images/fixos/logo.png"
+)
+
+Salon.create(
+	:name => "Spettacolo",
+	:username => "spettacolo",
+	:fone => "01155718022",
+	:address => "Rua Coronel Diogo, 364",
+	:neighborhood => "Aclimação",
+	:city => "São Paulo",
+	:state => "SP",
+	:zipcode => "01545000",
+	:email => "spettacolo@spettacolo.com.br",
+	:remote_logo_url => "http://www.spettacolo.com.br/wp-content/uploads/2012/04/logo250.png"
+)
+
+Salon.create(
 	:name => "Espaço 560",
 	:username => "espaco560",
-	:fone => "34661162",
+	:fone => "08134661162",
 	:address => "Av Cons Aguiar, 1212",
 	:neighborhood => "Boa Viagem",
 	:city => "Recife",
@@ -28,7 +67,7 @@ Salon.create(
 Salon.create(
 	:name => "Josymar Cabeleleiros",
 	:username => "josymarcabeleleiros",
-	:fone => "32249098",
+	:fone => "08132249098",
 	:address => "Av Dantas Barreto, 507 Sl 02",
 	:neighborhood => "Santo Antônio",
 	:city => "Recife",
@@ -37,10 +76,11 @@ Salon.create(
 	:email => "josymarcab@gmail.com"
 )
 
+puts "Criando chinacabeleireiros"
 Salon.create(
 	:name => "China Cabeleireiros",
 	:username => "chinacabeleireiros",
-	:fone => "32438210",
+	:fone => "08132438210",
 	:address => "Pç Lula Cabral Melo, 68 Lj 4 Ga Via Roma Center",
 	:neighborhood => "Parnamirim",
 	:city => "Recife",
@@ -48,10 +88,48 @@ Salon.create(
 	:zipcode => "52060141",
 	:email => "chinacab@gmail.com"
 )
-puts "Saloes criados!"
+
+Salon.create(
+	:name => "Edelson Cabeleleiros",
+	:username => "edelson",
+	:fone => "08132285606",
+	:address => "Rua Conde de Irajá, 353",
+	:neighborhood => "Torre",
+	:city => "Recife",
+	:state => "PE",
+	:zipcode => "50710310",
+	:email => "edelson@gmail.com"
+)
+
+puts "Indo criar Jacques"
+Salon.create(
+	:name => "Jacques Janine",
+	:username => "jacquesjanine",
+	:fone => "08134636368",
+	:address => "Rua Padre Carapuceiro – loja BV 271",
+	:neighborhood => "Boa Viagem",
+	:city => "Recife",
+	:state => "PE",
+	:zipcode => "51020900",
+	:email => "shoppingrecife@jacquesjanine.com.br",
+	:remote_logo_url => "http://jacquesjanine.com.br/wp-content/themes/janine/assets/images/jacques_logo.png"
+)
+
+Salon.create(
+	:name => "Studio Neide",
+	:username => "studioneide",
+	:fone => "01120418285",
+	:address => "Rua Brook Taylor, 1065",
+	:neighborhood => "Jardim Coimbra",
+	:city => "São Paulo",
+	:state => "SP",
+	:zipcode => "0369000",
+	:email => "studioneide@gmail.com",
+	:remote_logo_url => "http://www.studioneide.com.br/templates/gk_cherrydesign/images/style1/logo.png"
+)
+
+
 espaco560 = Salon.find_by_username("espaco560")
-josymarcabeleleiros = Salon.find_by_username("josymarcabeleleiros")
-chinacabeleireiros = Salon.find_by_username("chinacabeleireiros")
 
 puts "Criando profissionais dos saloes"
 espaco560.professionals.create(

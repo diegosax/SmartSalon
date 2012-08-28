@@ -39,6 +39,14 @@ gem 'thin'
 
 gem 'simple_form'
 
+gem 'mini_magick'
+
+gem 'carrierwave'
+
+gem 'geocoder'
+
+gem 'gmaps4rails'
+
 group :production do
 	gem "pg"
 end
