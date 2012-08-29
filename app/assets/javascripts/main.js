@@ -1,3 +1,7 @@
+function clearSalonSearchResults(){
+	$("#large_grid").empty();
+}
+
 function forceResize(){
 	if($(window).width() <= 979){
 		$(".chzn-done").show();
@@ -262,5 +266,25 @@ $(document).ready(function(){
 	}
 
 	//------------------------------------------------------------//
+
+	$('a[data-toggle="tab"]').on('shown', function (e) {
+   		removeLoading(); 
+   		clearSalonSearchResults();
+  	});
+
+  	$('a[href="#address-search-tab"]').on('shown', function (e) {
+   		$("#address_search_well form").submit();
+  	});
+
+  	$("#address_search_well form").submit(function(e){
+  		clearSalonSearchResults();
+  		if ($("#location").val().length > 0){
+  			addLoading($("#large_grid"));
+  			return true;
+  		} else{
+  			return false;
+  		}
+  		
+  	});
 	
 });

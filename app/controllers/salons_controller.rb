@@ -2,13 +2,15 @@ class SalonsController < ApplicationController
   # GET /salons
   # GET /salons.json
   def index
-    if params[:address].present?
-      @salons = Salon.near(params[:address], 20, :order => :distance)
+    if params[:location].present?
+      @salons = Salon.near(params[:location], 20, :order => :distance)      
     else
       @salons = Salon.all
     end
+    @my_salons_and_favorites = Salon.all
       respond_to do |format|
       format.html # index.html.erb
+      format.js
       format.json { render json: @salons }
     end
   end

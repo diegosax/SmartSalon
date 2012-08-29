@@ -3,7 +3,7 @@
     <h3 class="heading">Meus Salões | Favoritos</h3>
     <div id="mini_grid" class="wmk_grid">
       <ul>
-        <%@salons.each do |salon| %>
+        <%@my_salons_and_favorites.each do |salon| %>
         <li class="thumbnail">
           <%=link_to new_event_url(:salon => salon) do%>                        
           <%=image_tag salon.logo.url(:thumb)%>
@@ -53,8 +53,7 @@
             <input class="span5" id="appendedInputButton" size="16" type="text">
             <button class="btn" type="button">Buscar</button>
             <span class="help-block">
-              Digite parte do nome ou da descrição do salão
-              ou <a href="#">encontrar o salão mais próximo</a>
+              Digite parte do nome ou da descrição do salão              
             </span>
           </div>
         </div>
@@ -62,13 +61,12 @@
       <div class="tab-pane" id="address-search-tab">
         <div class="well well-large salon_search" id="address_search_well">
           <h3>Encontre o salão mais próximo de onde você está!</h3>
-          <%= form_tag salons_path, :method => :get do %>
+          <%= form_tag salons_path, :method => :get, :remote => true do %>
           <div class="input-append">
-            <%= text_field_tag :address, params[:address], :class=> "span5", :size => 16 %>
+            <%= text_field_tag :location, params[:location], :class=> "span5", :size => 16 %>
             <%= submit_tag "Buscar", :name => nil, :class=> "btn" %>
             <span class="help-block">
-              Digite parte do endereço, bairro, cidade, estado ou cep de onde você está
-              ou <a href="#">buscar pelo nome</a>
+              Digite parte do endereço, bairro, cidade, estado ou cep de onde você está              
             </span>
           </div>
           <% end %>
@@ -81,30 +79,10 @@
     </div>
     
     
-    <div id="large_grid" class="wmk_grid">
-      <ul>        
-        <%@salons.each do |salon| %>
-        <li class="thumbnail">
-          <%=link_to new_event_url(:salon => salon) do%>                                  
-          <%=image_tag salon.logo.url(:thumb)%>
-          <%end%>
-          <p>
-            <a href="javascript:void(0)" title="Remove"><i class="icon-trash"></i></a>
-            <a href="javascript:void(0)" title="Edit"><i class="icon-pencil"></i></a>
-            <%=link_to new_event_url(:salon => salon), :style => "float:left" do%>
-            <span><strong><%=salon.name%></strong></span>
-            <%end%>
-            <br>    
-            <%=link_to "Ver Detalhes", salon%>
-
-          </p>
-        </li>                
-        <%end%>
-      </ul>
+    <div id="large_grid" class="wmk_grid">            
     </div>
 
   </div>
-  
 </div>
 </div>
 
@@ -113,17 +91,32 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
+  
+  <%if params[:location].present?%>
+    $('#search-tabs a[href="#address-search-tab"]').tab('show');  
+  <%else%>
+    $('#search-tabs a[href="#name-search-tab"]').tab('show');  
+  <%end%>
+
+  
+
   function successGeocoded(address){    
     $("#geolocation_info").html(
       "<p>Localização aproximada encontrada: <br><strong>" + address.formatted_address + "</strong></p>"
       );
+    addLoading($("#large_grid"));
+    $.ajax({
+      url:"<%=escape_javascript(salons_path)%>" + ".js" ,
+      data: {location: address.formatted_address},      
+      dataType: "script"
+    });
+  }
+function
+   errorGeocoded(){
+
   }
 
-  function errorGeocoded(){
-
-  }
-
-  function mapThisGoogle(latitude,longitude,callback){    
+  function mapThisGoogle(latitude,longitude){    
     // Start up a new reverse geocoder for addresses?
     geocoder = new google.maps.Geocoder();
     var latlng = new google.maps.LatLng(latitude, longitude);
@@ -136,23 +129,16 @@ $(document).ready(function(){
         }
       } else {
         errorGeocoded();
-      }
-      callback();
+      }    
     });
   }
 
-  function addSearchLink(){
-    var html="<a href='#' id='address_search'>Desejo buscar por outra localização</a>" + " ou " + 
-    "<a href='#' id='name_search'>buscar pelo nome do salão</a>";
-    $("#geolocation_info").append(html);
-  }
-
   function success(position){    
-    mapThisGoogle(position.coords.latitude,position.coords.longitude, addSearchLink);    
+    mapThisGoogle(position.coords.latitude,position.coords.longitude);    
   }
 
   function error(type){
-    $("#geolocation_info").html("<p>Me desculpe, mas sua localização não pôde ser determinada. Por favor, utilize uma das opções de busca abaixo</p>");
+    $("#geolocation_info").html("<p>Me desculpe, mas sua localização não pôde ser determinada. Por favor, utilize outra opção de busca</p>");
   }
 
   function locationSearch(){
@@ -164,65 +150,9 @@ $(document).ready(function(){
     }  
   }
 
-  
-
   $('a[href="#location-search-tab"]').on('shown', function (e) {
     locationSearch();  
   });
-
-  
-
-/*
-  function search_box_toogle(search_type){
-    if ($("#address_search_well").is(":visible")){      
-      $("#address_search_well").fadeOut("fast",function(){
-        $("#name_search_well").fadeIn("fast");
-      });
-    } else if ($("#name_search_well").is(":visible")){      
-      $("#name_search_well").fadeOut("fast",function(){
-        $("#address_search_well").fadeIn("fast");
-      });
-    } else{
-      switch (search_type){
-        //case 1: Address Search
-        case 1:         
-        $("#address_search_well").slideDown();
-        break;
-        //case 1: Name Search
-        case 2:          
-        $("#name_search_well").slideDown();
-        break;        
-      }
-      
-      $("#geolocation_info").fadeOut("fast",function(){
-        $(this).before("<a href='#' id='location_search_link'>Buscar salões pela minha localização atual</a>");
-      });      
-    }
-  }
-
-  $("#location_search_link").live("click", function(event){
-    $("#address_search_well, #name_search_well").fadeOut("fast",function(){
-      $("#location_search_link").remove();      
-      locationSearch();        
-    });
-  });
-
-  $("#address_search").live("click",function(event){    
-    event.preventDefault();
-    console.log('address_search');
-    search_box_toogle(1);
-  });
-  $("#name_search").live("click",function(event){   
-    event.preventDefault();
-    search_box_toogle(2);
-  });
-
-  $(".salon_search a").click(function(e){   
-    e.preventDefault();
-    search_box_toogle(0);
-    return false;
-  }); 
-*/
 
 });
 
