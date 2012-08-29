@@ -1,0 +1,29 @@
+<ul>        
+  <%if @salons.empty?%>
+  <div class="alert alert-info">
+    <a class="close" data-dismiss="alert">×</a>
+    Sua busca não obteve resultados
+  </div>
+  <%else%>
+  <%@salons.each do |salon| %>
+  <li class="thumbnail">
+    <%=link_to new_salon_event_url(salon) do%>                                  
+    <%=image_tag salon.logo.url(:thumb)%>
+    <%end%>
+    <p>
+      <a href="javascript:void(0)" title="Remove"><i class="icon-trash"></i></a>
+      <a href="javascript:void(0)" title="Edit"><i class="icon-pencil"></i></a>
+      <%=link_to new_salon_event_url(salon), :style => "float:left" do%>
+      <span><strong><%=salon.name%></strong></span>
+      <%end%>
+      <br>    
+      <%=link_to "Ver Detalhes", salon%>
+    </p>
+    <h5>
+      ~ <strong><%=salon.distance_in_kilometers%></strong>
+    </h5>
+  </li>
+
+  <%end%>
+  <%end%>
+</ul>

@@ -148,8 +148,6 @@ $(document).ready(function(){
 		addLoading($("#new-event-form"));
 	});
 
-	
-
 	$("#choose-service .chzn_a").chosen().change(function(){
 		$("#client_calendar").remove().fadeOut("fast");
 		$("#choose-professional").remove().fadeOut("fast");

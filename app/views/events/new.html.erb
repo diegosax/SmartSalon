@@ -4,13 +4,38 @@
   </div>
 
   <div class="row-fluid">
-    <div class="span12">
-      <%= form_tag({}, {:method => :get, :id => "new-event-form",:remote => true}) do %>
-      
-      <%=render "new_choose_service"%>
-      <%=render "new_choose_professional"%>
-      <%=render "new_event_calendar"%>
-      <%end%>
-    </div>    
+    <div class="span12">      
+        <%if @salon%>
+        <div class="alert alert-block alert-info fade in">            
+          <h4 class="alert-heading"><%=@salon.name%></h4>
+          <p>
+            <%=image_tag @salon.logo.url(:thumb)%>
+            <address>                
+              <%=@salon.address%>                
+              <br />
+              <%=@salon.city%>, <%=@salon.state%> <%=@salon.zipcode%>
+              <br />
+              <%=@salon.fone%>
+            </address>
+          </p>
+          <p>
+            <%=link_to "Escolher outro salão",salons_url, :class =>"btn btn-info"%>              
+          </p>
+        </div>
+        <%else%>
+          <h3 class="heading">
+            Selecione um entre seus salões favoritos
+            <%=link_to "Buscar Todos", salons_url, :class=> "pull-right btn btn-info"%>
+          </h3>
+
+          <%=render "/salons/favorite_salons"%>          
+        <%end%>
+        <%= form_tag({}, {:method => :get, :id => "new-event-form",:remote => true}) do %>
+        <%#= hidden_field_tag :salon, params[:salon] %>
+        <%=render "new_choose_service"%>
+        <%=render "new_choose_professional"%>
+        <%=render "new_event_calendar"%>
+        <%end%>
+      </div>    
+    </div>
   </div>
-</div>

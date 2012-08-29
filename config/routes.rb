@@ -1,5 +1,4 @@
 Smartsalon::Application.routes.draw do
-  
 
   resources :settings
 
@@ -49,9 +48,10 @@ Smartsalon::Application.routes.draw do
   end
 
   resources :salons do
+    resources :events  
   end
 
-  resources :events
+  resources :events, :only => [:index,:new]
 
   resources :users
 

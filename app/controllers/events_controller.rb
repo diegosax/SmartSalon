@@ -31,27 +31,34 @@ class EventsController < ApplicationController
   # GET /events/new
   # GET /events/new.xml
   def new
-    @services = Service.all
-    if params[:service]
-      @service = Service.find(params[:service])
-      if !params[:professionals].blank?
-        if params[:professionals] == "any"
-          @service_professionals = @service.professionals
-        else
-          @service_professionals = Professional.find(params[:professionals])
+    if params[:salon_id].present?
+      @salon = Salon.find(params[:salon_id])
+      @services = @salon.services
+      if params[:service]
+        @service = @salon.services.find(params[:service])
+        if !params[:professionals].blank?
+          if params[:professionals] == "any"
+            @service_professionals = @service.professionals
+          else
+            @service_professionals = @salon.professionals.find(params[:professionals])
+          end
+          @events = Event.find(
+            :all,
+            :conditions => ["
+              (start_at >= ? OR end_at >= ?) AND professional_id in (?) AND salon_id = ?", 
+              Date.today.to_datetime, 
+              Date.today.to_datetime, 
+              @service_professionals,
+              @salon.id],
+              :order => "start_at")
+          @date = params[:month] ? Date.parse(params[:month]) : Date.today            
         end
-        @events = Event.find(
-          :all,
-          :conditions => ["
-            (start_at >= ? OR end_at >= ?) AND professional_id in (?)", 
-            Date.today.to_datetime, 
-            Date.today.to_datetime, 
-            @service_professionals],
-            :order => "start_at")
-        @date = params[:month] ? Date.parse(params[:month]) : Date.today            
+        @professionals = @service.professionals   
       end
-      @professionals = @service.professionals   
+    else
+      @my_salons_and_favorites = Salon.limit(5)
     end
+    
     
     respond_to do |format|
       format.html
@@ -68,12 +75,19 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.xml
   def create
-    @event = current_user.events.new(:end_at => params[:end_at], :start_at => params[:start_at],:professional_id => params[:professionals])
-    service = Service.find(params[:service])    
+    @event = current_user.events.new(
+      :end_at => params[:end_at], 
+      :start_at => params[:start_at]
+    )
+    salon = Salon.find(params[:salon_id])
+    professional = salon.professionals.find(params[:professionals])
+    service = professional.services.find(params[:service])        
     @event.title = service.name
     @event.description = "#{service.name} marcado(a) pelo cliente via internet, 
     na: #{DateTime.now.strftime("%A, %d de %B às %H:%M")}"
-    @event.service = service    
+    @event.service = service
+    @event.salon = salon
+    @event.professional = professional
     respond_to do |format|
       if @event.save
         format.js

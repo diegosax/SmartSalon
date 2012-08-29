@@ -1,13 +1,14 @@
-
-<div class="formSep" id="choose-service">
-	<div class="row-fluid">
-		<p><span class="label label-inverse">Selecione o serviço desejado:</span></p>
-		<%= select_tag(
-			:service, 
-			options_for_select(@services.collect{ |s| [s.name, s.id] }, (@service.id if @service)),
-			:include_blank => true, 
-			:class => "chzn_a", 
-			"data-placeholder" => "Selecione um serviço"
-			) %>
+<%if @services%>
+	<div class="formSep" id="choose-service">
+		<div class="row-fluid">
+			<p><span class="label label-inverse">Selecione o serviço desejado:</span></p>
+			<%= select_tag(
+				:service, 
+				options_for_select(@services.collect{ |s| [s.name, s.id] }, (@service.id if @service)),
+				:include_blank => true, 
+				:class => "chzn_a", 
+				"data-placeholder" => "Selecione um serviço"
+				) %>
+		</div>
 	</div>
-</div>
+<%end%>

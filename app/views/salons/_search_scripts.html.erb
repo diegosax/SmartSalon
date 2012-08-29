@@ -1,0 +1,71 @@
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+  
+  <%if params[:location].present?%>
+    $('#search-tabs a[href="#address-search-tab"]').tab('show');  
+  <%else%>
+    $('#search-tabs a[href="#name-search-tab"]').tab('show');  
+  <%end%>
+
+  
+
+  function successGeocoded(address){    
+    $("#geolocation_info").html(
+      "<p>Localização aproximada encontrada: <br><strong>" + address.formatted_address + "</strong></p>"
+      );
+    addLoading($("#large_grid"));
+    $.ajax({
+      url:"<%=escape_javascript(salons_path)%>" + ".js" ,
+      data: {location: address.formatted_address},      
+      dataType: "script"
+    });
+  }
+function
+   errorGeocoded(){
+
+  }
+
+  function mapThisGoogle(latitude,longitude){    
+    // Start up a new reverse geocoder for addresses?
+    geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(latitude, longitude);
+    geocoder.geocode({'latLng': latlng}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        if (results[1]) {
+          successGeocoded(results[0]);
+        } else {
+          errorGeocoded()
+        }
+      } else {
+        errorGeocoded();
+      }    
+    });
+  }
+
+  function success(position){    
+    mapThisGoogle(position.coords.latitude,position.coords.longitude);    
+  }
+
+  function error(type){
+    $("#geolocation_info").html("<p>Me desculpe, mas sua localização não pôde ser determinada. Por favor, utilize outra opção de busca</p>");
+  }
+
+  function locationSearch(){
+    if (navigator.geolocation) {
+      $("#geolocation_info").html("Obtendo sua localização para encontrar os salões mais próximos <%=escape_javascript(image_tag '/assets/ajax_loader.gif')%>").slideDown("fast");
+      navigator.geolocation.getCurrentPosition(success, error);
+    } else {
+      error('not supported');
+    }  
+  }
+
+  $('a[href="#location-search-tab"]').on('shown', function (e) {
+    locationSearch();  
+  });
+
+});
+
+</script>
