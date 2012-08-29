@@ -26,9 +26,9 @@ class Event < ActiveRecord::Base
 	end
 
 	private
-	def add_client_to_salon
+	def add_client_to_salon		
 		begin
-			self.client << self.salon
+			self.client.salons << self.salon
 		rescue
 			puts "Salon/Client already exists"
 		end

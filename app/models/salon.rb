@@ -7,6 +7,7 @@ class Salon < ActiveRecord::Base
   has_many :events, :through => :professionals
   has_many :client_salons
   has_many :clients, :through => :client_salons
+  has_many :favorites
   mount_uploader :logo, LogoUploader
   geocoded_by :full_address
   after_validation :geocode, :if => :address_changed?
@@ -24,8 +25,12 @@ class Salon < ActiveRecord::Base
   end
 
   def distance_in_kilometers
-    new_dsitance = (self.distance * 1.609344).round(2)
-    new_dsitance < 1 ? "#{new_dsitance*1000} metros" : "#{new_dsitance} quilômetros"
+    if Salon.method_defined? :distance
+      new_dsitance = (self.distance * 1.609344).round(2)
+      new_dsitance < 1 ? "#{new_dsitance*1000} metros" : "#{new_dsitance} quilômetros"
+    else
+      nil
+    end
   end
 
 end

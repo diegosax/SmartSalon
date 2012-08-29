@@ -9,7 +9,9 @@ class SalonsController < ApplicationController
     else
       []
     end
-    @my_salons_and_favorites = Salon.all
+    
+    @my_salons_and_favorites = current_user.my_salons_and_favorites if current_user
+    
       respond_to do |format|
       format.html # index.html.erb
       format.js

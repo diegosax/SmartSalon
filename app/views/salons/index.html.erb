@@ -1,7 +1,13 @@
 <div class="row-fluid">  
+  
   <div class="span4">
   	<h3 class="heading">Meus Salões | Favoritos</h3>
-    <%=render "favorite_salons"%>
+    <%if @my_salons_and_favorites%>
+    	<%=render "favorite_salons"%>
+    <%else%>
+    	<h3>Você precisa estar logado para acessar seus salões</h3>
+    	<%=link_to "Clique aqui", new_client_session_url%> para efetuar seu login
+    <%end%>
   </div>
   <div class="span8">
     <%=render "search_salons"%>

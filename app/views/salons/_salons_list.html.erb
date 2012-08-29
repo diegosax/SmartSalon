@@ -19,9 +19,11 @@
       <br>    
       <%=link_to "Ver Detalhes", salon%>
     </p>
-    <h5>
-      ~ <strong><%=salon.distance_in_kilometers%></strong>
-    </h5>
+    <%if salon.distance_in_kilometers%>
+      <h5>
+        ~ <strong><%=salon.distance_in_kilometers%></strong>
+      </h5>
+    <%end%>
   </li>
 
   <%end%>
