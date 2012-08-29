@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class Salon < ActiveRecord::Base
   attr_accessible :address, :city, :complement, :email, :fone, :logo, :name, :state, :username, :zipcode, :neighborhood, :remote_logo_url
   has_many :services, :dependent => :destroy
@@ -17,6 +19,12 @@ class Salon < ActiveRecord::Base
     else
       scoped
     end
+  end
+
+  def distance_in_kilometers
+    new_dsitance = (self.distance * 1.609344).round(2)
+    new_dsitance < 1 ? "#{new_dsitance*1000} metros" : "#{new_dsitance} quilômetros"
+
   end
 
 end
