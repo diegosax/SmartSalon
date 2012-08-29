@@ -25,11 +25,38 @@ class Admin::ServicesController < Admin::ApplicationController
     end
   end
 
+  # GET /services/new
+  # GET /services/new.json
+  def new
+    @service = Service.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @service }
+    end
+  end
 
   # GET /services/1/edit
   def edit
     @service = Service.find(params[:id])
   end
+
+  # POST /services
+  # POST /services.json
+  def create
+    @service = Service.new(params[:service])
+
+    respond_to do |format|
+      if @service.save
+        format.html { redirect_to admin_service_path(@service), notice: 'Service was successfully created.' }
+        format.json { render json: @service, status: :created, location: @service }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @service.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
 
   # PUT /services/1
   # PUT /services/1.json
