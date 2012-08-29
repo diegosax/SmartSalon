@@ -2,10 +2,12 @@ class SalonsController < ApplicationController
   # GET /salons
   # GET /salons.json
   def index
-    if params[:location].present?
-      @salons = Salon.near(params[:location], 20, :order => :distance)      
+    @salons = if params[:location].present?
+      Salon.near(params[:location], 20, :order => :distance)      
+    elsif params[:query].present?
+      Salon.text_search(params[:query])
     else
-      @salons = Salon.all
+      []
     end
     @my_salons_and_favorites = Salon.all
       respond_to do |format|
