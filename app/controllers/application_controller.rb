@@ -8,13 +8,13 @@ class ApplicationController < ActionController::Base
         sign_out :professional
         sign_in :user, resource
       end
-      return events_url
+      return events_path
     elsif (resource.is_a?(Professional))
       if !current_professional
         sign_out :user
         sign_in :professional, resource
       end
-      return admin_events_url
+      return admin_events_path
     end
   end
 
