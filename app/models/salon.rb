@@ -22,7 +22,7 @@ class Salon < ActiveRecord::Base
     else
       scoped
     end
-  end
+  end  
 
   def distance_in_kilometers
     if Salon.method_defined? :distance

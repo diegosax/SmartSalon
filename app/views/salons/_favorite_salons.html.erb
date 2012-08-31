@@ -1,21 +1,7 @@
 <div id="mini_grid" class="wmk_grid">
   <ul>
     <%@my_salons_and_favorites.each do |salon| %>
-    <li class="thumbnail">
-      <%=link_to new_salon_event_url(salon) do%>                        
-      <%=image_tag salon.logo.url(:thumb)%>
-      <%end%>
-      <p>
-        <a href="javascript:void(0)" title="Remove"><i class="icon-trash"></i></a>
-        <a href="javascript:void(0)" title="Edit"><i class="icon-pencil"></i></a>
-        <%=link_to new_salon_event_url(salon), :style => "float:left" do%>
-        <span><strong><%=salon.name%></strong></span>
-        <%end%>
-        <br>    
-        <%=link_to "Ver Detalhes", salon%>
-
-      </p>
-    </li>                
+    <%=render "salons/fav_salon", :salon => salon%>
     <%end%>
   </ul>
 </div>

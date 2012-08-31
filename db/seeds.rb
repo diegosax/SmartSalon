@@ -129,6 +129,9 @@ Salon.create(
 )
 
 
+espaco560 = Salon.find_by_username("espaco560")
+
+puts "Criando profissionais dos saloes"
 espaco560.professionals.create(
 	:name => "Jessica Almeida",
 	:email => "jessica@instanap.com",
@@ -136,6 +139,7 @@ espaco560.professionals.create(
 	:password_confirmation => "123456"
 )
 
+puts "primeiro profissional criado"
 espaco560.professionals.create(
 	:name => "Vanessa Alves",
 	:email => "vanessa@instanap.com",
@@ -161,13 +165,14 @@ espaco560.professionals.create(
 	:password => "123456",
 	:password_confirmation => "123456"
 )
+puts "Ultimo profissional criado"
 
-
+puts "Criando os servicos"
 espaco560.services.create(
 	:name => "Corte Masculino",
 	:duration => 30	
 )
-
+puts "Primeiro servico criado"
 espaco560.services.create(
 	:name => "Corte Feminino",
 	:duration => 60	

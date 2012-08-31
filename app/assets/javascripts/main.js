@@ -70,6 +70,10 @@ function addLoading(element){
 	var html = "<div class = 'loading'>Processando, por favor aguarde...<br /><img src='/assets/ajax_loader.gif'></img>"
 	$(element).append(html).fadeIn("slow");
 }
+function addLoadingSimple(element){
+	var html = "<img src='/assets/ajax_loader.gif'></img>"
+	$(element).html(html);
+}
 
 function removeLoading(){
 	$(".loading").remove().fadeOut("fast");
@@ -266,23 +270,58 @@ $(document).ready(function(){
 	//------------------------------------------------------------//
 
 	$('a[data-toggle="tab"]').on('shown', function (e) {
-   		removeLoading(); 
-   		clearSalonSearchResults();
-  	});
+		removeLoading(); 
+		clearSalonSearchResults();
+	});
 
-  	$('a[href="#address-search-tab"]').on('shown', function (e) {
-   		$("#address_search_well form").submit();
-  	});
+	$('a[href="#address-search-tab"]').on('shown', function (e) {
+		$("#address_search_well form").submit();
+	});
 
-  	$("#address_search_well form").submit(function(e){
-  		clearSalonSearchResults();
-  		if ($("#location").val().length > 0){
-  			addLoading($("#large_grid"));
-  			return true;
+	$("#address_search_well form").submit(function(e){
+		clearSalonSearchResults();
+		if ($("#location").val().length > 0){
+			addLoading($("#large_grid"));
+			return true;
+		} else{
+			return false;
+		}
+
+	});
+
+  	//----------------- Favorite salon ----------------------------//
+  	function removeFavorite(element){
+  		var id = element.closest("li").attr("data-id");
+  		$.ajax({
+  			type: "delete",
+  			url:"/favorites/" + id,
+  			dataType: "script"
+  		});
+  		addLoadingSimple($("#mini_grid li[data-id='" + id + "']"));
+  	}
+  	$(".star_fav").live("click", function(e){
+  		e.preventDefault();
+  		if ($(this).hasClass("favorite")){
+  			removeFavorite($(this));
   		} else{
-  			return false;
+  			$.ajax({
+	  			type: "post",
+	  			url:"/favorites",
+	  			data: {salon_id: $(this).closest("li").attr("data-id")},      
+	  			dataType: "script"
+  			});	
   		}
   		
   	});
-	
-});
+
+  	$(".remove_favorite i").tooltip();
+
+  	$(".remove_favorite").live("click",function(e){
+  		e.preventDefault();
+  		//This is line is necessary beacause there is a tooltip bug, it sticks
+  		$(".remove_favorite i").tooltip("hide");
+  		removeFavorite($(this));
+  	});
+
+
+  });

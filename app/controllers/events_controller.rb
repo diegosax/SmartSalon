@@ -56,7 +56,7 @@ class EventsController < ApplicationController
         @professionals = @service.professionals   
       end
     else
-      @my_salons_and_favorites = Salon.limit(5)
+      @my_salons_and_favorites = current_user.my_salons_and_favorites if current_user
     end
     
     

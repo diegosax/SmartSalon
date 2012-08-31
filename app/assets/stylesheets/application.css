@@ -405,3 +405,17 @@ div.controls{
 .clear{
     clear:both;
 }
+
+
+.star_fav{    
+    width:16px;
+    height:16px;
+    background: url("/assets/favorite.png") no-repeat;
+}
+.star_fav:hover{
+    background: url("/assets/favorite.png") no-repeat -16px 0;
+}
+
+.favorite{
+    background: url("/assets/favorite.png") no-repeat -16px 0;   
+}

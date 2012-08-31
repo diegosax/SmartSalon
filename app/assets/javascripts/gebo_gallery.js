@@ -17,8 +17,8 @@
                 $(this).find('.yt_vid,.self_vid,.vimeo_vid').append('<span class="vid_ico"/>');
             }); 
         },
-        mini: function(){
-            $('#mini_grid ul').imagesLoaded(function() {
+        mini: function(){                        
+            $('#mini_grid ul').imagesLoaded(function() {                
                 // Prepare layout options.
                 var options = {
                   autoResize: true, // This will auto-update the layout when the browser window is resized.

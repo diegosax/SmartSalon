@@ -1,5 +1,9 @@
 Smartsalon::Application.routes.draw do
 
+  post "favorites" => "favorites#create"
+
+  delete "favorites/:id" => "favorites#destroy"
+
   resources :settings
 
   namespace :landing do
