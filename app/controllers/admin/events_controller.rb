@@ -63,7 +63,7 @@ class Admin::EventsController < Admin::ApplicationController
 
   def create
     @event = Event.new(params[:event])    
-    puts "PARAMS PROFESSIONAL: #{params[:professional]}"
+    @event.created_by = current_professional.class
     if params[:professional] 
       @event.professional_id = params[:professional]
     else
@@ -75,9 +75,9 @@ class Admin::EventsController < Admin::ApplicationController
         format.js
         format.html { redirect_to(@event, :notice => 'Event was successfully created.') }
         format.xml  { render :xml => @event, :status => :created, :location => @event }
-      else
-        @professional = params[:professional] ? Professional.find(params[:professional]) : (current_user ? Professional.find(current_user) : Professional.first)
+      else        
         puts @event.errors
+        format.js { render "create_error"}
         format.html { render :action => "new" }
         format.xml  { render :xml => @event.errors, :status => :unprocessable_entity }
       end

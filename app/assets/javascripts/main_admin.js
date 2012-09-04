@@ -5,9 +5,7 @@ $(document).ready(function(){
 	});
 
 	$("#newEvent").on('shown',function(){
-		var now = new Date().toString("dd-MM-yyyy HH:mm");
-		
-		
+		var now = new Date().toString("dd-MM-yyyy HH:mm");				
 		
 		$('#datetime_from').datetime({
 			value: now,
@@ -21,5 +19,10 @@ $(document).ready(function(){
 			altField: '#datetime_to_alt', 
 			altFormat: "d 'de' MM yy 'às' hh:ii" 
 		});
-	});	
+	});
+
+	$("#new_admin_event_form").on("submit",function(e){
+		$("#newEvent .modal-body").html("");
+		addLoading($("#newEvent .modal-body"));
+	});
 });

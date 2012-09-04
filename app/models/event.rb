@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Event < ActiveRecord::Base
 	attr_accessible :changeable, :client_id, :description, :duration, :professional_id, :service_id, :salon_id, :start_at, :status, :title, :end_at
 	belongs_to :client
@@ -5,7 +6,7 @@ class Event < ActiveRecord::Base
 	belongs_to :service
 	belongs_to :salon
 	validates :title, :presence => true
-	#validates :start_at, :isbusy => true
+	validates_with IsBusyValidator
 	#validates :end_at, :range => true
 	after_save :add_client_to_salon	
 

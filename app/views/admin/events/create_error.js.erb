@@ -1,0 +1,7 @@
+$("#newEvent .modal-body").html(
+	"<div class='alert'>" + 
+    "<a class='close' data-dismiss='alert'>×</a>" + 
+    "<strong>Atenção! </strong>" + 
+    	" <%=@event.errors[:base][0]%>" + 
+    "</div>"
+);

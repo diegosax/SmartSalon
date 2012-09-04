@@ -1,6 +1,5 @@
 $("#newEvent").modal("hide");
 
-<%puts @event.inspect%>
 var event = {
 	id: <%=@event.id%>,
 	title: "<%=@event.title%>",
@@ -10,5 +9,4 @@ var event = {
 	end: "<%=@event.end_at.iso8601%>",
 	allDay: false
 };
-console.log(event);
 $("#calendar").fullCalendar('renderEvent',event,true);

@@ -85,6 +85,7 @@ class EventsController < ApplicationController
     @event.title = service.name
     @event.description = "#{service.name} marcado(a) pelo cliente via internet, 
     na: #{DateTime.now.strftime("%A, %d de %B às %H:%M")}"
+    @event.created_by = "Client"
     @event.service = service
     @event.salon = salon
     @event.professional = professional
@@ -95,6 +96,7 @@ class EventsController < ApplicationController
         format.xml  { render :xml => @event, :status => :created, :location => @event }
       else
         puts @event.errors
+        format.js
         format.html { render :action => "new" }
         format.xml  { render :xml => @event.errors, :status => :unprocessable_entity }
       end

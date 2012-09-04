@@ -4,7 +4,7 @@
         <h3>Novo Agendamento</h3>
     </div>
     <div class="modal-body">
-        <%= form_for([:admin,@event],:html=>{:class=>"form-horizontal well",:remote=>true}) do |f| %>
+        <%= form_for([:admin,@event],:html=>{:class=>"form-horizontal well",:remote=>true, :id=> "new_admin_event_form"}) do |f| %>
             <fieldset>
             <div class="control-group">
                 <%=f.label :title, :class => "control-label"%>
