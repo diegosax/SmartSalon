@@ -1,0 +1,15 @@
+<li class="thumbnail" data-id="<%=salon.id%>">
+  <%=link_to new_salon_event_url(salon) do%>                        
+  <%=image_tag salon.logo.url(:thumb)%>
+  <%end%>
+  <p>    
+    <a href="#" title="Remove" class="remove_favorite" rel="tooltip" >
+      <i class="icon-trash" data-original-title="Remover dos meus salões"></i>
+    </a>        
+    <%=link_to new_salon_event_url(salon), :style => "float:left" do%>
+      <span><strong><%=salon.name%></strong></span>
+    <%end%>
+    <br>    
+    <%=link_to "Ver Detalhes", salon%>
+  </p>
+</li>

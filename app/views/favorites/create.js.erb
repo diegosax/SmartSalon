@@ -1,0 +1,6 @@
+$("li[data-id='<%=escape_javascript(@favorite.salon.id.to_s)%>'] .star_fav").addClass("favorite");
+if ($("#mini_grid li[data-id='<%=escape_javascript(@favorite.salon.id.to_s)%>']").length == 0){
+	var html = "<%=escape_javascript(render '/salons/fav_salon', :salon => @favorite.salon)%>";
+	$("#mini_grid ul").append(html).fadeIn("slow");
+	gebo_gal_grid.mini();
+}

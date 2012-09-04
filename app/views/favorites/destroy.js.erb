@@ -1,0 +1,12 @@
+<%
+if @favorite 
+	id = @favorite.salon.id.to_s 
+else 
+	id = @salon.id.to_s 
+end
+%>
+
+$("#large_grid li[data-id='<%=escape_javascript(id)%>'] .star_fav").removeClass("favorite");
+$("#mini_grid li[data-id='<%=escape_javascript(id)%>']").remove().fadeOut("slow", function(){
+	gebo_gal_grid.mini();
+});

@@ -1,0 +1,20 @@
+<li class="thumbnail" data-id="<%=salon.id%>">
+  <%=link_to new_salon_event_url(salon) do%>                                  
+  <%=image_tag salon.logo.url(:thumb)%>
+  <%end%>
+  <p>      
+    <a href="#"><span class="star_fav pull_right <%=is_favorite(salon)%>"></span></a>
+    <%=link_to new_salon_event_url(salon), :style => "float:left" do%>
+    <span><strong><%=salon.name%></strong></span>
+    <%end%>
+    <br>    
+    
+    <%=link_to "Ver Detalhes", salon%>
+  </p>
+  
+  <%if salon.distance_in_kilometers%>
+  <h5>
+    ~ <strong><%=salon.distance_in_kilometers%></strong>
+  </h5>
+  <%end%>
+</li>
