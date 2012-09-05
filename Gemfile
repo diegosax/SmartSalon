@@ -41,6 +41,8 @@ gem "fog", "~> 1.3.1"
 
 gem 'simple_form'
 
+gem 'client_side_validations'
+
 gem 'mini_magick'
 
 gem 'carrierwave'

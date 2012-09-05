@@ -1,13 +1,15 @@
-<div class="modal hide fade" id="newEvent">
-    <div class="modal-header">
-        <button class="close" data-dismiss="modal">×</button>
-        <h3>Novo Agendamento</h3>
-    </div>
-    <div class="modal-body">
-        
-    </div>
-    <div class="modal-footer">
-        <a href="javascript:void(0)" class="btn">Cancelar</a>
-        <a href="javascript:void(0)" class="btn">Salvar</a>
-    </div>
-</div>
+<%=render "top_nav"%>
+
+<%= simple_form_for([:admin,@event],:html=>{:class=>"form-horizontal", :id=> "new_admin_event_form"}) do |f| %>
+    <legend>
+        Novo Agendamento
+    </legend>
+
+
+    <%=f.input :title%>                
+    <%=f.input :description, :input_html => {:rows => "8"} %>
+    <%=f.input :start_at, :input_html => {:id => "datetime_from"}, :as => :string%>
+    <%=f.input :end_at,  :input_html => {:id => "datetime_to"}, :as => :string%>
+    <%=f.submit "Salvar", :class=> "btn", :disable_with => "Salvando..."%>
+
+<%end%>    

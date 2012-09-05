@@ -21,8 +21,7 @@ $(document).ready(function(){
 		});
 	});
 
-	$("#new_admin_event_form").on("submit",function(e){
-		$("#newEvent .modal-body").html("");
-		addLoading($("#newEvent .modal-body"));
-	});
+//	$("#new_admin_event_form").on("submit",function(e){
+		//$("#newEvent .modal-body").html("");		
+	//});
 });

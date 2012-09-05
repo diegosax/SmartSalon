@@ -1,7 +1,23 @@
-$("#newEvent .modal-body").html(
-	"<div class='alert'>" + 
-    "<a class='close' data-dismiss='alert'>×</a>" + 
-    "<strong>Atenção! </strong>" + 
-    	" <%=@event.errors[:base][0]%>" + 
-    "</div>"
-);
+<%puts @event.errors.size%>
+<%if @event.errors.size > 1%>
+	<%@event.errors.delete(:base)%>
+	var errorHtml = "<div class='alert alert-block alert-error'>" + 
+  						"<button type='button' class='close' data-dismiss='alert'>×</button>" +
+  						"<h4>Alguns errors ocorreram, por favor corriga-os e tente novamente!</h4>" + 
+  						"<span class='error_messages'></span></div>"
+	$("#newEvent .modal-body").prepend(errorHtml);
+	<%@event.errors.full_messages.each do |err|%> 		
+  		var message = "<%=escape_javascript(err)%> <br />"  		
+  		$("#newEvent .modal-body span.error_messages").append(message);
+	<%end%>
+<%elsif @event.errors[:base].length > 0%>
+	$("#newEvent .modal-body").html(
+		"<div class='alert'>" + 
+	    "<a class='close' data-dismiss='alert'>×</a>" + 
+	    "<strong>Atenção! </strong>" + 
+	    	"<%=@event.errors[:base][0]%>" + 
+	    "</div>"
+	);
+<%end%>
+
+

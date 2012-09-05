@@ -40,6 +40,7 @@
 //=	require tipped 
 //= require list_js/list.js
 //= require list_js/plugins/paging/list.paging
+//= require rails.validations
 //= require confirmation_modal
 //= require date
 //= require main_admin
