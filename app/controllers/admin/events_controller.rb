@@ -62,6 +62,8 @@ class Admin::EventsController < Admin::ApplicationController
   end
 
   def create
+    confirm_conflicts = params[:event][:confirm_conflicts]
+    params[:event].delete(:confirm_conflicts)
     @event = Event.new(params[:event])    
     @event.created_by = current_professional.class
     if params[:professional] 
@@ -69,17 +71,30 @@ class Admin::EventsController < Admin::ApplicationController
     else
       @event.professional = current_professional
     end
-    
-    respond_to do |format|
-      if @event.save
+
+    if confirm_conflicts == "1"
+      conflicted_events = @event.find_conflicts
+      conflicted_events.each do |e|
+        e.update_attributes(:reschedule => true)
+      end      
+      @event.save(:validate => false)
+      respond_to do |format|      
         format.js
-        format.html { redirect_to(@event, :notice => 'Event was successfully created.') }
+        format.html { redirect_to([:admin,@event], :notice => 'Event was successfully created.') }
         format.xml  { render :xml => @event, :status => :created, :location => @event }
-      else        
-        puts @event.errors
-        format.js { render "create_error"}
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @event.errors, :status => :unprocessable_entity }
+      end
+    else
+      respond_to do |format|
+        if @event.save
+          format.js
+          format.html { redirect_to(@event, :notice => 'Event was successfully created.') }
+          format.xml  { render :xml => @event, :status => :created, :location => @event }
+        else        
+          puts @event.errors
+          format.js { render "create_error"}
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @event.errors, :status => :unprocessable_entity }
+        end
       end
     end
   end

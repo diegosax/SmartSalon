@@ -1,15 +1,6 @@
 class IsBusyValidator < ActiveModel::Validator
   def validate(record)
-    events = Event.where(
-      "
-        start_at > ? and start_at < ? OR
-        end_at > ? and end_at < ? OR
-        start_at <= ? and end_at >= ?
-      ",
-      record.start_at,record.end_at,
-      record.start_at,record.end_at,
-      record.start_at,record.end_at
-    ).all
+    events = record.find_conflicts
     events.each do |event|
       if event.id == record.id && events.count == 1
         return

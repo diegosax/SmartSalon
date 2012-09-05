@@ -1,11 +1,51 @@
-<%=render "top_nav%>
+<%=render "top_nav"%>
+
 <div class="row-fluid">
-	<div clas="span12">
-		<h2 class="heading">
-			Eventos
-		</h2>
-		<div id="calendar">
-		</div>
-		<%#=render :partial => "index_events_list", :locals => {:events => @events, :date => @month}%>
+	<div class="span12">
+		<h2 class="heading">Agendamentos</h2>
+		<table class="table table-bordered table-striped table_vam" id="dt_gal">
+			<thead>
+				<tr>
+					<th>Cliente</th>
+					<th>Serviço</th>
+					<th>Funcionário</th>
+					<th>Data</th>
+					<th>Duração</th>
+					<th>Ação</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<%@events.each do |event|%>
+				<tr>					
+					<td>
+						<%=event.client.name if event.client%>
+					</td>
+					<td>
+						<%=event.service.name if event.service%>
+					</td>
+					<td>
+						<%=event.professional.name if event.professional%>
+					</td>
+					<td>
+						<%=event.start_at.strftime("%d de %B às %H:%M")%>
+					</td>
+					<td>
+						<%=distance_of_time_in_words(event.start_at,event.end_at)%>
+					</td>
+					<td>
+						<%=link_to [:admin,event], 
+						"data-method-type" => :delete, 
+						:class => "btn btn-mini pull-right btn-danger confirmable",
+						"data-message" => "Deseja realmente cancelar este agendamento?" do%>
+						<i class="icon-trash"></i>
+						Cancelar
+						<%end%>
+					</td>
+				</tr>
+				<%end%>
+			</tbody>
+		</table>
+
 	</div>
 </div>

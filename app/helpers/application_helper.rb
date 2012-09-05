@@ -8,9 +8,6 @@ module ApplicationHelper
 	end
 
 	def active_class(controller)
-		puts controller
-		puts controller_name
-		puts controller_name == controller
 		controller == controller_name ? "active" : ""
 	end
 end

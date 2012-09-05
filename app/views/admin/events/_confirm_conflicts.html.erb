@@ -1,0 +1,10 @@
+<div class="alert alert-block alert-warning fade in">
+	<h4 class="alert-heading">Atenção!</h4>
+	<p>
+		<%=@event.errors[:base][0]%>
+	</p>	
+	<p>
+		<%=f.submit "Confirmar agendamento e marcar conflitos para serem reagendados", :class => "btn btn-inverse"%>					
+		ou 
+		<a href="#" class="btn return">Voltar</a></p>
+</div>

@@ -1,6 +1,6 @@
 #encoding: utf-8
 class Event < ActiveRecord::Base
-	attr_accessible :changeable, :client_id, :description, :duration, :professional_id, :service_id, :salon_id, :start_at, :status, :title, :end_at
+	attr_accessible :changeable, :client_id, :description, :duration, :professional_id, :service_id, :salon_id, :start_at, :status, :title, :end_at, :confirm_conflicts, :reschedule
 	belongs_to :client
 	belongs_to :professional
 	belongs_to :service
@@ -26,6 +26,19 @@ class Event < ActiveRecord::Base
 
 	def professional_name=(name)
 		self.professional = Professional.find_by_name(name)
+	end
+
+	def find_conflicts
+		Event.where(
+      "
+        start_at > ? and start_at < ? OR
+        end_at > ? and end_at < ? OR
+        start_at <= ? and end_at >= ?
+      ",
+      self.start_at,self.end_at,
+      self.start_at,self.end_at,
+      self.start_at,self.end_at
+    ).all
 	end
 
 	private
