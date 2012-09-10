@@ -29,6 +29,7 @@ class Admin::ServicesController < Admin::ApplicationController
   # GET /services/new.json
   def new
     @service = Service.new
+    @current_professional = current_professional
 
     respond_to do |format|
       format.html # new.html.erb
@@ -38,6 +39,7 @@ class Admin::ServicesController < Admin::ApplicationController
 
   # GET /services/1/edit
   def edit
+    @current_professional = current_professional
     @service = Service.find(params[:id])
   end
 
@@ -45,6 +47,10 @@ class Admin::ServicesController < Admin::ApplicationController
   # POST /services.json
   def create
     @service = Service.new(params[:service])
+    @service.salon = current_professional.salon
+    if params[:service_professionals]
+        @service.professionals = Professional.find(params[:service_professionals])
+    end
 
     respond_to do |format|
       if @service.save
@@ -62,6 +68,12 @@ class Admin::ServicesController < Admin::ApplicationController
   # PUT /services/1.json
   def update
     @service = Service.find(params[:id])
+    @service.salon = current_professional.salon
+    if params[:service_professionals]
+        @service.professionals = Professional.find(params[:service_professionals])
+    else
+        @service.professionals = []
+    end
 
     respond_to do |format|
       if @service.update_attributes(params[:service])

@@ -31,8 +31,24 @@
       <%=f.text_field :price%>
     </div>
    </div>
+
+
+<div class="control-group">
+
+	<% if @service and @service.professionals
+	@professionals_selected = @service.professionals.collect
+	end %>
+
+<%= debug @professionals_selected.map {|p| [p.id]} %>
+
+	<label for="service_professionals">Professionals</label>
+	<%= select_tag 'service_professionals', options_for_select(@current_professional.salon.professionals.all.map {|p| [p.name,p.id]}, @professionals_selected.map {|p| [p.id]}), { :multiple => true, :class => "chzn-select", :style => "width:450px;" } %>
+
+</div>
+
 <div class="control-group">
 </div>
+
 </fieldset>
 <div class="modal-footer">
         <%= link_to 'Cancelar', admin_services_path , :class=> "btn"%>
