@@ -46,13 +46,14 @@ Smartsalon::Application.routes.draw do
     :sessions => "admin/sessions"
   }
 
-
   resources :clients do
     resources :events
   end
 
   resources :salons do
-    resources :events  
+    post "events/:id/edit" => "events#update"
+    post "events/new" => "events#create"
+    resources :events
   end
 
   resources :events

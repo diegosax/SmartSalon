@@ -11,9 +11,10 @@
       <% calendar.day(:day_method => :start_at) do |date, events| %>
         <%= date.day %>
         <br>
+        <%puts date.day.to_s + " - " + session[:new_start_date].inspect%>
         <%if session[:new_start_date] == nil%>
           <%if date >= Date.today && date.month == @date.month%>
-            <%=raw isavailable_mod(events,date,@service_professionals,@service)%>
+            <%=raw isavailable_mod(events, date, @service_professionals, @service)%>
           <% end %>
         <%else%>
           <%if           

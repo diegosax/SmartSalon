@@ -5,10 +5,9 @@ class IsBusyValidator < ActiveModel::Validator
       if event.id == record.id && events.count == 1
         return
       end
-    end
-    puts "TAMANHO DOS CONFLITOSSSSSS: #{events.length}"
+    end    
     unless events.blank?
-      record.errors[:base] << (options[:message] || "As datas escolhidas entram em conflito com #{events.length - 1} outros agendamentos.")
+      record.errors[:base] << (options[:message] || "As datas escolhidas entram em conflito com #{events.length} outro(s) agendamento(s).")
     end
   end
 end
