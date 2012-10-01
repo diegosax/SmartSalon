@@ -31,34 +31,8 @@ class EventsController < ApplicationController
   # GET /events/new
   # GET /events/new.xml
   def new
-    if params[:salon_id].present?
-      @salon = Salon.find(params[:salon_id])
-      @services = @salon.services
-      if params[:service]
-        @service = @salon.services.find(params[:service])
-        if !params[:professionals].blank?
-          if params[:professionals] == "any"
-            @service_professionals = @service.professionals
-          else
-            @service_professionals = @salon.professionals.find(params[:professionals])
-          end
-          @events = Event.find(
-            :all,
-            :conditions => ["
-              (start_at >= ? OR end_at >= ?) AND professional_id in (?) AND salon_id = ?", 
-              Date.today.to_datetime, 
-              Date.today.to_datetime, 
-              @service_professionals,
-              @salon.id],
-              :order => "start_at")
-          @date = params[:month] ? Date.parse(params[:month]) : Date.today            
-        end
-        @professionals = @service.professionals   
-      end
-    else
-      @my_salons_and_favorites = current_user.my_salons_and_favorites if current_user
-    end
-    
+    @event = Event.new
+    find_new_event
     
     respond_to do |format|
       format.html
@@ -69,7 +43,20 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
-    @event = Event.find(params[:id])
+    @event = Event.includes(:salon,:professional,:service).find(params[:id])    
+    @salon = @event.salon
+    @services = @salon.services
+    @service = @event.service
+    @professionals = @service.professionals
+    @service_professionals = @event.professional
+    
+
+    find_new_event
+    respond_to do |format|
+      format.html
+      format.js {render "new"}
+      format.xml  { render :xml => @event }
+    end    
   end
 
   # POST /events
@@ -78,7 +65,7 @@ class EventsController < ApplicationController
     @event = current_user.events.new(
       :end_at => params[:end_at], 
       :start_at => params[:start_at]
-    )
+      )
     salon = Salon.find(params[:salon_id])
     professional = salon.professionals.find(params[:professionals])
     service = professional.services.find(params[:service])        
@@ -95,8 +82,8 @@ class EventsController < ApplicationController
         format.html { redirect_to(@event, :notice => 'Event was successfully created.') }
         format.xml  { render :xml => @event, :status => :created, :location => @event }
       else
-        puts @event.errors
-        format.js
+        puts @event.errors.inspect        
+        format.js {render "create_error"}
         format.html { render :action => "new" }
         format.xml  { render :xml => @event.errors, :status => :unprocessable_entity }
       end
@@ -106,19 +93,16 @@ class EventsController < ApplicationController
   # PUT /events/1
   # PUT /events/1.xml
   def update
-    @event = Event.find(params[:id])
-    
-    if !@event.remarcavel?
-      flash[:alert] = "Voce nao tem permissao para alterar esse evento."
-      render :action => "edit"
-      return
-    end
-    
+    @event = Event.find(params[:id])    
+    @event.professional = Professional.find(params[:professionals])
+    @event.end_at = params[:end_at]
+    @event.start_at = params[:start_at]
+    @event.reschedule = false
     respond_to do |format|
-      if @event.update_attributes(params[:event])
+      if @event.save
         format.html { redirect_to(@event, :notice => 'Event was successfully updated.') }
         format.xml  { head :ok }
-        format.js
+        format.js :notice => "Evento alterado com sucesso"
       else
         format.js
         format.html { render :action => "edit" }
@@ -156,6 +140,42 @@ class EventsController < ApplicationController
       format.html # index.html.erb
       format.xml  { render :xml => @events }
     end
+  end
+
+  private
+  def find_new_event    
+    if params[:salon_id].present?
+      @salon = Salon.find(params[:salon_id])
+      @services = @salon.services
+      if params[:service]
+        @service = @salon.services.find(params[:service])
+        if !params[:professionals].blank?
+          if params[:professionals] == "any"
+            @service_professionals = @service.professionals
+          else
+            @service_professionals = @salon.professionals.find(params[:professionals])
+          end                      
+        end
+        @professionals = @service.professionals   
+      end
+    else
+      @my_salons_and_favorites = current_user.my_salons_and_favorites if current_user
+    end
+
+    if @service_professionals && @salon
+      @events = Event.find(
+        :all,
+        :conditions => ["
+          (start_at >= ? OR end_at >= ?) AND professional_id in (?)", 
+          Date.today.to_datetime, 
+          Date.today.to_datetime, 
+          @service_professionals
+          ],
+          :order => "start_at")
+      @date = params[:month] ? Date.parse(params[:month]) : Date.today
+    end
+
+    
   end
 
 end

@@ -90,8 +90,11 @@ function loadDateTimePicker(){
 function onChooseProfessionalChange(){
 	$("#client_calendar").remove().fadeOut("fast");		
 	addLoading($("#new-event-form"));
-	$("#new-event-form").submit();
-	history.pushState(null,"",$("#new-event-form").attr("action") + "?" + $("#new-event-form").serialize());
+	$.ajax(window.location.pathname, {
+			data: $("#new-event-form").serialize(),
+			dataType: "script"
+		});
+	history.pushState(null,"",window.location.pathname + "?" + $("#new-event-form").serialize());
 }
 
 userList = null;
@@ -113,12 +116,12 @@ $(document).ready(function(){
 	   } 
 	}
 	
-	$(".day_number a").live("click",function(){
+	/*$(".day_number a").live("click",function(){
 		$("#newEvent").modal("show");
 	});
 
 	Tipped.setDefaultSkin('light');
-
+	
 	$('.event').each(function(index){
 		Tipped.create(this,$(this).find("a").attr("href"), {
 			ajax: true,
@@ -146,18 +149,24 @@ $(document).ready(function(){
 		event.preventDefault();
 	});
 
+
 	$("a[data-remote=true]").live("click",function(event){
 		$(this).closest("div").remove().fadeOut("fast");
 		addLoading($("#new-event-form"));
 	});
+	*/
 
 	$("#choose-service .chzn_a").chosen().change(function(){
 		$("#client_calendar").remove().fadeOut("fast");
 		$("#choose-professional").remove().fadeOut("fast");
 		addLoading($("#new-event-form"));
 		$("#choose-professional select option[value='']").attr('selected',true);
-		$("#new-event-form").submit();
-		history.pushState(null,"",$("#new-event-form").attr("action") + "?" + $("#new-event-form").serialize());
+		$.ajax(window.location.pathname, {
+			data: $("#new-event-form").serialize(),
+			dataType: "script"
+		});
+		//$("#new-event-form").submit();
+		history.pushState(null,"",window.location.pathname + "?" + $("#new-event-form").serialize());
 	});
 
 	$("#choose-professional .chzn_a").chosen().change(function(){
@@ -179,7 +188,7 @@ $(document).ready(function(){
 	$("#save-event-btn").live("click",function(event){
 		event.preventDefault();
 		$("#confirmation-modal .modal-body p").html("Processando, por favor aguarde...<br /><img src='/assets/ajax_loader.gif'></img>");
-		$.post($("#confirmation-modal .link").attr("data-link"),{},"html");		
+		$.post($("#confirmation-modal .link").attr("data-link"),{},"html");
 	});
 
 	$("#confirmation-modal").on("hide", function(){

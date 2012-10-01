@@ -46,18 +46,19 @@
 			<span style="display:none" class="sl_id">
 				<%=e.id%>
 			</span>
-			<%=link_to e, 
+			<%=link_to e,
 			"data-method-type" => :delete, 
 			:class => "btn btn-mini pull-right btn-danger confirmable",
 			"data-message" => "Deseja realmente cancelar este agendamento?" do%>
 			<i class="icon-trash"></i>
 			Cancelar
 			<%end%>
-			<a href="#" class="btn btn-mini pull-right btn-warning">
+			<%=link_to edit_salon_event_path(e.salon,e), :class => "btn btn-mini pull-right btn-warning" do%>			
 				<i class="icon-edit"></i>
 				Remarcar
-			</a>
-			<span class="label label-success sl_status">
+			<%end%>
+			<%label_class = e.reschedule ? "label-important" : "label-success"%>
+			<span class="label <%=label_class%> sl_status">
 				<%=e.start_at.strftime("%d de %B às %H:%M")%>
 			</span>
 
@@ -65,8 +66,12 @@
 			<br>
 			<small class="s_color"><b>com: </b>
 				<span class = "sl_professional"><%=e.professional.name if e.professional%><span>
-				</small>
-
+				</small>			
+			<%if e.reschedule%>			
+				<small><label class="label">
+					Este agendamento foi cancelado e marcado para reagendamento, por favor escolha outra data para este evento, ou cancele-o
+				</label></small>
+			<%end%>
 			</li>
 			<div class="clear"></div>
 			<%end%>

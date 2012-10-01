@@ -2,7 +2,8 @@
 
 module EventsHelper	
       def isavailable_mod(events, myDate, professionals = nil, service)      
-            start_time = 8
+            start_hour = 8
+            start_min = 0
             if 
                   (
                   session[:new_start_date] &&
@@ -11,17 +12,18 @@ module EventsHelper
                   session[:new_start_date].year == myDate.year
                   )
 
-                        start_time = session[:new_start_date].hour + service.duration.minutes
+                        puts "Servico: " + service.inspect.to_s
+                        start_hour = session[:new_start_date].hour
+                        start_min = session[:new_start_date].min
                         session[:new_start_date] = nil
-
             end
             
             end_time = 18
-            intervalInMinutes = service.duration            
-            actual_date = Time.zone.local(myDate.year,myDate.month,myDate.day, start_time, 0)            
+            intervalInMinutes = service.duration
+            actual_date = Time.zone.local(myDate.year,myDate.month,myDate.day, start_hour, start_min)            
             end_date = Time.zone.local(myDate.year,myDate.month,myDate.day, end_time, 0)            
             if actual_date.to_date == Date.today
-                  actual_date += (DateTime.now.hour - start_time).hours + service.duration.minutes
+                  actual_date += (DateTime.now.hour - start_hour).hours + service.duration.minutes
             end
 
             valid_times = []
@@ -63,16 +65,14 @@ module EventsHelper
             html = "<ul>"
             valid_times.each do |time|
                   html << "<li>"
-                  html << link_to(
-                              time.strftime("%H:%M"),
-                              {
-                                    :controller => "events", 
-                                    :start_at => time, 
+                  link_params = {                                    
+                                    :start_at => time,
                                     :end_at => intervalInMinutes.minutes.since(time),
                                     :professionals => professionals,
                                     :service => service
-                              },
-                                    
+                              }
+                  html << link_to(
+                              time.strftime("%H:%M"),link_params,
                               {
                                     "data-message" => "Deseja realmente marcar um(a) <b>#{service.name}</b> com <b>#{professionals.name}</b> para #{time.strftime('%A, dia %d de %B às %H:%M')}?",
                                     :class => "new-event-link confirmable"

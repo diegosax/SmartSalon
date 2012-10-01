@@ -1,47 +1,38 @@
-<%= form_for(event,:html => {:class => "form label-inline"}) do |f| %>
+<div class="row-fluid">
+  <div class="span12">      
+    <%= form_for(@event, {:html => {:id => "new-event-form",:remote => true}}) do %>
+      <%if @salon%>        
+        <div class="alert alert-block alert-info fade in">            
+          <h4 class="alert-heading"><%=@salon.name%></h4>
+          <p>
+            <%=image_tag @salon.logo.url(:thumb)%>
+            <address>                
+              <%=@salon.address%>                
+              <br />
+              <%=@salon.city%>, <%=@salon.state%> <%=@salon.zipcode%>
+              <br />
+              <%=@salon.fone%>
+            </address>
+          </p>
+          <p>
+            <%=link_to "Escolher outro salão",salons_url, :class =>"btn btn-info"%>              
+          </p>
+        </div>
 
-  <div class="set-row-2">
-    <%= f.label :title,:class => ("error" unless !event.errors[:title].any?) %>
-    <%= f.text_field :title, :class => "input-2", :size => "50" %>
-    <%if event.errors[:title].any?%>
-      <div class="form-msg-error-advanced"><%= "O Título "+event.errors[:title][0] %> </div>
+      <%else%>
+
+        <h3 class="heading">
+          Selecione um entre seus salões favoritos
+          <%=link_to "Buscar Todos", salons_url, :class=> "pull-right btn btn-info"%>
+        </h3>
+
+        <%=render "/salons/favorite_salons"%>
+      <%end%>
+
+
+      <%=render "new_choose_service"%>
+      <%=render "new_choose_professional"%>
+      <%=render "new_event_calendar"%>
     <%end%>
-  </div>
-  <div class="set-row-2">
-    <%= f.label :description,:class => ("error" unless !event.errors[:description].any?) %>
-    <%= f.text_area :description, :class => "textarea-2", :size => "40" %>
-    <%if event.errors[:description].any?%>
-      <p class="error"><%= event.errors[:title][0] %> </p>
-    <%end%>
-  </div>
-  <div class="set-row-2">
-    <%= f.label :client_nome,:class => ("error" unless !event.errors[:client_id].any?) %>
-    <%= f.text_field :client_nome, :autocomplete => autocomplete_client_nome_events_path ,:class => "input-2", :size => "50" %>
-  </div>
-  <%if event.errors[:client_id].any?%>
-    <div class="form-msg-error-advanced"><%= event.errors[:client_id][0] %> </div>
-  <%end%>
-  <div class="set-row-2">
-    <%= f.label :start_at,:class => ("error" unless !event.errors[:start_at].any?) %>
-    <%= f.text_field :start_at, :id => "datetime_from",:class => "input-2" %>
-    <input class="friendly_date" id="datetime_from_alt" disabled="disabled" />
-    <%if event.errors[:start_at].any?%>
-      <div class="form-msg-error-advanced"><%= "O início " + event.errors[:start_at][0] %> </div>
-
-    <%end%>
-  </div>
-  <div class="set-row-2">
-    <%= f.label :end_at,:class => ("error" unless !event.errors[:end_at].any?) %>
-    <%= f.text_field :end_at, :id => "datetime_to",:class => "input-2" %><input class="friendly_date" id="datetime_to_alt" disabled="disabled" />
-    <%if event.errors[:end_at].any?%>
-      <div class="form-msg-error-advanced"><%= "O Fim " + event.errors[:end_at][0] %> </div>
-    <%end%>
-  </div>
-  <div class="submit-box">
-    <input type="reset" name="reset" value="Reset" />
-    <%= f.submit "Salvar", :class => "delete-contact gradient-btn" %>
-  </div>
-
-
-
-<% end %>
+  </div>    
+</div>

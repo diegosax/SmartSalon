@@ -1,3 +1,1 @@
-$.nyroModalRemove();
-$("div[data-id=<%=@event.id%>]").fadeOut();
-$("div[data-date=<%=@event.start_at.strftime('%Y-%m-%d')%>]").parent().append("<%=escape_javascript(render :partial => 'event', :locals => {:event => @event})%>").effect("highlight", {}, 6000);
+window.location = "<%=events_path%>";
