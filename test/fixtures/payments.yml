@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  description: 
+  status: false
+  due_date: 2012-10-03
+  payment_date: 2012-10-03
+
+two:
+  description: 
+  status: false
+  due_date: 2012-10-03
+  payment_date: 2012-10-03

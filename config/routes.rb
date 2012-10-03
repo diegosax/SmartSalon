@@ -26,6 +26,7 @@ Smartsalon::Application.routes.draw do
       end
     end
     resources :professionals
+    resources :salons
   end
 
   devise_for :clients, :controllers =>

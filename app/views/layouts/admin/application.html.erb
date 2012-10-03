@@ -37,7 +37,14 @@
 						
 					</a>
 					<ul class="nav pull-right">    
-						<li>
+            <li>
+							<%=link_to [:admin,current_professional.salon] do%>								
+								<strong>
+									<%=current_professional.salon.name%>
+								</strong>
+							<%end%>							
+						</li>						
+            <li>
 							<%=link_to [:admin,current_professional] do%>								
 								<strong>
 									<%=current_professional.name%>
