@@ -4,9 +4,8 @@ class Admin::ServicesController < Admin::ApplicationController
 	#TODO ADICIONAR VALIDACOES PARA CHECAR SE O USUARIO LOGADO TEM PERMISSAO PARA REALIZAR A OPERAÇÃO
 
   def index
-
-    @services = Service.all
-
+    @services = current_professional.salon.services
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @services }    

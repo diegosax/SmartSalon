@@ -1,0 +1,48 @@
+<%=render "/admin/utils/top_nav"%>
+
+<div class="row-fluid">
+	<div class="span12">
+		<h2 class="heading">
+			Perfil
+		</h2>
+		<form class="form-horizontal well">
+			<p>
+				<strong>Nome:</strong> <%=@professional.name%>
+			</p>
+			
+			<div class="w-box">
+				<div class="w-box-header">
+					Meus Serviços
+				</div>
+				<div class="w-box-content">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Ações</th>
+							</tr>
+						</thead>
+						<tbody>
+							<%@professional.professional_services.each do |ps| %>
+							<tr id="ps<%=ps.id%>">
+								<td><%=ps.service.name%></td>
+								<td><%=link_to admin_professional_service_path(ps), 
+								"data-method-type" => :delete,
+								:class => "btn btn-mini btn-danger confirmable",
+								"data-message" => "Deseja realmente cancelar este agendamento?" do%>
+								<i class="icon-trash"></i>
+								Desassociar
+								<%end%></td>
+							</tr>
+							<%end%>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<br />
+			<p>
+				<%=link_to "Agendamentos", admin_events_url, :class=>"btn btn-gebo"%>
+			</p>
+		</form>
+	</div>
+</div>

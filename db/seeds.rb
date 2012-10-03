@@ -170,7 +170,7 @@ puts "Ultimo profissional criado"
 puts "Criando os servicos"
 espaco560.services.create(
 	:name => "Corte Masculino",
-	:duration => 30	
+	:duration => 30
 )
 puts "Primeiro servico criado"
 espaco560.services.create(
