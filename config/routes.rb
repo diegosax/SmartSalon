@@ -21,11 +21,14 @@ Smartsalon::Application.routes.draw do
     end      
     resources :events do
       collection do
+        get "easy/new" => "events#easy_new"
+        post "easy/new" => "events#easy_create"
         get 'get_events'
         get 'search'
       end
     end
     resources :professionals
+    resources :clients
   end
 
   devise_for :clients, :controllers =>

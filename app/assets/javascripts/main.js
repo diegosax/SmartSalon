@@ -1,3 +1,8 @@
+function showNoticeMessage(msg){
+	var noty = noty({text: 'noty - a jquery notification library!'});
+	return noty;
+}
+
 function clearSalonSearchResults(){
 	$("#large_grid").empty();
 }
@@ -115,47 +120,11 @@ $(document).ready(function(){
 	       //$.getScript(location.href);
 	   } 
 	}
+
+	$("#choose-client .chzn_a").chosen().change(function(){
+		history.pushState(null,"",window.location.pathname + "?" + $("#new-event-form").serialize());
+	});
 	
-	/*$(".day_number a").live("click",function(){
-		$("#newEvent").modal("show");
-	});
-
-	Tipped.setDefaultSkin('light');
-	
-	$('.event').each(function(index){
-		Tipped.create(this,$(this).find("a").attr("href"), {
-			ajax: true,
-			closeButton: true,
-			hideOn: 'click-outside',
-			closeButtonSkin: 'light',
-			hideOthers: true,
-			showOn: 'click',
-			spinner: {
-				radii:     [32, 42],
-				color:     '#808080',
-				dashWidth: 1,
-				dashes:    75,
-				speed:     .7
-			},
-			hook: {
-				target: 'rightmiddle',
-				tooltip: 'lefttop'
-			},
-			skin: 'light'			
-		});   
-	});
-
-	$('.event a').live("click",function(event){
-		event.preventDefault();
-	});
-
-
-	$("a[data-remote=true]").live("click",function(event){
-		$(this).closest("div").remove().fadeOut("fast");
-		addLoading($("#new-event-form"));
-	});
-	*/
-
 	$("#choose-service .chzn_a").chosen().change(function(){
 		$("#client_calendar").remove().fadeOut("fast");
 		$("#choose-professional").remove().fadeOut("fast");
@@ -330,6 +299,12 @@ $(document).ready(function(){
   		$(".remove_favorite i").tooltip("hide");
   		removeFavorite($(this));
   	});
+
+  	//----------- MASKED INPUT ----------------//
+
+  	$("#client_celphone").mask("(99) 9999-9999");
+
+  	//------------END MASKED INPUT ------------//
 
 
   });

@@ -1,0 +1,9 @@
+$("<option value='<%=@client.id%>' selected='selected'><%=@client.name%></option>").appendTo("#client");
+$("#client").trigger("liszt:updated");
+$("#new_client").modal('hide');
+var noty = noty(
+	{
+		text: '<%=flash[:notice]%>',
+		type: 'success'
+	}
+);

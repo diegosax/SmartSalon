@@ -2,22 +2,26 @@
   <div class="span12">      
     <%= form_for(@event, {:html => {:id => "new-event-form",:remote => true}}) do %>
       <%if @salon%>        
-        <div class="alert alert-block alert-info fade in">            
-          <h4 class="alert-heading"><%=@salon.name%></h4>
-          <p>
-            <%=image_tag @salon.logo.url(:thumb)%>
-            <address>                
-              <%=@salon.address%>                
-              <br />
-              <%=@salon.city%>, <%=@salon.state%> <%=@salon.zipcode%>
-              <br />
-              <%=@salon.fone%>
-            </address>
-          </p>
-          <p>
-            <%=link_to "Escolher outro salão",salons_url, :class =>"btn btn-info"%>              
-          </p>
-        </div>
+        <%if isClient?%>          
+          <div class="alert alert-block alert-info fade in">            
+            <h4 class="alert-heading"><%=@salon.name%></h4>
+            <p>
+              <%=image_tag @salon.logo.url(:thumb)%>
+              <address>                
+                <%=@salon.address%>                
+                <br />
+                <%=@salon.city%>, <%=@salon.state%> <%=@salon.zipcode%>
+                <br />
+                <%=@salon.fone%>
+              </address>
+            </p>
+            <p>
+              <%=link_to "Escolher outro salão",salons_url, :class =>"btn btn-info"%>              
+            </p>
+          </div>
+        <%else%>
+          <%=render "/admin/events/choose_client"%>  
+        <%end%>
 
       <%else%>
 
@@ -30,9 +34,9 @@
       <%end%>
 
 
-      <%=render "new_choose_service"%>
-      <%=render "new_choose_professional"%>
-      <%=render "new_event_calendar"%>
+      <%=render "/events/new_choose_service"%>
+      <%=render "/events/new_choose_professional"%>
+      <%=render "/events/new_event_calendar"%>
     <%end%>
   </div>    
 </div>

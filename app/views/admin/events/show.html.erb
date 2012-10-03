@@ -1,0 +1,33 @@
+<%=render "top_nav"%>
+
+<div class="row-fluid">
+	<div class="span12">
+		<h2 class="heading">
+			Resumo do Agendamento
+		</h2>
+		<form class="form-horizontal well">
+			<p>
+				<strong>Código:</strong> <%=@event.id%>
+			</p>
+			<p>
+				<strong>Salão:</strong> <%=@event.salon.name if @event.salon%>
+			</p>
+			<p>
+				<strong>Client:</strong> <%=@event.client.name if @event.client%>
+			</p>
+			<p>
+				<strong>Serviço:</strong> <%=@event.service.name if @event.service%>
+			</p>
+			<p>
+				<strong>Quando:</strong> <%=@event.start_at.strftime("%d de %B às %H:%Mh") + "( em #{distance_of_time_in_words(DateTime.now,@event.start_at)})" if @event.salon%>
+			</p>
+			<p>
+				<strong>Duração:</strong> <%=distance_of_time_in_words(@event.start_at,@event.end_at)%>
+			</p>
+
+			<p>
+				<%=link_to "Agendamentos", admin_events_url, :class=>"btn btn-gebo"%>
+			</p>
+		</form>
+	</div>
+</div>

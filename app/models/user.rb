@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :name, :email,:landphone,:celphone, :password, :password_confirmation, :remember_me
+  validates :celphone, :presence => true
 
   def is_client?
   	self.is_a?(Client)

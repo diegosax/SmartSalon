@@ -1,0 +1,20 @@
+<div class="modal hide fade" id="new_client">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Novo Cliente</h3>
+  </div>
+  <div class="modal-body">
+    <%@new_client = Client.new%>
+    <%= simple_form_for([:admin,@new_client],:html=>{:class=>"form-horizontal",:remote=>true}) do |f| %>
+    <div class="form-content">
+      <%=f.input :name%>
+      <%=f.input :celphone%>                      
+      <%=f.input :email%>      
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss='modal'>Cancelar</a>
+    <%=f.submit "Salvar", :class=> "btn btn-primary", :disable_with => "Salvando..."%>    
+  </div>
+  <%end%>
+</div>

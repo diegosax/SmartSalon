@@ -26,7 +26,9 @@
 //= require chosen.jquery
 //= require qtip2/jquery.qtip.min
 //= require jBreadcrumbs/js/jquery.jBreadCrumb.1.1.min
-//= require sticky/sticky.min
+//= require noty/jquery.noty
+//= require noty/layouts/top
+//= require noty/themes/default
 //= require ios-orientationchange-fix
 //= require forms/jquery.ui.touch-punch.min
 //= require jquery.ui.datetime.min
@@ -40,6 +42,7 @@
 //=	require tipped 
 //= require list_js/list.js
 //= require list_js/plugins/paging/list.paging
+//= require jquery.maskedinput-1.3
 //= require rails.validations
 //= require confirmation_modal
 //= require date

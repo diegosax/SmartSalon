@@ -1,4 +1,7 @@
+#encoding: utf-8
+
 class Admin::EventsController < Admin::ApplicationController
+  include NewEvent
   before_filter :authenticate_professional!
 
   def index
@@ -61,6 +64,18 @@ class Admin::EventsController < Admin::ApplicationController
     end
   end
 
+  def easy_new
+    @event = Event.new
+    @clients = current_professional.salon.clients
+    @client = Client.find(params[:client]) unless params[:client].blank?
+    find_new_event
+    respond_to do |format|
+      format.html # new.html.erb
+      format.js {render "/events/new"}
+      format.xml  { render :xml => @event }
+    end
+  end
+
   def create
     confirm_conflicts = params[:event][:confirm_conflicts]
     params[:event].delete(:confirm_conflicts)
@@ -99,11 +114,41 @@ class Admin::EventsController < Admin::ApplicationController
     end
   end
 
+  def easy_create
+    @event = Event.new(
+      :end_at => params[:end_at], 
+      :start_at => params[:start_at]
+      )
+    salon = current_professional.salon
+    professional = salon.professionals.find(params[:professionals])
+    service = professional.services.find(params[:service])
+    client = salon.clients.find(params[:client])
+    @event.title = service.name
+    @event.description = "#{service.name} marcado(a) pelo funcionário #{current_professional.name} via internet, 
+    na: #{DateTime.now.strftime("%A, %d de %B às %H:%M")}"
+    @event.created_by = "Professional"
+    @event.service = service
+    @event.salon = salon
+    @event.professional = professional
+    @event.client = client
+    respond_to do |format|
+      if @event.save
+        format.js
+        format.html { redirect_to([:admin,@event], :notice => 'Event was successfully created.') }
+        format.xml  { render :xml => @event, :status => :created, :location => @event }
+      else
+        puts @event.errors.inspect      
+        format.js {render "create_error"}
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @event.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
   def show
     @event = Event.find(params[:id])
     respond_to do |format|
-      format.html {render :layout => false}
-      format.js
+      format.html      
       format.xml  { render :xml => @event }
     end
   end
