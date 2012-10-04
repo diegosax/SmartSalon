@@ -1,0 +1,9 @@
+<p><span class="label label-inverse">Selecione o serviço a ser associado:</span></p>
+	<%= select_tag(
+		:service,
+		options_for_select(@services.collect{ |s| [s.name, s.id] }),
+		:include_blank => true,
+		:id => "choose_professional_service",
+		:class => "chzn_a", 
+		"data-placeholder" => "Selecione o serviço"
+		) %>

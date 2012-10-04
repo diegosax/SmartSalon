@@ -1,0 +1,11 @@
+$("#associate_service").modal("hide");
+$("#associated_services tbody").append("<%=escape_javascript(render @professional_service)%>");
+$("#associated_services tr#ps<%=escape_javascript(@professional_service.id.to_s)%>").effect("highlight", {}, 4000);
+
+var noty = noty(
+	{
+		text: '<%=flash.discard(:notice)%>',
+		type: 'success',
+		timeout: 4000
+	}
+);

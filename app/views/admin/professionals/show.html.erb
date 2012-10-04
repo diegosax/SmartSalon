@@ -13,9 +13,12 @@
 			<div class="w-box">
 				<div class="w-box-header">
 					Meus Serviços
+					<div class="pull-right">
+						<%=link_to "Associar novo serviço", new_admin_professional_service_path, :class => "btn btn-gebo btn-mini", :remote => true, :id => "new_professional_service"%>
+					</div>
 				</div>
 				<div class="w-box-content">
-					<table class="table table-striped">
+					<table class="table table-striped" id="associated_services">
 						<thead>
 							<tr>
 								<th>Name</th>
@@ -24,25 +27,12 @@
 						</thead>
 						<tbody>
 							<%@professional.professional_services.each do |ps| %>
-							<tr id="ps<%=ps.id%>">
-								<td><%=ps.service.name%></td>
-								<td><%=link_to admin_professional_service_path(ps), 
-								"data-method-type" => :delete,
-								:class => "btn btn-mini btn-danger confirmable",
-								"data-message" => "Deseja realmente cancelar este agendamento?" do%>
-								<i class="icon-trash"></i>
-								Desassociar
-								<%end%></td>
-							</tr>
+								<%=render ps%>
 							<%end%>
 						</tbody>
 					</table>
 				</div>
 			</div>
-			<br />
-			<p>
-				<%=link_to "Agendamentos", admin_events_url, :class=>"btn btn-gebo"%>
-			</p>
 		</form>
 	</div>
 </div>

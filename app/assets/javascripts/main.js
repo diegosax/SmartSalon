@@ -3,6 +3,10 @@ function showNoticeMessage(msg){
 	return noty;
 }
 
+function showDefaultLoadingModel(){
+	$("#loading-modal").modal();
+}
+
 function clearSalonSearchResults(){
 	$("#large_grid").empty();
 }
@@ -120,7 +124,7 @@ $(document).ready(function(){
 	       //$.getScript(location.href);
 	   } 
 	}
-
+	$(".chzn_a").chosen();
 	$("#choose-client .chzn_a").chosen().change(function(){
 		history.pushState(null,"",window.location.pathname + "?" + $("#new-event-form").serialize());
 	});
@@ -141,6 +145,8 @@ $(document).ready(function(){
 	$("#choose-professional .chzn_a").chosen().change(function(){
 		onChooseProfessionalChange();
 	});
+
+	
 
 	$("#new-event-form").on("submit",function(){
 		history.pushState(null,"",$(this).attr("action") + "?" + $(this).serialize());
@@ -305,6 +311,14 @@ $(document).ready(function(){
   	$("#client_celphone").mask("(99) 9999-9999");
 
   	//------------END MASKED INPUT ------------//
+
+  	//------------Professional / Services Association ----------//
+
+  	$("#new_professional_service").live("click",function(){
+  		showDefaultLoadingModel();
+  	});	
+
+  	//------------END Professional / Services Association ----------//
 
 
   });
