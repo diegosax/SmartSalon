@@ -28,6 +28,7 @@ Smartsalon::Application.routes.draw do
       end
     end
     resources :professionals
+    resources :salons
     resources :professional_services
     resources :clients
   end

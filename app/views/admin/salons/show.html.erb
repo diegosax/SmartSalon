@@ -1,0 +1,102 @@
+<%=render "/admin/utils/top_nav"%>
+
+<div class="row-fluid">
+	<div class="span12">
+		<h2 class="heading">
+			Dados do salão
+		</h2>
+		<form class="form-horizontal well">
+      <p>
+        <%=image_tag @salon.logo.url(:thumb)%>
+      </p>
+			<p>
+				<strong>Nome:</strong> <%=@salon.name%>
+			</p>
+			<p>
+				<strong>Nome de usuário:</strong> <%=@salon.username%>
+			</p>
+			<p>
+				<strong>Telefone:</strong> <%=@salon.fone%>
+			</p>
+			<p>
+				<strong>E-mail:</strong> <%=@salon.email%>
+			</p>
+			<p>
+        <address>                
+          <%=@salon.address%>                
+          <br />
+          <%=@salon.city%>, <%=@salon.state%> <%=@salon.zipcode%>
+          <br />
+          <%=@salon.fone%>
+        </address>
+      </p>
+
+      <div class="w-box">
+				<div class="w-box-header">
+					Assinatura atual
+				</div>
+				<div class="w-box-content">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Descrição</th>
+								<th>Início</th>
+								<th>Fim</th>
+								<th>Período de testes</th>
+								<th>Preço mensal</th>
+								<th>Ativo</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr id="cs<%=@currentSubscription.id%>">
+								<td><%=@currentSubscription.description%></td>
+								<td><%=@currentSubscription.initial_date%></td>
+								<td><%=@currentSubscription.end_date%></td>
+								<td><%=@currentSubscription.trial_period%> mêses </td>
+								<td><%=@currentSubscription.price%></td>
+								<% if @currentSubscription.status %> 
+                  <td> Sim  </td> 
+                <% else %>
+                  <td> Não  </td>             
+                <% end %>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+      </br>
+      <div class="w-box">
+				<div class="w-box-header">
+					Pagamentos da assinatura
+				</div>
+				<div class="w-box-content">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Descrição</th>
+								<th>Data de pagamento</th>
+                <th>Data de efitivação do pagamento</th>
+								<th>Pago</th>
+							</tr>
+						</thead>
+						<tbody>
+              <%@currentSubscription.payments.each do |p| %>
+							<tr id="p<%=@currentSubscription.id%>">
+								<td><%=p.description%></td>
+								<td><%=p.due_date%></td>
+								<td><%=p.payment_date%></td>
+								<% if p.status %> 
+                  <td> Sim  </td> 
+                <% else %>
+                  <td> Não  </td>             
+                <% end %>
+							</tr>
+							<%end%>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+		</form>
+	</div>
+</div>
