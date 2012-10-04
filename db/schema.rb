@@ -142,8 +142,8 @@ ActiveRecord::Schema.define(:version => 20121004123730) do
 
   create_table "working_times", :force => true do |t|
     t.integer  "day"
-    t.time     "from"
-    t.time     "to"
+    t.datetime "from"
+    t.datetime "to"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.integer  "professional_id"

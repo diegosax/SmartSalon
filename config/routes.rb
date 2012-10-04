@@ -27,10 +27,12 @@ Smartsalon::Application.routes.draw do
         get 'search'
       end
     end
-    resources :professionals
+    resources :professionals do
+      resources :working_times
+    end
     resources :salons
     resources :professional_services
-    resources :clients
+    resources :clients    
   end
 
   devise_for :clients, :controllers =>

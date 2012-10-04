@@ -1,0 +1,12 @@
+<tr id="wt<%=working_time.id%>">
+	<td><%=working_time.day_name%></td>
+	<td><%=working_time.from.strftime("%H:%Mh")%></td>
+	<td><%=working_time.to.strftime("%H:%Mh")%></td>
+	<td><%=link_to admin_professional_working_time_path(current_professional,working_time), 
+	"data-method-type" => :delete,
+	:class => "btn btn-mini btn-danger confirmable",
+	"data-message" => "Deseja realmente remover este horário?" do%>
+	<i class="icon-trash"></i>
+	Remover
+	<%end%></td>
+</tr>

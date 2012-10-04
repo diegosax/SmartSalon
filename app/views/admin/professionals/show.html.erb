@@ -9,8 +9,8 @@
 			<p>
 				<strong>Nome:</strong> <%=@professional.name%>
 			</p>
-			
-			<div class="w-box">
+		<!-- Services -->
+			<p><div class="w-box">
 				<div class="w-box-header">
 					Meus Serviços
 					<div class="pull-right">
@@ -32,7 +32,13 @@
 						</tbody>
 					</table>
 				</div>
-			</div>
+			</div></p>
+
+
+		<!-- Working Times -->
+			<p>
+				<%=render "/admin/working_times/working_times"%>
+			</p>
 		</form>
 	</div>
 </div>

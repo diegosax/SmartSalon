@@ -39,7 +39,7 @@
 //= require gebo_tables
 //= require gebo_gallery
 //=	require spinners.min
-//=	require tipped 
+//=	require tipped
 //= require list_js/list.js
 //= require list_js/plugins/paging/list.paging
 //= require jquery.maskedinput-1.3
