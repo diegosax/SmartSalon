@@ -1,8 +1,6 @@
 class Admin::ServicesController < Admin::ApplicationController
   before_filter :authenticate_professional!
 
-	#TODO ADICIONAR VALIDACOES PARA CHECAR SE O USUARIO LOGADO TEM PERMISSAO PARA REALIZAR A OPERAÇÃO
-
   def index
     @services = current_professional.salon.services
     

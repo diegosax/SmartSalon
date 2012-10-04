@@ -2,7 +2,7 @@
 	<div class="span12">
 		<ul class="dshb_icoNav clearfix">
 			<li>
-				<%=link_to "Novo", new_admin_service_path, :style=> "background-image: url(/assets/gCons/add-item.png)", :class => "new_remote_event"%>
+				<%=link_to "Novo", new_admin_service_path, :style=> "background-image: url(/assets/gCons/add-item.png)"%>
 			</li>
 		</ul>
 	</div>
@@ -32,7 +32,7 @@
 					<td>
 						<%= service.price %>
 					</td>
-<td>
+          <td>
 						<%=link_to edit_admin_service_path(service), 
 						:class => "btn btn-mini pull-right btn-warning" do%>
 						<i class="icon-edit"></i>
@@ -40,8 +40,8 @@
 						<%end%>
 					<td>
 						<%=link_to admin_service_path(service), 
-                                                confirm: 'Deseja realmente excluir este serviço?',
-                                                method: :delete,
+            confirm: 'Deseja realmente excluir este serviço?',
+            method: :delete,
 						:class => "btn btn-mini pull-right btn-danger confirmable" do%>
 						<i class="icon-trash"></i>
 						Excluir

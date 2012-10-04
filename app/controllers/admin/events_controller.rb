@@ -41,7 +41,7 @@ class Admin::EventsController < Admin::ApplicationController
 
   def search
     @events = Event.order("start_at").includes(:client,:professional).where("start_at >= ?", Date.today)
-    puts @events.first.inspect
+
     respond_to do |format|
       format.js
       format.json

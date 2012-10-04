@@ -1,0 +1,45 @@
+<%= simple_form_for([:admin,@professional],:html=>{:class=>"form-horizontal", :id=> "new_admin_professional_form"}) do |f| %>
+
+<div class="form-content">
+    <%=f.input :name%>
+    <%=f.input :email%>
+    <%=f.input :password%>
+    <%=f.input :password_confirmation%>
+    <%=f.input :address%>
+    <%=f.input :complement%>
+    <%=f.input :region%>
+    <%=f.input :state%>
+    <%=f.input :landphone%>
+    <%=f.input :celphone%>
+
+    <!-- Working Times -->
+    <% if @professional.id%>
+		  <p>
+			  <%=render "/admin/working_times/working_times"%>
+		  </p
+    <%end%>
+
+    <%= link_to 'Cancelar', admin_professionals_path , :class=> "btn"%>
+    <%=f.submit "Salvar", :class=> "btn", :disable_with => "Salvando..."%>
+</div>
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		<%if @professional.errors.size == 1 && @professional.errors[:base].length > 0%>
+			var hiddenConfirm = "<%=escape_javascript(f.hidden_field(:confirm_conflicts, :value => 1))%>"
+			$("#new_admin_professional_form").append(hiddenConfirm);
+			$("#new_admin_professional_form .form-content").fadeOut("fast");
+			$("#new_admin_professional_form").append(" <%= escape_javascript(render('confirm_conflicts', :f => f)) %>");
+
+			$("#new_admin_professional_form .return").live("click",function(e){
+				e.preventDefault();
+				$("#new_admin_professional_form #event_confirm_conflicts").remove();
+				$("#new_admin_professional_form .alert").slideUp("slow",function(){
+					$("#new_admin_professional_form .form-content").slideDown();
+				});
+			});
+		<%end%>		
+	});	
+</script>
+<%end%>
