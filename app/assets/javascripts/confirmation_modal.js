@@ -4,6 +4,7 @@ $(document).ready(function(){
 		$("#confirmation-modal .modal-body p").html($(this).attr("data-message"));
 		$("#confirmation-modal .link").attr("data-destination",$(this).attr("href"));
 		$("#confirmation-modal .link").attr("data-method-type",$(this).attr("data-method-type"));
+		console.log("Opening confirmation modal");
 		$("#confirmation-modal").modal('show');
 	});
 	$("#confirm-btn").live("click",function(event){

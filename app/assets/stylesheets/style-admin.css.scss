@@ -215,16 +215,17 @@ body.admin-body{
 	.nav .nav-header {
 		position: relative;
 	}
-	
+	/*
 	.modal {
 		top: 90px;
 		margin-top: 0;
 		max-height: none;
 		position: absolute;
-		z-index: 40;
+		z-index: 1050;
 		width: 560px;
 		margin-left: -280px;
 	}
+	*/
 	.modal:focus {
 		outline: none;
 	}
@@ -233,10 +234,7 @@ body.admin-body{
 	}
 	.modal-header .close {
 		margin-top: 2px;
-	}
-	.modal input[type="text"] {
-		width: 100%;
-	}
+	}	
 	.modal textarea {
 		width: 100%;
 	}

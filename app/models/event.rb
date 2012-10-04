@@ -9,7 +9,7 @@ class Event < ActiveRecord::Base
 	validates :start_at, :presence => true
 	validates :end_at, :presence => true
 	validates_with IsBusyValidator
-	#validates :end_at, :range => true
+	validates :end_at, :range => true
 	after_save :add_client_to_salon	
 
 	def client_name

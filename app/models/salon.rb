@@ -12,7 +12,7 @@ class Salon < ActiveRecord::Base
   mount_uploader :logo, LogoUploader
   geocoded_by :full_address
   after_validation :geocode, :if => :address_changed?
-  after_save :create_subscription
+  after_create :create_subscription
 
   def full_address
   	self.address + ", " + self.city + " - " + self.state + " - " + (self.zipcode ? self.zipcode : "")

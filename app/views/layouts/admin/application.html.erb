@@ -46,9 +46,9 @@
 						</li>						
             <li>
 							<%=link_to [:admin,current_professional] do%>								
-								<strong>
-									<%=current_professional.name%>
-								</strong>
+							<strong>
+								<%=current_professional.name%>
+							</strong>
 							<%end%>							
 						</li>
 						<li class="divider-vertical"></li>                                        
@@ -63,7 +63,7 @@
 	</div>
 	<div class="container admin-container">		
 		<% flash.each do |name, msg| %>
-			<%= content_tag :div, msg, id: "flash_#{name}" %>
+		<%= content_tag :div, msg, id: "flash_#{name}" %>
 		<% end %>
 
 		<!-- main content -->
@@ -82,22 +82,22 @@
 							</li>							
 							<li class = "<%=active_class('events')%>">
 								<%=link_to search_admin_events_path do%>									
-									<i class="icon-list-alt"></i>
-									<i class="icon-list-alt icon-white"></i>
-									Agendamentos
+								<i class="icon-list-alt"></i>
+								<i class="icon-list-alt icon-white"></i>
+								Agendamentos
 								<%end%>
 							</li>
 							<li class = "<%=active_class('services')%>">
 								<%=link_to admin_services_path do%>
-									<i class="icon-briefcase"></i>
-									<i class="icon-briefcase icon-white"></i>
-									Serviços
+								<i class="icon-briefcase"></i>
+								<i class="icon-briefcase icon-white"></i>
+								Serviços
 								<%end%>
 							</li>
 							<li>
 								<%=link_to destroy_professional_session_path, :method => :delete do%>		
-									<i class="icon-off icon-white" title="My Feed"></i>
-									Sair
+								<i class="icon-off icon-white" title="My Feed"></i>
+								Sair
 								<%end%>
 							</li>
 
@@ -169,7 +169,7 @@
 						</div>
 					</div>
 				</div>
-			</div>-->
+			</div>-->			
 		</body>
 
 		</html>

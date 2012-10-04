@@ -1,7 +1,7 @@
 #encoding: utf-8
 
 module EventsHelper	
-      def isavailable_mod(events, myDate, professionals = nil, service)      
+      def isavailable_mod(events, myDate, params = {})      
             start_hour = 8
             start_min = 0
             if 
@@ -11,13 +11,14 @@ module EventsHelper
                   session[:new_start_date].month == myDate.month &&
                   session[:new_start_date].year == myDate.year
                   )
-
-                        puts "Servico: " + service.inspect.to_s
+                        
                         start_hour = session[:new_start_date].hour
                         start_min = session[:new_start_date].min
                         session[:new_start_date] = nil
             end
-            
+            service = params[:service]
+            professionals = params[:professionals]
+            client = params[:client]
             end_time = 18
             intervalInMinutes = service.duration
             actual_date = Time.zone.local(myDate.year,myDate.month,myDate.day, start_hour, start_min)            
@@ -61,15 +62,15 @@ module EventsHelper
                   )
                   session[:new_start_date] = actual_date;
             end
-
-            html = "<ul>"
+            html = "<ul>"            
             valid_times.each do |time|
                   html << "<li>"
                   link_params = {                                    
                                     :start_at => time,
                                     :end_at => intervalInMinutes.minutes.since(time),
                                     :professionals => professionals,
-                                    :service => service
+                                    :service => service,
+                                    :client => client
                               }
                   html << link_to(
                               time.strftime("%H:%M"),link_params,

@@ -1,0 +1,19 @@
+<div class="formSep" id="choose-client">
+	<div class="row-fluid form-inline">
+		<p>
+			<span class="label label-inverse">Selecione ou cadstre o cliente:</span>
+		</p>
+		<%= select_tag(
+			:client, 
+			options_for_select(@clients.collect{ |s| [s.name, s.id] }, (@client.id if @client)),
+			:include_blank => true, 
+			:class => "chzn_a", 
+			"data-placeholder" => "Selecione o cliente"
+			) %>
+			
+			<%=link_to "#new_client", "data-toggle" => "modal", :class => "btn btn-primary" do%>
+				<i class="icon-user icon-white"></i>
+				Novo Cliente
+			<%end%>			
+		</div>
+	</div>

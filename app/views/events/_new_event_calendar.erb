@@ -1,5 +1,5 @@
 <%if @events%>
-
+  <%@client ||= current_user%>
   <div id="client_calendar">
     <h2 id="month">
         <%= link_to "<", params.merge(:month => (@date.beginning_of_month-1).strftime("%Y-%m-01")), :remote => true %>
@@ -11,10 +11,13 @@
       <% calendar.day(:day_method => :start_at) do |date, events| %>
         <%= date.day %>
         <br>
-        <%puts date.day.to_s + " - " + session[:new_start_date].inspect%>
         <%if session[:new_start_date] == nil%>
           <%if date >= Date.today && date.month == @date.month%>
-            <%=raw isavailable_mod(events, date, @service_professionals, @service)%>
+            <%=raw isavailable_mod(events, date, 
+              :professionals => @service_professionals,
+              :service => @service,
+              :client => @client
+            )%>
           <% end %>
         <%else%>
           <%if           
@@ -22,7 +25,11 @@
             session[:new_start_date].month == date.month &&
             session[:new_start_date].year == date.year          
           %>
-            <%=raw isavailable_mod(events,session[:new_start_date],@service_professionals,@service)%>
+            <%=raw isavailable_mod(events,session[:new_start_date],
+              :professionals => @service_professionals,
+              :service => @service,
+              :client => @client
+            )%>
           <%end%>
         <%end%>
       <% end %>

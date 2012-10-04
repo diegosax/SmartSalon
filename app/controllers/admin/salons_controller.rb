@@ -5,6 +5,7 @@ class Admin::SalonsController < Admin::ApplicationController
   # GET /services/1.json
   def show
     @salon = Salon.find(params[:id])
+    @currentSubscription = @salon.subscriptions.last
 
     respond_to do |format|
       format.html # show.html.erb

@@ -22,7 +22,7 @@ class SalonsController < ApplicationController
   # GET /salons/1
   # GET /salons/1.json
   def show
-    @salon = Salon.find(params[:id])
+    @salon = Salon.find(params[:id]) 
 
     respond_to do |format|
       format.html # show.html.erb

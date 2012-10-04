@@ -2,7 +2,7 @@ removeLoading();
 <%if @events%>
 	if ($("#client_calendar").length > 0)
 		$("#client_calendar").remove();
-	var html = "<%=escape_javascript(render :partial => 'new_event_calendar')%>";
+	var html = "<%=escape_javascript(render :partial => '/events/new_event_calendar')%>";
 	
 	$("#new-event-form").append(html);	
 	
@@ -12,9 +12,9 @@ removeLoading();
 			$("#choose-professional").remove();		
 		if ($("#client_calendar").length > 0)
 			$("#client_calendar").remove();
-		var html = "<%=escape_javascript(render :partial => "new_choose_professional")%>";
+		var html = "<%=escape_javascript(render :partial => '/events/new_choose_professional')%>";
 		$("#new-event-form").append(html);
-		$("#choose-professional .chzn_a").chosen().change(function(){			
+		$("#choose-professional .chzn_a").chosen().change(function(){
 			onChooseProfessionalChange();
 		});
 		forceResize();

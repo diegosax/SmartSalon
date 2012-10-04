@@ -36,7 +36,7 @@
 <div class="control-group">
 
 	<% if @service and @service.professionals
-	@professionals_selected = @service.professionals.collect
+	 @professionals_selected = @service.professionals.collect
 	end %>
 
 <%= debug @professionals_selected.map {|p| [p.id]} %>
