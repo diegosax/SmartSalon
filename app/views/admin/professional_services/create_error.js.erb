@@ -1,0 +1,9 @@
+$("#associate_service").modal("hide");
+
+var noty = noty(
+	{
+		text: '<%=flash.discard(:alert)%>',
+		type: 'error',
+		timeout: 4000
+	}
+);

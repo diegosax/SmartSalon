@@ -1,0 +1,6 @@
+var html = "<%=escape_javascript(render '/admin/professionals/choose_service')%>"
+$("#associate_service").remove();
+$(html).prependTo("body");
+$("#loading-modal").modal("hide")
+$("#associate_service").modal("show");
+$(".chzn_a").chosen();
