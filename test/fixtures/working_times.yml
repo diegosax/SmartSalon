@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  day: 1
+  from: 2012-10-04 09:33:32
+  to: 2012-10-04 09:33:32
+
+two:
+  day: 1
+  from: 2012-10-04 09:33:32
+  to: 2012-10-04 09:33:32
