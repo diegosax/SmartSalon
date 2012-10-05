@@ -1,4 +1,4 @@
-<%= form_for([:admin, @service],:html=>{:class=>"form-horizontal well"}) do |f| %>
+<%= simple_form_for([:admin, @service],:html=>{:class=>"form-horizontal well"}) do |f| %>
   <% if @service.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h2>
@@ -11,49 +11,18 @@
     </div>
   <% end %>
 
-<fieldset>
 
-  <div class="control-group">
-    <%=f.label "Nome", :class => "control-label"%>
-    <div class="controls">
-      <%=f.text_field :name%>
-    </div>
-  </div>
-  <div class="control-group">
-     <%=f.label "Duração", :class => "control-label"%>
-    <div class="controls">
-      <%=f.number_field :duration%>
-    </div>
-  </div>
-  <div class="control-group">
-    <%=f.label "Preço", :class => "control-label"%>
-    <div class="controls">
-      <%=f.text_field :price%>
-    </div>
-   </div>
+<div class="form-content">
 
+    <%=f.input :name, :label => 'Nome'%>
+    <%=f.input :duration, :label => 'Duração'%>
+    <%=f.input :price, :label => 'Preço'%>
 
-<div class="control-group">
-
-	<% if @service and @service.professionals
-	 @professionals_selected = @service.professionals.collect
-	end %>
-
-<%= debug @professionals_selected.map {|p| [p.id]} %>
-
-	<label for="service_professionals">Professionals</label>
-	<%= select_tag 'service_professionals', options_for_select(@current_professional.salon.professionals.all.map {|p| [p.name,p.id]}, @professionals_selected.map {|p| [p.id]}), { :multiple => true, :class => "chzn-select", :style => "width:450px;" } %>
+    <%= link_to 'Cancelar', admin_services_path , :class=> "btn"%>
+    <%=f.submit "Salvar", :class=> "btn", :disable_with => "Salvando..."%>
 
 </div>
 
-<div class="control-group">
-</div>
-
-</fieldset>
-<div class="modal-footer">
-        <%= link_to 'Cancelar', admin_services_path , :class=> "btn"%>
-        <%=f.submit "Salvar", :class=> "btn"%>
-    </div>
 <% end %>
 
 <script>

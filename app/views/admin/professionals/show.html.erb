@@ -10,30 +10,7 @@
 				<strong>Nome:</strong> <%=@professional.name%>
 			</p>
 		<!-- Services -->
-			<p><div class="w-box">
-				<div class="w-box-header">
-					Meus Serviços
-					<div class="pull-right">
-						<%=link_to "Associar novo serviço", new_admin_professional_service_path, :class => "btn btn-gebo btn-mini", :remote => true, :id => "new_professional_service"%>
-					</div>
-				</div>
-				<div class="w-box-content">
-					<table class="table table-striped" id="associated_services">
-						<thead>
-							<tr>
-								<th>Nome</th>
-								<th>Ações</th>
-							</tr>
-						</thead>
-						<tbody>
-							<%@professional.professional_services.each do |ps| %>
-								<%=render ps%>
-							<%end%>
-						</tbody>
-					</table>
-				</div>
-			</div></p>
-
+			<%=render "professional_services"%>
 
 		<!-- Working Times -->
 			<p>

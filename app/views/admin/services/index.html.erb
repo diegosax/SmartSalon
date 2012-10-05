@@ -22,7 +22,8 @@
 			<tbody>
 
 				<%@services.each do |service|%>
-				<tr>					
+				<tr id="s_<%=service.id.to_s%>">
+					
 					<td>
 						<%= service.name %>
 					</td>
@@ -33,19 +34,21 @@
 						<%= service.price %>
 					</td>
           <td>
+
+            <%=link_to [:admin,service], 
+						"data-method-type" => :delete, 
+						:class => "btn btn-mini pull-right btn-danger confirmable",
+						"data-message" => "Deseja realmente excluir este serviço?" do%>
+						<i class="icon-trash"></i>
+						Excluir
+						<%end%>
+
 						<%=link_to edit_admin_service_path(service), 
 						:class => "btn btn-mini pull-right btn-warning" do%>
 						<i class="icon-edit"></i>
 						Editar
 						<%end%>
-					<td>
-						<%=link_to admin_service_path(service), 
-            confirm: 'Deseja realmente excluir este serviço?',
-            method: :delete,
-						:class => "btn btn-mini pull-right btn-danger confirmable" do%>
-						<i class="icon-trash"></i>
-						Excluir
-						<%end%>
+
 					</td>
 				</tr>
 				<%end%>
