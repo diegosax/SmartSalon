@@ -1,0 +1,12 @@
+$("#new_working_time").modal("hide");
+$("#working_times_box").replaceWith("<%=escape_javascript(render '/admin/working_times/working_times')%>")
+//$("#working_times tbody").append("<%=escape_javascript(render @working_time)%>");
+//$("#working_times tr#wt<%=escape_javascript(@working_time.id.to_s)%>").effect("highlight", {}, 4000);
+
+var noty = noty(
+	{
+		text: '<%=flash.discard(:notice)%>',
+		type: 'success',
+		timeout: 4000
+	}
+);

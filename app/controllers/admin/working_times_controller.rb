@@ -7,11 +7,12 @@ class Admin::WorkingTimesController < Admin::ApplicationController
   end
 
   def create
-  	@working_time = current_professional.working_times.new(params[:working_time])
+    @professional = Professional.find(params[:professional_id])
+  	@working_time = @professional.working_times.new(params[:working_time])
   	respond_to do |format|
   		if @working_time.save
   			flash[:notice] = "Horário cadastrado com sucesso"
-  			format.js
+  			format.js {@working_times = @professional.working_times.order("day, 'from', 'to'")}
   			format.html{redirect_to current_professional}
   			format.json
   		else
@@ -27,6 +28,17 @@ class Admin::WorkingTimesController < Admin::ApplicationController
   end
 
   def update
+  end
+
+  def destroy
+    @working_time = WorkingTime.find(params[:id])  
+    @working_time.destroy
+    respond_to do |format|
+      flash[:notice] = "Horário removido com sucesso!"
+      format.html { redirect_to(@working_time.professional) }
+      format.js
+      format.xml  { head :ok }
+    end
   end
 
 end
