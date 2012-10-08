@@ -25,12 +25,9 @@ module EventsHelper
                   session[:new_start_date].month == myDate.month &&
                   session[:new_start_date].year == myDate.year
                   )
-                        puts "SESSION TRUEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
                         start_hour = session[:new_start_date].hour
                         start_min = session[:new_start_date].min
                         session[:new_start_date] = nil
-            else
-                  puts "SESSION FALSEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
             end
             service = params[:service]            
             client = params[:client]
