@@ -12,7 +12,8 @@ class Admin::ProfessionalsController < Admin::ApplicationController
   end
 
 	def show
-		@professional = Professional.find(params[:id])
+		@professional = current_professional
+    @working_times = @professional.working_times.order("day, 'from', 'to'")
 	end
 
   def new

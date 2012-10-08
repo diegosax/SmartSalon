@@ -7,6 +7,20 @@ class Admin::WorkingTimesController < Admin::ApplicationController
   end
 
   def create
+  	@working_time = current_professional.working_times.new(params[:working_time])
+  	respond_to do |format|
+  		if @working_time.save
+  			flash[:notice] = "Horário cadastrado com sucesso"
+  			format.js
+  			format.html{redirect_to current_professional}
+  			format.json
+  		else
+  			flash[:alert] = "Houve um erro ao criar o horário"
+  			format.js {render "create_error"}
+  			format.html{redirect_to current_professional}
+  			format.json
+  		end
+  	end
   end
 
   def edit

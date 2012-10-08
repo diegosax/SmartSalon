@@ -1,16 +1,17 @@
-<div class="w-box">
+<%=render "/admin/working_times/modal_form"%>
+<div class="w-box" id="working_times_box">
 	<div class="w-box-header">
 		Meus Horários
 		<div class="pull-right">
 			<%=link_to "Criar novo horário de trabalho", 
-				new_admin_professional_working_time_path(current_professional), 
-				:class => "btn btn-gebo btn-mini", 
-				:remote => true, 
+				"#new_working_time",
+				"data-toggle" => "modal", 
+				:class => "btn btn-gebo btn-mini",				
 				:id => "new_working_time"%>
 		</div>
 	</div>
 	<div class="w-box-content">
-		<table class="table table-striped" id="associated_services">
+		<table class="table table-striped" id="working_times">
 			<thead>
 				<tr>
 					<th>Dia</th>
@@ -19,8 +20,8 @@
 					<th>Ações</th>
 				</tr>
 			</thead>
-			<tbody>
-				<%@professional.working_times.each do |wt| %>
+			<tbody>				
+				<%@working_times.each do |wt| %>
 					<%=render wt%>
 				<%end%>
 			</tbody>
