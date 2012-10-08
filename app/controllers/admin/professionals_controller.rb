@@ -1,3 +1,4 @@
+#encoding : utf-8
 class Admin::ProfessionalsController < Admin::ApplicationController
 	before_filter :authenticate_professional!
 
@@ -66,22 +67,32 @@ class Admin::ProfessionalsController < Admin::ApplicationController
   # DELETE /professionals/1.json
   def destroy
 
+    confirm_delete = params[:confirm_delete]
     @professional = Professional.find(params[:id])
-    
-    ActiveRecord::Base.transaction do
-      #remove associations
-      @professional.professional_services.each do |ps|
-        ps.destroy
+
+    if @professional.events.length > 0 && !confirm_delete
+      @professional.errors[:base] << "Existem agendamentos para este professional. " + 
+        "A exclusão do professional vai provocar o cancelamento desses eventos." + 
+        "Você deseja confirmar a operação?"
+
+      respond_to do |format|
+        format.js { render "destroy_error"}
+        format.html { redirect_to admin_professionals_url }
+        format.xml  { render :xml => @professional.errors, :status => :unprocessable_entity }
+      end
+    else
+
+      @professional.destroy
+
+      @professional.events.each do |e|
+        e.update_attributes(:reschedule => true)
       end
 
-      #remove service
-      @professional.destroy
-    end
-
-    respond_to do |format|
-      format.html { redirect_to admin_professionals_url }
-      format.js
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to admin_professionals_url }
+        format.json { head :no_content }
+        format.js
+      end      
     end
   end
 end
