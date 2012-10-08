@@ -1,0 +1,12 @@
+var html = '<div class="alert alert-block alert-warning fade in"> \
+	<h4 class="alert-heading">Atenção!</h4> \
+	<p> \
+		<%=@service.errors[:base][0]%> \
+	</p> \
+</div>';
+
+$("#confirmation-modal .modal-body").html(html);
+
+var link_div = $("#confirmation-modal .link");
+
+link_div.attr("data-destination",link_div.attr("data-destination") + "?confirm_delete=1");

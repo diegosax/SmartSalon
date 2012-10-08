@@ -1,3 +1,4 @@
+#encoding : utf-8
 class Admin::ServicesController < Admin::ApplicationController
   before_filter :authenticate_professional!
 
@@ -55,7 +56,6 @@ class Admin::ServicesController < Admin::ApplicationController
     end
   end
 
-
   # PUT /services/1
   # PUT /services/1.json
   def update
@@ -73,27 +73,35 @@ class Admin::ServicesController < Admin::ApplicationController
     end
   end
 
-
   # DELETE /services/1
   # DELETE /services/1.json
   def destroy
 
+    confirm_delete = params[:confirm_delete]
     @service = Service.find(params[:id])
 
-    ActiveRecord::Base.transaction do
-      #remove associations
-      @service.professional_services.each do |ps|
-        ps.destroy
+    if @service.events.length > 0 && !confirm_delete
+      @service.errors[:base] << "Existem agendamentos para este serviço. " + 
+        "A exclusão do serviço vai provocar o cancelamento desses eventos." + 
+        "Você deseja confirmar a operação?"
+
+      respond_to do |format|
+        format.js { render "destroy_error"}
+        format.html { redirect_to admin_services_url }
+        format.xml  { render :xml => @service.errors, :status => :unprocessable_entity }
+      end
+    else
+      @service.destroy
+
+      @service.events.each do |e|
+        e.update_attributes(:reschedule => true)
       end
 
-      #remove service
-      @service.destroy
-    end
-
-    respond_to do |format|
-      format.html { redirect_to admin_services_url }
-      format.json { head :no_content }
-      format.js
-    end
+      respond_to do |format|
+        format.html { redirect_to admin_services_url }
+        format.json { head :no_content }
+        format.js
+      end      
+    end     
   end
 end

@@ -12,12 +12,35 @@ class Admin::ProfessionalServicesController < Admin::ApplicationController
   end
 	
   def destroy
+    
+    confirm_delete = params[:confirm_delete]
     @professional_service = ProfessionalService.find(params[:id])
-    @professional_service.destroy    
-    respond_to do |format|
+
+    ps_events = @professinoal_service.professional.events.where(:service_id => @professional_service.service)
+
+    if ps_events.length > 0 && !confirm_delete
+      @professional_service.errors[:base] << "Existem agendamentos para este serviço associados ao profissional selecionado. " + 
+        "A desassociação do serviço vai provocar o cancelamento desses eventos." + 
+        "Você deseja confirmar a operação?"
+
+      respond_to do |format|
+        format.js { render "destroy_error"}
+        format.html { redirect_to(events_url) }
+        format.xml  { render :xml => @professional_service.errors, :status => :unprocessable_entity }
+      end
+    else
+
+      @professional_service.destroy
+
+      ps_events.each do |e|
+        e.update_attributes(:reschedule => true)
+      end
+
+      respond_to do |format|
       format.html { redirect_to(events_url) }
       format.js
       format.xml  { head :ok }
+      end
     end
   end
 
@@ -38,5 +61,4 @@ class Admin::ProfessionalServicesController < Admin::ApplicationController
       end
     end    
   end
-
 end
