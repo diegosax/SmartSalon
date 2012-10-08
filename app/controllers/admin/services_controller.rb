@@ -26,7 +26,6 @@ class Admin::ServicesController < Admin::ApplicationController
   # GET /services/new.json
   def new
     @service = Service.new
-    @current_professional = current_professional
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,7 +35,6 @@ class Admin::ServicesController < Admin::ApplicationController
 
   # GET /services/1/edit
   def edit
-    @current_professional = current_professional
     @service = Service.find(params[:id])
   end
 
@@ -45,9 +43,6 @@ class Admin::ServicesController < Admin::ApplicationController
   def create
     @service = Service.new(params[:service])
     @service.salon = current_professional.salon
-    if params[:service_professionals]
-        @service.professionals = Professional.find(params[:service_professionals])
-    end
 
     respond_to do |format|
       if @service.save
@@ -66,11 +61,6 @@ class Admin::ServicesController < Admin::ApplicationController
   def update
     @service = Service.find(params[:id])
     @service.salon = current_professional.salon
-    if params[:service_professionals]
-        @service.professionals = Professional.find(params[:service_professionals])
-    else
-        @service.professionals = []
-    end
 
     respond_to do |format|
       if @service.update_attributes(params[:service])
@@ -87,12 +77,23 @@ class Admin::ServicesController < Admin::ApplicationController
   # DELETE /services/1
   # DELETE /services/1.json
   def destroy
+
     @service = Service.find(params[:id])
-    @service.destroy
+
+    ActiveRecord::Base.transaction do
+      #remove associations
+      @service.professional_services.each do |ps|
+        ps.destroy
+      end
+
+      #remove service
+      @service.destroy
+    end
 
     respond_to do |format|
       format.html { redirect_to admin_services_url }
       format.json { head :no_content }
+      format.js
     end
   end
 end

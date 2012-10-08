@@ -66,8 +66,18 @@ class Admin::ProfessionalsController < Admin::ApplicationController
   # DELETE /professionals/1
   # DELETE /professionals/1.json
   def destroy
+
     @professional = Professional.find(params[:id])
-    @professional.destroy
+    
+    ActiveRecord::Base.transaction do
+      #remove associations
+      @professional.professional_services.each do |ps|
+        ps.destroy
+      end
+
+      #remove service
+      @professional.destroy
+    end
 
     respond_to do |format|
       format.html { redirect_to admin_professionals_url }

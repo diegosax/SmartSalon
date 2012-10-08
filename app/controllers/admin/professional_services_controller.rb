@@ -11,7 +11,7 @@ class Admin::ProfessionalServicesController < Admin::ApplicationController
   end
 	
   def destroy
-    @professional_service = current_professional.professional_services.find(params[:id])
+    @professional_service = ProfessionalService.find(params[:id])
     @professional_service.destroy
     respond_to do |format|
       format.html { redirect_to(events_url) }
@@ -25,6 +25,7 @@ class Admin::ProfessionalServicesController < Admin::ApplicationController
     professional = Professional.find(params[:professional]) if params[:professional]
     professional ||= current_professional
     @professional_service = ProfessionalService.new(:service => service, :professional => professional)
+
     respond_to do |format|
       if @professional_service.save
         flash[:notice] = "Associação efetuada com sucesso"
