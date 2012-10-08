@@ -4,7 +4,8 @@ class Admin::ProfessionalServicesController < Admin::ApplicationController
 	before_filter :authenticate_professional!
 
   def new
-    @services = Service.where("id NOT IN (?)", current_professional.service_ids)    
+    @professional = Professional.find(params[:professional_id])
+    @services = Service.where("id NOT IN (?)", @professional.service_ids)    
     respond_to do |format|
       format.js
     end
@@ -15,7 +16,7 @@ class Admin::ProfessionalServicesController < Admin::ApplicationController
     confirm_delete = params[:confirm_delete]
     @professional_service = ProfessionalService.find(params[:id])
 
-    ps_events = @professional_service.professional.events.where(:service_id => @professional_service.service)
+    ps_events = @professinoal_service.professional.events.where(:service_id => @professional_service.service)
 
     if ps_events.length > 0 && !confirm_delete
       @professional_service.errors[:base] << "Existem agendamentos para este serviço associados ao profissional selecionado. " + 
@@ -45,8 +46,7 @@ class Admin::ProfessionalServicesController < Admin::ApplicationController
 
   def create
     service = Service.find(params[:service])
-    professional = Professional.find(params[:professional]) if params[:professional]
-    professional ||= current_professional
+    professional = Professional.find(params[:professional_id])    
     @professional_service = ProfessionalService.new(:service => service, :professional => professional)
 
     respond_to do |format|

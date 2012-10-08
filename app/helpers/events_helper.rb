@@ -1,9 +1,23 @@
 #encoding: utf-8
 
-module EventsHelper	
-      def isavailable_mod(events, myDate, params = {})      
-            start_hour = 8
-            start_min = 0
+module EventsHelper      
+      
+      def add_to_valid_times(time)            
+            @working_times.each do |wt|
+                  if time.hour >= wt.from.hour &&
+                        time.hour < wt.to.hour
+                        @valid_times << time
+                        return
+                  end
+            end            
+      end
+
+      def isavailable_mod(events, myDate, params = {})            
+            start_hour = 0
+            start_min = 0      
+            professional = params[:professionals]
+            @working_times = professional.working_times.where(:day => myDate.wday)
+            @valid_times = []
             if 
                   (
                   session[:new_start_date] &&
@@ -11,28 +25,29 @@ module EventsHelper
                   session[:new_start_date].month == myDate.month &&
                   session[:new_start_date].year == myDate.year
                   )
-                        
+                        puts "SESSION TRUEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
                         start_hour = session[:new_start_date].hour
                         start_min = session[:new_start_date].min
                         session[:new_start_date] = nil
+            else
+                  puts "SESSION FALSEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
             end
-            service = params[:service]
-            professionals = params[:professionals]
+            service = params[:service]            
             client = params[:client]
-            end_time = 18
+            end_time = 23
+            end_min = 59
             intervalInMinutes = service.duration
             actual_date = Time.zone.local(myDate.year,myDate.month,myDate.day, start_hour, start_min)            
-            end_date = Time.zone.local(myDate.year,myDate.month,myDate.day, end_time, 0)            
+            end_date = Time.zone.local(myDate.year,myDate.month,myDate.day, end_time, end_min)            
             if actual_date.to_date == Date.today
-                  actual_date += (DateTime.now.hour - start_hour).hours + service.duration.minutes
-            end
-
-            valid_times = []
-            i = 0;
+                  actual_date += (DateTime.now.hour).hours
+                  actual_date += service.duration.minutes
+            end            
+            i = 0;            
             while i < events.length && actual_date <= (end_date - intervalInMinutes.minutes) do
                   diference = (events[i].start_at.minus_with_coercion(actual_date)/60).to_i
                   if diference >= intervalInMinutes
-                        valid_times << actual_date
+                        add_to_valid_times(actual_date)
                         if diference < (intervalInMinutes * 2)
                               actual_date = events[i].end_at
                               i+=1
@@ -50,7 +65,7 @@ module EventsHelper
             end
 
             while actual_date <= (end_date - intervalInMinutes.minutes) do
-                  valid_times << actual_date
+                  add_to_valid_times(actual_date)
                   actual_date += intervalInMinutes.minutes
             end
 
@@ -63,19 +78,19 @@ module EventsHelper
                   session[:new_start_date] = actual_date;
             end
             html = "<ul>"            
-            valid_times.each do |time|
+            @valid_times.each do |time|
                   html << "<li>"
                   link_params = {                                    
                                     :start_at => time,
                                     :end_at => intervalInMinutes.minutes.since(time),
-                                    :professionals => professionals,
+                                    :professionals => professional,
                                     :service => service,
                                     :client => client
                               }
                   html << link_to(
                               time.strftime("%H:%M"),link_params,
                               {
-                                    "data-message" => "Deseja realmente marcar um(a) <b>#{service.name}</b> com <b>#{professionals.name}</b> para #{time.strftime('%A, dia %d de %B às %H:%M')}?",
+                                    "data-message" => "Deseja realmente marcar um(a) <b>#{service.name}</b> com <b>#{professional.name}</b> para #{time.strftime('%A, dia %d de %B às %H:%M')}?",
                                     :class => "new-event-link confirmable"
                               } 
                         )

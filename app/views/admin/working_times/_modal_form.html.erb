@@ -1,0 +1,20 @@
+<div class="modal hide fade" id="new_working_time">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Novo Horário</h3>
+  </div>
+  <div class="modal-body">
+    <%@working_time = WorkingTime.new%>
+    <%= simple_form_for([:admin,@professional,@working_time],:html=>{:class=>"form-horizontal",:remote=>true}) do |f| %>
+    <div class="form-content">
+      <%=f.input :day, :collection => Date::DAYNAMES.collect.with_index{|a,i| [a,i]}, :include_blank => false%>
+      <%=f.input :from, :as => :string%>
+      <%=f.input :to, :as => :string%>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss='modal'>Cancelar</a>
+    <%=f.submit "Salvar", :class=> "btn btn-primary", :disable_with => "Salvando..."%>    
+  </div>
+  <%end%>
+</div>

@@ -1,11 +1,11 @@
 <%=render "/admin/utils/top_nav"%>
-
+<%=render "/admin/working_times/modal_form"%>
 <div class="row-fluid">
 	<div class="span12">
 		<h2 class="heading">
 			Perfil
 		</h2>
-		<form class="form-horizontal well">
+		<div class="form-horizontal well">
 			<p>
 				<strong>Nome:</strong> <%=@professional.name%>
 			</p>
@@ -16,6 +16,6 @@
 			<p>
 				<%=render "/admin/working_times/working_times"%>
 			</p>
-		</form>
+		</div>
 	</div>
 </div>

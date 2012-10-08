@@ -24,8 +24,8 @@ module NewEvent
         :all,
         :conditions => ["
           (start_at >= ? OR end_at >= ?) AND professional_id in (?)", 
-          Date.today.to_datetime, 
-          Date.today.to_datetime, 
+          DateTime.now,
+          DateTime.now,
           @service_professionals
           ],
           :order => "start_at")

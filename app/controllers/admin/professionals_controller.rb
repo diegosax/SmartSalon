@@ -7,18 +7,17 @@ class Admin::ProfessionalsController < Admin::ApplicationController
     
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @professionals }  
-
+      format.json { render json: @professionals }
     end
-  end
+  end  
 
 	def show
 		@professional = Professional.find(params[:id])
+    @working_times = @professional.working_times.order("day, 'from', 'to'")
 	end
 
   def new
-    @professional = Professional.new
-    
+    @professional = Professional.new    
     respond_to do |format|
       format.html # new.html.erb
       format.js
