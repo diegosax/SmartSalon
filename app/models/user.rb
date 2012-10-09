@@ -10,6 +10,12 @@ class User < ActiveRecord::Base
                 :address, :complement, :region, :state
   #validates :celphone, :presence => true
 
+  attr_accessor :role #admin professional client
+
+  def role?(role)
+    self.role
+  end
+
   def is_client?
   	self.is_a?(Client)
   end

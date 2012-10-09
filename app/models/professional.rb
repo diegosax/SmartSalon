@@ -5,9 +5,14 @@ class Professional < User
   has_many :professional_services, :dependent => :destroy
   has_many :services, :through => :professional_services
   belongs_to :salon
-  after_create :create_working_times
+  after_create :init
 
-  def create_working_times
+  def init
+
+    #set_professional_role
+    #self.role= "professional"
+
+    #create_working_times
   	for i in 1..5
   		self.working_times.create(
   			:day => i,

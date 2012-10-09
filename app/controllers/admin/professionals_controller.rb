@@ -1,6 +1,7 @@
 #encoding : utf-8
 class Admin::ProfessionalsController < Admin::ApplicationController
 	before_filter :authenticate_professional!
+  authorize_resource
 
   def index
     @professionals = current_professional.salon.professionals

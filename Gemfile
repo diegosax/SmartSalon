@@ -33,6 +33,8 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 gem 'devise'
 
+gem "cancan"
+
 gem 'quiet_assets', :group => :development
 
 gem 'thin'
