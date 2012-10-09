@@ -7,11 +7,18 @@
  	<%= csrf_meta_tags %>
  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
  </head>
- <body class="login_page">		
- 	<div class="login_box">			
+ <body class="login_page"> 	 	
+ 	<div class="outer_login_box">
+ 	<%=image_tag "/assets/main-logo.jpg", :width => 380%>
+ 	<div class="login_box">
  		<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:id => "login_form"}) do |f| %>
- 		<div class="top_b">Login</div>				
- 		<div class="cnt_b">
+ 		<%- flash.each do |name, msg| -%>
+ 		<div class="alert alert-login alert-error">
+ 			<%= msg %>
+ 		</div>
+ 		<%- end -%> 
+
+ 		<div class="cnt_b"> 				            
  			<div class="formRow">
  				<div class="input-prepend">
  					<span class="add-on">
@@ -26,15 +33,14 @@
  					<%=f.password_field :password, :id=> "password", :placeholder => "Senha"%>
  				</div>
  			</div>
- 			<div class="formRow clearfix">
- 				<% if devise_mapping.rememberable? -%>
+ 			<div class="formRow clearfix"> 				
  				<label class="checkbox">    					
- 					<%= f.check_box :remember_me %> Me manter conectado    					
- 				</div>
- 				<% end -%>
+ 					<%= f.check_box :remember_me %> 
+ 					Me manter conectado 					
+ 				</div> 				 				
  			</div>
  			<div class="btm_b clearfix">
- 				<%=f.submit "Login", :class => "btn btn-inverse pull-right"%>
+ 				<%=f.submit "Login", :class => "btn btn-gebo pull-right"%>
  				<span class="link_reg">
  					<a href="#reg_form">Não possui cadastro? Crie sua conta agora!</a>
  				</span>
@@ -93,13 +99,12 @@
  			</div>  
  			<%end%>
 
+ 		</div> 	
+ 			<div class="links_b links_btm clearfix">
+ 				<span class="linkform"><a href="#pass_form">Esqueci Minha Senha</a></span>
+ 				<span class="linkform" style="display:none"><a href="#login_form">Voltar a tela de login</a></span>
+ 			</div>
  		</div>
-
- 		<div class="links_b links_btm clearfix">
- 			<span class="linkform"><a href="#pass_form">Esqueci Minha Senha</a></span>
- 			<span class="linkform" style="display:none"><a href="#login_form">Voltar a tela de login</a></span>
- 		</div>  
-
  		<script>
  		$(document).ready(function(){
 
@@ -145,5 +150,6 @@
 					}
 				});
 			});
+
  </script>
 </body>
