@@ -12,8 +12,8 @@ class User < ActiveRecord::Base
 
   attr_accessor :role #admin professional client
 
-  def role?(role)
-    self.role
+  def role?(role) 
+    self.role == role
   end
 
   def is_client?

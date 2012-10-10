@@ -1,24 +1,19 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user)
-
+  def initialize(user)    
     user ||= User.new # Guest user if user hasn't loggend in
-
-    puts "######################################### ID: " + user.id.to_s
-    puts "######################################### is_professional?: " + user.is_professional?.to_s
-
-    if user.role? :admin
+    
+    if user.role? :admin      
       can :manage, :all
-    else
-        if user.is_professional? #user.role?(:professional)
-            can :read, Professional do |professional|
-              professional.id == user.id #only if it is the professional profile
-            end
-            can :update, Professional do |professional|
-              professional.id == user.id #only if it is the professional profile
-            end
-        end
+    else      
+      if user.is_professional? #user.role?(:professional)
+          can :read, Professional, :id => user.id #only if it is the professional profile
+          can :update, Professional, :id => user.id          
+      else        
+        can :create, Event
+        can :manage, Event, :user_id => user.id
+      end
     end
   end
 end

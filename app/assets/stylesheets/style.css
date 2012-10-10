@@ -267,11 +267,12 @@
     /* login page */
 
     .login_page  {
-        margin:40px 20px 20px;
+        margin:0 auto;
         background: #267ac0;
     }
     .outer_login_box{
-        margin:0 auto;
+        margin:0 auto;        
+        padding-top: 40px; 
         width:380px;
     }
     .login_page .login_box {
@@ -758,7 +759,10 @@
 
     @media (max-width: 479px) {
     	.login_page .login_box {width:100%}
-    	.login_page .cnt_b {padding:20px 0;width:68%;margin:0 auto}
+        .login_page .login_box input[type=text]{
+            margin-left: -1px;
+        }
+    	.login_page .cnt_b {padding:20px 0;width:65%;margin:0 auto}
     	.-list-container {height:300px}
         .chzn-done{
             display: inline-block;

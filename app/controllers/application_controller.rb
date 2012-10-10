@@ -1,6 +1,9 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   layout :layout
+  rescue_from CanCan::AccessDenied do |e|    
+    redirect_to :back, :alert => e.message
+  end
 
   def go_to_root(resource)
     if (resource.is_a?(Client))
@@ -20,6 +23,10 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     go_to_root(resource)
+  end
+
+  def current_ability
+      @current_ability ||= Ability.new(current_user || current_professional)
   end
 
   private

@@ -1,7 +1,7 @@
 #encoding : utf-8
 class Admin::ProfessionalsController < Admin::ApplicationController
 	before_filter :authenticate_professional!
-  authorize_resource
+  load_and_authorize_resource
 
   def index
     @professionals = current_professional.salon.professionals
@@ -46,6 +46,7 @@ class Admin::ProfessionalsController < Admin::ApplicationController
 
   def edit
     @professional = Professional.find(params[:id])
+    @working_times = @professional.working_times.order("day, 'from', 'to'")
   end
 
   def update
