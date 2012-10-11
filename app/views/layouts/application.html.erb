@@ -93,5 +93,16 @@
 			</div>
 	</div>
 </body>
-<%= yield :scripts %>
+	<%= yield :scripts %>
+	<script type="text/javascript">
+		<% flash.each do |name, msg| %>		
+			var noty = noty(
+			{
+				text: '<%=escape_javascript(msg)%>',
+				type: "<%= escape_javascript(name.to_s == 'notice' ? 'success' : 'error')%>",
+				timeout: 4000
+			}
+			);
+		<%end%>				
+		</script>
 </html>

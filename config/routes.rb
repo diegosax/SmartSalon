@@ -28,6 +28,9 @@ Smartsalon::Application.routes.draw do
       end
     end
     resources :professionals do
+      collection do
+        post "search_zipcode" => "professionals#search_zipcode"
+      end
       resources :working_times
       resources :professional_services
     end

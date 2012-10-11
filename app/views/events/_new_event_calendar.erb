@@ -1,37 +1,40 @@
 <%if @events%>
-  <%@client ||= current_user%>
+  <%#@client ||= current_user%>
   <div id="client_calendar">
     <h2 id="month">
-        <%= link_to "<", params.merge(:month => (@date.beginning_of_month-1).strftime("%Y-%m-01")), :remote => true %>
-        <%=h @date.strftime("%B %Y") %>
-        <%= link_to ">", params.merge(:month => (@date.end_of_month+1).strftime("%Y-%m-01")),:remote => true%>
+      <span class="month_info">
+        <%= link_to "", params.merge(:month => (@date.beginning_of_month-1).strftime("%Y-%m-01")), :remote => true, :class=> "prev_month"%>
+        <span class="month_name"><%=@date.strftime("%B %Y")%></span>
+        <%= link_to "", params.merge(:month => (@date.end_of_month+1).strftime("%Y-%m-01")),:remote => true, :class=> "next_month"%>        
+      </span>
     </h2>
     <%= calendar_for @events, :year => @date.year, :month => @date.month do |calendar| %>
       <%= calendar.head('Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado') %>
       <% calendar.day(:day_method => :start_at) do |date, events| %>
-        <%= date.day %>
-        <br>
-        <%if session[:new_start_date] == nil%>
-          <%if date >= Date.today && date.month == @date.month%>
-            <%=raw isavailable_mod(events, date, 
-              :professionals => @service_professionals,
-              :service => @service,
-              :client => @client
-            )%>
-          <% end %>
-        <%else%>
-          <%if           
-            session[:new_start_date].day == date.day &&
-            session[:new_start_date].month == date.month &&
-            session[:new_start_date].year == date.year          
-          %>
-            <%=raw isavailable_mod(events,session[:new_start_date],
-              :professionals => @service_professionals,
-              :service => @service,
-              :client => @client
-            )%>
+        <%= date.day %>        
+        <div class="not_visible">
+          <%if session[:new_start_date] == nil%>
+            <%if date >= Date.today && date.month == @date.month%>
+              <%=raw isavailable_mod(events, date, 
+                :professionals => @service_professionals,
+                :service => @service,
+                :client => @client
+              )%>
+            <% end %>
+          <%else%>
+            <%if           
+              session[:new_start_date].day == date.day &&
+              session[:new_start_date].month == date.month &&
+              session[:new_start_date].year == date.year          
+            %>
+              <%=raw isavailable_mod(events,session[:new_start_date],
+                :professionals => @service_professionals,
+                :service => @service,
+                :client => @client
+              )%>
+            <%end%>
           <%end%>
-        <%end%>
+        </div>
       <% end %>
     <% end %>
   </div>

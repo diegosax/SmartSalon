@@ -3,26 +3,26 @@
 <div class="form-content">
     <%=f.input :name, :label => 'Nome'%>
     <%=f.input :email, :label => 'E-mail'%>
-    <%=f.input :password, :label => 'Senha'%>
-    <%=f.input :password_confirmation, :label => 'Confirmar senha'%>
-    <%=f.input :address, :label => 'Endereço'%>
+    <div class="control-group">
+        <%=f.label :zipcode, "CEP", :class => "control-label"%>
+        <div class="controls">
+            <%=f.input_field :zipcode%><%=image_tag "/assets/small_loader.gif", :class => 'zipcode_loading'%>
+        </div>
+    </div>
+    <%=f.input :address, :label => "Endereço"%>
+    <%=f.input :house_number, :label => 'Número'%>
     <%=f.input :complement, :label => 'Compelemento'%>
-    <%=f.input :region, :label => 'Região'%>
+    <%=f.input :region, :label => 'Bairro'%>
+    <%=f.input :city, :label => 'Cidade'%>
     <%=f.input :state, :label => 'Estado'%>
     <%=f.input :landphone, :label => 'Telefone Fixo'%>
     <%=f.input :celphone, :label => 'Celular'%>
-
-    <% if @professional.id %>
-      <p>
-        <%=render "professional_services"%>
-			  <%=render '/admin/working_times/working_times'%>
-      </p>
-    <%end%>
-
     <%= link_to 'Cancelar', admin_professionals_path , :class=> "btn"%>
-    <%=f.submit "Salvar", :class=> "btn", :disable_with => "Salvando..."%>
+    <%=f.submit "Salvar", :class=> "btn btn-gebo", :disable_with => "Salvando..."%>    
 </div>
-
+<%end%>
+<%=render "professional_services"%>
+<%=render '/admin/working_times/working_times'%>
 
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -42,4 +42,3 @@
 		<%end%>		
 	});	
 </script>
-<%end%>

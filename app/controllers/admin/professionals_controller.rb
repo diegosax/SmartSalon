@@ -2,6 +2,7 @@
 class Admin::ProfessionalsController < Admin::ApplicationController
 	before_filter :authenticate_professional!
   load_and_authorize_resource
+  skip_authorize_resource :only => :search_zipcode
 
   def index
     @professionals = current_professional.salon.professionals
@@ -12,10 +13,10 @@ class Admin::ProfessionalsController < Admin::ApplicationController
     end
   end  
 
-	def show
-		@professional = Professional.find(params[:id])
+  def show
+    @professional = Professional.find(params[:id])
     @working_times = @professional.working_times.order("day, 'from', 'to'")
-	end
+  end
 
   def new
     @professional = Professional.new    
@@ -27,7 +28,7 @@ class Admin::ProfessionalsController < Admin::ApplicationController
   end
 
   def create
-    
+
     @professional = Professional.new(params[:professional])
     @professional.salon = current_professional.salon
 
@@ -52,7 +53,7 @@ class Admin::ProfessionalsController < Admin::ApplicationController
   def update
     @professional = Professional.find(params[:id])
     @professional.salon = current_professional.salon
-    
+    @working_times = @professional.working_times.order("day, 'from', 'to'")
     respond_to do |format|
       if @professional.update_attributes(params[:professional])
         format.html { redirect_to admin_professional_url, notice: 'Profissional atualizado com sucesso.' }
@@ -73,8 +74,8 @@ class Admin::ProfessionalsController < Admin::ApplicationController
 
     if @professional.events.length > 0 && !confirm_delete
       @professional.errors[:base] << "Existem agendamentos para este professional. " + 
-        "A exclusão do professional vai provocar o cancelamento desses eventos." + 
-        "Você deseja confirmar a operação?"
+      "A exclusão do professional vai provocar o cancelamento desses eventos." + 
+      "Você deseja confirmar a operação?"
 
       respond_to do |format|
         format.js { render "destroy_error"}
@@ -94,6 +95,17 @@ class Admin::ProfessionalsController < Admin::ApplicationController
         format.json { head :no_content }
         format.js
       end      
+    end
+  end
+
+  def search_zipcode
+    begin
+      @address = BuscaEndereco.cep(params[:zipcode])      
+    rescue
+      @address = nil      
+    end
+    respond_to do |format|
+      format.js
     end
   end
 end

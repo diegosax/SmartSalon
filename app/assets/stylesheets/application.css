@@ -23,17 +23,20 @@
  *= require style-admin
  */
 
+ #client_calendar .not_visible{
+    display: none;
+ }
+
 #client_calendar table {
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 3px;
     width: 100%;
 }
 
 #client_calendar td,
 #client_calendar th {
-    font-family: "Lucida Grande",arial,helvetica,sans-serif;
-    font-size: 10px;
-    padding: 6px;
-    border: 1px solid #999;
+    font-family: "Lucida Grande",arial,helvetica,sans-serif;    
+    padding: 6px;    
 }
 
 #client_calendar th {
@@ -41,14 +44,20 @@
     color: #666;
     text-align: center;
     width: 14.2857142857143%;
+    margin:1em;
 }
 
 #client_calendar td {
-    background: #FFF;
+    background: #EFF;
     color: #777;
     height: 80px;
-    vertical-align: top;
-    font-size: 16px;
+    vertical-align: center;
+    text-align: center;
+    font-size: 20px;
+}
+
+#client_calendar td:hover{
+    background-color: #D7F2FF;    
 }
 
 #client_calendar .notmonth {
@@ -56,15 +65,48 @@
 }
 
 #client_calendar #month {
-    margin: 0;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    margin-bottom: 10px;
+    padding: 10px 280px;
     text-align: center;
+    font-size: 1.5em;
 }
 
-#client_calendar #month a, #client_calendar #month a:hover {
-    text-decoration: none;
-    padding: 0 10px;
+#client_calendar #month span.month_name{
+    margin:0 60px;    
+}
+
+#client_calendar #month a.next_month{
+    width: 24px;
+    height: 24px;
+    background: url("/assets/arrow_icons.png") 0 -24px no-repeat;    
+    margin-left: -8px;
+}
+
+#client_calendar #month a.next_month:hover{
+    background-position: 0 0;
+}
+
+#client_calendar #month a.prev_month{
+    width: 24px;
+    height: 24px;
+    background: url("/assets/arrow_icons.png") 0 -72px no-repeat;        
+}
+
+#client_calendar #month a.prev_month:hover{
+    background-position: 0 -48px;
+}
+
+
+#client_calendar .month_info{
+    padding: 10px 0;
+    border-top: 2px solid;
+    border-bottom: 2px solid;        
+}
+
+#client_calendar #month a{
+    text-decoration: none;    
+    margin-top: 2px;
+    padding: 0 12px;
     color: #999;
 }
 
@@ -92,6 +134,38 @@
     -moz-opacity: 0.5;
     filter:alpha(opacity=5);
 }
+
+#client_calendar td .not_visible{
+    /*position: relative;*/
+}
+
+#client_calendar td .not_visible a{
+    font-size: 13px;
+    width: 100%
+}
+
+#client_calendar td.active .not_visible div.active{    
+}
+#client_calendar td.active .not_visible div.active a{
+    color: #888;
+}
+
+#client_calendar td.active{
+    
+}
+
+#client_calendar td .not_visible a:hover{
+    text-decoration: none;
+}
+
+#client_calendar tr td .dropdown-time-list{
+    display: none;
+    width: 100%;
+    background-color: #FFF;
+    border-radius: 2px;
+    /*position: absolute;    */
+}
+
 table.calendar
 {
     margin:18px 0 12px;
@@ -136,7 +210,7 @@ table.calendar td
 }
 
 table.calendar td:hover{
-    background-color: #fff89d;
+    
 }
 
 table.calendar td.notmonth:hover, table.calendar td.weekend:hover{
@@ -146,6 +220,11 @@ table.calendar td.notmonth:hover, table.calendar td.weekend:hover{
 table.calendar td img{
     float: right;
 }
+
+
+
+
+
 
 
 
@@ -414,4 +493,10 @@ div.controls{
 
 .favorite{
     background: url("/assets/favorite.png") no-repeat -16px 0;   
+}
+
+
+.zipcode_loading{
+    display: none;
+    margin-left: 10px;
 }

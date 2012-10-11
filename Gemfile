@@ -39,6 +39,8 @@ gem 'quiet_assets', :group => :development
 
 gem 'thin'
 
+gem 'client_side_validations'
+
 gem "fog", "~> 1.3.1"
 
 gem 'simple_form'
@@ -52,6 +54,8 @@ gem 'carrierwave'
 gem 'geocoder'
 
 gem 'gmaps4rails'
+
+gem 'brcep'
 
 group :production do
 	gem "pg"

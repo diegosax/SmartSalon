@@ -19,6 +19,6 @@ class Admin::ApplicationController < ActionController::Base
 	end
 
 	def current_ability
-  		@current_ability ||= Ability.new(current_user || current_professional)
+  		@current_ability ||= AdminAbility.new(current_professional)
 	end
 end

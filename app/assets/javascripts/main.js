@@ -1,6 +1,5 @@
 function showNoticeMessage(msg){
-	var noty = noty({text: 'noty - a jquery notification library!'});
-	return noty;
+	var noty = noty({text: 'noty - a jquery notification library!'});	
 }
 
 function showDefaultLoadingModel(){
@@ -24,34 +23,30 @@ function addToHourList(item,period,calendarItem){
 }
 
 function prettyCalendar(){
-	console.log("prettyCalendar Chamado");
 	if ($("#client_calendar").length > 0){
 		$("#client_calendar tr td").addClass("unavailable");
 		$("#client_calendar tr td.future").removeClass("unavailable").addClass("full");	
 		$("#client_calendar tr td.future").removeClass("unavailable").addClass("full");
 		
-		var htmlButtonMorning = "<div class='btn-group morning'> \
-		<button data-toggle='dropdown' class='btn dropdown-toggle btn-mini'> \
-		Manhã \
-		</button><ul class='dropdown-menu morning'></ul></div>";
-		var htmlButtonAfternoon = "<div class='btn-group afternoon'> \
-		<button data-toggle='dropdown' class='btn dropdown-toggle btn-mini'> \
-		Tarde \
-		</button><ul class='dropdown-menu afternoon'></ul></div>";
-		var htmlButtonNight = "<div class='btn-group night'> \
-		<button data-toggle='dropdown' class='btn dropdown-toggle btn-mini'> \
-		Noite \
-		</button><ul class='dropdown-menu night'></ul></div>";
+		var htmlDivMorning = "<div class='morning'>" + 
+		"<a href='#' class='time-choose'>Manhã</a>" + 
+		"<ul class='dropdown-time-list'></ul></div>";
+		var htmlDivAfternoon = "<div class='afternoon'>" + 
+		"<a href='#' class='time-choose'>Tarde</a>" + 
+		"<ul class='dropdown-time-list'></ul></div>";
+		var htmlDivNight = "<div class='night'>" + 
+		"<a href='#' class='time-choose'>Noite</a>" + 
+		"<ul class='dropdown-time-list'></ul></div>";		
 		var free_dates = $("#client_calendar tr td ul");
 		free_dates.each(function(i){
 			var calendarItem = $(this).closest("td");
 			$(calendarItem).removeClass("unavailable").addClass("free");
-			$(calendarItem).append(htmlButtonMorning);
-			$(calendarItem).append(htmlButtonAfternoon);
-			$(calendarItem).append(htmlButtonNight);
+			$(calendarItem).find(".not_visible").append(htmlDivMorning);
+			$(calendarItem).find(".not_visible").append(htmlDivAfternoon);
+			$(calendarItem).find(".not_visible").append(htmlDivNight);
 			var hours = $(this).find("li");
 			hours.each(function(){
-				var hour = parseFloat($(this).text());
+				var hour = parseFloat($(this).find("a").text());
 				if (hour >=0 && hour < 12){
 					addToHourList($(this),"morning",calendarItem);
 				} else if (hour >= 12 && hour < 18){
@@ -63,12 +58,12 @@ function prettyCalendar(){
 			$(this).remove();
 			$(calendarItem).find("ul").each(function(){
 				if ($(this).find("li").length == 0){
-					//$(this).closest("div").remove();
-					$(this).parent().find("button").attr("disabled",true);
+					$(this).closest("div").remove();
+					//$(this).parent().find("li").remove();
 				}
-			});
+			});			
 
-			$(calendarItem).find(".btn-group").wrapAll("<div class='btn-actions' />")
+			//$(calendarItem).find(".btn-group").wrapAll("<div class='btn-actions' />")
 			
 		});
 
@@ -109,13 +104,32 @@ function onChooseProfessionalChange(){
 userList = null;
 $(document).ready(function(){
 
-	//----------------------------------------------------------------------------------------
-    //Preparando a requisicao ajax para ser enviada como javascript
-    //jQuery.ajaxSetup({
-    //    'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
-    //});
-    //Fim da preparacao da requisicao ajax
-	//----------------------------------------------------------------------------------------------------
+	$("#client_calendar td").live({
+		//hover in
+		mouseenter:
+		function(){
+			$(this).find(".not_visible").slideDown("fast");
+		},
+		//hover out
+		mouseleave:
+		function(){
+			$(this).find(".not_visible").slideUp("fast");
+		}
+	});
+
+	$("#client_calendar td .not_visible a.time-choose").live('click', function(e){
+		var timeList = $(this).parent().find("ul");
+		if (timeList.is(":visible")){
+			timeList.slideUp();
+			$(this).closest("td").removeClass("active");
+			$(this).closest("div").removeClass("active");
+		}else{
+			timeList.slideDown();		
+			$(this).closest("td").addClass("active");
+			$(this).closest("div").addClass("active");
+		}
+		e.preventDefault();
+	});
 
 	loadDateTimePicker();
 
@@ -238,9 +252,7 @@ $(document).ready(function(){
 	}
 	);
 
-	//------------End OF User Events List ------------------------//
-
-	//prettyCalendar();
+	//------------End OF User Events List ------------------------//	
 
 	$(window).on("debouncedresize",function() {
 		forceResize();
@@ -308,7 +320,10 @@ $(document).ready(function(){
 
   	//----------- MASKED INPUT ----------------//
 
-  	$("#client_celphone").mask("(99) 9999-9999");
+  		$("#client_celphone").mask("(99) 9999-9999");
+  		$("#professional_celphone").mask("(99) 9999-9999");
+  		$("#professional_landphone").mask("(99) 9999-9999");
+  		$("#professional_zipcode").mask("99.999-999");
 
   	//------------END MASKED INPUT ------------//
 
@@ -320,5 +335,21 @@ $(document).ready(function(){
 
   	//------------END Professional / Services Association ----------//
 
+  	//------------Address Loading ----------------------------------//
+
+  		//ao soltar a tecla dentro do campo de cep ele verifica se possui 8 digitos e chama um posto para preenchimento do cep
+    	$("#professional_zipcode").keyup(function(e){
+    		var zipcode = $("#professional_zipcode").val().replace(/[^0-9]/g, '');    	    
+    	    if (zipcode.length == 8){    	       	
+    	        $(this).attr("disabled", true);
+    	        $(".zipcode_loading").fadeIn('slow');
+    	        $.post("/admin/professionals/search_zipcode", {zipcode: $(this).val()}, {}, "script");    	        
+    	        $("#professional_address").focus();
+    	        e.preventDefault();
+    	        return false;
+    	    }
+    	});
+
+  	//------------END Address Loading ------------------------------//
 
   });

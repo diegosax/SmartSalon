@@ -44,15 +44,13 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
-    @event = Event.includes(:salon,:professional,:service).find(params[:id])    
-    @salon = @event.salon
-    @services = @salon.services
-    @service = @event.service
-    @professionals = @service.professionals
-    @service_professionals = @event.professional
-    
-
-    find_new_event
+    @event = Event.includes(:salon,:professional,:service).find(params[:id])        
+    @salon = @event.salon    
+    if !params[:service] && !params[:professionals]      
+      @service = @event.service    
+      @service_professionals = @event.professional
+    end    
+    find_new_event    
     respond_to do |format|
       format.html
       format.js {render "new"}
@@ -94,16 +92,18 @@ class EventsController < ApplicationController
   # PUT /events/1
   # PUT /events/1.xml
   def update
-    @event = Event.find(params[:id])    
-    @event.professional = Professional.find(params[:professionals])
+    @event = Event.includes(:salon).find(params[:id])
+    @event.professional = @event.salon.professionals.find(params[:professionals])
+    @event.service = @event.professional.services.find(params[:service])
     @event.end_at = params[:end_at]
     @event.start_at = params[:start_at]
     @event.reschedule = false
+    @event.client = current_user
     respond_to do |format|
-      if @event.save
+      if @event.save        
         format.html { redirect_to(@event, :notice => 'Event was successfully updated.') }
         format.xml  { head :ok }
-        format.js :notice => "Evento alterado com sucesso"
+        format.js {flash[:notice] = "Evento alterado com sucesso"}
       else
         format.js
         format.html { render :action => "edit" }

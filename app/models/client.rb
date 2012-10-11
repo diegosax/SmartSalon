@@ -4,6 +4,7 @@ class Client < User
   has_many :salons, :through => :client_salons
   has_many :favorites
   validates :name, :presence => true  
+  validates :celphone, :presence => true
 
   def my_salons_and_favorites
   	self.favorites.map(&:salon) | self.salons

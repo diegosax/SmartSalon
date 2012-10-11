@@ -7,8 +7,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email,:landphone,:celphone, :password, :password_confirmation, :remember_me,
-                :address, :complement, :region, :state
-  #validates :celphone, :presence => true
+                :address, :complement, :region, :state, :city, :zipcode, :house_number
 
   attr_accessor :role #admin professional client
 
