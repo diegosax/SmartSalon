@@ -8,8 +8,22 @@ class Ability
       can :manage, :all
     else      
       if user.is_professional? #user.role?(:professional)
+
+          can :create, Client
+
+          can :manage, Service
+
           can :read, Professional, :id => user.id #only if it is the professional profile
-          can :update, Professional, :id => user.id          
+          can :update, Professional, :id => user.id
+
+          can :read, Salon, :id => user.salon.id
+
+          can :destroy, ProfessionalService, :professional_id => user.id 
+          can :create, ProfessionalService #needs extra check on controller
+
+          can :destroy, WorkingTime, :professional_id => user.id 
+          can :create, WorkingTime #needs extra check on controller
+
       else        
         can :create, Event
         can :manage, Event, :user_id => user.id

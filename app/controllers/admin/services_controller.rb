@@ -1,6 +1,7 @@
 #encoding : utf-8
 class Admin::ServicesController < Admin::ApplicationController
-  before_filter :authenticate_professional!  
+  before_filter :authenticate_professional! 
+  load_and_authorize_resource
 
   def index
     @services = current_professional.salon.services
