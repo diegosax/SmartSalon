@@ -1,5 +1,6 @@
 class Admin::SalonsController < Admin::ApplicationController
   before_filter :authenticate_professional!
+  load_and_authorize_resource
 
   # GET /services/1
   # GET /services/1.json

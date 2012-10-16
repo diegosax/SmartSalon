@@ -2,12 +2,18 @@
 
 class Admin::WorkingTimesController < Admin::ApplicationController  
   before_filter :authenticate_professional!
+  load_and_authorize_resource 
 
   def new
   end
 
   def create
     @professional = Professional.find(params[:professional_id])
+
+    if @professional.id != current_professional.id
+      raise CanCan::AccessDenied.new("Not authorized!", :create, WorkingTime)
+    end
+
   	@working_time = @professional.working_times.new(params[:working_time])
     date = Time.zone.parse("2000-01-01")
     @working_time.from = @working_time.from.change(

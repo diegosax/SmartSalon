@@ -3,7 +3,12 @@ class Admin::ApplicationController < ActionController::Base
 	before_filter :load_salon
 	rescue_from CanCan::AccessDenied do |e|
 		Rails.logger.debug "Access denied on #{e.action} #{e.subject.inspect}"
-    	redirect_to :admin_root, :alert => e.message
+    	respond_to do |format|
+    		flash[:alert] = e.message
+    		format.html {redirect_to :admin_root_path}
+    		format.js {render :js => "window.location = '#{admin_root_path}'"}
+    	end
+    	
   	end
 
 	#before_filter :check_logged
@@ -19,6 +24,7 @@ class Admin::ApplicationController < ActionController::Base
 	end
 
 	def current_ability
+		puts "SETTING THE CURRENT ABILITYYYYYYYYYYYYYYYYYYYYYY"
   		@current_ability ||= AdminAbility.new(current_professional)
 	end
 end

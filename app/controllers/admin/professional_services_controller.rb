@@ -2,9 +2,15 @@
 
 class Admin::ProfessionalServicesController < Admin::ApplicationController
 	before_filter :authenticate_professional!
+  load_and_authorize_resource
 
   def new
     @professional = Professional.find(params[:professional_id])
+
+    if @professional.id != current_professional.id
+      raise CanCan::AccessDenied.new("Not authorized!", :create, ProfessionalService)
+    end
+
     @services = Service.where("id NOT IN (?)", @professional.service_ids)    
     respond_to do |format|
       format.js
@@ -15,6 +21,11 @@ class Admin::ProfessionalServicesController < Admin::ApplicationController
     
     confirm_delete = params[:confirm_delete]
     @professional_service = ProfessionalService.find(params[:id])
+
+    puts params[:id]
+    puts @professional_service.inspect
+    puts @professinoal_service.professional
+    puts @professional_service.id
 
     ps_events = @professinoal_service.professional.events.where(:service_id => @professional_service.service)
 
@@ -46,7 +57,13 @@ class Admin::ProfessionalServicesController < Admin::ApplicationController
 
   def create
     service = Service.find(params[:service])
-    professional = Professional.find(params[:professional_id])    
+    professional = Professional.find(params[:professional_id])  
+
+
+    if professional.id != current_professional.id
+      raise CanCan::AccessDenied.new("Not authorized!", :create, ProfessionalService)
+    end
+
     @professional_service = ProfessionalService.new(:service => service, :professional => professional)
 
     respond_to do |format|

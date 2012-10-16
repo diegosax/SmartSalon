@@ -113,7 +113,8 @@ $(document).ready(function(){
 		//hover out
 		mouseleave:
 		function(){
-			$(this).find(".not_visible").slideUp("fast");
+			$(this).find(".not_visible .active").removeClass("active").find("ul").slideUp();			
+			$(this).find(".not_visible").slideUp();
 		}
 	});
 
