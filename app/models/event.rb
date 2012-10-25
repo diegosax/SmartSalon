@@ -13,7 +13,7 @@ class Event < ActiveRecord::Base
 	after_save :add_client_to_salon	
 
 	def client_name
-		self.client.nome if self.client
+		self.client.name if self.client
 	end
 
 	def client_name=(nome)
@@ -21,7 +21,7 @@ class Event < ActiveRecord::Base
 	end
 
 	def professional_name
-		self.professional.nome if self.professional
+		self.professional.name if self.professional
 	end
 
 	def professional_name=(name)

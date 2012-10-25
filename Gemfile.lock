@@ -182,6 +182,7 @@ DEPENDENCIES
   geocoder
   gmaps4rails
   jquery-rails
+  mail
   mini_magick
   pg
   quiet_assets

@@ -160,6 +160,9 @@ class Admin::EventsController < Admin::ApplicationController
     @event.destroy
 
     respond_to do |format|
+      puts "-------------------------------_> 1"
+      Notifier.event_canceled(@event).deliver
+      puts "-------------------------------_> 2"
       format.html { redirect_to(events_url) }
       format.js
       format.xml  { head :ok }

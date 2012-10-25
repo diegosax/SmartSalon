@@ -57,6 +57,8 @@ gem 'gmaps4rails'
 
 gem 'brcep'
 
+gem 'mail'
+
 group :production do
 	gem "pg"
 end
