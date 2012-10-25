@@ -1,5 +1,10 @@
 <%if @address%>
+	$("#professional_address").val("<%=escape_javascript(@address[:logradouro])%>");
+	$("#professional_region").val("<%=escape_javascript(@address[:bairro])%>");
+	$("#professional_city").val("<%=escape_javascript(@address[:cidade])%>");
+	$("#professional_state").val("<%=escape_javascript(@address[:uf])%>");
 <%else%>
+
 <%end%>
 $("#professional_zipcode").removeAttr("disabled");
 $(".zipcode_loading").fadeOut('slow');

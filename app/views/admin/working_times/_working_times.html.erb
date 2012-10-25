@@ -1,7 +1,7 @@
-<div class="w-box" id="working_times_box">
-	<div class="w-box-header">
-		Horários
-		<div class="pull-right">
+<div class="widget" id="working_times_box">
+	<div class="widget-header">
+		<span class="title">Horário de trabalho</span>
+		<div class="toolbar">
 			<%=link_to "Criar novo horário de trabalho", 
 				"#new_working_time",
 				"data-toggle" => "modal", 
@@ -9,14 +9,14 @@
 				:id => "new_working_time"%>
 		</div>
 	</div>
-	<div class="w-box-content">
+	<div class="widget-content table-container">
 		<table class="table table-striped" id="working_times">
 			<thead>
 				<tr>
 					<th>Dia</th>
 					<th>Início</th>
 					<th>Fim</th>
-					<th>Ações</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>				

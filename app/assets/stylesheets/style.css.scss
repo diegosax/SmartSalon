@@ -19,7 +19,7 @@
     }
     
     /*Custom CSS*/
-
+body.client{
     #client_calendar .btn-group:first-child .btn{
         margin-left: 0;
         -webkit-border-bottom-left-radius: 4px;
@@ -199,11 +199,10 @@
 
     /* main content */
 
-    body{
-        background: url(/assets/blue3.jpg) repeat;
-    }
+    
     #maincontainer {
     	min-height: 100%;
+        background: url(/assets/blue3.jpg) repeat;
     }
     #contentwrapper{
     	float: left;
@@ -793,3 +792,4 @@
     .input-append span, .input-append button, .input-append .btn{
         margin-left:-5px !important;
     }
+}

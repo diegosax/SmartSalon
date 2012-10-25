@@ -1,6 +1,6 @@
 <div class="row-fluid">
   <div class="span12">      
-    <%= form_for(@event, {:html => {:id => "new-event-form",:remote => true}}) do %>
+    <%= form_for(@event, {:html => {:id => "new-event-form", :remote => true}}) do %>
       <%if @salon%>        
         <%if isClient?%>          
           <div class="alert alert-block alert-info fade in">            
@@ -32,10 +32,8 @@
 
         <%=render "/salons/favorite_salons"%>
       <%end%>
-
-
-      <%=render "/events/new_choose_service"%>
-      <%=render "/events/new_choose_professional"%>
+      <p><%=render "/events/new_choose_service"%></p>
+      <p><%=render "/events/new_choose_professional"%></p>
       <%=render "/events/new_event_calendar"%>
     <%end%>
   </div>    

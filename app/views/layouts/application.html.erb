@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body>
+<body class="client">
 	<div class="modal hide fade" id="confirmation-modal">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">×</button>
@@ -24,15 +24,16 @@
 			<a class="btn btn-primary" id="confirm-btn">Confirmar</a>
 		</div>
 	</div>
+
+
 	<div id="maincontainer" class="clearfix">
 		<!-- header -->
 		<header>
 			<div class="navbar navbar-fixed-top">
 				<div class="navbar-inner">
 					<div class="container">
-						<%=link_to root_url, :class => "brand" do%>
-						<i class="icon-home icon-white"></i>
-						Instanap - Beauty
+						<%=link_to root_url, :class => "brand" do%>						
+							Instanap {Beauty}
 						<%end%>
 						<ul class="nav user_menu pull-right">
 							<li class="dropdown">

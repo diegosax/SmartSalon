@@ -5,7 +5,7 @@ class Admin::ApplicationController < ActionController::Base
 		Rails.logger.debug "Access denied on #{e.action} #{e.subject.inspect}"
     	respond_to do |format|
     		flash[:alert] = e.message
-    		format.html {redirect_to :admin_root_path}
+    		format.html {redirect_to :back}
     		format.js {render :js => "window.location = '#{admin_root_path}'"}
     	end
     	

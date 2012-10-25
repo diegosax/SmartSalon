@@ -1,33 +1,56 @@
-<%=render "top_nav"%>
+<%=render "top_menu"%>
 
-<div class="row-fluid">
-	<div class="span12">
-		<h2 class="heading">
-			Resumo do Agendamento
-		</h2>
-		<form class="form-horizontal well">
-			<p>
-				<strong>Código:</strong> <%=@event.id%>
-			</p>
-			<p>
-				<strong>Salão:</strong> <%=@event.salon.name if @event.salon%>
-			</p>
-			<p>
-				<strong>Client:</strong> <%=@event.client.name if @event.client%>
-			</p>
-			<p>
-				<strong>Serviço:</strong> <%=@event.service.name if @event.service%>
-			</p>
-			<p>
-				<strong>Quando:</strong> <%=@event.start_at.strftime("%d de %B às %H:%Mh") + "( em #{distance_of_time_in_words(DateTime.now,@event.start_at)})" if @event.salon%>
-			</p>
-			<p>
-				<strong>Duração:</strong> <%=distance_of_time_in_words(@event.start_at,@event.end_at)%>
-			</p>
-
-			<p>
-				<%=link_to "Agendamentos", admin_events_url, :class=>"btn btn-gebo"%>
-			</p>
-		</form>
-	</div>
+<div id="main-header" class="page-header">
+	<h1 id="main-heading">
+		Detalhes do Agendamento <span> em <%=distance_of_time_in_words(@event.start_at,Date.today)%></span>
+	</h1>
 </div>
+
+<div id="main-content">
+	<div class="row-fluid">
+		<div class="form-horizontal widget">
+			<div class="widget-header">
+				<span class="title">
+					Detalhes do Agendamento
+				</span>
+				<div class="toolbar">
+					<%=link_to "Remarcar Evento", edit_admin_event_path(@event), :class => "btn btn-mini" %>
+				</div>
+			</div>
+			<div class="widget-content table-container">
+				<table class="table table-striped table-detail-view">
+					<tbody>
+						<tr>
+							<th>Código</th>
+							<td><%=@event.id%></td>
+						</tr>
+						<tr>
+							<th>Salão</th>
+							<td><%=link_to @event.salon.name, [:admin,@event.salon]%></td>
+						</tr>
+						<tr>
+							<th>Cliente</th>
+							<td><%=link_to @event.client.name, [:admin,@event.client] if @event.client%></td>
+						</tr>
+						<tr>
+							<th>Serviço</th>
+							<td><%=@event.service.name if @event.service%></td>
+						</tr>
+						<tr>
+							<th>Início</th>
+							<td><%=@event.start_at.strftime("%d de %B às %H:%Mh") + "  (em #{distance_of_time_in_words(DateTime.now,@event.start_at)})" if @event.salon%></td>
+						</tr>
+						<tr>
+							<th>Fim</th>
+							<td><%=@event.end_at.strftime("%d de %B às %H:%Mh") if @event.salon%></td>
+						</tr>
+						<tr>
+							<th>Duração</th>
+							<td><%=distance_of_time_in_words(@event.start_at,@event.end_at)%></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>		

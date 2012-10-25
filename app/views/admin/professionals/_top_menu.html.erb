@@ -1,0 +1,18 @@
+<%=content_for :top_menu do%>
+	<%if action_name != "index"%>
+		<%=link_to admin_professionals_path, :class => "item" do%>
+		<span class="item-icon">
+			<i class="icol-application-view-list"></i>
+		</span>
+		<span class="item-label">Listar Funcionários</span>								
+		<%end%>
+	<%end%>
+	<%if action_name != "new"%>
+		<%=link_to new_admin_professional_path, :class => "item" do%>
+		<span class="item-icon">
+			<i class="icol-add"></i>
+		</span>
+		<span class="item-label">Novo Funcionário</span>								
+		<%end%>
+	<%end%>
+<%end%>

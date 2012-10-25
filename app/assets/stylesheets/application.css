@@ -9,18 +9,17 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require bootstrap-responsive.min
- *= require bootstrap_and_overrides
-
- *= require jBreadcrumbs/css/BreadCrumb
- *= require jquery-ui-1.8.21.custom
+ *= require bootstrap.min
+ *= require dark
  *= require qtip2/jquery.qtip.min
  *= require fullcalendar/fullcalendar_gebo
  *= require jquery.ui.datetime
  *= require tipped
  *= require chosen
  *= require style
- *= require style-admin
+ *= require mooncake/fonts/icomoon/style
+ *= require mooncake/mooncake.min
+ *= require mooncake/plugins.min
  */
 
  #client_calendar .not_visible{
@@ -461,14 +460,6 @@ div.controls{
     background-color: #FEF;
 }
 
-.sidebar_switch {    
-    left: 245px !important;    
-}
-
-.sidebar_hidden .sidebar_switch {
-    left: 4px !important;
-}
-
 .external_link{
     background: none !important;
 }
@@ -499,4 +490,26 @@ div.controls{
 .zipcode_loading{
     display: none;
     margin-left: 10px;
+}
+
+
+body.admin-body .modal-body{
+    overflow-y: visible;
+}
+
+body.admin-body #additional_filters{
+    display:inline;
+    margin-left: 20px;  
+    float:right;
+    margin-bottom: 0;
+    padding: 0;    
+}
+
+body.admin-body #additional_filters a span{
+    margin-left: 10px;
+    padding: 2px 4px;
+}
+
+body.admin-body #additional_filters a span:hover{
+    background-color: #08A;
 }

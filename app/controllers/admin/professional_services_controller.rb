@@ -17,17 +17,16 @@ class Admin::ProfessionalServicesController < Admin::ApplicationController
     end
   end
 	
-  def destroy
-    
+  def destroy    
     confirm_delete = params[:confirm_delete]
     @professional_service = ProfessionalService.find(params[:id])
 
     puts params[:id]
     puts @professional_service.inspect
-    puts @professinoal_service.professional
+    puts @professional_service.professional
     puts @professional_service.id
 
-    ps_events = @professinoal_service.professional.events.where(:service_id => @professional_service.service)
+    ps_events = @professional_service.professional.events.where(:service_id => @professional_service.service)
 
     if ps_events.length > 0 && !confirm_delete
       @professional_service.errors[:base] << "Existem agendamentos para este serviço associados ao profissional selecionado. " + 

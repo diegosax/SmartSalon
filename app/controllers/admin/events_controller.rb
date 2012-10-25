@@ -6,6 +6,8 @@ class Admin::EventsController < Admin::ApplicationController
 
   def index
     @events = Event.order("start_at").includes(:client,:professional).all
+    
+
     @month = params[:month] ? Date.parse(params[:month]) : Date.today
     @date = @month
     @event = Event.new
@@ -160,6 +162,7 @@ class Admin::EventsController < Admin::ApplicationController
     @event.destroy
 
     respond_to do |format|
+      flash[:notice] = "Evento cancelado com sucesso!"
       format.html { redirect_to(events_url) }
       format.js
       format.xml  { head :ok }

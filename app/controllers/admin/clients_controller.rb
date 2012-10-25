@@ -5,7 +5,8 @@ class Admin::ClientsController < Admin::ApplicationController
 		@client = Client.new(params[:client])
 		generated_password = Devise.friendly_token.first(6)
 		@client.password = generated_password
-		@client.salons << current_professional.salon		
+		@client.salons << current_professional.salon
+        @client.created_by = current_professional.salon.id
     	respond_to do |format|
     	  if @client.save
             flash[:notice] = "Cliente cadastrado com sucesso!"
