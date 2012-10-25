@@ -1,35 +1,52 @@
-<%=render "top_nav"%>
+<%=render "top_menu"%>
 
-<%= simple_form_for([:admin,@event],:html=>{:class=>"form-horizontal", :id=> "new_admin_event_form"}) do |f| %>
-    <legend>
-        Novo Agendamento
-    </legend>
-
-<div class="form-content">
-    <%=f.input :title%>                
-    <%=f.input :description, :input_html => {:rows => "8"} %>
-    <%=f.input :start_at, :input_html => {:id => "datetime_from"}, :as => :string%>
-    <%=f.input :end_at,  :input_html => {:id => "datetime_to"}, :as => :string%>    
-    <%=f.submit "Salvar", :class=> "btn", :disable_with => "Salvando..."%>
+<div id="main-header" class="page-header">
+	<h1 class="main-heading">Agendamento Manual de Eventos</h1>
 </div>
 
 
-<script type="text/javascript">
-	$(document).ready(function(){
-		<%if @event.errors.size == 1 && @event.errors[:base].length > 0%>
-			var hiddenConfirm = "<%=escape_javascript(f.hidden_field(:confirm_conflicts, :value => 1))%>"
-			$("#new_admin_event_form").append(hiddenConfirm);
-			$("#new_admin_event_form .form-content").fadeOut("fast");
-			$("#new_admin_event_form").append(" <%= escape_javascript(render('confirm_conflicts', :f => f)) %>");
+<div id="main-content">
+	<div class="row-fluid">
+		<div class="span12 widget">
+			<div class="widget-header">
+				<span class="title">Dados do Evento</span>
+			</div>
+			<div class="widget-content form-container">
+				<%= simple_form_for([:admin,@event],:html=>{:class=>"form-horizontal", :id=> "new_admin_event_form"}) do |f| %>
+				<%=f.input :title%>                
+				<%=f.input :description, :input_html => {:rows => "8"} %>
+				<%=f.input :start_at, :input_html => {:id => "datetime_from"}, :as => :string%>
+				<%=f.input :end_at,  :input_html => {:id => "datetime_to"}, :as => :string%>    
+				<div class="form-actions">
+					<%=f.submit "Salvar", :class => "btn btn-primary", :disable_with => "Salvando..."%>
+					<%=link_to "Cancelar", :back, :class => "btn"%>
+				</div>			
+				<%end%>
+			</div>
+		</div>
+	</div>
+</div>
 
-			$("#new_admin_event_form .return").live("click",function(e){
-				e.preventDefault();
-				$("#new_admin_event_form #event_confirm_conflicts").remove();
-				$("#new_admin_event_form .alert").slideUp("slow",function(){
-					$("#new_admin_event_form .form-content").slideDown();
-				});
-			});
-		<%end%>		
-	});	
+
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+	<%if @event.errors.size == 1 && @event.errors[:base].length > 0%>
+	var hiddenConfirm = "<%=escape_javascript(f.hidden_field(:confirm_conflicts, :value => 1))%>"
+	$("#new_admin_event_form").append(hiddenConfirm);
+	$("#new_admin_event_form .form-content").fadeOut("fast");
+	$("#new_admin_event_form").append(" <%= escape_javascript(render('confirm_conflicts', :f => f)) %>");
+
+	$("#new_admin_event_form .return").live("click",function(e){
+		e.preventDefault();
+		$("#new_admin_event_form #event_confirm_conflicts").remove();
+		$("#new_admin_event_form .alert").slideUp("slow",function(){
+			$("#new_admin_event_form .form-content").slideDown();
+		});
+	});
+	<%end%>		
+});
 </script>
-<%end%>

@@ -345,7 +345,7 @@ $(document).ready(function(){
     	        $(this).attr("disabled", true);
     	        $(".zipcode_loading").fadeIn('slow');
     	        $.post("/admin/professionals/search_zipcode", {zipcode: $(this).val()}, {}, "script");    	        
-    	        $("#professional_address").focus();
+    	        $("#professional_house_number").focus();
     	        e.preventDefault();
     	        return false;
     	    }

@@ -18,11 +18,13 @@
 //= require jquery.actual.min
 //= require jquery.cookie.min
 //= require jquery.validate
-//= require jquery.dataTables.min
-//= require jquery.dataTables.sorting
 //= require jquery.flexslider-min
 //= require jquery.imagesloaded.min
 //= require jquery.wookmark
+//= require datatables/jquery.dataTables.min
+//= require datatables/TableTools/js/TableTools.min
+//= require datatables/dataTables.bootstrap
+//= require datatables/jquery.dataTables.columnFilter
 //= require chosen.jquery
 //= require qtip2/jquery.qtip.min
 //= require jBreadcrumbs/js/jquery.jBreadCrumb.1.1.min
@@ -36,8 +38,10 @@
 //= require fullcalendar/fullcalendar
 //= require fullcalendar/gcal
 //= require gebo_calendar
-//= require gebo_tables
 //= require gebo_gallery
+//= require mooncake/setup
+//= require mooncake/template
+//= require mooncake/dataTables
 //=	require spinners.min
 //=	require tipped
 //= require list_js/list.js

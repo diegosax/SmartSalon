@@ -1,4 +1,12 @@
 $("#confirmation-modal").modal("hide");
-$("#<%=escape_javascript(@event.id.to_s)%>").hide("slow", function(){
-	//userList.remove("sl_id",<%=escape_javascript(@event.id.to_s)%>);	
-});
+var events_list = $('#events_list').dataTable();
+var item = $("#e_<%=escape_javascript(@event.id.to_s)%>");
+events_list.fnDeleteRow(item[0]);
+
+var noty = noty(
+	{
+		text: '<%=flash.discard(:notice)%>',
+		type: 'success',
+		timeout: 4000
+	}
+);

@@ -55,7 +55,9 @@ gem 'geocoder'
 
 gem 'gmaps4rails'
 
-gem 'brcep'
+gem 'brazilian-rails'
+
+gem 'breadcrumbs_on_rails'
 
 gem 'mail'
 

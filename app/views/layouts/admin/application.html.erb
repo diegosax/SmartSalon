@@ -38,112 +38,190 @@
 		</div>
 		<div style="display:none" class="link" data-destination="">
 		</div>		
-	</div>
-	<div class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a data-target=".navbar .nav-collapse" data-toggle="collapse" class="btn btn-navbar">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</a>
-				<div class="nav-collapse">
-					<a href="/home/">
-						
-					</a>
-					<ul class="nav pull-right">    
-            <li>
-							<%=link_to [:admin,current_professional.salon] do%>								
-								<strong>
-									<%=current_professional.salon.name%>
-								</strong>
-							<%end%>							
-						</li>						
-            <li>
-							<%=link_to [:admin,current_professional] do%>								
-							<strong>
-								<%=current_professional.name%>
-							</strong>
-							<%end%>							
-						</li>
-						<li class="divider-vertical"></li>                                        
-						<li>
-							<%=link_to "Sair", destroy_professional_session_path, :method => :delete%>
-						</li>
-
-					</ul>
+	</div>	
+	<div id="wrapper">		
+		<!-- main content -->
+		<header id="header" class="navbar navbar-inverse">
+			<div class="navbar-inner">
+				<div class="container">
+					<div class="brand-wrap pull-left">
+						<div class="brand-img">
+							<a class="brand" href="#">
+								<%=image_tag "/assets/logo.png"%>
+							</a>
+						</div>
+					</div>
+					<div id="header-right" class="clearfix">
+						<div id="nav-toggle" data-toggle="collapse" data-target="#navigation" class="collapsed">
+							<i class="icon-caret-down"></i>
+						</div>
+						<div id="header-search">
+							<span id="search-toggle" data-toggle="dropdown">
+								<i class="icon-search"></i>
+							</span>													
+						</div>
+						<div id="dropdown-lists">
+							<%=link_to :back, :class => "item" do%>
+								<span class="item-icon">
+									<i class="icon-arrow-left"></i>
+								</span>
+								<span class="item-label">Voltar</span>								
+							<%end%>
+							<%=yield(:top_menu)%>
+						</div>
+						<div id="header-functions" class="pull-right">
+							<div id="user-info" class="clearfix">
+								<span class="info">
+									Seja bem vindo(a)
+									<span class="name">
+										<%=link_to current_professional.name, [:admin,current_professional]%>
+									</span>
+								</span>								
+							</div>
+							<div id="logout-ribbon">
+								<%=link_to destroy_professional_session_path, :method => :delete do%>
+									<i class="icon-off"></i>
+								<%end%>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-	<div class="container admin-container">		
-		
+		</header>
 
-		<!-- main content -->
-		<div class="row">
-			<div class="span2">				
-				<div id="navigation-site">
-					<div class="main-nav-collapse">
-						<button class="btn btn-collapse" data-toggle="collapse" data-target=".main-nav-collapse .nav-collapse">
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-						<ul class="nav nav-list nav-collapse">
-							<li class="nav-header">
-								Menu
-							</li>							
-							<li class = "<%=active_class('events')%>">
-								<%=link_to search_admin_events_path do%>									
-								<i class="icon-list-alt"></i>
-								<i class="icon-list-alt icon-white"></i>
-								Agendamentos
-								<%end%>
-							</li>
-              <li class = "<%=active_class('professionals')%>">
-								<%=link_to admin_professionals_path do%>									
-								<i class="icon-user"></i>
-								<i class="icon-user icon-white"></i>
-								Profissionais
-								<%end%>
-							</li>
-							<li class = "<%=active_class('services')%>">
-								<%=link_to admin_services_path do%>
-								<i class="icon-briefcase"></i>
-								<i class="icon-briefcase icon-white"></i>
-								Serviços
-								<%end%>
-							</li>
-							<li>
-								<%=link_to destroy_professional_session_path, :method => :delete do%>		
-								<i class="icon-off icon-white" title="My Feed"></i>
-								Sair
-								<%end%>
-							</li>
+		<div id="content-wrap">
+			<div id="content" class="sidebar sidebar-minimized">
+				<div id="content-outer">
+					<div id="content-inner">
+						<aside id="sidebar">
+							<nav id="navigation" class="collapse">
+								<ul>
+									<li class="<%=active_class('home')%>">										
+										<span title="Dashboard">
+											<i class="icon-home"></i>
+											<span class="nav-title">Dashboard</span>
+										</span>										
+									</li>
+									<li class="<%=active_class('events')%>">										
+										<span title="Eventos">
+											<i class="icon-calendar"></i>
+											<span class="nav-title">Eventos</span>
+										</span>
+										<ul class="inner-nav">
+                                        	<li class="<%=active_action('events', 'new')%>">
+												<%=link_to new_admin_event_path do%>
+													<i class="icol-calendar-1"></i>
+													Agendamento Manual
+												<%end%>
+											</li>
+											<li class="<%=active_action('events', 'easy_new')%>">
+												<%=link_to easy_new_admin_events_path do%>
+													<i class="icol-calendar-2"></i>
+													Agendamento Fácil
+												<%end%>
+											</li>
+                                        	<li class="<%=active_action('events', 'index')%>">
+												<%=link_to admin_events_path do%>
+													<i class="icol-application-view-list"></i>
+													Todos os Eventos
+												<%end%>
+											</li>
+											<li>
+												<%=link_to admin_events_path(:professional => current_professional) do%>
+													<i class="icol-bricks"></i>
+													Meus Eventos
+												<%end%>
+											</li>
+                                        </ul>					
+										
+									</li>
 
-						</ul>
+									<li class="<%=active_class('professionals')%>">										
+										<span title="Funcionários">
+											<i class="icon-official"></i>
+											<span class="nav-title">Funcionários</span>
+										</span>																
+										<ul class="inner-nav">
+											<li class="<%=active_action('professionals', 'index')%>">
+												<%=link_to admin_professionals_path do%>
+													<i class="icol-application-view-list"></i>
+													Listar Funcionários
+												<%end%>
+											</li>
+											<li class="<%=active_action('professionals', 'new')%>">
+												<%=link_to new_admin_professional_path do%>
+													<i class='icol-add'></i>
+													Novo Funcionário
+												<%end%>
+											</li>
+
+										</ul>
+									</li>
+
+									<li class="<%=active_class('services')%>">										
+										<span title="Serviços">
+											<i class="icon-cog-3"></i>
+											<span class="nav-title">Serviços</span>
+										</span>																
+										<ul class="inner-nav">
+											<li class="<%=active_action('services', 'index')%>">
+												<%=link_to admin_services_path do%>
+													<i class="icol-application-view-list"></i>
+													Listar Serviços
+												<%end%>
+											</li>
+											<li class="<%=active_action('services', 'new')%>">
+												<%=link_to new_admin_service_path do%>
+													<i class='icol-add'></i>
+													Novo Serviço
+												<%end%>
+											</li>
+
+										</ul>
+									</li>
+
+									<li>
+										<%=link_to admin_clients_path do%>
+											<span title="Clientes">
+												<i class="icon-users"></i>
+												<span class="nav-title">Clientes</span>
+											</span>											
+										<%end%>
+									</li>
+									<li>
+										<span title="ConfiguraçÕes">
+											<i class="icon-cogs"></i>
+											<span class="nav-title">Opções</span>
+										</span>
+									</li>												
+								</ul>
+							</nav>
+						</aside>
+						<div id="sidebar-separator"></div>
+						<section class="clearfix" id='main'>
+							<%= yield %>
+						</section>		
 					</div>
-				</div>				
-			</div>
-			<div class="span10" id='main'>
-				<%= yield %>
-				<br />
-				<br />
-				<br />
-			</div>
-			
-		</div>		
-		</body>
-		<script type="text/javascript">
-		<% flash.each do |name, msg| %>		
-			var noty = noty(
-			{
-				text: '<%=escape_javascript(msg)%>',
-				type: "<%= escape_javascript(name.to_s == 'notice' ? 'success' : 'error')%>",
-				timeout: 4000
-			}
-			);
-		<%end%>				
-		</script>
+				</div>
 
-		</html>
+			</div>
+		</div>
+
+		<footer id="footer">
+            <div class="footer-left">MoonCake - Responsive Admin Template</div>
+            <div class="footer-right"><p>Copyright 2012. All Rights Reserved.</p></div>
+        </footer>
+	</body>
+	<script type="text/javascript">
+	<% flash.each do |name, msg| %>		
+	var noty = noty(
+	{
+		text: '<%=escape_javascript(msg)%>',
+		type: "<%= escape_javascript(name.to_s == 'notice' ? 'success' : 'error')%>",
+		timeout: 4000
+	}
+	);
+	<%end%>				
+	</script>
+
+	</html>

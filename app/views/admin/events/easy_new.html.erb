@@ -1,9 +1,27 @@
+<%=render "top_menu"%>
 <%=render "/admin/clients/modal_form"%>
 
-<div class="box corners shadow">
-  <div class="box-header">
-    <h2 class="heading">Novo Agendamento</h2>
-  </div>  
-  <%=render "/events/form"%>
-  
+<div id="main-header" class="page-header">
+	<h1 class="main-heading">Agendamento Fácil<span>O mesmo usado pelos seus clientes</span></h1>
 </div>
+
+<div id="main-content">
+	<div class="row-fluid">
+		<div class="widget span12">
+			<div class="widget-header">
+				<span class="title">
+					Criando novo evento
+				</span>
+			</div>
+			<div class="widget-content form-container">
+				<div class="control-group">
+					<%=render "/events/form"%>				
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+
+  

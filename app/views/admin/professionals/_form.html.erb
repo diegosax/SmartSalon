@@ -1,44 +1,90 @@
-<%= simple_form_for([:admin,@professional],:html=>{:class=>"form-horizontal well", :id=> "new_admin_professional_form"}) do |f| %>
+<div id="main-header" class="page-header">
+    <h1 id="main-heading">
+        <%if action_name == "new" || action_name == "create"%>
+        Novo Funcionário
+        <%else%>
+        Alterar Funcionário <span><%=@professional.name%></span>
+        <%end%>
 
-<div class="form-content">
-    <%=f.input :name, :label => 'Nome'%>
-    <%=f.input :email, :label => 'E-mail'%>
-    <div class="control-group">
-        <%=f.label :zipcode, "CEP", :class => "control-label"%>
-        <div class="controls">
-            <%=f.input_field :zipcode%><%=image_tag "/assets/small_loader.gif", :class => 'zipcode_loading'%>
-        </div>
-    </div>
-    <%=f.input :address, :label => "Endereço"%>
-    <%=f.input :house_number, :label => 'Número'%>
-    <%=f.input :complement, :label => 'Compelemento'%>
-    <%=f.input :region, :label => 'Bairro'%>
-    <%=f.input :city, :label => 'Cidade'%>
-    <%=f.input :state, :label => 'Estado'%>
-    <%=f.input :landphone, :label => 'Telefone Fixo'%>
-    <%=f.input :celphone, :label => 'Celular'%>
-    <%= link_to 'Cancelar', admin_professionals_path , :class=> "btn"%>
-    <%=f.submit "Salvar", :class=> "btn btn-gebo", :disable_with => "Salvando..."%>    
+    </h1>
 </div>
-<%end%>
-<%=render "professional_services"%>
-<%=render '/admin/working_times/working_times'%>
 
-<script type="text/javascript">
-	$(document).ready(function(){
-		<%if @professional.errors.size == 1 && @professional.errors[:base].length > 0%>
-			var hiddenConfirm = "<%=escape_javascript(f.hidden_field(:confirm_conflicts, :value => 1))%>"
-			$("#new_admin_professional_form").append(hiddenConfirm);
-			$("#new_admin_professional_form .form-content").fadeOut("fast");
-			$("#new_admin_professional_form").append(" <%= escape_javascript(render('confirm_conflicts', :f => f)) %>");
+<div id="main-content">
+    <div class="row-fluid">
+        <div class="span12 widget">
+            <div class="widget-header">
+                <span class="title">
+                    <%if action_name == "new" || action_name == "create"%>
+                    Novo Funcionário
+                    <%else%>
+                    Alterar Funcionário
+                    <%end%>                    
+                </span>
+            </div>
+            <div class="widget-content form-container">
+                <%= simple_form_for([:admin,@professional],:html=>{:class=>"form-horizontal", :id=> "new_admin_professional_form"}) do |f| %>
+                <fieldset>
+                    <legend>Dados Pessoais</legend>
+                    <%=f.input :name, :label => 'Nome'%>
+                    <%=f.input :email, :label => 'E-mail'%>    
+                    <%if action_name == "new" || action_name == "create"%>
+                    <%=f.input :password, :label => "Senha"%>
+                    <%=f.input :password_confirmation, :label => "Confirme sua Senha"%>
+                    <%end%>           
+                </fieldset>
 
-			$("#new_admin_professional_form .return").live("click",function(e){
-				e.preventDefault();
-				$("#new_admin_professional_form #event_confirm_conflicts").remove();
-				$("#new_admin_professional_form .alert").slideUp("slow",function(){
-					$("#new_admin_professional_form .form-content").slideDown();
-				});
-			});
-		<%end%>		
-	});	
-</script>
+                <fieldset>
+                    <legend>Dados de Contato</legend>
+                    <div class="control-group">
+                        <%=f.label :zipcode, "CEP", :class => "control-label"%>
+                        <div class="controls">
+                            <%=f.input_field :zipcode%><%=image_tag "/assets/small_loader.gif", :class => 'zipcode_loading'%>
+                        </div>
+                    </div>
+                    <%=f.input :address, :label => "Endereço"%>
+                    <%=f.input :house_number, :label => 'Número'%>
+                    <%=f.input :complement, :label => 'Compelemento'%>
+                    <%=f.input :region, :label => 'Bairro'%>
+                    <%=f.input :city, :label => 'Cidade'%>
+                    <%=f.input :state, :label => 'Estado'%>
+                    <%=f.input :landphone, :label => 'Telefone Fixo'%>
+                    <%=f.input :celphone, :label => 'Celular'%>                                
+                </fieldset>                
+
+                <div class="form-actions">
+                    <%=f.submit "Salvar", :class => "btn btn-primary"%>
+                    <%=link_to "Cancelar", :back, :class => "btn"%>
+                </div>
+
+
+                <%end%>            
+
+            </div>
+        </div>
+
+    </div>
+    <%if action_name == "edit"%>
+    <%=render "professional_services"%>
+    <%=render '/admin/working_times/working_times'%>
+    <%end%>
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+        <%if @professional.errors.size == 1 && @professional.errors[:base].length > 0%>
+        var hiddenConfirm = "<%=escape_javascript(f.hidden_field(:confirm_conflicts, :value => 1))%>"
+        $("#new_admin_professional_form").append(hiddenConfirm);
+        $("#new_admin_professional_form .form-content").fadeOut("fast");
+        $("#new_admin_professional_form").append(" <%= escape_javascript(render('confirm_conflicts', :f => f)) %>");
+
+        $("#new_admin_professional_form .return").live("click",function(e){
+            e.preventDefault();
+            $("#new_admin_professional_form #event_confirm_conflicts").remove();
+            $("#new_admin_professional_form .alert").slideUp("slow",function(){
+                $("#new_admin_professional_form .form-content").slideDown();
+            });
+        });
+        <%end%>     
+    }); 
+    </script>
+</div>
+

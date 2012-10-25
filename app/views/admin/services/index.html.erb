@@ -1,59 +1,68 @@
-<div class="row-fluid">
-	<div class="span12">
-		<ul class="dshb_icoNav clearfix">
-			<li>
-				<%=link_to "Novo", new_admin_service_path, :style=> "background-image: url(/assets/gCons/add-item.png)"%>
-			</li>
-		</ul>
-	</div>
+<%=render "top_menu"%>
+
+<div id="main-header" class="page-header">
+	<h1 id="main-heading">
+		Serviços
+	</h1>
 </div>
-<div class="row-fluid">
-	<div class="span12">
-		<h2 class="heading">Serviços</h2>
-		<table class="table table-bordered table-striped table_vam" id="dt_gal">
-			<thead>
-				<tr>
-					<th>Nome</th>
-					<th>Duração</th>
-					<th>Preço</th>
-					<th>Ação</th>
-				</tr>
-			</thead>
-			<tbody>
+<div id="main-content">
+	<div class="row-fluid">
+		<div class="span12 widget">
+			<div class="widget-header">
+				<span class="title">Serviços</span>
+				<div class="toolbar">
+					<%=link_to "Adicionar Serviço", new_admin_service_path, :class => "btn btn-gebo btn-mini"%>
+				</div>
+			</div>
+			<div class="widget-content table-container">
+				<table class="table table-striped form-inline" id="services_list">
+					<thead>
+						<tr>
+							<th>Nome</th>
+							<th>Preço</th>
+							<th>Duração</th>							
+							<th></th>		
+						</tr>
+					</thead>
+					<tbody>
 
-				<%@services.each do |service|%>
-				<tr id="s_<%=service.id.to_s%>">
-					
-					<td>
-						<%= service.name %>
-					</td>
-					<td>
-						<%= service.duration %>
-					</td>
-					<td>
-						<%= service.price %>
-					</td>
-          <td>
+						<%@services.each do |s|%>
+						<tr id="s_<%=s.id.to_s%>">					
+							<td><%=s.name%></td>
+							<td><%=s.price ? s.price.real : "-"%></td>					
+							<td><%=distance_of_time_in_words(s.duration*60)%> (<%=s.duration%> minutos)</td>
+							<td class="action-col">
+								<span class="btn-group">
+									<%=link_to [:admin, s], 
+									:class => "btn btn-small btn-primary" do%>
+									<i class="icon-search"></i>
+									Detalhes
+									<%end%>
+									<%=link_to edit_admin_service_path(s), 
+									:class => "btn btn-small btn-warning" do%>
+									<i class="icon-pencil"></i>
+									Editar
+									<%end%>
+									<%=link_to [:admin,s], 
+									"data-method-type" => :delete, 
+									:class => "btn btn-small btn-danger confirmable",
+									"data-message" => "Deseja realmente remover este serviço?" do%>
+									<i class="icon-trash"></i>
+									Remover
+									<%end%>
 
-            			<%=link_to [:admin,service], 
-						"data-method-type" => :delete, 
-						:class => "btn btn-mini pull-right btn-danger confirmable",
-						"data-message" => "Deseja realmente excluir este serviço?" do%>
-						<i class="icon-trash"></i>
-						Excluir
+
+								</span>
+
+
+							</td>
+						</tr>
 						<%end%>
+					</tbody>					
+				</table>	
+			</div>
 
-						<%=link_to edit_admin_service_path(service), 
-						:class => "btn btn-mini pull-right btn-warning" do%>
-						<i class="icon-edit"></i>
-						Editar
-						<%end%>
 
-					</td>
-				</tr>
-				<%end%>
-			</tbody>
-		</table>
-
-	</div>
+		</div>
+	</div>	
 </div>
