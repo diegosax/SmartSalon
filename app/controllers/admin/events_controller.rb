@@ -163,9 +163,12 @@ class Admin::EventsController < Admin::ApplicationController
 
     respond_to do |format|
 
-      puts "-------------------------------_> 1"
-      Notifier.event_canceled(@event).deliver
-      puts "-------------------------------_> 2"
+      if(@event.client)
+        Notifier.client_event_canceled(@event).deliver
+      end
+      if(@event.professional)   
+        Notifier.professional_event_canceled(@event).deliver
+      end
 
       flash[:notice] = "Evento cancelado com sucesso!"
       format.html { redirect_to(events_url) }

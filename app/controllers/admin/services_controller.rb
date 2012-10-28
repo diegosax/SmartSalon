@@ -96,6 +96,12 @@ class Admin::ServicesController < Admin::ApplicationController
 
       @service.events.each do |e|
         e.update_attributes(:reschedule => true)
+        if(e.client)
+          Notifier.client_event_canceled(e).deliver
+        end
+        if(e.professional)
+          Notifier.professional_event_canceled(e).deliver
+        end
       end
 
       respond_to do |format|
