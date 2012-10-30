@@ -164,6 +164,14 @@ class Admin::EventsController < Admin::ApplicationController
     @event.update_attribute(:status,"Cancelado")
 
     respond_to do |format|
+
+      if(@event.client)
+        Notifier.client_event_canceled(@event).deliver
+      end
+      if(@event.professional)   
+        Notifier.professional_event_canceled(@event).deliver
+      end
+
       flash[:notice] = "Evento cancelado com sucesso!"
       format.html { redirect_to(events_url) }
       format.js

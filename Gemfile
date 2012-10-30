@@ -59,6 +59,8 @@ gem 'brazilian-rails'
 
 gem 'breadcrumbs_on_rails'
 
+gem 'mail'
+
 group :production do
 	gem "pg"
 end
