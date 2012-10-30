@@ -25,12 +25,12 @@ ActiveRecord::Schema.define(:version => 20121017233758) do
     t.text     "description"
     t.integer  "client_id"
     t.integer  "professional_id"
-    t.string   "status"
+    t.string   "status",          :default => "Agendado"
     t.datetime "start_at"
     t.integer  "duration"
     t.boolean  "changeable"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
     t.datetime "end_at"
     t.integer  "service_id"
     t.integer  "salon_id"

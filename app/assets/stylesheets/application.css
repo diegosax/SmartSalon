@@ -513,3 +513,7 @@ body.admin-body #additional_filters a span{
 body.admin-body #additional_filters a span:hover{
     background-color: #08A;
 }
+
+body.admin-body .dashboard_tables tbody tr:hover td blockquote{
+    border-left: 5px solid #DD0;
+}

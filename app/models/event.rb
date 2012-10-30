@@ -1,6 +1,8 @@
 #encoding: utf-8
 class Event < ActiveRecord::Base
-	attr_accessible :changeable, :client_id, :description, :duration, :professional_id, :service_id, :salon_id, :start_at, :status, :title, :end_at, :confirm_conflicts, :reschedule
+	attr_accessible :changeable, :client_id, :description, :duration, :professional_id, :service_id, :salon_id, :start_at, :status, :title, :end_at, :confirm_conflicts, :reschedule	
+	scope :active, :conditions => {:status => "Agendado"}
+	scope :canceled, :conditions => {:status => "Cancelado"}
 	belongs_to :client
 	belongs_to :professional
 	belongs_to :service
@@ -26,20 +28,25 @@ class Event < ActiveRecord::Base
 
 	def professional_name=(name)
 		self.professional = Professional.find_by_name(name)
-	end
+	end	
 
 	def find_conflicts
 		Event.where(
-      "
-        start_at > ? and start_at < ? OR
-        end_at > ? and end_at < ? OR
-        start_at <= ? and end_at >= ?
-      ",
-      self.start_at,self.end_at,
-      self.start_at,self.end_at,
-      self.start_at,self.end_at
-    ).all
+	      "
+	        (start_at > ? and start_at < ? OR
+	        end_at > ? and end_at < ? OR
+	        start_at <= ? and end_at >= ?) AND
+			professional_id = ? AND
+			salon_id = ?
+	      ",
+	      self.start_at,self.end_at,
+	      self.start_at,self.end_at,
+	      self.start_at,self.end_at,
+	      self.professional.id, self.salon.id
+	    ).all
 	end
+
+
 
 	private
 	def add_client_to_salon		

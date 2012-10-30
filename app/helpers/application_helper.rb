@@ -16,4 +16,14 @@ module ApplicationHelper
 			action == action_name ? "active" : ""
 		end
 	end
+
+	def event_type(event)
+		if event.status == "Agendado"
+			"success"
+		elsif event.status == "Cancelado"
+			"important"
+		else
+			""
+		end
+	end
 end

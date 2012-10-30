@@ -150,7 +150,7 @@ class Admin::EventsController < Admin::ApplicationController
   def show
     @event = Event.find(params[:id])
     respond_to do |format|
-      format.html      
+      format.html
       format.xml  { render :xml => @event }
     end
   end
@@ -159,7 +159,9 @@ class Admin::EventsController < Admin::ApplicationController
   # DELETE /events/1.xml
   def destroy
     @event = Event.find(params[:id])
-    @event.destroy
+    #Instead of destroying the event set it to Canceled
+    #@event.destroy
+    @event.update_attribute(:status,"Cancelado")
 
     respond_to do |format|
       flash[:notice] = "Evento cancelado com sucesso!"

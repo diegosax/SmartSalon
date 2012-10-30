@@ -35,7 +35,8 @@ Smartsalon::Application.routes.draw do
       resources :professional_services
     end
     resources :salons    
-    resources :clients    
+    resources :clients
+    get 'dashboard' => "dashboard#index"
   end
 
   devise_for :clients, :controllers =>

@@ -22,6 +22,21 @@ $(document).ready(function(){
 	});
 
 	//------------Filterable Tables ---------------------//
+	$(function(){		
+		var activeTab = $('[href=' + location.hash + ']');
+   		activeTab && activeTab.tab('show');	
+	});
+
+	$(".stats-container li a").live("click",function(){
+		history.pushState(null,"",$(this).attr("href"));
+		var activeTab = $('[href=' + location.hash + ']');
+   		activeTab && activeTab.tab('show');	
+	});
+
+	$(".dashboard_tables ul li a").live("click",function(){
+		history.pushState(null,"",$(this).attr("href"));
+	});
+	
 	
 
 });

@@ -62,10 +62,10 @@
 						</div>
 						<div id="dropdown-lists">
 							<%=link_to :back, :class => "item" do%>
-								<span class="item-icon">
-									<i class="icon-arrow-left"></i>
-								</span>
-								<span class="item-label">Voltar</span>								
+							<span class="item-icon">
+								<i class="icon-arrow-left"></i>
+							</span>
+							<span class="item-label">Voltar</span>								
 							<%end%>
 							<%=yield(:top_menu)%>
 						</div>
@@ -75,12 +75,12 @@
 									Seja bem vindo(a)
 									<span class="name">
 										<%=link_to current_professional.name, [:admin,current_professional]%>
-									</span>
-								</span>								
+									</span>									
+								</span>						
 							</div>
 							<div id="logout-ribbon">
 								<%=link_to destroy_professional_session_path, :method => :delete do%>
-									<i class="icon-off"></i>
+								<i class="icon-off"></i>
 								<%end%>
 							</div>
 						</div>
@@ -96,11 +96,13 @@
 						<aside id="sidebar">
 							<nav id="navigation" class="collapse">
 								<ul>
-									<li class="<%=active_class('home')%>">										
-										<span title="Dashboard">
+									<li class="<%=active_class('dashboard')%>">
+										<%=link_to admin_dashboard_path do%>
+										<span title="Dashboard">												
 											<i class="icon-home"></i>
 											<span class="nav-title">Dashboard</span>
-										</span>										
+										</span>								
+										<%end%>		
 									</li>
 									<li class="<%=active_class('events')%>">										
 										<span title="Eventos">
@@ -108,31 +110,31 @@
 											<span class="nav-title">Eventos</span>
 										</span>
 										<ul class="inner-nav">
-                                        	<li class="<%=active_action('events', 'new')%>">
+											<li class="<%=active_action('events', 'new')%>">
 												<%=link_to new_admin_event_path do%>
-													<i class="icol-calendar-1"></i>
-													Agendamento Manual
+												<i class="icol-calendar-1"></i>
+												Agendamento Manual
 												<%end%>
 											</li>
 											<li class="<%=active_action('events', 'easy_new')%>">
 												<%=link_to easy_new_admin_events_path do%>
-													<i class="icol-calendar-2"></i>
-													Agendamento Fácil
+												<i class="icol-calendar-2"></i>
+												Agendamento Fácil
 												<%end%>
 											</li>
-                                        	<li class="<%=active_action('events', 'index')%>">
+											<li class="<%=active_action('events', 'index')%>">
 												<%=link_to admin_events_path do%>
-													<i class="icol-application-view-list"></i>
-													Todos os Eventos
+												<i class="icol-application-view-list"></i>
+												Todos os Eventos
 												<%end%>
 											</li>
 											<li>
 												<%=link_to admin_events_path(:professional => current_professional) do%>
-													<i class="icol-bricks"></i>
-													Meus Eventos
+												<i class="icol-bricks"></i>
+												Meus Eventos
 												<%end%>
 											</li>
-                                        </ul>					
+										</ul>					
 										
 									</li>
 
@@ -144,14 +146,14 @@
 										<ul class="inner-nav">
 											<li class="<%=active_action('professionals', 'index')%>">
 												<%=link_to admin_professionals_path do%>
-													<i class="icol-application-view-list"></i>
-													Listar Funcionários
+												<i class="icol-application-view-list"></i>
+												Listar Funcionários
 												<%end%>
 											</li>
 											<li class="<%=active_action('professionals', 'new')%>">
 												<%=link_to new_admin_professional_path do%>
-													<i class='icol-add'></i>
-													Novo Funcionário
+												<i class='icol-add'></i>
+												Novo Funcionário
 												<%end%>
 											</li>
 
@@ -166,14 +168,14 @@
 										<ul class="inner-nav">
 											<li class="<%=active_action('services', 'index')%>">
 												<%=link_to admin_services_path do%>
-													<i class="icol-application-view-list"></i>
-													Listar Serviços
+												<i class="icol-application-view-list"></i>
+												Listar Serviços
 												<%end%>
 											</li>
 											<li class="<%=active_action('services', 'new')%>">
 												<%=link_to new_admin_service_path do%>
-													<i class='icol-add'></i>
-													Novo Serviço
+												<i class='icol-add'></i>
+												Novo Serviço
 												<%end%>
 											</li>
 
@@ -181,18 +183,18 @@
 									</li>
 
 									<li>
-										<%=link_to admin_clients_path do%>
-											<span title="Clientes">
-												<i class="icon-users"></i>
-												<span class="nav-title">Clientes</span>
-											</span>											
-										<%end%>
-									</li>
-									<li>
-										<span title="ConfiguraçÕes">
-											<i class="icon-cogs"></i>
-											<span class="nav-title">Opções</span>
+										<span title="Clientes">
+											<i class="icon-users"></i>
+											<span class="nav-title">Clientes</span>
 										</span>
+									</li>
+									<li class="<%=active_class('salons')%>">
+										<%=link_to admin_salon_path(current_professional.salon) do%>
+											<span title="Configurações">
+												<i class="icon-cogs"></i>
+												<span class="nav-title">Meu Salão</span>
+											</span>
+										<%end%>
 									</li>												
 								</ul>
 							</nav>
@@ -208,9 +210,9 @@
 		</div>
 
 		<footer id="footer">
-            <div class="footer-left">MoonCake - Responsive Admin Template</div>
-            <div class="footer-right"><p>Copyright 2012. All Rights Reserved.</p></div>
-        </footer>
+			<div class="footer-left">MoonCake - Responsive Admin Template</div>
+			<div class="footer-right"><p>Copyright 2012. All Rights Reserved.</p></div>
+		</footer>
 	</body>
 	<script type="text/javascript">
 	<% flash.each do |name, msg| %>		

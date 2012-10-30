@@ -5,7 +5,7 @@ class CreateEvents < ActiveRecord::Migration
       t.text :description
       t.integer :client_id
       t.integer :professional_id
-      t.string :status
+      t.string :status, :default => "Agendado"
       t.datetime :start_at
       t.integer :duration
       t.boolean :changeable
