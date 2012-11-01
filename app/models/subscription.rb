@@ -1,5 +1,4 @@
-class Subscription < ActiveRecord::Base
-  attr_accessible :description, :end_date, :initial_date, :price, :status, :trial_period
+class Subscription < ActiveRecord::Base  
   has_many  :payments
   belongs_to :salon
   validates :end_date, :initial_date, :price, :status, presence: true

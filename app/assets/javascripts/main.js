@@ -83,13 +83,6 @@ function removeLoading(){
 	$(".loading").remove().fadeOut("fast");
 }
 
-function loadDateTimePicker(){
-	var minu = (60 - (new Date().getMinutes()))%5;
-	$('#datetime_from').datetime({value: '+'+minu+'min',format: 'dd-mm-yy hh:ii',altField: '#datetime_from_alt', altFormat: "d 'de' MM yy 'às' hh:ii", chainTo: '#datetime_to', chainOptions: { value: '' } });
-	$('#datetime_to').datetime({format: 'dd-mm-yy hh:ii',altField: '#datetime_to_alt', altFormat: "d 'de' MM yy 'às' hh:ii"});
-	$('#datetime_atualizacao_data').datetime({value: '+1min',format: 'dd-mm-yy hh:ii',altField: '#datetime_atualizacao_data_alt', altFormat: "d 'de' MM yy 'às' hh:ii" });
-}
-
 
 function onChooseProfessionalChange(){
 	$("#client_calendar").remove().fadeOut("fast");		
@@ -130,9 +123,7 @@ $(document).ready(function(){
 			$(this).closest("div").addClass("active");
 		}
 		e.preventDefault();
-	});
-
-	loadDateTimePicker();
+	});	
 
 	window.onpopstate = function(e) { 
 		if (!(typeof e.state == 'undefined')) { 

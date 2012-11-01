@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121017233758) do
+ActiveRecord::Schema.define(:version => 20121031150716) do
 
   create_table "client_salons", :force => true do |t|
     t.integer  "client_id"
@@ -47,12 +47,13 @@ ActiveRecord::Schema.define(:version => 20121017233758) do
 
   create_table "payments", :force => true do |t|
     t.string   "description"
-    t.boolean  "status"
+    t.string   "status"
     t.date     "due_date"
     t.date     "payment_date"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.integer  "subscription_id"
+    t.float    "price"
   end
 
   create_table "professional_services", :force => true do |t|
@@ -66,7 +67,8 @@ ActiveRecord::Schema.define(:version => 20121017233758) do
   create_table "salons", :force => true do |t|
     t.string   "name"
     t.string   "username"
-    t.string   "fone"
+    t.string   "landphone"
+    t.string   "celphone"
     t.string   "address"
     t.string   "city"
     t.string   "state"
@@ -74,11 +76,13 @@ ActiveRecord::Schema.define(:version => 20121017233758) do
     t.string   "complement"
     t.string   "email"
     t.string   "logo"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "neighborhood"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "number"
+    t.integer  "professional_id"
   end
 
   create_table "services", :force => true do |t|

@@ -1,7 +1,7 @@
 #encoding: utf-8
 
 class Salon < ActiveRecord::Base
-  attr_accessible :address, :city, :complement, :email, :fone, :logo, :name, :state, :username, :zipcode, :neighborhood, :remote_logo_url
+  attr_accessible :address,:number, :city, :complement, :email, :landphone,:celphone, :logo, :name, :state, :username, :zipcode, :neighborhood, :remote_logo_url
   has_many :services, :dependent => :destroy
   has_many :professionals, :dependent => :destroy
   has_many :events, :through => :professionals
@@ -9,6 +9,7 @@ class Salon < ActiveRecord::Base
   has_many :clients, :through => :client_salons
   has_many :favorites
   has_many :subscriptions
+  belongs_to :manager, :class_name => "Professional"
   mount_uploader :logo, LogoUploader
   geocoded_by :full_address
   after_validation :geocode, :if => :address_changed?
@@ -40,8 +41,47 @@ class Salon < ActiveRecord::Base
     subscription.initial_date = DateTime.now
     subscription.trial_period = 2;
     subscription.end_date = subscription.initial_date + 1.year + subscription.trial_period.month
-    subscription.price = 80
-    subscription.save
+    subscription.price = 80    
+    if subscription.save      
+      12.times do |i|
+        subscription.payments.create(
+          :description => "Mensalidade",
+          :status => "A Pagar",
+          :price => subscription.price,
+          :due_date => Date.today + subscription.trial_period.months + (i-1).month        
+        )
+      end
+    else
+      p "Caiu no else"
+    end
   end
+
+  def to_moip_payer_format
+    payer = {
+      :nome => self.name,
+      :email => self.email,
+      :tel_cel => formatted_phone(self.celphone),
+      :tel_fixo => formatted_phone(self.landphone),
+      :logradouro => self.address,
+      :numero => self.number,
+      :complemento => self.complement,
+      :bairro => self.neighborhood,
+      :cidade => self.city,
+      :estado => self.state.upcase,
+      :pais => "BRA",
+      :cep => formatted_zipcode(self.zipcode)
+    }
+    payer
+  end
+
+  private
+  def formatted_phone(phone)
+    return phone.nil? ? "" : phone.sub(/(\d{2})(\d{4})(\d{4})/, "(\\1)\\2-\\3")
+  end
+
+  def formatted_zipcode(zipcode)
+    return zipcode.sub(/(\d{5})(\d{3})/, "\\1-\\2")
+  end
+
 
 end

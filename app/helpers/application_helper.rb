@@ -26,4 +26,14 @@ module ApplicationHelper
 			""
 		end
 	end
+
+	def payment_status_type(status)
+		if status == "A Pagar" || status == "Iniciado" || status == "Autorizado" || status == "Boleto Impresso"
+			"warning"
+		elsif status == "Cancelado" || status == "Vencido"
+			"important"
+		elsif status == "Pagamento Confirmado"
+			"success"
+		end
+	end
 end

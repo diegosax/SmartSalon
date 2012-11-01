@@ -1,3 +1,56 @@
+<!-- Modal qu econterá os dados do pagamento -->
+
+<div class="modal hide fade" id="payment-modal">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<h3>Dados do pagamento</h3>
+	</div>
+	<div class="modal-body">		
+		<div class="widget">
+			<div class="widget-content form-container">
+				<%=form_tag admin_salon_payments_checkout_path(@salon), :class => "form-horizontal" do |f|%>
+					<div class="control-group">
+						<label class="control-label">
+							Forma de pagamento
+						</label>
+						<div class="controls">
+							<label class="radio">
+								<%=radio_button_tag "payment_type","boleto", true%>
+								Boleto
+							</label>
+							<label class="radio">
+								<%=radio_button_tag "payment_type","cartao"%>
+								Cartão de Crédito
+							</label>
+						</div>
+					</div>
+					<fieldset style="display:none">
+						<legend>
+							Dados do Cartão de Crédito
+						</legend>
+						<div class="control-group">
+							<label class="control-label">
+								Número do cartão
+							</label>
+							<div class="controls extra-margin">
+								<%=text_field_tag :card_number%>
+							</div>
+						</div>
+					</fieldset>
+				<%end%>
+			</div>
+		</div>		
+	</div>
+	<div style="display:none" class="link" data-destination="">
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss = "modal">Cancelar</a>
+		<a class="btn btn-primary" id="submit-btn">Efetuar Pagamento</a>
+	</div>
+</div>
+
+<!-- Fim do modal -->
+
 <div id="main-header" class="page-header">
 	<h1 id="main-heading">
 		Informações sobre o salão <span> <%=@salon.name%></span>
@@ -31,8 +84,12 @@
 							<td><%=@salon.username%></td>
 						</tr>
 						<tr>
-							<th>Telefone</th>
-							<td><%=@salon.fone%></td>
+							<th>Telefone Fixo</th>
+							<td><%=@salon.landphone%></td>
+						</tr>
+						<tr>
+							<th>Telefone Celular</th>
+							<td><%=@salon.celphone%></td>
 						</tr>
 						<tr>
 							<th>Logo</th>
@@ -100,29 +157,47 @@
 				<span class="title">
 					Pagamentos
 				</span>
+				<div class="toolbar">
+					<%=link_to "Efetuar Pagamento", "#", :class => "btn btn-mini"%>
+				</div>
 			</div>
 			<div class="widget-content table-container">
 				<table class="table table-striped form-inline">
 					<thead>
 						<tr>
 							<th>Descrição</th>
-							<th>Data de pagamento</th>
-							<th>Data de efitivação do pagamento</th>
-							<th>Pago</th>
+							<th>Data de Vencimento</th>
+							<th>Data de Pagamento</th>
+							<th>Status</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
+						<%payment_disabled = ["disabled"]%>
 						<%@currentSubscription.payments.each do |p| %>
 						<tr id="p<%=@currentSubscription.id%>">
 							<td><%=p.description%></td>
-							<td><%=p.due_date%></td>
-							<td><%=p.payment_date%></td>
-							<% if p.status %> 
-							<td> Sim  </td> 
-							<% else %>
-							<td> Não  </td>             
-							<% end %>
+							<td><%=p.due_date.strftime("%d de %B de %Y")%></td>
+							<td><%=p.payment_date%></td>							
+							<td> <span class="badge badge-<%=payment_status_type(p.status)%>"><%=p.status%></span></td>	
+							<td class="action-col">
+								<%if (p.status == "A Pagar" || p.status == "Cancelado" || p.status == "Vencido") && payment_disabled.pop%>
+								<span class="btn-group">
+									<%=link_to "#payment-modal","data-toggle" => "modal", :class => "btn btn-primary" do%>
+									<i class="icon-search"></i>Efetuar Pagamento
+									<%end%>									
+								</span>
+								<%end%>
+							</td>
+						</tr>						
+						<%end%>
+						<%if @currentSubscription.payments.size == 0%>
+						<tr>
+							<td colspan="5">
+								Você não possui mensalidades
+							</td>
 						</tr>
+
 						<%end%>
 					</tbody>
 				</table>

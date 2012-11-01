@@ -54,6 +54,7 @@ class Admin::EventsController < Admin::ApplicationController
 
   def new
     @event = Event.new
+    @clients = current_professional.salon.clients
     delay = (60 - (DateTime.now.min))%5
     if !params[:day].nil?
       @event.start_at = params[:day] + " " + DateTime.now.strftime("%H:%M") unless params[:day].nil?

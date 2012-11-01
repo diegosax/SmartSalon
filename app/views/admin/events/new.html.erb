@@ -1,4 +1,5 @@
 <%=render "top_menu"%>
+<%=render "/admin/clients/modal_form"%>
 
 <div id="main-header" class="page-header">
 	<h1 class="main-heading">Agendamento Manual de Eventos</h1>
@@ -13,10 +14,20 @@
 			</div>
 			<div class="widget-content form-container">
 				<%= simple_form_for([:admin,@event],:html=>{:class=>"form-horizontal", :id=> "new_admin_event_form"}) do |f| %>
-				<%=f.input :title%>                
-				<%=f.input :description, :input_html => {:rows => "8"} %>
-				<%=f.input :start_at, :input_html => {:id => "datetime_from"}, :as => :string%>
-				<%=f.input :end_at,  :input_html => {:id => "datetime_to"}, :as => :string%>    
+				<%=f.input :title, :label => "Título"%>                
+				<%=f.input :description, :label => "Descrição",:input_html => {:rows => "8"} %>
+				<div class="control-group">
+					<label for="" class="control-label">
+						Cliente
+					</label>
+					<div class="controls">
+						<%=render "/admin/events/choose_client"%>  		
+					</div>
+					
+				</div>
+				
+				<%=f.input :start_at,:label => "Início", :input_html => {:id => "datetime_from"}, :as => :string%>
+				<%=f.input :end_at,:label => "Fim",  :input_html => {:id => "datetime_to"}, :as => :string%>    
 				<div class="form-actions">
 					<%=f.submit "Salvar", :class => "btn btn-primary", :disable_with => "Salvando..."%>
 					<%=link_to "Cancelar", :back, :class => "btn"%>

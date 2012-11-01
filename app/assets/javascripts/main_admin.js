@@ -36,7 +36,25 @@ $(document).ready(function(){
 	$(".dashboard_tables ul li a").live("click",function(){
 		history.pushState(null,"",$(this).attr("href"));
 	});
-	
-	
 
+	/* ----------Payment Details Modal -------------------*/
+
+	$("#payment_type_boleto").live("click",function(){
+		$("#payment-modal fieldset").slideUp();		
+	});
+
+	$("#payment_type_cartao").live("click", function(){		
+		if ($("#payment-modal fieldset").is(":hidden")){			
+			$("#payment-modal fieldset").slideDown();
+		}
+	});
+
+	$("#submit-btn").live("click",function(e){
+		e.preventDefault();
+		$(this).attr("disabled","disabled");
+		$(this).text("Processando...");
+		addLoading($("#payment-modal .modal-body"));
+		$("#payment-modal form").submit();
+		
+	});
 });

@@ -21,6 +21,7 @@
 //= require jquery.flexslider-min
 //= require jquery.imagesloaded.min
 //= require jquery.wookmark
+//= require datepair
 //= require datatables/jquery.dataTables.min
 //= require datatables/TableTools/js/TableTools.min
 //= require datatables/dataTables.bootstrap
@@ -33,11 +34,6 @@
 //= require noty/themes/default
 //= require ios-orientationchange-fix
 //= require forms/jquery.ui.touch-punch.min
-//= require jquery.ui.datetime.min
-//= require ui.datetimepicker
-//= require fullcalendar/fullcalendar
-//= require fullcalendar/gcal
-//= require gebo_calendar
 //= require gebo_gallery
 //= require mooncake/setup
 //= require mooncake/template

@@ -1,0 +1,302 @@
+<div id="main-header" class="page-header">    
+    <h1 id="main-heading">
+        Dashboard <span>Aqui você encontra tudo que você precisa saber sobre seu sistema</span>
+    </h1>
+</div>
+
+<div id="main-content">
+    <ul class="stats-container">
+        <li>
+            <a href="#my_today_events" class="stat summary">
+                <span class="icon icon-circle bg-green">
+                    <i class="icon-stats"></i>
+                </span>
+                <span class="digit">
+                    <span class="text">Meus Agendamentos de Hoje</span>
+                    <%=@my_today_events.length%>
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="#all_today_events" class="stat summary">
+                <span class="icon icon-circle bg-blue">
+                    <i class="icon-stats-up"></i>
+                </span>
+                <span class="digit">
+                    <span class="text">Todos os Agendamentos de hoje</span>
+                    <%=@all_today_events.length%>
+                </span>
+            </a>
+        </li>        
+        <li>
+            <a href="#today_canceled_events" class="stat summary">
+                <span class="icon icon-circle bg-red">
+                    <i class="icon-user"></i>
+                </span>
+                <span class="digit">
+                    <span class="text">Angendamentos de Hoje Cancelados</span>
+                    <%=@today_canceled_events.length%>
+                </span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="tabbable analytics-tab paper-stack dashboard_tables">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#my_today_events" data-target="#my_today_events" data-toggle="tab">
+                    <i class="icon-stats"></i> 
+                    Meus Agendamentos de Hoje
+                </a>
+            </li>
+            <li>
+                <a href="#all_today_events" data-target="#all_today_events" data-toggle="tab">
+                    <i class="icon-stats-up"></i> 
+                    Todos os Agendamentos de Hoje
+                </a>
+            </li>
+            <li>
+                <a href="#today_canceled_events" data-target="#today_canceled_events" data-toggle="tab">
+                    <i class="icon-user"></i>
+                    Agendamentos de Hoje Cancelados
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="my_today_events" class="tab-pane active">                
+                <div class="widget">
+                    <div class="widget-content table-container">
+                        <table class="table table-striped table-flipscroll">
+                            <thead>
+                                <tr>
+                                    <th style="width:20%">Horário</th>
+                                    <th>Serviço</th>
+                                    <th>Cliente</th>
+                                    <th>Duração</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th colspan="6">
+                                        <i class="icon-stats"></i> Meus Agendamentos de Hoje</th>
+                                    </tr>
+                                    <%@my_today_events.each do |event|%>
+                                    <tr>
+                                        <td>
+                                            <blockquote>
+                                                <p>
+                                                    <%=event.start_at.strftime("%H:%M h")%>        
+                                                </p>
+                                                <small>
+                                                    em <%=distance_of_time_in_words(Time.zone.now,event.start_at)%>
+                                                </small>
+                                            </blockquote>
+
+                                        </td>
+                                        <td><%=event.service.name if event.service%></td>
+                                        <td><%=event.client.name if event.client%></td>
+                                        <td><%=distance_of_time_in_words(event.start_at,event.end_at) + " ( termina às #{event.end_at.strftime('%H:%M')} )"%></td>
+                                        <td>
+                                            <span class="badge badge-<%=event_type(event)%>">
+                                                <%=event.status%>
+                                            </span>
+                                        </td>
+                                        <td class="action-col">
+                                            <span class="btn-group">
+                                                <%=link_to [:admin, event], 
+                                                :class => "btn btn-small" do%>
+                                                <i class="icon-search"></i>
+
+                                                <%end%>
+                                                <%=link_to edit_admin_event_path(event), 
+                                                :class => "btn btn-small" do%>
+                                                <i class="icon-pencil"></i>
+
+                                                <%end%>
+                                                <%=link_to [:admin,event], 
+                                                "data-method-type" => :delete, 
+                                                :class => "btn btn-small confirmable",
+                                                "data-message" => "Deseja realmente remover este evento?" do%>
+                                                <i class="icon-trash"></i>
+
+                                                <%end%>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <%end%>
+                                    <%if @my_today_events.length == 0%>
+                                    <tr>
+                                        <td colspan=6>
+                                            <div class="alert alert-danger">
+                                                Você não possui nenhum agendamento para hoje
+                                            </div>    
+                                        </td>
+
+                                    </tr>
+                                    <%end%>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="all_today_events" class="tab-pane">                
+                    <div class="widget">
+                        <div class="widget-content table-container">
+                            <table class="table table-striped table-flipscroll">
+                                <thead>
+                                    <tr>
+                                        <th style="width:20%">Horário</th>
+                                        <th>Serviço</th>
+                                        <th>Cliente</th>
+                                        <th>Funcionário</th>
+                                        <th>Duração</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th colspan="7">
+                                            <i class="icon-stats-up"></i> Todos os Agendamentos de Hoje
+                                        </th>
+                                    </tr>
+                                    <%@all_today_events.each do |event|%>
+                                    <tr>
+                                        <td>
+                                            <blockquote>
+                                                <p>
+                                                    <%=event.start_at.strftime("%H:%M h")%>        
+                                                </p>
+                                                <small>
+                                                    em <%=distance_of_time_in_words(Time.zone.now,event.start_at)%>
+                                                </small>
+                                            </blockquote>
+
+                                        </td>
+                                        <td><%=event.service.name if event.service%></td>
+                                        <td><%=event.client.name if event.client%></td>
+                                        <td><%=event.professional.name if event.professional%></td>
+                                        <td><%=distance_of_time_in_words(event.start_at,event.end_at) + " ( termina às #{event.end_at.strftime('%H:%M')} )"%></td>
+                                        <td><span class="badge badge-<%=event_type(event)%>"><%=event.status%></span></td>
+                                        <td class="action-col">
+                                            <span class="btn-group">
+                                                <%=link_to [:admin, event], 
+                                                :class => "btn btn-small" do%>
+                                                <i class="icon-search"></i>
+
+                                                <%end%>
+                                                <%=link_to edit_admin_event_path(event), 
+                                                :class => "btn btn-small" do%>
+                                                <i class="icon-pencil"></i>
+
+                                                <%end%>
+                                                <%=link_to [:admin,event], 
+                                                "data-method-type" => :delete, 
+                                                :class => "btn btn-small confirmable",
+                                                "data-message" => "Deseja realmente remover este evento?" do%>
+                                                <i class="icon-trash"></i>
+
+                                                <%end%>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <%end%>
+                                    <%if @all_today_events.length == 0%>
+                                    <tr>
+                                        <td colspan=7>
+                                            <div class="alert alert-danger">
+                                                Você não possui nenhum agendamento para hoje
+                                            </div>    
+                                        </td>
+
+                                    </tr>
+                                    <%end%>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="today_canceled_events" class="tab-pane">                
+                    <div class="widget">
+                        <div class="widget-content table-container">
+                            <table class="table table-striped table-flipscroll">
+                                <thead>
+                                    <tr>
+                                        <th style="width:20%">Horário</th>
+                                        <th>Serviço</th>
+                                        <th>Cliente</th>
+                                        <th>Funcionário</th>
+                                        <th>Duração</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th colspan="7">
+                                            <i class="icon-user"></i> Agendamentos Cancelados de Hoje</th>
+                                        </tr>
+                                        <%@today_canceled_events.each do |event|%>
+                                        <tr>
+                                            <td>
+                                                <blockquote>
+                                                    <p>
+                                                        <%=event.start_at.strftime("%H:%M h")%>        
+                                                    </p>
+                                                    <small>
+                                                        em <%=distance_of_time_in_words(Time.zone.now,event.start_at)%>
+                                                    </small>
+                                                </blockquote>
+
+                                            </td>
+                                            <td><%=event.service.name if event.service%></td>
+                                            <td><%=event.client.name if event.client%></td>
+                                            <td><%=event.professional.name if event.professional%></td>
+                                            <td><%=distance_of_time_in_words(event.start_at,event.end_at) + " ( termina às #{event.end_at.strftime('%H:%M')} )"%></td>
+                                            <td><span class="badge badge-<%=event_type(event)%>"><%=event.status%></span></td>
+                                            <td class="action-col">
+                                                <span class="btn-group">
+                                                    <%=link_to [:admin, event], 
+                                                    :class => "btn btn-small" do%>
+                                                    <i class="icon-search"></i>
+
+                                                    <%end%>
+                                                    <%=link_to edit_admin_event_path(event), 
+                                                    :class => "btn btn-small" do%>
+                                                    <i class="icon-pencil"></i>
+
+                                                    <%end%>
+                                                    <%=link_to [:admin,event], 
+                                                    "data-method-type" => :delete, 
+                                                    :class => "btn btn-small confirmable",
+                                                    "data-message" => "Deseja realmente remover este evento?" do%>
+                                                    <i class="icon-trash"></i>
+
+                                                    <%end%>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <%end%>
+                                        <%if @today_canceled_events.length == 0%>
+                                        <tr>
+                                            <td colspan=7>
+                                                <div class="alert alert-danger">
+                                                    Você não possui nenhum agendamento cancelado para hoje
+                                                </div>    
+                                            </td>
+
+                                        </tr>
+                                        <%end%>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+

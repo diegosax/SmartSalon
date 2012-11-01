@@ -3,8 +3,9 @@ class CreateSalons < ActiveRecord::Migration
     create_table :salons do |t|
       t.string :name
       t.string :username
-      t.string :fone
-      t.string :address
+      t.string :landphone
+      t.string :celphone
+      t.string :address      
       t.string :city
       t.string :state
       t.string :zipcode

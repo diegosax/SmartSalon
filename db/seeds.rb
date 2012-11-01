@@ -16,7 +16,8 @@ Client.destroy_all
 Salon.create(
 	:name => "Open Hair",
 	:username => "openhair",
-	:fone => "01135010199",
+	:landphone => "1135010199",
+	:celphone => "1135010199",
 	:address => "Av Giovanni Gronchi, 3363",
 	:neighborhood => "Morumbi",
 	:city => "São Paulo",
@@ -29,7 +30,8 @@ Salon.create(
 Salon.create(
 	:name => "Soho Academy Pinheiros",
 	:username => "sohoacademy",
-	:fone => "01138133834",
+	:landphone => "1138133834",
+	:celphone => "1195010199",
 	:address => "Rua dos Pinheiros, 1376",
 	:neighborhood => "Pinheiros",
 	:city => "São Paulo",
@@ -42,7 +44,8 @@ Salon.create(
 Salon.create(
 	:name => "Spettacolo",
 	:username => "spettacolo",
-	:fone => "01155718022",
+	:landphone => "1125718022",
+	:celphone => "1195718022",
 	:address => "Rua Coronel Diogo, 364",
 	:neighborhood => "Aclimação",
 	:city => "São Paulo",
@@ -55,7 +58,8 @@ Salon.create(
 Salon.create(
 	:name => "Espaço 560",
 	:username => "espaco560",
-	:fone => "08134661162",
+	:landphone => "8134661162",
+	:celphone => "8194661162",
 	:address => "Av Cons Aguiar, 1212",
 	:neighborhood => "Boa Viagem",
 	:city => "Recife",
@@ -67,7 +71,8 @@ Salon.create(
 Salon.create(
 	:name => "Josymar Cabeleleiros",
 	:username => "josymarcabeleleiros",
-	:fone => "08132249098",
+	:landphone => "8132249098",
+	:celphone => "8182249098",
 	:address => "Av Dantas Barreto, 507 Sl 02",
 	:neighborhood => "Santo Antônio",
 	:city => "Recife",
@@ -80,7 +85,8 @@ puts "Criando chinacabeleireiros"
 Salon.create(
 	:name => "China Cabeleireiros",
 	:username => "chinacabeleireiros",
-	:fone => "08132438210",
+	:landphone => "8132438210",
+	:celphone => "8182438210",
 	:address => "Pç Lula Cabral Melo, 68 Lj 4 Ga Via Roma Center",
 	:neighborhood => "Parnamirim",
 	:city => "Recife",
@@ -92,7 +98,8 @@ Salon.create(
 Salon.create(
 	:name => "Edelson Cabeleleiros",
 	:username => "edelson",
-	:fone => "08132285606",
+	:landphone => "8132285606",
+	:celphone => "8191385606",
 	:address => "Rua Conde de Irajá, 353",
 	:neighborhood => "Torre",
 	:city => "Recife",
@@ -105,7 +112,8 @@ puts "Indo criar Jacques"
 Salon.create(
 	:name => "Jacques Janine",
 	:username => "jacquesjanine",
-	:fone => "08134636368",
+	:landphone => "8134636368",
+	:celphone => "8194636368",
 	:address => "Rua Padre Carapuceiro – loja BV 271",
 	:neighborhood => "Boa Viagem",
 	:city => "Recife",
@@ -118,12 +126,13 @@ Salon.create(
 Salon.create(
 	:name => "Studio Neide",
 	:username => "studioneide",
-	:fone => "01120418285",
+	:landphone => "1120418285",
+	:celphone => "1191418285",
 	:address => "Rua Brook Taylor, 1065",
 	:neighborhood => "Jardim Coimbra",
 	:city => "São Paulo",
 	:state => "SP",
-	:zipcode => "0369000",
+	:zipcode => "03690000",
 	:email => "studioneide@gmail.com",
 	:remote_logo_url => "http://www.studioneide.com.br/templates/gk_cherrydesign/images/style1/logo.png"
 )

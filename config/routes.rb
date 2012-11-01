@@ -34,7 +34,9 @@ Smartsalon::Application.routes.draw do
       resources :working_times
       resources :professional_services
     end
-    resources :salons    
+    resources :salons do
+      post "payments/checkout" => "payments#checkout", :as => "payments_checkout"
+    end
     resources :clients
     get 'dashboard' => "dashboard#index"
   end

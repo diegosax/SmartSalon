@@ -6,5 +6,5 @@ module SalonsHelper
 		else
 			""
 		end
-	end
+	end	
 end

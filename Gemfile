@@ -35,6 +35,8 @@ gem 'devise'
 
 gem "cancan"
 
+gem "httparty"
+
 gem 'quiet_assets', :group => :development
 
 gem 'thin'
@@ -60,6 +62,8 @@ gem 'brazilian-rails'
 gem 'breadcrumbs_on_rails'
 
 gem 'mail'
+
+gem 'jquery-timepicker-rails'
 
 group :production do
 	gem "pg"

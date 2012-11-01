@@ -34,6 +34,7 @@ module Smartsalon
     config.i18n.default_locale = "pt-BR"
     config.autoload_paths += %W[#{config.root}/lib/validators/]
     config.autoload_paths += %W[#{config.root}/lib/modules/]
+    config.autoload_paths += %W[#{config.root}/lib]
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"

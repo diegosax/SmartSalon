@@ -13,6 +13,7 @@ module EventsHelper
       end
 
       def isavailable_mod(events, myDate, params = {})            
+            puts events.inspect
             start_hour = 0
             start_min = 0      
             professional = params[:professionals]

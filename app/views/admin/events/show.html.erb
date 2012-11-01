@@ -48,6 +48,14 @@
 							<th>Duração</th>
 							<td><%=distance_of_time_in_words(@event.start_at,@event.end_at)%></td>
 						</tr>
+						<tr>
+							<th>Situação</th>
+							<td>
+								<span class="badge badge-<%=event_type(@event)%>">
+                                                <%=@event.status%>
+                                            </span>
+							</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
