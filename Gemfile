@@ -53,6 +53,8 @@ gem 'mini_magick'
 
 gem 'carrierwave'
 
+gem 'sidekiq'
+
 gem 'geocoder'
 
 gem 'gmaps4rails'
