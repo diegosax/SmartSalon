@@ -31,6 +31,7 @@ class Event < ActiveRecord::Base
 	end	
 
 	def find_conflicts
+
 		Event.where(
 	      "
 	        (start_at > ? and start_at < ? OR
