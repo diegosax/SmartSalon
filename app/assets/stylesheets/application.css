@@ -15,6 +15,7 @@
  *= require tipped
  *= require chosen
  *= require style
+ *= require login
  *= require mooncake/fonts/icomoon/style
  *= require mooncake/mooncake.min
  *= require mooncake/plugins.min
