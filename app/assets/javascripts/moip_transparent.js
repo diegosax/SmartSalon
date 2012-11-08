@@ -22,6 +22,9 @@ var moip_success = function(data){
 		$("#payment-modal .modal-footer .btn").click(function(){window.location.reload();});			
 	} else{
 		//Only boleto
+		var html_content = '<div class="alert alert-success fade in"> \
+			<strong>Seus dados para pagamento foram processados com sucesso!</strong><br> \
+			<a href="'+ data.url + '">Clique Aqui</a> para visualizar seu boleto </div>';			
 		window.location.href = data.url;		
 	}
 }

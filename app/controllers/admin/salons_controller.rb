@@ -7,7 +7,7 @@ class Admin::SalonsController < Admin::ApplicationController
   def show
     @salon = Salon.find(params[:id])
     @currentSubscription = @salon.subscriptions.last
-
+    @payments = @currentSubscription.payments.order(:due_date)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @service }

@@ -53,5 +53,7 @@ class Admin::PaymentsController < Admin::ApplicationController
       end
       payment.save
     end			
+
+    render :nothing => true, :status => 200
   end
 end

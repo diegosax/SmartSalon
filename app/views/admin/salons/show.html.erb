@@ -127,7 +127,7 @@
 						</tr>
 					</thead>
 					<tbody>						
-						<%@currentSubscription.payments.each do |p| %>
+						<%@payments.each do |p| %>
 						<tr id="p<%=@currentSubscription.id%>">
 							<td><%=p.description%></td>
 							<td><%=p.due_date.strftime("%d de %B de %Y")%></td>
