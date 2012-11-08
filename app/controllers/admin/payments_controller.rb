@@ -36,24 +36,26 @@ class Admin::PaymentsController < Admin::ApplicationController
     salon = Salon.find(extract_salon_from_moip_id(id))
     subscription = salon.subscriptions.last		
     if subscription.id == extract_subscription_from_moip_id(id)
+      puts "PASSOU DO PRIMEIRO, SUBSCRIPTION MATCH"
       payment = subscription.payments.find(extract_payment_from_moip_id(id))			
-      if payment				
-        if payment.locked && notification[:status] == 4        
+      if payment
+        puts "PASSOU DO PAYMENT, ELE EXISTE"				
+        if payment.locked && notification[:status] == 4
+          puts 'ATUALIZANDO STATUS DEENTRO DO IF'
           payment.status = Payment::STATUS[notification[:status]]
-        end
-      else
-        payment.status = Payment::STATUS[notification[:status]]
-        payment.payment_mode = Payment::PAYMENT_MODES[notification[:payment_mode]]
-        payment.payment_type = Payment::PAYMENT_TYPES[notification[:payment_type]]
-        payment.moip_code = notification[:moip_code]
-        if notification[:status] == 1 || notification[:status] == 4
-          payment.payment_date = Time.zone.now
-          payment.locked = true
-        end				
-      end
-      payment.save
-    end			
-
+        else
+          payment.status = Payment::STATUS[notification[:status]]
+          payment.payment_mode = Payment::PAYMENT_MODES[notification[:payment_mode]]
+          payment.payment_type = Payment::PAYMENT_TYPES[notification[:payment_type]]
+          payment.moip_code = notification[:moip_code]
+          if notification[:status] == 1 || notification[:status] == 4
+            payment.payment_date = Time.zone.now
+            payment.locked = true
+          end
+        end              				
+        payment.save
+      end      
+    end
     render :nothing => true, :status => 200
   end
 end

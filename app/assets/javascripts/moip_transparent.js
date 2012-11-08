@@ -24,8 +24,13 @@ var moip_success = function(data){
 		//Only boleto
 		var html_content = '<div class="alert alert-success fade in"> \
 			<strong>Seus dados para pagamento foram processados com sucesso!</strong><br> \
-			<a href="'+ data.url + '">Clique Aqui</a> para visualizar seu boleto </div>';			
-		window.location.href = data.url;		
+			<a href="'+ data.url + '" target="_blank">Clique Aqui</a> para visualizar seu boleto </div>';			
+		$("#payment-modal .widget-content").fadeOut(function(){
+			$("#payment-modal .widget-content").html(html_content);
+		}).fadeIn();				
+		$("#payment-modal .modal-footer .btn-primary").remove();
+		$("#payment-modal .modal-footer .btn").text("OK");
+		$("#payment-modal .modal-footer .btn").click(function(){window.location.reload();});		
 	}
 }
 
