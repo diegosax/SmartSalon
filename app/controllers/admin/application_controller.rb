@@ -27,4 +27,31 @@ class Admin::ApplicationController < ActionController::Base
 		puts "SETTING THE CURRENT ABILITYYYYYYYYYYYYYYYYYYYYYY"
   		@current_ability ||= AdminAbility.new(current_professional)
 	end
+
+	def extract_salon_from_moip_id(id)
+		ids = id.split("-")
+		if ids.size > 0
+			return ids[0]
+		else
+			return 0
+		end
+	end
+
+	def extract_subscription_from_moip_id(id)
+		ids = id.split("-")
+		if ids.size > 1
+			return ids[1]
+		else
+			return 0
+		end
+	end
+
+	def extract_payment_from_moip_id(id)
+		ids = id.split("-")
+		if ids.size > 2
+			return ids[2]
+		else
+			return 0
+		end
+	end
 end

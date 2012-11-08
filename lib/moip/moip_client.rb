@@ -28,7 +28,7 @@ module Moip
         puts full_data
        # raise full_data.inspect
        get_response!(full_data["EnviarInstrucaoUnicaResponse"]["Resposta"])
-     end
+      end
 
       # Consulta dos dados das autorizações e pagamentos associados à Instrução
       def query(token)
