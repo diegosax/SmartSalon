@@ -1,0 +1,6 @@
+Olá <%= @event.client.name %>,
+
+Foi detectado um conflito de horários em um dos seus agendamentos.
+O serviço <%= @event.service.name if @event.service %> agendado com <%= @event.professional.name if @event.professional %> foi cancelado.
+Por favor, acesse o site para agendá-lo em um novo horário.
+

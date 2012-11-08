@@ -1,0 +1,4 @@
+Olá <%= @event.client.name %>,
+
+Este é um e-mail de confirmação de agendamento do serviço <%= @event.service.name if @event.service %> agendado com <%= @event.professional.name if @event.professional %>.
+

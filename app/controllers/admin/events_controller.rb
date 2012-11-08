@@ -55,6 +55,7 @@ class Admin::EventsController < Admin::ApplicationController
   def new
     @event = Event.new
     @clients = current_professional.salon.clients
+    @client = Client.find(params[:client]) unless params[:client].blank?
     delay = (60 - (DateTime.now.min))%5
     if !params[:day].nil?
       @event.start_at = params[:day] + " " + DateTime.now.strftime("%H:%M") unless params[:day].nil?
@@ -90,13 +91,31 @@ class Admin::EventsController < Admin::ApplicationController
       @event.professional = current_professional
     end
 
+    @event.salon = @event.professional.salon
+    @event.client = @event.salon.clients.find(params[:client])
+    
     if confirm_conflicts == "1"
       conflicted_events = @event.find_conflicts
       conflicted_events.each do |e|
         e.update_attributes(:reschedule => true)
+        if(e.client)
+          Notifier.client_event_reschedule_notification(e).deliver
+        end
+        if(e.professional)   
+          Notifier.professional_event__reschedule_notification(e).deliver
+        end
+
       end      
       @event.save(:validate => false)
-      respond_to do |format|      
+      respond_to do |format|  
+        
+        if(@event.client)
+          Notifier.client_event_created(@event).deliver
+        end
+        if(@event.professional)   
+          Notifier.professional_event_created(@event).deliver
+        end
+
         format.js
         format.html { redirect_to([:admin,@event], :notice => 'Event was successfully created.') }
         format.xml  { render :xml => @event, :status => :created, :location => @event }
@@ -104,6 +123,14 @@ class Admin::EventsController < Admin::ApplicationController
     else
       respond_to do |format|
         if @event.save
+
+          if(@event.client)
+            Notifier.client_event_created(@event).deliver
+          end
+          if(@event.professional)   
+            Notifier.professional_event_created(@event).deliver
+          end
+        
           format.js
           format.html { redirect_to(@event, :notice => 'Event was successfully created.') }
           format.xml  { render :xml => @event, :status => :created, :location => @event }
@@ -136,6 +163,14 @@ class Admin::EventsController < Admin::ApplicationController
     @event.client = client
     respond_to do |format|
       if @event.save
+
+        if(@event.client)
+          Notifier.client_event_created(@event).deliver
+        end
+        if(@event.professional)   
+          Notifier.professional_event_created(@event).deliver
+        end
+        
         format.js
         format.html { redirect_to([:admin,@event], :notice => 'Event was successfully created.') }
         format.xml  { render :xml => @event, :status => :created, :location => @event }
