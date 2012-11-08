@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap.min
 //= require jquery-ui
+//= require jquery.actual.min
 //= require datatables/jquery.dataTables.min
 //= require datatables/TableTools/js/TableTools.min
 //= require datatables/dataTables.bootstrap
