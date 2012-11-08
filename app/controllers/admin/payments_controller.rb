@@ -1,5 +1,5 @@
 class Admin::PaymentsController < Admin::ApplicationController
-	before_filter :authenticate_professional!
+	before_filter :authenticate_professional!, :except => [:notification]
 
 	def checkout
 		if params[:payment_type] == "boleto"
@@ -20,5 +20,10 @@ class Admin::PaymentsController < Admin::ApplicationController
   			puts "DADOS DE RETORNO: #{response}"
   			redirect_to Moip::MoipClient.moip_page(response["Token"])
 		end
+	end
+
+	def notification
+		puts "NOTIFICATION RECEIVED:"
+		puts params.inspect
 	end
 end
