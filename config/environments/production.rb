@@ -1,4 +1,9 @@
 Smartsalon::Application.configure do
+  Moip.setup do |config|
+    config.uri = "https://desenvolvedor.moip.com.br/sandbox"
+    config.token = "BWJD71VQTOJSZKFJCEY82GAAAOYSPP8N"
+    config.key = "X5BB8TROFCSRBXXEZHNXTWP7TXOVRBUBRR5CYMLR"
+  end
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
