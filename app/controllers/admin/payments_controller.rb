@@ -34,8 +34,10 @@ class Admin::PaymentsController < Admin::ApplicationController
     notification = Moip::MoipClient.notification(params)
     id = notification[:transaction_id]
     salon = Salon.find(extract_salon_from_moip_id(id))
-    subscription = salon.subscriptions.last		
-    if subscription.id == extract_subscription_from_moip_id(id)
+    subscription = salon.subscriptions.last
+    puts "SUBSCRIPTION ID: #{subscription.id}"
+    puts "extracted: #{extract_subscription_from_moip_id(id)}"		
+    if subscription.id.to_s == extract_subscription_from_moip_id(id).to_s
       puts "PASSOU DO PRIMEIRO, SUBSCRIPTION MATCH"
       payment = subscription.payments.find(extract_payment_from_moip_id(id))			
       if payment
@@ -55,6 +57,8 @@ class Admin::PaymentsController < Admin::ApplicationController
         end              				
         payment.save
       end      
+    else
+      puts "Subscription not found"
     end
     render :nothing => true, :status => 200
   end
