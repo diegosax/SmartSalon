@@ -1,0 +1,11 @@
+var token = "<%=escape_javascript(@response['Token'])%>";
+var moip_div = '<div id="MoipWidget" data-token="'+token+'" callback-method-success="moip_success" callback-method-error="moip_failure"></div>';
+var modal = "<%=escape_javascript(render '/admin/payments/new_payment')%>"
+$("#payment-modal").remove();
+$(modal).prependTo("body");
+$("#loading-modal").modal("hide");
+$("#payment-modal").prepend(moip_div);
+$("#payment-modal").modal("show");
+$("#birth_date").mask("99/99/9999");
+$("#telephone").mask("(99)9999-9999");
+$("#cpf").mask("999.999.999-99");

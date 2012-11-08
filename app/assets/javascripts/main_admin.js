@@ -24,20 +24,20 @@ $(document).ready(function(){
 	//------------Filterable Tables ---------------------//
 	$(function(){		
 		var activeTab = $('[href=' + location.hash + ']');
-   		activeTab && activeTab.tab('show');	
+		activeTab && activeTab.tab('show');	
 	});
 
 	$(".stats-container li a").live("click",function(){
 		history.pushState(null,"",$(this).attr("href"));
 		var activeTab = $('[href=' + location.hash + ']');
-   		activeTab && activeTab.tab('show');	
+		activeTab && activeTab.tab('show');	
 	});
 
 	$(".dashboard_tables ul li a").live("click",function(){
 		history.pushState(null,"",$(this).attr("href"));
 	});
 
-	/* ----------Payment Details Modal -------------------*/
+	/* ----------Payment Details Modal -------------------*/	
 
 	$("#payment_type_boleto").live("click",function(){
 		$("#payment-modal fieldset").slideUp();		
@@ -48,13 +48,23 @@ $(document).ready(function(){
 			$("#payment-modal fieldset").slideDown();
 		}
 	});
-
+	/*
 	$("#submit-btn").live("click",function(e){
 		e.preventDefault();
 		$(this).attr("disabled","disabled");
 		$(this).text("Processando...");
 		addLoading($("#payment-modal .modal-body"));
-		$("#payment-modal form").submit();
-		
+		$("#payment-modal form").submit();		
 	});
+	*/
+	$("#payment-modal form").submit(function(){		
+		return false;
+	});
+
+	$("#payment-modal form .controls img").live("click", function(){
+		$("#payment-modal form .controls img").removeClass("selected");
+		$(this).addClass("selected");
+	});	
+
+
 });

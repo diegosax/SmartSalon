@@ -2,7 +2,10 @@ function showNoticeMessage(msg){
 	var noty = noty({text: 'noty - a jquery notification library!'});	
 }
 
-function showDefaultLoadingModel(){
+function showDefaultLoadingModel(message){
+	if (message){
+		$("#loading-modal .modal-body p").text(message);
+	}
 	$("#loading-modal").modal();
 }
 
@@ -274,5 +277,13 @@ $(document).ready(function(){
     	});
 
   	//------------END Address Loading ------------------------------//
+
+  	//------------ Payments Modal ----------------------------------//
+
+  	$("#payment_btn").live("click",function(){
+		showDefaultLoadingModel("Inicializando transação, por favor aguarde...");
+	});
+
+  	//--------------------------------------------------------------//
 
   });

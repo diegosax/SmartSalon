@@ -524,3 +524,16 @@ body.admin-body #payment-modal form .control-label{
 body.admin-body #payment-modal form .controls{
     margin-left: 150px !important;
 }
+
+body.admin-body #payment-modal form .controls img{
+    padding: 0 10px;    
+    cursor: pointer;    
+}
+body.admin-body #payment-modal form .controls img:hover,
+body.admin-body #payment-modal form .controls img.selected
+{
+    background-color: #FEF;
+}
+body.admin-body #payment-modal .modal-body{
+    overflow-y: scroll;
+}

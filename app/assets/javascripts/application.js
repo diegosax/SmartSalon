@@ -30,6 +30,7 @@
 //= require jquery.maskedinput-1.3
 //= require confirmation_modal
 //= require date
+//= require moip_transparent
 //= require main_admin
 //= require custom
 //= require main.js

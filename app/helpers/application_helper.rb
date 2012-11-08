@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 module ApplicationHelper
 	def isClient?
 		return current_user.class == Client
@@ -28,12 +30,12 @@ module ApplicationHelper
 	end
 
 	def payment_status_type(status)
-		if status == "A Pagar" || status == "Iniciado" || status == "Autorizado" || status == "Boleto Impresso"
-			"warning"
-		elsif status == "Cancelado" || status == "Vencido"
+		if status == Payment::STATUS[5] || status == Payment::STATUS[99]
 			"important"
-		elsif status == "Pagamento Confirmado"
+		elsif status == Payment::STATUS[1] || status == Payment::STATUS[4]
 			"success"
+		else
+			"warning"
 		end
 	end
 end

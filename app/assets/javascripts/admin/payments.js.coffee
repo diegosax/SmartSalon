@@ -1,3 +1,16 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+$(document).ready(function(){
+	console.log("Payments.js loaded");
+
+	var moip_success = function(data){
+		alert('Sucesso\n' + JSON.stringify(data));
+	}
+
+	var moip_failure = function(data){
+		alert('Falha\n' + JSON.stringify(data));
+	}
+
+	var checkout = function(){
+		alert("checkout");
+	}	
+
+});

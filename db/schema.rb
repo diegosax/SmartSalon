@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121031150716) do
+ActiveRecord::Schema.define(:version => 20121108142726) do
 
   create_table "client_salons", :force => true do |t|
     t.integer  "client_id"
@@ -50,10 +50,14 @@ ActiveRecord::Schema.define(:version => 20121031150716) do
     t.string   "status"
     t.date     "due_date"
     t.date     "payment_date"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.integer  "subscription_id"
     t.float    "price"
+    t.string   "payment_mode"
+    t.string   "payment_type"
+    t.string   "moip_code"
+    t.boolean  "locked",          :default => false
   end
 
   create_table "professional_services", :force => true do |t|

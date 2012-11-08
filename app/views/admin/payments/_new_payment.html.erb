@@ -1,0 +1,104 @@
+<div class="modal hide fade" id="payment-modal">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<h3>Dados do pagamento</h3>
+	</div>
+	<div class="modal-body">		
+		<div class="widget">
+			<div class="widget-content form-container">				
+				<%=form_tag "#", :class => "form-horizontal" do |f|%>
+					<div class="control-group">
+						<label class="control-label">
+							Forma de pagamento
+						</label>
+						<div class="controls">
+							<label class="radio">
+								<%=radio_button_tag "payment_type","boleto", true%>
+								Boleto
+							</label>
+							<label class="radio">
+								<%=radio_button_tag "payment_type","cartao"%>
+								Cartão de Crédito
+							</label>
+						</div>
+					</div>
+					<fieldset style="display:none">
+						<legend>
+							Dados do Cartão de Crédito
+						</legend>
+						<div class="control-group">
+							<label class="control-label">
+								Escolha o Cartão	
+							</label>
+							<div class="controls extra-margin">
+								<%=image_tag "/assets/cards/mastercard_48.png", :class => "selected", "data-card" => "Mastercard"%>
+								<%=image_tag "/assets/cards/visa_48.png", "data-card" => "Visa"%>								
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">
+								Nome do Titular do Cartão
+							</label>
+							<div class="controls extra-margin">
+								<%=text_field_tag :card_name, "", :maxlength => 45%>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">
+								Número do cartão
+							</label>
+							<div class="controls extra-margin">
+								<%=text_field_tag :card_number, "", :maxlength => 19%>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">
+								Data de Expiração
+							</label>
+							<div class="controls extra-margin">
+								<%= select_month nil, {use_month_numbers: true}, {name: nil, id: "card_month", :class => "span1"}%>
+    							<%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year", :class => "span1"}%>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">
+								Código de Segurança (CVC)
+							</label>
+							<div class="controls extra-margin">
+								<%=text_field_tag :security_code, "",:class => "span1", :maxlength => 4%>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">
+								Data de Nascimento
+							</label>
+							<div class="controls extra-margin">
+								<%=text_field_tag :birth_date, "", :maxlength => 10%>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">
+								Telefone
+							</label>
+							<div class="controls extra-margin">
+								<%=text_field_tag :telephone, "", :maxlength => 13%>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">
+								CPF
+							</label>
+							<div class="controls extra-margin">
+								<%=text_field_tag :cpf, "", :maxlength => 14%>
+							</div>
+						</div>
+					</fieldset>
+				<%end%>
+			</div>
+		</div>		
+	</div>	
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss = "modal">Cancelar</a>
+		<a class="btn btn-primary" id="submit-payment">Efetuar Pagamento</a>
+	</div>
+</div>

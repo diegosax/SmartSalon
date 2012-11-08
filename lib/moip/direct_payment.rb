@@ -74,59 +74,61 @@ module Moip
                 xml.text attributes[:id_proprio]
               }
 
-              # Definindo o pagamento direto
-              xml.PagamentoDireto {
-                xml.Forma {
-                  xml.text attributes[:forma]
+              # Definindo o pagamento direto              
+              if attributes[:forma]
+                xml.PagamentoDireto {
+                  xml.Forma {
+                    xml.text attributes[:forma]
+                  }
+
+                  # Débito Bancário
+                  if ["DebitoBancario"].include?(attributes[:forma])
+                    xml.Instituicao {
+                      xml.text attributes[:instituicao]
+                    }
+                  end
+
+                  # Cartão de Crédito
+                  if attributes[:forma] == "CartaoCredito"
+                    xml.Instituicao {
+                      xml.text attributes[:instituicao]
+                    }
+                    xml.CartaoCredito {
+                      xml.Numero {
+                        xml.text attributes[:numero]
+                      }
+                      xml.Expiracao {
+                        xml.text attributes[:expiracao]
+                      }
+                      xml.CodigoSeguranca {
+                        xml.text attributes[:codigo_seguranca]
+                      }
+                      xml.Portador {
+                        xml.Nome {
+                          xml.text attributes[:nome]
+                        }
+                        xml.Identidade(:Tipo => "CPF") {
+                          xml.text attributes[:identidade]
+                        }
+                        xml.Telefone {
+                          xml.text attributes[:telefone]
+                        }
+                        xml.DataNascimento {
+                          xml.text attributes[:data_nascimento]
+                        }
+                      }
+                    }
+                    xml.Parcelamento {
+                      xml.Parcelas {
+                        xml.text attributes[:parcelas]
+                      }
+                      xml.Recebimento {
+                        xml.text attributes[:recebimento]
+                      }
+                    }
+                  end
                 }
-
-                # Débito Bancário
-                if ["DebitoBancario"].include?(attributes[:forma])
-                  xml.Instituicao {
-                    xml.text attributes[:instituicao]
-                  }
-                end
-
-                # Cartão de Crédito
-                if attributes[:forma] == "CartaoCredito"
-                  xml.Instituicao {
-                    xml.text attributes[:instituicao]
-                  }
-                  xml.CartaoCredito {
-                    xml.Numero {
-                      xml.text attributes[:numero]
-                    }
-                    xml.Expiracao {
-                      xml.text attributes[:expiracao]
-                    }
-                    xml.CodigoSeguranca {
-                      xml.text attributes[:codigo_seguranca]
-                    }
-                    xml.Portador {
-                      xml.Nome {
-                        xml.text attributes[:nome]
-                      }
-                      xml.Identidade(:Tipo => "CPF") {
-                        xml.text attributes[:identidade]
-                      }
-                      xml.Telefone {
-                        xml.text attributes[:telefone]
-                      }
-                      xml.DataNascimento {
-                        xml.text attributes[:data_nascimento]
-                      }
-                    }
-                  }
-                  xml.Parcelamento {
-                    xml.Parcelas {
-                      xml.text attributes[:parcelas]
-                    }
-                    xml.Recebimento {
-                      xml.text attributes[:recebimento]
-                    }
-                  }
-                end
-              }
+              end
 
               # Dados do pagador
               xml.Pagador {

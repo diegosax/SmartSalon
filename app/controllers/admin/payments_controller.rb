@@ -1,49 +1,57 @@
+#encoding: utf-8
+
 class Admin::PaymentsController < Admin::ApplicationController
 	before_filter :authenticate_professional!, :except => [:notification]
 
-	def checkout
-		if params[:payment_type] == "boleto"
-			salon = current_professional.salon
-			payment = salon.subscriptions.last.payments.payable.order(:due_date).first			
-			payer = salon.to_moip_payer_format
-			invoice = {
-				:razao => "Pagamento Mensalidade do mes de #{payment.due_date.strftime('%B')}",
-				:id_proprio => "#{salon.id}-#{payment.subscription.id}-#{payment.id}-#{Time.now.to_i}",
-				:valor => payment.price,
-				:forma => "BoletoBancario",
-				:dias_expiracao => "5",
-				:pagador => payer
-			}
-			
-			response = Moip::MoipClient.checkout(invoice)
-  			# exibe o boleto para impressão
-  			puts "DADOS DE RETORNO: #{response}"
-  			redirect_to Moip::MoipClient.moip_page(response["Token"])
-		end
-	end
+	def checkout		
+		@salon = current_professional.salon
+		@payment = @salon.subscriptions.last.payments.find(params[:payment])
+		@payer = @salon.to_moip_payer_format
+		@invoice = {
+			:razao => "Pagamento Mensalidade do mes de #{@payment.due_date.strftime('%B')}",
+			:id_proprio => "#{@salon.id}-#{@payment.subscription.id}-#{@payment.id}-#{Time.now.to_i}",
+			:valor => @payment.price,				
+			:pagador => @payer
+		}
+		
+		@response = Moip::MoipClient.checkout(@invoice)
+		# exibe o boleto para impressão
+		puts "DADOS DE RETORNO: #{response}"
+		#by uncommenting the next line the buyer will be redirected to the Moip Payment Page
+    #redirect_to Moip::MoipClient.moip_page(response["Token"])
 
-	def notification
-		puts "NOTIFICATION RECEIVED:"
-		puts params.inspect
-		notification = Moip::MoipClient.notification(params)
-		id = notification[:transaction_id]
-		salon = Salon.find(extract_salon_from_moip_id(id))
-		subscription = salon.subscriptions.last		
-		if subscription.id = extract_subscription_from_moip_id(id)
+    #by using this code the buyer won't leave the company page
+    #Transparent checkout
 
-			payment = subscription.payments.find(extract_payment_from_moip_id(id))
-			if payment
-				payment.status = notification.status
-				if payment.status == "completed"
-					payment.payment_date = Time.zone.now
-				end
-				puts "DETALHES DO PAGAMENTO::::: #{payment.inspect}"
-				payment.save
-			end			
+    respond_to do |format|
+      format.js
+    end
+  end
 
-		else
-			"NAO ENCONTROU NENHUMA TRANSACAO"
-		end
-
-	end
+  def notification
+    puts "NOTIFICATION RECEIVED:"
+    puts params.inspect
+    notification = Moip::MoipClient.notification(params)
+    id = notification[:transaction_id]
+    salon = Salon.find(extract_salon_from_moip_id(id))
+    subscription = salon.subscriptions.last		
+    if subscription.id == extract_subscription_from_moip_id(id)
+      payment = subscription.payments.find(extract_payment_from_moip_id(id))			
+      if payment				
+        if payment.locked && notification[:status] == 4        
+          payment.status = Payment::STATUS[notification[:status]]
+        end
+      else
+        payment.status = Payment::STATUS[notification[:status]]
+        payment.payment_mode = Payment::PAYMENT_MODES[notification[:payment_mode]]
+        payment.payment_type = Payment::PAYMENT_TYPES[notification[:payment_type]]
+        payment.moip_code = notification[:moip_code]
+        if notification[:status] == 1 || notification[:status] == 4
+          payment.payment_date = Time.zone.now
+          payment.locked = true
+        end				
+      end
+      payment.save
+    end			
+  end
 end

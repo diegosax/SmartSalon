@@ -48,18 +48,19 @@ module Moip
         notification = {}
         notification[:transaction_id] = params["id_transacao"]
         notification[:amount]         = params["valor"]
-        notification[:status]         = Moip::STATUS[params["status_pagamento"].to_i]
+        notification[:status]         = params["status_pagamento"].to_i
         notification[:code]           = params["cod_moip"]
         notification[:payment_type]   = params["tipo_pagamento"]
         notification[:email]          = params["email_consumidor"]
+        notification[:payment_mode]   = params["forma_pagamento"].to_i
+        notification[:moip_code]      = params["cod_moip"]
         notification
       end
 
       private
 
       def peform_action!(action_name, url, options = {})
-
-        puts "MOIP account: #{Moip.key}"
+        
         raise(MissingConfigError, "É necessário criar um arquivo de configuração para o moip. Veja mais em: https://github.com/moiplabs/moip-ruby") if Moip.token.nil? && Moip.key.nil?
 
         raise(MissingTokenError, "É necessário informar um token na configuração") if Moip.token.nil? || Moip.token.empty?
