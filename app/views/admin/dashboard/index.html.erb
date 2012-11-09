@@ -66,7 +66,7 @@
             <div id="my_today_events" class="tab-pane active">                
                 <div class="widget">
                     <div class="widget-content table-container">
-                        <table class="table table-striped table-flipscroll">
+                        <table class="table table-striped dashboard-table table-flipscroll">
                             <thead>
                                 <tr>
                                     <th style="width:20%">Horário</th>
@@ -78,7 +78,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr class="tr_info">
                                     <th colspan="6">
                                         <i class="icon-stats"></i> Meus Agendamentos de Hoje</th>
                                     </tr>
@@ -145,7 +145,7 @@
                 <div id="all_today_events" class="tab-pane">                
                     <div class="widget">
                         <div class="widget-content table-container">
-                            <table class="table table-striped table-flipscroll">
+                            <table class="table table-striped table-flipscroll dashboard-table">
                                 <thead>
                                     <tr>
                                         <th style="width:20%">Horário</th>
@@ -158,7 +158,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr class="tr_info">
                                         <th colspan="7">
                                             <i class="icon-stats-up"></i> Todos os Agendamentos de Hoje
                                         </th>
@@ -223,8 +223,20 @@
                 <div id="today_canceled_events" class="tab-pane">                
                     <div class="widget">
                         <div class="widget-content table-container">
-                            <table class="table table-striped table-flipscroll">
-                                <thead>
+                            <table class="table table-striped table-flipscroll dashboard-table">
+                                <%if @today_canceled_events.length == 0%>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="alert alert-danger">
+                                                    Você não possui nenhum agendamento cancelado para hoje
+                                                </div>    
+                                            </td>
+
+                                        </tr>    
+                                    </tbody>
+                                <%else%>    
+                                    <thead>
                                     <tr>
                                         <th style="width:20%">Horário</th>
                                         <th>Serviço</th>
@@ -236,7 +248,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr class="tr_info">
                                         <th colspan="7">
                                             <i class="icon-user"></i> Agendamentos Cancelados de Hoje</th>
                                         </tr>
@@ -280,18 +292,10 @@
                                                 </span>
                                             </td>
                                         </tr>
-                                        <%end%>
-                                        <%if @today_canceled_events.length == 0%>
-                                        <tr>
-                                            <td colspan=7>
-                                                <div class="alert alert-danger">
-                                                    Você não possui nenhum agendamento cancelado para hoje
-                                                </div>    
-                                            </td>
-
-                                        </tr>
-                                        <%end%>
+                                        <%end%>                                        
                                     </tbody>
+                                <%end%>
+                                
                                 </table>
                             </div>
                         </div>

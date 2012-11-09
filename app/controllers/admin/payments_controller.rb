@@ -62,4 +62,8 @@ class Admin::PaymentsController < Admin::ApplicationController
     end
     render :nothing => true, :status => 200
   end
+
+  def invoice
+    @payment = Payment.find(params[:payment_id])
+  end
 end

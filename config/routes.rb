@@ -36,8 +36,10 @@ Smartsalon::Application.routes.draw do
     end
     resources :salons do
       post "payments/checkout" => "payments#checkout", :as => "payments_checkout"
+      get "payments/:payment_id/invoice" => "payments#invoice", :as => "payments_invoice"
     end
     post "payments/notification" => "payments#notification", :as => "payment_notification"
+
     resources :clients
     get 'dashboard' => "dashboard#index"
   end

@@ -1,0 +1,62 @@
+<div id="main-header" class="page-header">
+    <h1 id="main-heading">
+        Invoice
+    </h1>
+</div>
+
+<div id="main-content">
+    <div class="row-fluid">
+        <div class="span12 widget">
+            <div class="widget-content clearfix">
+                <div class="span8">
+                    <h3><%=@payment.subscription.salon.name%></h3>
+
+                    <address>
+                        <%=@payment.subscription.salon.address%><br>
+                        <%=@payment.subscription.salon.city%>, <%=@payment.subscription.salon.state%> - <%=@payment.subscription.salon.zipcode%><br>                        
+                        <%=@payment.subscription.salon.landphone%>
+                    </address>                    
+                </div>
+
+                <div class="span3 widget-content table-container">
+                    <table class="table table-detail-view">                        
+                        <tbody>
+                            <tr>
+                                <th>Invoice #</th>
+                                <td>77683876</td>
+                            </tr>
+                            <tr>
+                                <th>Código MoIP</th>
+                                <td>312</td>
+                            </tr>
+                            <tr>
+                                <th>Data de Pagamento</th>
+                                <td>28/10/2012</td>
+                            </tr>                            
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="span11 widget-content table-container clearfix">
+                    <table class="table">                        
+                        <tbody>
+                            <tr>
+                                <th>Invoice #</th>
+                                <td>77683876</td>
+                            </tr>
+                            <tr>
+                                <th>Código MoIP</th>
+                                <td>312</td>
+                            </tr>
+                            <tr>
+                                <th>Data de Pagamento</th>
+                                <td>28/10/2012</td>
+                            </tr>                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>            
+        </div>        
+    </div>
+</div>
+
