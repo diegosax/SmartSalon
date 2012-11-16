@@ -1,6 +1,25 @@
 class Admin::ClientsController < Admin::ApplicationController
 	before_filter :authenticate_professional!
     load_and_authorize_resource
+
+  def index
+      @clients = current_professional.salon.clients
+
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @clients }
+      end
+  end
+
+  def show
+    @client = Client.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @client }
+    end
+  end
+
 	def create
 		@client = Client.new(params[:client])
 		generated_password = Devise.friendly_token.first(6)

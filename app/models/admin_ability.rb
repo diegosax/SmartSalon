@@ -8,6 +8,7 @@ class AdminAbility
     else      
       if user.is_professional? #user.role?(:professional)
           can :create, Client
+          can :read, Client
 
           can :manage, Service
           can :read, Professional#, :id => user.id #only if it is the professional profile

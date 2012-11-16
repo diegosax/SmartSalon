@@ -1,0 +1,39 @@
+<%=render "top_menu"%>
+
+<div id="main-header" class="page-header">
+	<h1 id="main-heading">
+		Detalhes do Cliente <span><%=@client.name%></span>
+	</h1>
+
+</div>
+<div id="main-content">
+	<div class="row-fluid">
+		<div class="form-horizontal widget">
+			<div class="widget-header">
+				<span class="title">Informações do Cliente</span>
+				<div class="toolbar">
+					<%=link_to "Alterar Cliente", edit_admin_client_path(@client), :class => "btn btn-gebo btn-mini" %>
+				</div>
+			</div>
+
+			<div class="widget-content table-container">
+				<table class="table table-striped table-detail-view">
+					<tbody>
+						<tr>
+							<th>Nome</th>
+							<td><%=@client.name%></td>
+						</tr>
+						<tr>
+							<th>Celular</th>
+							<td><%=@client.celphone%></td>
+						</tr>					
+						<tr>
+							<th>E-mail</th>
+							<td><%=@client.email%></td>
+						</tr>
+					</tbody>					
+				</table>
+			</div>		
+		</div>
+	</div>
+</div>
