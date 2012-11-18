@@ -1,0 +1,25 @@
+<%=render "top_menu"%>
+
+<div id="main-header" class="page-header">
+	<h1 class="main-heading">Novo Cliente</h1>
+</div>
+
+<div id="main-content">
+	<div class="row-fluid">
+		<div class="span12 widget">
+			<div class="widget-header">
+				<span class="title">Dados do Cliente</span>
+			</div>
+			<div class="widget-content form-container">
+        <%= simple_form_for([:admin,@client],:html=>{:class=>"form-horizontal",:remote=>true}) do |f| %>
+        <%=f.input :name, :label => "Nome"%>
+        <%=f.input :celphone, :label => "Celular"%>     				
+				<div class="form-actions">
+					<%=f.submit "Salvar", :class => "btn btn-primary", :disable_with => "Salvando..."%>
+					<%=link_to "Cancelar", :back, :class => "btn"%>
+				</div>			
+				<%end%>
+			</div>
+		</div>
+	</div>
+</div>

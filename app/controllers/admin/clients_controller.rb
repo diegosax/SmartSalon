@@ -20,6 +20,19 @@ class Admin::ClientsController < Admin::ApplicationController
     end
   end
 
+  def new
+    @client = Client.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @client }
+    end
+  end
+
+  def edit
+    @client = Client.find(params[:id])
+  end
+
 	def create
 		@client = Client.new(params[:client])
 		generated_password = Devise.friendly_token.first(6)
@@ -39,4 +52,30 @@ class Admin::ClientsController < Admin::ApplicationController
     	  end
     	end
 	end
+
+  def update
+    @client = Client.find(params[:id])
+
+    respond_to do |format|
+      if @client.update_attributes(params[:client])
+          flash[:notice] = "Cliente atualizado com sucesso!"
+        format.html { redirect_to admin_client_url }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @client.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+
+    clientSalon = ClientSalon.where(:client_id => params[:id], :salon_id => current_professional.salon.id)
+    clientSalon.destroy
+ 
+    respond_to do |format|
+      format.html { redirect_to admin_clients_url }
+      format.json { head :no_content }
+    end
+  end
 end
