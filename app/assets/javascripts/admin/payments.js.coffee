@@ -1,6 +1,4 @@
-$(document).ready(function(){
-	console.log("Payments.js loaded");
-
+###$(document).ready(function(){
 	var moip_success = function(data){
 		alert('Sucesso\n' + JSON.stringify(data));
 	}
@@ -14,3 +12,4 @@ $(document).ready(function(){
 	}	
 
 });
+###

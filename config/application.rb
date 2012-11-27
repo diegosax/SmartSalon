@@ -36,6 +36,9 @@ module Smartsalon
     config.autoload_paths += %W[#{config.root}/lib/modules/]
     config.autoload_paths += %W[#{config.root}/lib]
 
+    config.assets.paths << "#{Rails.root}/vendor/assets/fonts"
+
+
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 

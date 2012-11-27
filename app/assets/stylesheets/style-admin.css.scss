@@ -1,39 +1,40 @@
-body.admin-body{
+body{
 	background: url("/assets/background/bg-body.png") repeat-y;
 	background-position: center;
 	padding-top: 40px;
 	padding-bottom: 40px;	
-	.headerbar {
-		padding: 10px 0 16px 0;
-		background: #fff;
-	}
-	.link-dangerous,
-	.link-dangerous:hover {
-		color: #d52705;
-	}
-	.new_notifications_count_indicator.has_new_notifications span {
-		background: #f20000;
-		padding: 1px 6px;
-		margin: 0 -6px;
-		-moz-border-radius: 4px;
-		-webkit-border-radius: 4px;
-		border-radius: 4px;
-		color: #fff;
-	}
-	#notification_switcher {
-		position: relative;
-	}
-	#header-logo {
-		vertical-align: middle;
-	}
-	#header-logo > * {
-		line-height: 50px;
-		max-height: 50px;
-	}
-	#header-logo img {
-		vertical-align: middle;
-		max-width: 100%;
-	}
+}
+.headerbar {
+	padding: 10px 0 16px 0;
+	background: #fff;
+}
+.link-dangerous,
+.link-dangerous:hover {
+	color: #d52705;
+}
+.new_notifications_count_indicator.has_new_notifications span {
+	background: #f20000;
+	padding: 1px 6px;
+	margin: 0 -6px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	color: #fff;
+}
+#notification_switcher {
+	position: relative;
+}
+#header-logo {
+	vertical-align: middle;
+}
+#header-logo > * {
+	line-height: 50px;
+	max-height: 50px;
+}
+#header-logo img {
+	vertical-align: middle;
+	max-width: 100%;
+}
 	/* temp */
 	#navigation-site img {
 		display: none;
@@ -315,4 +316,3 @@ body.admin-body{
 	#main{
 		padding-top: 20px;
 	}
-}

@@ -1,5 +1,7 @@
 Smartsalon::Application.routes.draw do
 
+  get "dashboard/index"
+
   post "favorites" => "favorites#create"
 
   delete "favorites/:id" => "favorites#destroy"
@@ -9,6 +11,7 @@ Smartsalon::Application.routes.draw do
   namespace :landing do
     root :to => "pages#index"
     get "pages/index"
+    get "pages/about"
   end
 
   namespace :admin do    
@@ -76,7 +79,7 @@ Smartsalon::Application.routes.draw do
 
   resources :users
 
-  root :to => "events#index"
+  root :to => "dashboard#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
