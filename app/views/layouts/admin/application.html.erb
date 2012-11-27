@@ -182,11 +182,27 @@
 										</ul>
 									</li>
 
-									<li>
+									<li class="<%=active_class('clients')%>">
 										<span title="Clientes">
 											<i class="icon-users"></i>
 											<span class="nav-title">Clientes</span>
 										</span>
+
+											<ul class="inner-nav">
+											<li class="<%=active_action('clients', 'index')%>">
+												<%=link_to admin_clients_path do%>
+												<i class="icol-application-view-list"></i>
+												Listar Clientes
+												<%end%>
+											</li>
+											<li class="<%=active_action('clients', 'new')%>">
+												<%=link_to new_admin_client_path do%>
+												<i class='icol-add'></i>
+												Novo Cliente
+												<%end%>
+											</li>
+
+										</ul>
 									</li>
 									<li class="<%=active_class('salons')%>">
 										<%=link_to admin_salon_path(current_professional.salon) do%>

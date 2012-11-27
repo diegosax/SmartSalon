@@ -1,0 +1,66 @@
+<%=render "top_menu"%>
+
+<div id="main-header" class="page-header">
+	<h1 id="main-heading">
+		Clientes
+	</h1>
+</div>
+<div id="main-content">
+	<div class="row-fluid">
+		<div class="span12 widget">
+			<div class="widget-header">
+				<span class="title">Clientes</span>
+				<div class="toolbar">
+					<%=link_to "Adicionar Cliente", new_admin_client_path, :class => "btn btn-gebo btn-mini"%>
+				</div>
+			</div>
+			<div class="widget-content table-container">
+				<table class="table table-striped form-inline" id="services_list">
+					<thead>
+						<tr>
+							<th>Nome</th>
+							<th>Celular</th>
+							<th>E-mail</th>							
+							<th></th>		
+						</tr>
+					</thead>
+					<tbody>
+
+						<%@clients.each do |c|%>
+						<tr id="c_<%=c.id.to_s%>">					
+							<td><%=c.name%></td>
+							<td><%=c.celphone%></td>					
+							<td><%=c.email%></td>
+              <td class="action-col">
+								<span class="btn-group">
+									<%=link_to [:admin, c], 
+									:class => "btn btn-small btn-primary" do%>
+									<i class="icon-search"></i>
+									Detalhes
+									<%end%>
+									<%=link_to edit_admin_client_path(c), 
+									:class => "btn btn-small btn-warning" do%>
+									<i class="icon-pencil"></i>
+									Editar
+									<%end%>
+									<%=link_to [:admin,c], 
+									"data-method-type" => :delete, 
+									:class => "btn btn-small btn-danger confirmable",
+									"data-message" => "Deseja realmente remover este cliente?" do%>
+									<i class="icon-trash"></i>
+									Remover
+									<%end%>
+
+
+								</span>
+
+
+							</td>
+						</tr>
+						<%end%>
+					</tbody>					
+				</table>	
+			</div>
+		</div>
+	</div>	
+</div>
