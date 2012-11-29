@@ -5,7 +5,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Home | Frenzy Responsive HTML Template</title>
+	<title>Instanapp | Área do cliente</title>
 	<meta name="description" content="">
 	<meta name="author" content="bonfirelab | www.bonfirelab.com">
 	<meta name="robots" content="index, follow">
@@ -67,7 +67,7 @@
 							</form>
 							<ul class="user-menu">
 								<li><a href="#signInModal" data-toggle="modal">Sign In</a></li>
-								<li><a href="#">Sign Up</a></li>
+								<li><a href="#">Sign Out</a></li>
 								<li class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" href="#">My Account 
 										<span class="awe-caret-down icon-white"></span></a>
@@ -75,7 +75,13 @@
 											<li><a href="#"><span class="awe-dashboard"></span> Dashboard</a></li>
 											<li><a href="#"><span class="awe-user"></span> Profile</a></li>
 											<li><a href="#"><span class="awe-cog"></span> Settings</a></li>
-											<li><a href="#"><span class="awe-signout"></span> Sign Out</a></li>
+											<li>
+												<%=link_to destroy_user_session_path, :method => :delete, :class => "awe-signout" do%>
+												<span class="awe-signout">
+													Sair
+												</span>
+												<%end%>												
+											</li>
 										</ul>
 									</li>
 								</ul>
@@ -125,7 +131,13 @@
 														<li><a href="#"><span class="awe-dashboard"></span> Dashboard</a></li>
 														<li><a href="#"><span class="awe-user"></span> Profile</a></li>
 														<li><a href="#"><span class="awe-cog"></span> Settings</a></li>
-														<li><a href="#"><span class="awe-signout"></span> Sign Out</a></li>
+														<li>
+															<%=link_to destroy_user_session_path, :method => :delete do%>
+															<span class="awe-signout">
+																Sair
+															</span>
+															<%end%>												
+														</li>
 													</ul>
 												</li>
 											</ul>

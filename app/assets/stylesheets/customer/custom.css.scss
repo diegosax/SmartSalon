@@ -1,0 +1,70 @@
+.dashboard .all-events h3.post-lead{
+	cursor: pointer;
+	padding: 3px 8px;
+}
+
+.dashboard .all-events h3.post-lead:hover{
+	background-color:#eef;
+}
+
+.dashboard h3.salon_info{
+	position: absolute;
+	margin: 0;
+	line-height: 30px;
+	display: block;
+	top: 60px;
+	right: 39px;
+	height: 30px;
+	padding: 0 10px;
+	background-color: rgba(0, 0, 0, 0.8);
+	background: url('/assets/customer/slider-bg-iefix.png') repeat 0 0 transparent 9;
+	max-width: 80%;
+	border-right: 5px solid #F47E00;
+	white-space: nowrap;
+	font-size:100%;
+}
+
+.dashboard h3.salon_info a{
+	color: white;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-decoration: none;	
+	white-space: nowrap;
+}
+
+.dashboard h3.salon_info:hover{
+	border-right: 5px solid #00CC33;
+}
+
+.dashboard .event-actions{
+	position: absolute;
+	top: 10px;
+	right: 50px;
+	z-index: 1001;
+}
+
+.dashboard .event-actions > div{
+	display:inline-block;
+}
+
+.dashboard .event-actions > div > span{
+	color: #535353;
+	display: block;
+	width: 24px;
+	height: 24px;
+	line-height: 23px;
+	background-color: white;
+	text-align: center;
+	-webkit-border-radius: 1000px;
+	-moz-border-radius: 1000px;
+	border-radius: 1000px;
+	cursor: pointer;
+	-webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard .event-actions > div > span:hover{
+	color: #F47E00;
+}

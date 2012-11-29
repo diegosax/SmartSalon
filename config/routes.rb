@@ -43,7 +43,13 @@ Smartsalon::Application.routes.draw do
     end
     post "payments/notification" => "payments#notification", :as => "payment_notification"
 
-    resources :clients
+    resources :clients do
+      post "add/to/salon" => "clients#add_to_salon", :as => "add_to_salon"
+      collection do
+        get "search"
+      end
+      
+    end
     get 'dashboard' => "dashboard#index"
   end
 

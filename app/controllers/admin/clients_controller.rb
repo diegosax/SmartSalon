@@ -1,14 +1,14 @@
 class Admin::ClientsController < Admin::ApplicationController
 	before_filter :authenticate_professional!
-    load_and_authorize_resource
+  load_and_authorize_resource
 
   def index
-      @clients = current_professional.salon.clients
+    @clients = current_professional.salon.clients
 
-      respond_to do |format|
+    respond_to do |format|
         format.html # index.html.erb
         format.json { render json: @clients }
-      end
+    end
   end
 
   def show
@@ -33,32 +33,61 @@ class Admin::ClientsController < Admin::ApplicationController
     @client = Client.find(params[:id])
   end
 
-	def create
-		@client = Client.new(params[:client])
-		generated_password = Devise.friendly_token.first(6)
-		@client.password = generated_password
-		@client.salons << current_professional.salon
-        @client.created_by = current_professional.salon.id
-    	respond_to do |format|
-    	  if @client.save
-            flash[:notice] = "Cliente cadastrado com sucesso!"
-    	    format.html { redirect_to @client }
-    	    format.json { render json: @client, status: :created, location: @client }
-    	    format.js
-    	  else
-    	  	format.js {render "create_error"}
-    	    format.html { render action: "new" }
-    	    format.json { render json: @client.errors, status: :unprocessable_entity }
-    	  end
-    	end
-	end
+  def search
+    @client = Client.where("email = ? or celphone = ?", params[:email], params[:celphone]).first    
+    respond_to do |format|
+      if @client        
+        format.js
+      else        
+        format.js {render :search_not_found}
+      end
+    end          
+  end
+
+  def add_to_salon
+    @client = Client.find(params[:client_id])
+    @client.salons << current_professional.salon      
+    respond_to do |format|
+      if @client.save
+        flash[:notice] = "Cliente adicionado com sucesso!"
+        format.html { redirect_to @client }
+        format.json { render json: @client, status: :created, location: @client }
+        format.js
+      else
+        puts @client.errors
+        format.js {render "add_error"}
+        format.html { render action: "new" }
+        format.json { render json: @client.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def create
+    @client = Client.new(params[:client])
+    generated_password = Devise.friendly_token.first(6)
+    @client.password = generated_password
+    @client.salons << current_professional.salon
+    @client.created_by = current_professional.salon.id
+    respond_to do |format|
+      if @client.save
+        flash[:notice] = "Cliente cadastrado com sucesso!"
+        format.html { redirect_to @client }
+        format.json { render json: @client, status: :created, location: @client }
+        format.js
+      else
+        format.js {render "create_error"}
+        format.html { render action: "new" }
+        format.json { render json: @client.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   def update
     @client = Client.find(params[:id])
 
     respond_to do |format|
       if @client.update_attributes(params[:client])
-          flash[:notice] = "Cliente atualizado com sucesso!"
+        flash[:notice] = "Cliente atualizado com sucesso!"
         format.html { redirect_to admin_client_url }
         format.json { head :no_content }
       else
@@ -68,14 +97,14 @@ class Admin::ClientsController < Admin::ApplicationController
     end
   end
 
-  def destroy
+def destroy
 
-    clientSalon = ClientSalon.where(:client_id => params[:id], :salon_id => current_professional.salon.id)
-    clientSalon.destroy
- 
-    respond_to do |format|
-      format.html { redirect_to admin_clients_url }
-      format.json { head :no_content }
-    end
+  clientSalon = ClientSalon.where(:client_id => params[:id], :salon_id => current_professional.salon.id)
+  clientSalon.destroy
+
+  respond_to do |format|
+    format.html { redirect_to admin_clients_url }
+    format.json { head :no_content }
   end
+end
 end

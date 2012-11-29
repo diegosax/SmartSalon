@@ -6,10 +6,8 @@ class AdminAbility
     if user.role? :admin      
       can :manage, :all
     else      
-      if user.is_professional? #user.role?(:professional)
-          can :create, Client
-          can :read, Client
-          can :update, Client
+      if user.is_professional? #user.role?(:professional)          
+          can :manage, Client
           
           can :destroy, ClientSalon, :salon_id => user.salon.id 
 

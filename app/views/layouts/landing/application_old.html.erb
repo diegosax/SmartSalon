@@ -1,0 +1,303 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Instanapp</title>
+
+  <!-- // Viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+  <!-- // Webfonts -->
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:400,700,700italic,400italic|Pacifico|Viga|Cutive" rel="stylesheet">
+
+  <!-- // CSS -->
+  <%=stylesheet_link_tag "landing/style","landing/nivo-slider"%>
+
+  <!-- // JavaScript (All JavaScript at the bottom, except "Modernizr" and "Adapt".) -->
+  <script src="/assets/libs/modernizr-2.0.6.js"></script>
+  <script>
+  var ADAPT_CONFIG = {
+    path: 'css/',
+    dynamic: true,
+    range: [
+    '0px    to 760px  = ../../../../../../assets/landing/mobile.css',
+    '760px  to 980px  = ../../../../../../assets/landing/720.css',
+    '980px        = ../../../../../../assets/landing/960.css'
+    ]
+  };
+  </script>
+  <%=javascript_include_tag "jquery","adapt.min","jquery.nivo.slider.pack"%>
+</head>
+
+<body>
+
+
+
+  <!-- ##################### Top ##################### -->
+  <div id="top">
+    <div class="container_12">
+
+      <div class="grid_12">
+        <%= form_for("user", :url => user_session_path, :html => {:class => "float-right landing-login"}) do |f| %>
+        <p>
+          <%= f.text_field :email, :placeholder => "Email" %>
+          <%= f.password_field :password, :placeholder => "Senha" %>
+          <%= f.submit 'Login' %>
+        </p>
+        <p>
+          <div class="checkbox">
+            <label>
+              <%= f.check_box :remember_me %>
+              Manter conectado
+            </label>
+          </div>
+          <div class="forgot-passowrd">
+            <%= link_to "Esqueci minha senha", new_password_path('user') %>
+          </div>
+        </p>
+        
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+  <!-- ##################### Top END ##################### -->
+
+
+
+  <!-- ##################### Hero ##################### -->
+  <header id="hero">
+    <div id="hero-inner">
+      <div class="container_12">
+
+        <div class="grid_12">
+          <h1 id="logo">Faze</h1>
+          <h2 id="claim">Agende horários em seus salões favoritos sem complicação. Use pela internet, celular ou tablet!</span></h2>
+          <img src="/assets/landing/woman-with-phone.png" alt="" id="promo">
+        </div>
+
+      </div>
+    </div>
+  </header>
+  <!-- ##################### Hero END ##################### -->
+
+
+
+  <!-- ##################### Bar ##################### -->
+  <div id="bar">
+    <div class="container_12">
+
+      <div class="grid_6 push_3" id="cta">
+        <p><a href="#" class="cta-button">
+          Cadastrar meu salão
+        </a></p>
+        <p><em>Aplicativos:</em> <strong><a href="#">Download</a> para iPhone</strong> <strong><a href="#">Download</a> para Android</strong></p>
+      </div>      
+
+    </div>
+  </div>
+  <!-- Bar END -->
+
+
+
+  <!-- ##################### Main ##################### -->
+  <article id="main">
+    <div class="container_12">
+
+      <!-- Feature Row 1 -->
+      <section class="grid_4 mainbox">
+        <h3 class="title">
+          <img src="/assets/landing/icon1.png" alt=""> 
+          Moderno
+        </h3>
+        <p>
+          Passe a gerenciar seus horários no salão de uma maneira fácil, prática e intuitiva.
+          Todo o procesos é feito pela internet, assim você consegue ter informações ao vivo sobre os horários disponíveis para o serviço que você deseja fazer.
+        </p>
+      </section>
+
+      <section class="grid_4 mainbox">
+        <h3 class="title">
+          <img src="/assets/landing/icon2.png" alt=""> 
+          Adaptável
+        </h3>
+        <p>
+          Não importa de onde você esteja acessando nossa página, seja de um notebook, um tablet ou até mesmo um celular, nosso site irá se adaptar a sua tela e você terá um layout confortável para gerenciar seus horários.
+        </p>
+      </section>
+
+      <section class="grid_4 mainbox noshadow">
+        <h3 class="title"><img src="/assets/landing/icon3.png" alt=""> Photoshop</h3>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed dui odio, euismod vel, hendrerit nonummy, molestie quis, erat. Sed ac mauris quis tortor ultrices rutrum. Suspendisse potenti. Vestibulum ante ipsum primis in faucibus orci luctus.</p>
+      </section>
+      <!--Feature Row 1 END -->
+
+      <div class="clearfix"></div>
+
+      <!-- Feature Row 2 -->
+      <section class="grid_4 mainbox">
+        <h3 class="title"><img src="/assets/landing/icon4.png" alt=""> Lorem</h3>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed dui odio, euismod vel, hendrerit nonummy, molestie quis, erat. Sed ac mauris quis tortor ultrices rutrum. Suspendisse potenti. Vestibulum ante ipsum primis in faucibus orci luctus.</p>
+      </section>
+
+      <section class="grid_4 mainbox">
+        <h3 class="title"><img src="/assets/landing/icon5.png" alt=""> Ipsum</h3>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed dui odio, euismod vel, hendrerit nonummy, molestie quis, erat. Sed ac mauris quis tortor ultrices rutrum. Suspendisse potenti. Vestibulum ante ipsum primis in faucibus orci luctus.</p>
+      </section>
+
+      <section class="grid_4 mainbox noshadow">
+        <h3 class="title"><img src="/assets/landing/icon6.png" alt=""> Dolor</h3>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed dui odio, euismod vel, hendrerit nonummy, molestie quis, erat. Sed ac mauris quis tortor ultrices rutrum. Suspendisse potenti. Vestibulum ante ipsum primis in faucibus orci luctus.</p>
+      </section>
+      <!-- Feature Row 1 END -->
+
+      <div class="clearfix"></div>
+
+      <!-- About -->
+      <section class="grid_6 mainbox noshadow">
+        <h3 class="title"><img src="/assets/landing/icon7.png" alt=""> About</h3>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed dui odio, euismod vel, hendrerit nonummy, molestie quis, erat. Sed ac mauris quis tortor ultrices rutrum. Suspendisse potenti.</p>
+        <ul class="checklist">
+          <li>Lorem ipsum dolor sit amet, condetetur sadipscing elitr</li>
+          <li>Magna aliquyam erat sed diam voluptua</li>
+          <li>Sed diam nonumy eirmod tempor invidunt ut labore</li>
+          <li>Consetetur sadipscing elitr sed diam noumy</li>
+          <li>Volupta diam sed aliquyam magna dolore</li>
+        </ul>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed dui odio, euismod vel, hendrerit nonummy, molestie quis, erat. Sed ac <a href="#">mauris</a> quis tortor ultrices rutrum. Suspendisse potenti.</p>
+        <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
+      </section>
+      <!-- About END -->
+
+      <!-- Screenshots -->
+      <section class="grid_6 mainbox noshadow">
+        <h3 class="title"><img src="/assets/landing/icon8.png" alt=""> Screenshots</h3>
+        <div class="nivoSlider">
+          <img src="/assets/landing/main-slider-dummy-1.jpg" alt="">
+          <img src="/assets/landing/main-slider-dummy-2.jpg" alt="">
+          <img src="/assets/landing/main-slider-dummy-3.jpg" alt="">
+          <img src="/assets/landing/main-slider-dummy-4.jpg" alt="">
+        </div>
+      </section>
+      <!-- Screenshots END -->
+
+    </div>
+  </article>
+  <!-- ##################### Main END ##################### -->
+
+
+
+  <!-- ##################### Newsletter ##################### -->
+  <div id="newsletter">
+    <div id="newsletter-inner">
+      <div class="container_12">
+
+        <div class="grid_6">
+          <h3 class="title">
+            Cadastre-se agora!
+          </h3>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <%=form_for(Client.new) do |f|%>
+
+          <div class="grid_3">
+            <%=f.label :name, "Nome"%>
+            <%=f.text_field :name%>
+          </div>
+
+          <div class="grid_3">
+            <%=f.label :email, "Email"%>
+            <%=f.text_field :email%>
+          </div>
+
+          <div class="grid_3">
+            <%=f.label :password, "Senha"%>
+            <%=f.password_field :password%>
+          </div>
+
+          <div class="grid_3">
+            <%=f.submit "Cadastrar"%>
+          
+          </div>
+
+        <%end%>
+
+      </div>
+    </div>
+  </div>
+  <!-- ##################### Newsletter END ##################### -->
+
+
+
+  <!-- ##################### Voices ##################### -->
+  <div id="voices">
+    <div class="container_12">
+
+      <div class="grid_12" id="testimonial">
+        <h3 class="title"><img src="/assets/landing/icon10.png" alt=""> What others say</h3>
+        <blockquote>"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed dui odio, euismod vel, hendrerit nonummy, molestie quis, erat. Sed ac mauris quis tortor ultrices rutrum. Suspendisse potenti. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vestibulum lacus dolor, viverra vel, lacinia sit amet, suscipit sed, felis." <span>- John Doe, <a href="#">Big Company</a></span></blockquote>
+      </div>
+
+      <div class="grid_12" id="asseen">
+        <h3 class="title"><img src="/assets/landing/icon11.png" alt=""> As seen on</h3>
+        <div id="asseen-logos">
+          <ul>
+            <li><img src="/assets/landing/dummy-logo.png" alt=""></li>
+            <li><img src="/assets/landing/dummy-logo.png" alt=""></li>
+            <li><img src="/assets/landing/dummy-logo.png" alt=""></li>
+            <li><img src="/assets/landing/dummy-logo.png" alt=""></li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- ##################### Voices END ##################### -->
+
+
+
+  <!-- ##################### Footer ##################### -->
+  <footer id="footer">
+    <div class="container_12">
+
+      <div class="grid_6" id="footer-social">
+        <ul>
+          <li>Find us on:</li>
+          <li><a href="#"><img src="/assets/landing/icon-facebook.png" alt=""></a></li>
+          <li><a href="#"><img src="/assets/landing/icon-twitter.png" alt=""></a></li>
+          <li><a href="#"><img src="/assets/landing/icon-google.png" alt=""></a></li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="grid_6" id="footer-credits">
+        <p>&copy; 2012 Faze. Design by <a href="#">Weddig &amp; Keutel</a>.</p>
+        <!-- As long as you use the default icons of this theme you are NOT allowed to change the "Icons by icons8.com" text/link or to deleted it. The author of the icons must be attributed! -->
+        <p>Icons by <a href="http://icons8.com/download-huge-windows8-set/">icons8.com</a>.</p>
+      </div>
+
+    </div>
+  </footer>
+  <!-- ##################### Footer ##################### -->
+
+
+
+  <!-- // JavaScript (At the bottom for fast page loading.) --> 
+  <script type="text/javascript">
+  $(function(){
+    $('.nivoSlider').nivoSlider({
+      animSpeed: 1000, // Slide transition speed (in ms)
+          pauseTime: 4000, // How long each slide will show (in ms)
+          directionNav: true,
+          controlNav: true,
+          prevText: 'prev',
+          nextText: 'next'
+        });    
+  }); 
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+@media screen and (max-width: 730px){
+	.table-flipscroll.dashboard-table thead tr th{
+		width:80% !important;		
+	}
+
+	.table-flipscroll.dashboard-table thead tr th:first-child{
+		height: 1.2em;
+		padding: 2.52em 0.65em;		
+	}
+
+	.table-flipscroll.dashboard-table tr.tr_info{
+		display: none !important;
+	}
+
+	.tabbable ul li{
+		float:none !important;		
+	}
+	.tabbable ul li.active a{		
+		background-color: #EEE !important;		
+	}
+
+	.analytics-tab .tab-content,
+	.widget-content.table-container{
+		overflow: hidden !important;
+	}
+
+	.table-flipscroll td{
+		min-height: 1.5em;
+	}
+
+	.table-flipscroll th{
+		background-color: #FFF !important;
+	}
+
+
+
+}

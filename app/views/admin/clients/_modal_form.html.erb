@@ -1,20 +1,64 @@
 <div class="modal hide fade" id="new_client">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Novo Cliente</h3>
+    <h3>Adicionar Cliente</h3>
   </div>
   <div class="modal-body">
-    <%@new_client = Client.new%>
-    <%= simple_form_for([:admin,@new_client],:html=>{:class=>"form-horizontal",:remote=>true}) do |f| %>
-    <div class="form-content">
-      <%=f.input :name%>
-      <%=f.input :celphone%>                      
-      <%=f.input :email%>      
+
+    <%=form_tag "#", :class => "form-horizontal" do |f| %>
+    <label class="control-label">
+      Sobre o Cliente
+    </label>
+    <div class="controls">
+      <label class="radio">
+        <%=radio_button_tag "client_status","registered", true%>
+        Cliente possui conta no Instanapp
+      </label>
+      <label class="radio">
+        <%=radio_button_tag "client_status","not_registered"%>
+        Cliente sem conta no Instanapp
+      </label>
+      <label class="radio">
+        <%=radio_button_tag "client_status","not_sure"%>
+        Não tenho certeza
+      </label>
+    </div>
+    <%end%>    
+
+    <div id="not_registered" class="hidden">
+      <%@new_client = Client.new%>
+      <%= simple_form_for([:admin,@new_client],:html=>{:class=>"form-horizontal",:remote=>true}) do |f| %>
+      <div class="form-content">
+        <%=f.input :name%>
+        <%=f.input :celphone%>                      
+        <%=f.input :email%>      
+      </div>
+      <%end%>
+    </div>
+
+    <div id="registered" class="select_client">
+      <%=form_tag search_admin_clients_path, :class => "form-vertical", :remote => true, :method => :get do |f|%>
+      <div class="formSep">
+        <label>Digite o email do cliente</label>
+        <%=text_field_tag :email%>
+        <span class="help-block">Deve ser o mesmo usado no Instanapp</span>                
+      </div>
+      <h4>ou</h4>
+      <div class="formSep">
+        <label>Digite o celular do cliente</label>
+        <%=text_field_tag :celphone,"", :class => "phone"%>
+        <span class="help-block">Deve ser o mesmo usado no Instanapp</span>                
+      </div>
+      <%=submit_tag "Buscar Cliente"%>
+      <%end%>
+    </div>
+
+    <div id="not_sure" class="hidden select_client">
+      
     </div>
   </div>
   <div class="modal-footer">
     <a href="#" class="btn" data-dismiss='modal'>Cancelar</a>
-    <%=f.submit "Salvar", :class=> "btn btn-primary", :disable_with => "Salvando..."%>    
-  </div>
-  <%end%>
+    <%=link_to "Adicionar Cliente","#", :class=> "btn btn-primary", :disable_with => "Salvando..."%>    
+  </div>  
 </div>

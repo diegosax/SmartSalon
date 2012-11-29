@@ -5,13 +5,14 @@ class Admin::ProfessionalServicesController < Admin::ApplicationController
   load_and_authorize_resource
 
   def new
-    @professional = Professional.find(params[:professional_id])
+    @professional = @salon.professionals.find(params[:professional_id])
 
-    if @professional.id != current_professional.id
-      raise CanCan::AccessDenied.new("Not authorized!", :create, ProfessionalService)
-    end
-
-    @services = Service.where("id NOT IN (?)", @professional.service_ids)    
+    #if @professional.id != current_professional.id
+    #  raise CanCan::AccessDenied.new("Not authorized!", :create, ProfessionalService)
+    #end
+    service_ids = @professional.service_ids
+    service_ids = [-1] if service_ids.empty?
+    @services = @salon.services.where("id NOT IN (?)", service_ids)    
     respond_to do |format|
       format.js
     end

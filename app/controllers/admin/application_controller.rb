@@ -1,5 +1,6 @@
 class Admin::ApplicationController < ActionController::Base
 	layout 'admin/application'
+	before_filter :authenticate_professional!, :except => [:check_logged]
 	before_filter :load_salon
 	rescue_from CanCan::AccessDenied do |e|
 		Rails.logger.debug "Access denied on #{e.action} #{e.subject.inspect}"
@@ -20,11 +21,10 @@ class Admin::ApplicationController < ActionController::Base
 	end
 
 	def load_salon
-		@salon = params[:salon_id]
+		@salon = current_professional.salon
 	end
 
-	def current_ability
-		puts "SETTING THE CURRENT ABILITYYYYYYYYYYYYYYYYYYYYYY"
+	def current_ability		
   		@current_ability ||= AdminAbility.new(current_professional)
 	end
 

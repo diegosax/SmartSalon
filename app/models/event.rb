@@ -3,6 +3,7 @@ class Event < ActiveRecord::Base
 	attr_accessible :changeable, :client_id, :description, :duration, :professional_id, :service_id, :salon_id, :start_at, :status, :title, :end_at, :confirm_conflicts, :reschedule	
 	scope :active, :conditions => {:status => "Agendado"}
 	scope :canceled, :conditions => {:status => "Cancelado"}
+	scope :next, :conditions => ["start_at >= ?",Time.zone.now.beginning_of_day]
 	belongs_to :client
 	belongs_to :professional
 	belongs_to :service

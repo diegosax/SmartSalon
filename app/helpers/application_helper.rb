@@ -38,4 +38,8 @@ module ApplicationHelper
 			"warning"
 		end
 	end
+
+	def formatted_phone(phone)
+		phone.sub(/(\d{2})(\d{4})(\d{4})/, "(\\1)\\2-\\3") if phone
+	end
 end

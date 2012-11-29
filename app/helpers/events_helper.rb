@@ -12,6 +12,16 @@ module EventsHelper
             end            
       end
 
+      def format_date_header(date)
+            if date == Date.today
+                  "Hoje"
+            elsif date == Date.tomorrow
+                  "Amanhã"
+            else
+                  date.strftime("%d de %B")
+            end
+      end
+
       def isavailable_mod(events, myDate, params = {})            
             puts events.inspect
             start_hour = 0

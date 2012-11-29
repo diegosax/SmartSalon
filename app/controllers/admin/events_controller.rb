@@ -3,9 +3,10 @@
 class Admin::EventsController < Admin::ApplicationController
   include NewEvent
   before_filter :authenticate_professional!
+  before_filter :load_salon
 
   def index
-    @events = Event.order("start_at").includes(:client,:professional).all
+    @events = @salon.events.order("start_at").includes(:client,:professional).all
     
 
     @month = params[:month] ? Date.parse(params[:month]) : Date.today

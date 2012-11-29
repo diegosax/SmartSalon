@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Instanap - Beauty</title>
+	<%= stylesheet_link_tag    "application-customer", :media => "all" %>
+	<%= javascript_include_tag "application" %>
+	<%= csrf_meta_tags %>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body class="client">
+	<div class="modal hide fade" id="confirmation-modal">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">×</button>
+			<h3>Confirmação</h3>
+		</div>
+		<div class="modal-body">
+			<p></p>
+		</div>
+		<div style="display:none" class="link" data-destination="">
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss = "modal">Cancelar</a>
+			<a class="btn btn-primary" id="confirm-btn">Confirmar</a>
+		</div>
+	</div>
+
+
+	<div id="maincontainer" class="clearfix">
+		<!-- header -->
+		<header>
+			<div class="navbar navbar-fixed-top">
+				<div class="navbar-inner">
+					<div class="container">
+						<%=link_to root_url, :class => "brand" do%>						
+							Instanap {Beauty}
+						<%end%>
+						<ul class="nav user_menu pull-right">
+							<li class="dropdown">
+								<%if current_user%>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=current_user.email%> <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="user_profile.html">My Profile</a></li>
+									<li><a href="javascrip:void(0)">Another action</a></li>
+									<li class="divider"></li>
+									<li>
+										<%=link_to "Sair", destroy_user_session_path, :method => :delete%>
+									</li>
+								</ul>
+								<%else%>
+								<%=link_to "Login", new_user_session_path, :class => "dropdown-toggle"%>
+
+								<%end%>
+								
+								
+							</li>
+						</ul>
+						<a data-target=".nav-collapse" data-toggle="collapse" class="btn_menu">
+							<span class="icon-align-justify icon-white"></span>
+						</a>						
+					</div>
+				</div>
+			</div>
+			
+			<% flash.each do |name, msg| %>
+				<%puts "FLASH MESSAGESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSss"%>
+				<%puts "#{name} - #{msg}"%>
+				<%= content_tag :div, msg, id: "flash_#{name}", class: "alert alert-#{name}" %>
+			<% end %>
+
+		</header>
+
+		
+		<!-- main content -->		
+			<div class="container" id="container-body">
+				<div class="row-fluid">
+					<div class="row-fluid">
+						<div class="span12">
+							<ul class="dshb_icoNav clearfix">
+								<li>
+									<%=link_to "Salões", salons_path, :style=> "background-image: url(/assets/gCons/bookmark.png)"%>
+								</li>
+								<li>
+									<%=link_to "Agendar", new_event_path, :style=> "background-image: url(/assets/gCons/add-item.png)"%>
+								</li>
+								<li>
+									<%=link_to "Meus Eventos", events_path, :style=> "background-image: url(/assets/gCons/copy-item.png)"%>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<%= yield %>			
+				</div>
+			</div>
+	</div>
+</body>
+	<%= yield :scripts %>
+	<script type="text/javascript">
+		<% flash.each do |name, msg| %>		
+			var noty = noty(
+			{
+				text: '<%=escape_javascript(msg)%>',
+				type: "<%= escape_javascript(name.to_s == 'notice' ? 'success' : 'error')%>",
+				timeout: 4000
+			}
+			);
+		<%end%>				
+		</script>
+</html>

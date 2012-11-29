@@ -1,0 +1,26 @@
+<div class="review-block">
+	<div class="review-total">
+		<div class="name"><%=event.start_at.strftime("%H:%M")%></div>
+		<div class="total">
+			<div class="event-actions hidden-actions">
+				<div class="author-info">
+					<span class="ent-pencil">
+					</span>
+				</div>
+				<div class="time">
+					<span class="ent-calendar">
+					</span>
+				</div>
+				<div class="comment">
+					<span class="ent-comment">
+					</span>
+				</div>
+			</div>
+			<span class="value"><%=event.service.name%></span>
+			<span class="grade"><%=event.professional.name%> </span>
+		</div>
+	</div>
+	<h3 class="salon_info hidden-actions">
+		<%=link_to event.salon.name, event.salon%>							
+	</h3>				
+</div>
