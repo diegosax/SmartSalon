@@ -1,9 +1,17 @@
-<div id="mini_grid" class="wmk_grid">
-  <ul>
-  	<%if @my_salons_and_favorites%>
-	    <%@my_salons_and_favorites.each do |salon| %>
-	    	<%=render "salons/fav_salon", :salon => salon%>
-	    <%end%>
-    <%end%>
-  </ul>
-</div>
+<!-- Latest Review Widget -->
+	<div class="sidebar-widget" id="sidebar-tabs">
+		<div class="sidebar-header">
+			<ul class="nav nav-tabs" id="my-salons">
+				<li class="active"><a href="#my-salons">Meus Salões</a></li>				
+			</ul>
+		</div>
+		<div class="sidebar-content tab-content">
+			<div class="sidebar-item tab-pane active post-widget" id="my-salons">
+				<ul>
+					<%@my_salons_and_favorites.each do |salon|%>
+						<%=render "/salons/fav_salon", :salon => salon%>					
+					<%end%>
+				</ul>
+			</div>			
+		</div>
+	</div>

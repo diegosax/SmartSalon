@@ -4,6 +4,7 @@
 //= require customer_plugins/manifest
 //= require commom_plugins/chosen.jquery
 //= require commom_plugins/jquery.maskedinput-1.3
+//= require commom_plugins/jquery.placeholder.min
 //= require_tree ./customer
 //= require confirmation_modal
 //= require main

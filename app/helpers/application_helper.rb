@@ -9,7 +9,7 @@ module ApplicationHelper
 		return current_user.class == Lawyer
 	end
 
-	def active_class(controller)
+	def active_class(controller)		
 		controller == controller_name ? "active" : ""
 	end
 
@@ -40,6 +40,6 @@ module ApplicationHelper
 	end
 
 	def formatted_phone(phone)
-		phone.sub(/(\d{2})(\d{4})(\d{4})/, "(\\1)\\2-\\3") if phone
+		phone.sub(/(\d{2})(\d{4})(\d{4})/, "(\\1) \\2-\\3") if phone
 	end
 end

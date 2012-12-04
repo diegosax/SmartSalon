@@ -5,6 +5,7 @@
 	*= require font-awesome
 	*= require customer/fonts	
 	*= require customer/frenzy-blue	
+	*= require customer/form
 	*= require customer/custom
 
 */

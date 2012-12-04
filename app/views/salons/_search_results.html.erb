@@ -1,0 +1,32 @@
+<ul>
+	<%@salons.each do |salon|%>
+		<li>
+			<div class="item-top">
+				<div class="logo"><%=image_tag salon.logo.url%></div>
+				<div class="item-body">
+					<h3>    
+						<%=salon.name%>
+					</h3>
+						<address>        
+							<p><span class="awe-home"></span> <%=salon.address%> - <%=salon.neighborhood%></p>
+							<p><span class="awe-map-marker"></span> <%=salon.city%>, <%=salon.state%> - <%=salon.zipcode%></p>
+							<p><span class="awe-phone"></span> <%=formatted_phone(salon.landphone)%></p>
+						</address>      
+
+				</div>
+			</div>
+			<div class="item-bottom">
+
+				<%=link_to "#" do%>
+					<span class="awe-star-empty"></span>
+					Adicionar aos meus salões
+				<%end%>
+				<%=link_to "#" do%>
+					<span class="awe-calendar"></span>
+					Agendar Horário
+				<%end%>
+			</div>
+		</li>
+	<%end%>
+
+</ul>

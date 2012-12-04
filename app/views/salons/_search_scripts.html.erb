@@ -2,29 +2,19 @@
 
 <script type="text/javascript">
 
-$(document).ready(function(){
-  
-  <%if params[:location].present?%>
-    $('#search-tabs a[href="#address-search-tab"]').tab('show');  
-  <%else%>
-    $('#search-tabs a[href="#name-search-tab"]').tab('show');  
-  <%end%>
-
-  
-
-  function successGeocoded(address){    
-    $("#geolocation_info").html(
+function successGeocoded(address){    
+    $("#geolocation_status").html(
       "<p>Localização aproximada encontrada: <br><strong>" + address.formatted_address + "</strong></p>"
       );
-    addLoading($("#large_grid"));
+    addLoading($(".search-results"));
     $.ajax({
       url:"<%=escape_javascript(salons_path)%>" + ".js" ,
       data: {location: address.formatted_address},      
       dataType: "script"
     });
   }
-function
-   errorGeocoded(){
+  function
+  errorGeocoded(){
 
   }
 
@@ -50,20 +40,33 @@ function
   }
 
   function error(type){
-    $("#geolocation_info").html("<p>Me desculpe, mas sua localização não pôde ser determinada. Por favor, utilize outra opção de busca</p>");
+    $("#geolocation_status").html("<p>Me desculpe, mas sua localização não pôde ser determinada. Por favor, digite o endereço no campo acima</p>");
   }
 
   function locationSearch(){
     if (navigator.geolocation) {
-      $("#geolocation_info").html("Obtendo sua localização para encontrar os salões mais próximos <%=escape_javascript(image_tag '/assets/ajax_loader.gif')%>").slideDown("fast");
+      $("input#location").val("");
+      $("#geolocation_status").html("Obtendo sua localização para encontrar os salões mais próximos <%=escape_javascript(image_tag '/assets/ajax_loader.gif')%>").slideDown("fast");
       navigator.geolocation.getCurrentPosition(success, error);
     } else {
       error('not supported');
     }  
   }
 
-  $('a[href="#location-search-tab"]').on('shown', function (e) {
-    locationSearch();  
+$(document).ready(function(){
+
+  <%if params[:location].present?%>
+    $('#search-field a[href="#address-search"]').tab('show');  
+  <%else%>
+    $('#search-field a[href="#name-search"]').tab('show');  
+  <%end%>
+
+  
+
+  $('a[href="#address-search"]').on('shown', function (e) {
+    <%if !params[:location].present?%>          
+      locationSearch();    
+    <%end%>    
   });
 
 });

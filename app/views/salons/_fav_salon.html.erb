@@ -1,15 +1,11 @@
-<li class="thumbnail" data-id="<%=salon.id%>">
-  <%=link_to new_salon_event_url(salon) do%>                        
-  <%=image_tag salon.logo.url(:thumb)%>
-  <%end%>
-  <p>    
-    <a href="#" title="Remove" class="remove_favorite" rel="tooltip" >
-      <i class="icon-trash" data-original-title="Remover dos meus salões"></i>
-    </a>        
-    <%=link_to new_salon_event_url(salon), :style => "float:left" do%>
-      <span><strong><%=salon.name%></strong></span>
-    <%end%>
-    <br>    
-    <%=link_to "Ver Detalhes", salon%>
-  </p>
-</li>
+<li class="sidebar-item">
+  <a href="#" class="image-container">
+    <%=image_tag salon.logo.url(:thumb)%>
+  </a>
+  <h5>
+    <%=link_to salon.name, salon%>
+  </h5>
+  <span class="post-date">
+    <em><%="#{salon.city}, #{salon.state}"%> - <%=formatted_phone(salon.landphone)%></em></span>
+    <%=link_to "Agendar", new_salon_event_url(salon), :class => "btn btn-primary"%>
+  </li>

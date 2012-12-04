@@ -1,18 +1,21 @@
-<div class="row-fluid">  
-  
-  <div class="span4">
-  	<h3 class="heading">Meus Salões | Favoritos</h3>
-    <%if @my_salons_and_favorites%>
-    	<%=render "favorite_salons"%>
-    <%else%>
-    	<h3>Você precisa estar logado para acessar seus salões</h3>
-    	<%=link_to "Clique aqui", new_client_session_url%> para efetuar seu login
-    <%end%>
-  </div>
-  <div class="span8">
-    <%=render "search_salons"%>
+<div id="right-sidebar" class="span4 favorite_salons">
+  <%=render "favorite_salons"%>
+</div>
+
+<div id="content" class="span8">
+  <div class="post-single all-events">
+    <div class="article-header">
+      <h1 class="title">
+        Buscar Salões
+      </h1>
+      <div class="separator"></div>
+      <%=render "search_salons"%>
+      <div class="search-results">
+        <%=render "search_results"%>
+      </div>      
+    </div>
   </div>
 </div>
-</div>
+
 
 <%=render "search_scripts"%>

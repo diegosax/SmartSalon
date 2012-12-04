@@ -2,6 +2,8 @@ Smartsalon::Application.routes.draw do
 
   get "dashboard/index"
 
+  get "dashboard" => "dashboard#index"
+
   post "favorites" => "favorites#create"
 
   delete "favorites/:id" => "favorites#destroy"

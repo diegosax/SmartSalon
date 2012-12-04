@@ -7,83 +7,28 @@
 			<div class="separator"></div>
 			<%i = 0%>
 			<%while i < @events.size do%>
-				<%event = @events[i]%>				
-				<div>
-					<h3 class="post-lead" data-toggle="collapse" data-target="#<%=event.start_at.to_date%>">
-						<%=format_date_header event.start_at.to_date%> 
-						<a class="icon <%=i == 0 ? 'ent-minus' : 'ent-plus'%> pull-right"></a>						
-					</h3>	
-					<div class="events collapse <%=i == 0 ? 'in' : ''%>" id="<%=event.start_at.to_date%>">
-						<%=render :partial => "dashboard_event", :locals => {:event => event}%>
-						<%i+=1%>						
-						<%while i < @events.size && @events[i].start_at.to_date == @events[i-1].start_at.to_date do%>
-							<%event = @events[i]%>
-							<%=render :partial => "dashboard_event", :locals => {:event => event}%>
-							<%i+=1%>
-						<%end%>
-					</div>	
-				</div>				
+			<%event = @events[i]%>				
+			<div>
+				<h3 class="post-lead" data-toggle="collapse" data-target="#<%=event.start_at.to_date%>">
+					<%=format_date_header event.start_at.to_date%> 
+					<a class="icon <%=i == 0 ? 'ent-minus' : 'ent-plus'%> pull-right"></a>						
+				</h3>	
+				<div class="events collapse <%=i == 0 ? 'in' : ''%>" id="<%=event.start_at.to_date%>">
+					<%=render :partial => "dashboard_event", :locals => {:event => event}%>
+					<%i+=1%>						
+					<%while i < @events.size && @events[i].start_at.to_date == @events[i-1].start_at.to_date do%>
+					<%event = @events[i]%>
+					<%=render :partial => "dashboard_event", :locals => {:event => event}%>
+					<%i+=1%>
+					<%end%>
+				</div>	
+			</div>				
 			<%end%>			
-						
+
 		</div>
 	</div>
 </div>
 
-<div id="right-sidebar" class="span4 favorite_salons">	
-	<!-- Latest Review Widget -->
-	<div class="sidebar-widget" id="sidebar-tabs">
-		<div class="sidebar-header">
-			<ul class="nav nav-tabs" id="tab1">
-				<li class="active"><a href="#comments">Meus Salões</a></li>
-				<li><a href="#tags">Meus Funcionários</a></li>
-			</ul>
-		</div>
-		<div class="sidebar-content tab-content">
-			<div class="sidebar-item tab-pane active post-widget" id="comments">
-				<ul>
-					<li class="sidebar-item">
-						<a href="#" class="image-polaroid" title="Title">
-							<img src="/assets/customer/avatar/avatar-1.png" alt="Image">
-						</a>
-						<p>
-							<a href="#">This theme is powered by Twitter Bootstrap!</a><br>
-							<span class="post-date"><em>Posted by <a href="#">admin</a></em></span>
-						</p>
-					</li>
-					<li class="sidebar-item">
-						<a href="#" class="image-polaroid" title="Title">
-							<img src="/assets/customer/avatar/avatar-2.png" alt="Image">
-						</a>
-						<p>
-							<a href="#">Bravo! The LESS CSS stylesheet working great!</a><br>
-							<span class="post-date"><em>Posted by <a href="#">admin</a></em></span>
-						</p>
-					</li>
-					<li class="sidebar-item">
-						<a href="#" class="image-polaroid" title="Title">
-							<img src="/assets/customer/avatar/avatar-3.png" alt="Image">
-						</a>
-						<p>
-							<a href="#">Consectetur Adipiscing Elit Maecenas Justo Massa</a><br>
-							<span class="post-date"><em>Posted by <a href="#">admin</a></em></span>
-						</p>
-
-					</li>
-				</ul>
-			</div>
-			<div class="sidebar-item tab-pane tag-widget" id="tags">
-				<a href="#">tag</a>
-				<a href="#">orange</a>
-				<a href="#">blue</a>
-				<a href="#">colourful</a>
-				<a href="#">green</a>
-				<a href="#">lesscss</a>
-				<a href="#">puple</a>
-				<a href="#">another</a>
-				<a href="#">bootstrap</a>
-				<a href="#">beautiful</a>
-				<a href="#">another tag</a>
-			</div>
-		</div>
-	</div>
+<div id="right-sidebar" class="span4 favorite_salons">
+	<%=render "/salons/favorite_salons"%>
 </div>

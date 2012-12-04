@@ -6,22 +6,21 @@
 <head>
 	<meta charset="utf-8">
 	<title>Instanapp | Área do cliente</title>
-	<meta name="description" content="">
-	<meta name="author" content="bonfirelab | www.bonfirelab.com">
-	<meta name="robots" content="index, follow">
+	<meta name="description" content="Instanapp é um sistema de agendamento no salão de beleza pela internet">
+	<meta name="author" content="Instanapp | www.instanapp.com.br">
+	<meta name="robots" content="instanapp, agendamento, salão de beleza, salão">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
 	<%= stylesheet_link_tag    "application-customer", :media => "all" %>
 	<%= javascript_include_tag "application-customer" %>
-	<script async src="//use.typekit.net/xqn7tbp.js"></script>
-	<script>try{Typekit.load();}catch(e){}</script>
-
+	<script src="//use.typekit.net/xqn7tbp.js"></script>
+	
 	<!-- Fav and touch icons -->
 	<link rel="shortcut icon" href="/assets/customer/ico/favicon.ico">
 
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/customer/ico/apple-touch-icon-114-precomposed.png">
+	<!-- <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/customer/ico/apple-touch-icon-114-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/customer/ico/apple-touch-icon-72-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" href="/assets/customer/ico/apple-touch-icon-57-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="/assets/customer/ico/apple-touch-icon-57-precomposed.png"> -->
 	
 </head>
 <body>
@@ -40,9 +39,9 @@
 			<a class="btn btn-primary" id="confirm-btn">Confirmar</a>
 		</div>
 	</div>
-	<div id="bg">
+	<!-- <div id="bg">
 		<img src="/assets/customer/bg/halftone.png" alt="background image" />
-	</div>
+	</div> -->
 
 	<!--///////////////////////////// Header Area //////////////////////////////////-->
 
@@ -52,19 +51,12 @@
 		<div id="nav" class="container">
 			<div class="row">
 				<!-- Logo & Navigation -->
-				<div class="span12" role="navigation" id="mainnav">
-					<!-- Site Logo -->
-					<h1 id="logo" class="visible-desktop">
-						<%=image_tag "/assets/customer/main-logo-thumb.jpg"%>
-					</h1>
+				<div class="span12" role="navigation" id="mainnav">									
 
 					<!-- Navigation Start -->
 					<nav id="responsive-nav" class="hidden-desktop">
 						<div class="collapse-menu">
-							<a href="#" class="brand">Frenzy</a>
-							<form class="search">
-								<input class="input-medium" type="text" placeholder="Search&hellip;">
-							</form>
+							<a href="#" class="brand">Frenzy</a>							
 							<ul class="user-menu">
 								<li><a href="#signInModal" data-toggle="modal">Sign In</a></li>
 								<li><a href="#">Sign Out</a></li>
@@ -97,351 +89,91 @@
 								<li><a href="about.html">About Us</a></li>
 								<li><a href="contact.html">Contact Us</a></li>
 							</ul>
-						</nav>
-						<nav id="main-navigation" class="visible-desktop">
-							<ul class="first-level">
-								<li class="current"><a href="index.html">Home</a></li>
-								<li><a href="#">Home Template</span></a></li>
-								<li><a href="#">Page Template</span></a></li>
-								<li><a href="post.html">Post Archives</a></li>
-								<li><a href="contact.html">Contact Us</a></li>
-
-							</ul>
-						</nav>
-						<nav id="secondary-navigation" class="visible-desktop">
-							<div class="social-media">
-								<ul>
-									<li><a href="#"><span class="awe-facebook"></span></a></li>
-									<li><a href="#"><span class="awe-twitter"></span></a></li>
-									<li><a href="#"><span class="awe-pinterest"></span></a></li>
-									<li><a href="#"><span class="awe-google-plus"></span></a></li>
-									<li><a href="#"><span class="awe-linkedin"></span></a></li>
-								</ul>
-							</div>
-							<div class="pull-right">
-								<ul>
-									<li>
-										<ul>
-											<li><a href="#signInModal" data-toggle="modal">Sign In</a></li>
-											<li><a href="#">Sign Up</a></li>
-											<li class="dropdown">
-												<a class="dropdown-toggle" data-toggle="dropdown" href="#">My Account 
-													<span class="awe-caret-down icon-white"></span></a>
-													<ul class="dropdown-menu">
-														<li><a href="#"><span class="awe-dashboard"></span> Dashboard</a></li>
-														<li><a href="#"><span class="awe-user"></span> Profile</a></li>
-														<li><a href="#"><span class="awe-cog"></span> Settings</a></li>
-														<li>
-															<%=link_to destroy_user_session_path, :method => :delete do%>
-															<span class="awe-signout">
-																Sair
-															</span>
-															<%end%>												
-														</li>
-													</ul>
-												</li>
-											</ul>
+					</nav>							
+					<nav id="main-navigation" class="visible-desktop">
+						<ul class="primary-menu">
+							<li class="<%=active_class('dashboard')%>">
+								<%=link_to "Dashboard", dashboard_path%>
+							</li>
+							<li class="<%=active_class('events')%>">
+								<%=link_to "Agendamentos", events_path%>
+							</li>
+							<li class="<%=active_class('salons')%>">
+								<%=link_to "Salões", salons_path%>
+							</li>
+						</ul>
+						
+							<ul class="pull-right profile_actions">																		
+								<li class="dropdown">
+									<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+										Diego Marcolan
+										<span class="awe-caret-down icon-white"></span>
+									</a>
+									<ul class="dropdown-menu">										
+										<li>
+											<%=link_to current_user do%>
+												<span class="awe-user"></span>Minha Conta
+											<%end%>												
+										</li>										
+										<li>
+											<%=link_to destroy_user_session_path, :method => :delete do%>
+												<span class="awe-signout">
+													Sair
+												</span>
+											<%end%>
 										</li>
 									</ul>
-								</div>
-							</nav>
-							<!-- Navigation End -->
-						</div>
+								</li>
+							</ul>
+						
+					</nav>
+					<!-- Navigation End -->
 					</div>
 				</div>
-			</header>
-			<!-- Header End -->
+			</div>
+		</header>
+		<!-- Header End -->
 
+
+
+		<!--///////////////////////////// Main Content Area //////////////////////////////////-->
+
+		<!-- Main Content Wrapper Start -->
+		<div class="container" role="main">				
+			<section id="main-content" class="row home">
+				<%=yield%>					
+			</section>
+		</div>
+		<!-- Main Content Wrapper End -->
+
+		<!--///////////////////////////// Footer Area //////////////////////////////////-->
+
+		<!-- Footer Start -->
+		<footer class="footer">
 			
+		</footer>
+		<!-- Footer End -->
 
-			<!--///////////////////////////// Main Content Area //////////////////////////////////-->
 
-			<!-- Main Content Wrapper Start -->
-			<div class="container" role="main">				
-				<section id="main-content" class="row home">
-					<%=yield%>					
-				</section>
+		<!-- Modal -->
+		<div id="signInModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h3 id="signInModalLabel">Sign In</h3>
 			</div>
-			<!-- Main Content Wrapper End -->
-
-			<!--///////////////////////////// Footer Area //////////////////////////////////-->
-
-			<!-- Footer Start -->
-			<footer class="footer">
-				<div class="container footer-container">
-					<section class="row">
-						<div class="span4 visible-desktop">
-							<div class="row footer-left">
-
-								<!-- Begin Span4 Carousel Slider --> 
-								<div class="span4 carousel-widget">								
-									<div class="widget-header">
-										<h4 class="widget-heading">Latest From Category</h4>
-									</div>
-									<div class="widget-content carousel slide" id="carousel-widget2">
-										<!-- Begin Carousel Inner -->
-										<div class="carousel-inner">
-											<!-- Begin Slide Section / Carousel Item -->
-											<div class="slide-section active item">
-												<div class="separator"></div>
-												<div class="slide-item media">
-													<a class="pull-left media-thumbnail" href="#">
-														<img class="media-object" src="/assets/customer/slideshow/thumbnail-square.png" alt="thumbnail" />
-													</a>
-													<div class="media-body">
-														<h4 class="media-heading"><a href="#">Lorem ipsum dolor set amet</a></h4>
-														<p>Ut dignissim aliquet nibh tristique. Donec ullamcorper nulla quis 
-															Praesent a tellus vitae nisl vehicula semper.
-														</p> 
-													</div>
-												</div>
-
-												<div class="separator"></div>
-
-												<div class="slide-item media">
-													<a class="pull-left media-thumbnail" href="#">
-														<img class="media-object" src="/assets/customer/slideshow/thumbnail-square.png" alt="thumbnail" />
-													</a>
-													<div class="media-body">
-														<h4 class="media-heading"><a href="#">Lorem ipsum dolor set amet</a></h4>
-														<p>Ut dignissim aliquet nibh tristique. Donec ullamcorper nulla quis 
-															Praesent a tellus vitae nisl vehicula semper.
-														</p> 
-													</div>
-												</div>
-
-												<div class="separator"></div>
-
-												<div class="slide-item media">
-													<a class="pull-left media-thumbnail" href="#">
-														<img class="media-object" src="/assets/customer/slideshow/thumbnail-square.png" alt="thumbnail" />
-													</a>
-													<div class="media-body">
-														<h4 class="media-heading"><a href="#">Lorem ipsum dolor set amet</a></h4>
-														<p>Ut dignissim aliquet nibh tristique. Donec ullamcorper nulla quis 
-															Praesent a tellus vitae nisl vehicula semper.
-														</p> 
-													</div>
-												</div>
-											</div>
-											<!-- End Slide Section / Carousel Item -->
-											<!-- =================================================================== -->
-											<!-- Begin Slide Section / Carousel Item -->
-											<div class="slide-section item">
-												<div class="separator"></div>
-												<div class="slide-item media">
-													<a class="pull-left media-thumbnail" href="#">
-														<img class="media-object" src="/assets/customer/slideshow/thumbnail-square.png" alt="thumbnail" />
-													</a>
-													<div class="media-body">
-														<h4 class="media-heading"><a href="#">Lorem ipsum dolor set amet</a></h4>
-														<p>Ut dignissim aliquet nibh tristique. Donec ullamcorper nulla quis 
-															Praesent a tellus vitae nisl vehicula semper.
-														</p> 
-													</div>
-												</div>
-
-												<div class="separator"></div>
-
-												<div class="slide-item media">
-													<a class="pull-left media-thumbnail" href="#">
-														<img class="media-object" src="/assets/customer/slideshow/thumbnail-square.png" alt="thumbnail" />
-													</a>
-													<div class="media-body">
-														<h4 class="media-heading"><a href="#">Lorem ipsum dolor set amet</a></h4>
-														<p>Ut dignissim aliquet nibh tristique. Donec ullamcorper nulla quis 
-															Praesent a tellus vitae nisl vehicula semper.
-														</p> 
-													</div>
-												</div>
-
-												<div class="separator"></div>
-
-												<div class="slide-item media">
-													<a class="pull-left media-thumbnail" href="#">
-														<img class="media-object" src="/assets/customer/slideshow/thumbnail-square.png" alt="thumbnail" />
-													</a>
-													<div class="media-body">
-														<h4 class="media-heading"><a href="#">Lorem ipsum dolor set amet</a></h4>
-														<p>Ut dignissim aliquet nibh tristique. Donec ullamcorper nulla quis 
-															Praesent a tellus vitae nisl vehicula semper.
-														</p> 
-													</div>
-												</div>
-											</div>
-											<!-- End Slide Section / Carousel Item -->
-											<!-- =================================================================== -->
-											<!-- Begin Slide Section / Carousel Item -->
-											<div class="slide-section item">
-												<div class="separator"></div>
-												<div class="slide-item media">
-													<a class="pull-left media-thumbnail" href="#">
-														<img class="media-object" src="/assets/customer/slideshow/thumbnail-square.png" alt="thumbnail" />
-													</a>
-													<div class="media-body">
-														<h4 class="media-heading"><a href="#">Lorem ipsum dolor set amet</a></h4>
-														<p>Ut dignissim aliquet nibh tristique. Donec ullamcorper nulla quis 
-															Praesent a tellus vitae nisl vehicula semper.
-														</p> 
-													</div>
-												</div>
-
-												<div class="separator"></div>
-
-												<div class="slide-item media">
-													<a class="pull-left media-thumbnail" href="#">
-														<img class="media-object" src="/assets/customer/slideshow/thumbnail-square.png" alt="thumbnail" />
-													</a>
-													<div class="media-body">
-														<h4 class="media-heading"><a href="#">Lorem ipsum dolor set amet</a></h4>
-														<p>Ut dignissim aliquet nibh tristique. Donec ullamcorper nulla quis 
-															Praesent a tellus vitae nisl vehicula semper.
-														</p> 
-													</div>
-												</div>
-
-												<div class="separator"></div>
-
-												<div class="slide-item media">
-													<a class="pull-left media-thumbnail" href="#">
-														<img class="media-object" src="/assets/customer/slideshow/thumbnail-square.png" alt="thumbnail" />
-													</a>
-													<div class="media-body">
-														<h4 class="media-heading"><a href="#">Lorem ipsum dolor set amet</a></h4>
-														<p>Ut dignissim aliquet nibh tristique. Donec ullamcorper nulla quis 
-															Praesent a tellus vitae nisl vehicula semper.
-														</p> 
-													</div>
-												</div>
-											</div>
-											<!-- End Slide Section / Carousel Item -->
-
-										</div>
-										<!-- End Carousel Inner -->
-
-									</div>
-								</div>
-								<!-- End Span 4 Carousel Slider -->
-							</div>
-						</div>
-
-						<div class="span3 footer-extra">
-							<div class="footer-box">
-								<h4>From Sports</h4>
-								<ul>
-									<li><a class="" href="#">Championship Opening</a></li>
-									<li><a href="#">Ballon d’or Player</a></li>
-									<li><a href="#">EUFA Big Five</a></li>
-									<li><a href="#">Best Championship Match</a></li>
-									<li><a href="#">Interview With CR7</a></li>
-									<li><a href="#">EUFA Big Five</a></li>
-									<li><a href="#">Best Championship Match</a></li>
-									<li><a href="#">Interview With CR7</a></li>
-								</ul>
-							</div>
-							<div class="footer-box">
-								<h4>From Technology</h4>
-								<ul>
-									<li><a href="#">Ergo omni animali illud in eo</a></li>
-									<li><a href="#">An quisquam potest probare.</a></li>
-									<li><a href="#">Videmus in quodam volucrium</a></li>
-									<li><a href="#">Nonne videmus quanta perturbatio</a></li>
-									<li><a href="#">Nihilo magis.</a></li>
-									<li><a href="#">Lorem ipsum dolor sit amet</a></li>
-									<li><a href="#">Aliquam tincidunt mauris eu risus.</a></li>
-									<li><a href="#">Vestibulum auctor dapibus neque.</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="span3 footer-extra">
-							<div class="footer-box">
-								<h4>About Us</h4>
-								<p><a href="#"><img src="/assets/customer/logo.png" alt="Frenzy" ></a></p>
-								<p class="color"><em>Responsive HTML template build on Twitter Bootstrap and LESSCSS.</em></p>
-								<address>
-									<p><strong>Frenzy, Inc.</strong></p>
-									<p><span class="awe-home"></span> 999 Folsom Ave, Suite 111</p>
-									<p><span class="awe-map-marker"></span> San Francisco, CA 94107</p>
-									<p><span class="awe-phone"></span><abbr title="Phone"> P:</abbr> (123) 456-7890</p>
-								</address>
-
-								<address>
-									<p><strong>Contact Support</strong></p>
-									<p><span class="awe-envelope-alt"></span><a href="mailto:#"> support@domain.com</a></p>
-								</address>
-							</div>
-						</div>
-						<div class="span2 footer-extra">
-							<div class="footer-box">
-								<h4>Quick Links</h4>
-								<ul>
-									<li><a href="#">Home</a></li>
-									<li><a href="#">Sports</a></li>
-									<li><a href="#">Fashions</a></li>
-									<li><a href="#">Business</a></li>
-									<li><a href="#">Celebrity</a></li>
-									<li><a href="#">Health</a></li>
-									<li><a href="#">International</a></li>
-									<li><a href="#">Politics</a></li>
-									<li><a href="#">Technology</a></li>
-									<li><a href="#">Lifestyle</a></li>
-								</ul>
-							</div>
-							<div class="footer-box">
-								<h4>Follow Us</h4>
-								<ul class="social-media">
-									<li><a href="#"><span class="awe-facebook"></span></a></li>
-									<li><a href="#"><span class="awe-twitter"></span></a></li>
-									<li><a href="#"><span class="awe-pinterest"></span></a></li>
-									<li><a href="#"><span class="awe-google-plus"></span></a></li>
-									<li><a href="#"><span class="awe-linkedin"></span></a></li>
-								</ul>
-							</div>
-						</div>
-					</section>
-
-				</div>
-				<div class="container" role="navigation">
-					<section class="row">
-						<div class="footer-menu">
-							<ul>
-								<li><a href="#" title="link">About Us</a></li>
-								<li><a href="#" title="link">Contact Us</a></li>
-								<li><a href="#" title="link">Term of Services</a></li>
-							</ul>
-						</div>
-						<div class="footer-logo visible-desktop">
-							<a href="#" title="Frenzy">Frenzy</a>
-						</div>
-						<div class="copyright">
-							<p>Copyright &copy; 2012 <a href="http://bonfirelab.com" title="bonfirelab.com">bonfirelab</a>. All rights reserved.
-							</p>
-						</div>
-					</section>
-				</div>
-			</footer>
-			<!-- Footer End -->
-
-
-			<!-- Modal -->
-			<div id="signInModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h3 id="signInModalLabel">Sign In</h3>
-				</div>
-				<div class="modal-body">
-					<form method="post" action="#" name="login_form">
-						<p><input type="text" class="span3" name="eid" id="email" placeholder="Email"></p>
-						<p><input type="password" class="span3" name="passwd" placeholder="Password"></p>
-						<p><button type="submit" class="btn btn-primary">Sign in</button>
-							<a href="#">Forgot Password?</a>
-						</p>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-				</div>
+			<div class="modal-body">
+				<form method="post" action="#" name="login_form">
+					<p><input type="text" class="span3" name="eid" id="email" placeholder="Email"></p>
+					<p><input type="password" class="span3" name="passwd" placeholder="Password"></p>
+					<p><button type="submit" class="btn btn-primary">Sign in</button>
+						<a href="#">Forgot Password?</a>
+					</p>
+				</form>
 			</div>
-
-		</body>
-		</html>
+			<div class="modal-footer">
+				<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+			</div>
+		</div>
+		<script>$(document).ready(function(){try{Typekit.load();}catch(e){console.log(e)}}); </script>
+	</body>
+	</html>

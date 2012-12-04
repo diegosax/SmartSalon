@@ -3,13 +3,13 @@ class SalonsController < ApplicationController
   # GET /salons.json
   def index
     @salons = if params[:location].present?
-      Salon.near(params[:location], 20, :order => :distance)      
+      Salon.near(formatted(params[:location]), 30, :order => :distance)      
     elsif params[:query].present?
       Salon.text_search(params[:query])
     else
       []
     end
-    
+    puts @salons.inspect
     @my_salons_and_favorites = current_user.my_salons_and_favorites if current_user
     
       respond_to do |format|
@@ -88,5 +88,10 @@ class SalonsController < ApplicationController
       format.html { redirect_to salons_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def formatted(address)
+    address.gsub(/^(.{5})(.{3})$/,'\1-\2')
   end
 end

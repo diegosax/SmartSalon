@@ -1,55 +1,20 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @salon.name %>
-</p>
-
-<p>
-  <b>Username:</b>
-  <%= @salon.username %>
-</p>
-
-<p>
-  <b>Fone:</b>
-  <%= @salon.fone %>
-</p>
-
-<p>
-  <b>Address:</b>
-  <%= @salon.address %>
-</p>
-
-<p>
-  <b>City:</b>
-  <%= @salon.city %>
-</p>
-
-<p>
-  <b>State:</b>
-  <%= @salon.state %>
-</p>
-
-<p>
-  <b>Zipcode:</b>
-  <%= @salon.zipcode %>
-</p>
-
-<p>
-  <b>Complement:</b>
-  <%= @salon.complement %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%= @salon.email %>
-</p>
-
-<p>
-  <b>Logo:</b>
-  <%= @salon.logo %>
-</p>
-
-
-<%= link_to 'Edit', edit_salon_path(@salon) %> |
-<%= link_to 'Back', salons_path %>
+<div id="content" class="span12 salon-profile">
+  <div id="salon-profile">
+    <div class="profile-header">
+      <%=image_tag @salon.logo.url%>
+      <h3>    
+        <%=@salon.name%>
+        <address>        
+          <p><span class="awe-home"></span> <%=@salon.address%> - <%=@salon.neighborhood%></p>
+          <p><span class="awe-map-marker"></span> <%=@salon.city%>, <%=@salon.state%> - <%=@salon.zipcode%></p>
+          <p><span class="awe-phone"></span> <%=formatted_phone(@salon.landphone)%></p>
+        </address>      
+      </h3>      
+    </div>    
+    <div class="profile-body">
+      <h3>
+        Sobre o salão
+      </h3>      
+    </div>
+  </div>
+</div>

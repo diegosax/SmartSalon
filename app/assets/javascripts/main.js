@@ -1,3 +1,4 @@
+
 function showNoticeMessage(msg){
 	var noty = noty({text: 'noty - a jquery notification library!'});	
 }
