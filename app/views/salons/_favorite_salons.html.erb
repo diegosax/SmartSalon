@@ -1,17 +1,28 @@
 <!-- Latest Review Widget -->
-	<div class="sidebar-widget" id="sidebar-tabs">
-		<div class="sidebar-header">
-			<ul class="nav nav-tabs" id="my-salons">
-				<li class="active"><a href="#my-salons">Meus Salões</a></li>				
-			</ul>
-		</div>
-		<div class="sidebar-content tab-content">
-			<div class="sidebar-item tab-pane active post-widget" id="my-salons">
-				<ul>
-					<%@my_salons_and_favorites.each do |salon|%>
-						<%=render "/salons/fav_salon", :salon => salon%>					
-					<%end%>
-				</ul>
-			</div>			
-		</div>
+<div class="sidebar-widget" id="sidebar-tabs">
+	<div class="sidebar-header">
+		<ul class="nav nav-tabs" id="my-salons">
+			<li class="active"><a href="#my-salons">Meus Salões</a></li>				
+		</ul>
 	</div>
+	<div class="sidebar-content tab-content">
+		<div class="sidebar-item tab-pane active post-widget" id="my-salons">
+			<ul id="mini_grid">
+				<%if @my_salons_and_favorites.length > 0%>
+				<%@my_salons_and_favorites.each do |salon|%>
+				<%=render "/salons/fav_salon", :salon => salon%>					
+				<%end%>
+				<%else%>
+				<div class="no-favorites">
+					<br>
+					<div class="alert alert-danger fade in">
+						<a href="#" data-dismiss="alert" class="close">x</a>							
+						Você ainda não adicionou nenhum salão ao seu perfil
+					</div>	
+				</div>
+				
+				<%end%>
+			</ul>
+		</div>			
+	</div>
+</div>

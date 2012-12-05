@@ -67,6 +67,8 @@ gem 'mail'
 
 gem 'jquery-timepicker-rails'
 
+gem 'kaminari'
+
 group :production do
 	gem "pg"
 end

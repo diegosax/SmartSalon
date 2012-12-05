@@ -1,15 +1,15 @@
 class SalonsController < ApplicationController
   # GET /salons
   # GET /salons.json
-  def index
+  before_filter :authenticate_user!
+  def index 
     @salons = if params[:location].present?
-      Salon.near(formatted(params[:location]), 30, :order => :distance)      
+      Salon.near(formatted(params[:location]), 30, :order => :distance).page(params[:page])
     elsif params[:query].present?
-      Salon.text_search(params[:query])
+      Salon.text_search(params[:query]).page(params[:page])
     else
-      []
-    end
-    puts @salons.inspect
+      nil
+    end    
     @my_salons_and_favorites = current_user.my_salons_and_favorites if current_user
     
       respond_to do |format|

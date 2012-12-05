@@ -1,14 +1,15 @@
 class FavoritesController < ApplicationController
+  before_filter :authenticate_user!
+
   def create
   	salon = Salon.find(params[:salon_id])  	  	
-    @favorite = current_user.favorites.create(:salon => salon)
+    @favorite = current_user.favorites.build(:salon => salon)
     respond_to do |format|
       if @favorite.save
       	format.js
       	format.html
       else
-        format.js {render "create_error"}
-        
+        format.js {render "create_error"}        
       end
     end
   end

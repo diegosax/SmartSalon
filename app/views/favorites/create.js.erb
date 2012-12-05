@@ -1,6 +1,8 @@
-$("li[data-id='<%=escape_javascript(@favorite.salon.id.to_s)%>'] .star_fav").addClass("favorite");
+var link = $("li[data-id='<%=escape_javascript(@favorite.salon.id.to_s)%>'] .star_fav");
+link.addClass("favorite");
+link.html("<span class='awe-star'></span>Remover dos meus salões");
+$("#mini_grid .no-favorites").remove().fadeOut("slow");
 if ($("#mini_grid li[data-id='<%=escape_javascript(@favorite.salon.id.to_s)%>']").length == 0){
 	var html = "<%=escape_javascript(render '/salons/fav_salon', :salon => @favorite.salon)%>";
-	$("#mini_grid ul").append(html).fadeIn("slow");
-	gebo_gal_grid.mini();
+	$(html).hide().appendTo($("#mini_grid")).fadeIn("slow");	
 }

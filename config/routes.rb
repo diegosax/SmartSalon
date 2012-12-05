@@ -78,6 +78,7 @@ Smartsalon::Application.routes.draw do
   end
 
   resources :salons do
+    get 'page/:page', :action => :index, :on => :collection
     post "events/:id/edit" => "events#update"
     post "events/new" => "events#create"
     resources :events

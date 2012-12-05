@@ -13,6 +13,7 @@
 	
 	<%= stylesheet_link_tag    "application-customer", :media => "all" %>
 	<%= javascript_include_tag "application-customer" %>
+	<%= csrf_meta_tags %>
 	<script src="//use.typekit.net/xqn7tbp.js"></script>
 	
 	<!-- Fav and touch icons -->
@@ -39,6 +40,21 @@
 			<a class="btn btn-primary" id="confirm-btn">Confirmar</a>
 		</div>
 	</div>
+	<div class="modal hide" id="loading-modal">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">×</button>
+			<h3>Carregando...</h3>
+		</div>
+		<div class="modal-body">
+			<p>
+				Processando, por favor aguarde...								
+			</p>
+			<br />
+			<%=image_tag "/assets/ajax_loader.gif"%>
+		</div>
+		<div style="display:none" class="link" data-destination="">
+		</div>		
+	</div>	
 	<!-- <div id="bg">
 		<img src="/assets/customer/bg/halftone.png" alt="background image" />
 	</div> -->
