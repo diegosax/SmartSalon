@@ -1,10 +1,14 @@
 <tr id="ps<%=professional_service.id%>">
   <td><%=professional_service.service.name%></td>
-  <td><%=link_to admin_professional_professional_service_path(professional_service.professional,professional_service), 
-  "data-method-type" => :delete,
-  :class => "btn btn-mini btn-danger confirmable",
-  "data-message" => "Deseja realmente desassociar esse serviço do seu perfil?" do%>
-  <i class="icon-trash"></i>
-  Desassociar
-  <%end%></td>
+  <td>
+<%if can? :update, @professional %>	
+	  	<%=link_to admin_professional_professional_service_path(professional_service.professional,professional_service), 
+	  "data-method-type" => :delete,
+	  :class => "btn btn-mini btn-danger confirmable",
+	  "data-message" => "Deseja realmente desassociar esse serviço do seu perfil?" do%>
+	  <i class="icon-trash"></i>
+	  Desassociar
+	  <%end%></td>
+<%end%>
+
 </tr>

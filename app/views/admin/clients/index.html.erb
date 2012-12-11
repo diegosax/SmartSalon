@@ -11,7 +11,9 @@
 			<div class="widget-header">
 				<span class="title">Clientes</span>
 				<div class="toolbar">
-					<%=link_to "Adicionar Cliente", new_admin_client_path, :class => "btn btn-gebo btn-mini"%>
+					<%=link_to new_admin_client_path, :class => "btn btn-gebo btn-mini" do%>
+						<i class="icol-add"></i> Novo Cliente
+					<%end%>
 				</div>
 			</div>
 			<div class="widget-content table-container">

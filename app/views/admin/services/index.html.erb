@@ -32,7 +32,7 @@
 						<%@services.each do |s|%>
 							<tr id="s_<%=s.id.to_s%>">					
 								<td><%=s.name%></td>
-								<td><%=s.price ? s.price.real : "-"%></td>					
+								<td><%= s.price ? number_to_currency(s.price.real) : "  -" %></td>					
 								<td><%=distance_of_time(s.duration * 60, :locale => "pt-BR")%></td>
 								<td class="action-col">
 									<span class="btn-group visible-phone">

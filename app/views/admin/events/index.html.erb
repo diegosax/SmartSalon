@@ -21,7 +21,9 @@
 					<%end%>	
 				</span>
 				<div class="toolbar">
-					<%=link_to "Novo Agendamento", new_admin_event_path, :class => "btn btn-mini"%>
+					<%=link_to new_admin_event_path, :class => "btn btn-mini" do%>
+						<i class="icol-add"></i>  Novo Agendamento
+					<%end%>
 				</div>
 			</div>
 			<div class="widget-content table-container">

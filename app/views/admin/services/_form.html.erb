@@ -26,7 +26,7 @@
         <% if @service.errors.any? %>
         <div class="alert alert-danger fade in">
           <a href="#" class="close" data-dismiss="alert">×</a>
-          <strong>Por favor corrija os error abaixo:</strong><br>
+          <strong>Por favor corrija os erros abaixo:</strong><br>
           <p class="error-message">
             <% @service.errors.full_messages.each do |msg| %>
               <%= msg %>

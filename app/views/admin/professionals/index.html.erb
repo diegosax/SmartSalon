@@ -51,19 +51,20 @@
 									<i class="icon-search"></i>
 									Detalhes
 									<%end%>
-									<%=link_to edit_admin_professional_path(p), 
-									:class => "btn btn-small btn-warning" do%>
-									<i class="icon-pencil"></i>
-									Editar
-									<%end%>
-									<%=link_to [:admin,p], 
-									"data-method-type" => :delete, 
-									:class => "btn btn-small btn-danger confirmable",
-									"data-message" => "Deseja realmente remover este profissional?" do%>
-									<i class="icon-trash"></i>
-									Remover
-									<%end%>
-
+									<%if can? :update, p%>
+										<%=link_to edit_admin_professional_path(p), 
+										:class => "btn btn-small btn-warning" do%>
+										<i class="icon-pencil"></i>
+										Editar
+										<%end%>
+										<%=link_to [:admin,p], 
+										"data-method-type" => :delete, 
+										:class => "btn btn-small btn-danger confirmable",
+										"data-message" => "Deseja realmente remover este profissional?" do%>
+										<i class="icon-trash"></i>
+										Remover
+										<%end%>
+									<%end%>		
 
 								</span>
 

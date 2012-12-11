@@ -4,7 +4,13 @@
 
 		</span>
 		<div class="toolbar">
-			<%=link_to "Associar novo serviço", new_admin_professional_professional_service_path(@professional), :class => "btn btn-gebo btn-mini", :remote => true, :id => "new_professional_service"%>
+			<%if can? :update, @professional %>
+				<%=link_to new_admin_professional_professional_service_path(@professional), :class => " btn btn-gebo btn-mini", :remote => true, :id => "new_professional_service" do%>
+					<i class="icol-add"></i>
+					Associar novo serviço
+				<%end%>
+			<%end%>
+			
 		</div>
 	</div>
 	<div class="widget-content table-container">

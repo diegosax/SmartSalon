@@ -28,7 +28,7 @@
 						</tr>
 						<tr>
 							<th>Preço</th>
-							<td><%=@service.price if @service.price%></td>
+							<td><%= number_to_currency @service.price if @service.price%></td>
 						</tr>					
 						<tr>
 							<th>Duração</th>
@@ -47,7 +47,7 @@
 										<%=link_to edit_admin_service_path(@service), :class => "btn", :rel => "tooltip", "data-original-title" => "Alterar" do%>
 											<i class="icol-pencil"></i>
 										<%end%>
-										<%=link_to [:admin, @service], :class => "btn confirmable", :rel => "tooltip", "data-original-title" => "Excluir", "data-message" => "Deseja realmente remover este serviço?", "data-method-type" => :delete do%>
+										<%=link_to [:admin, @service], :class => "btn confirmable", :rel => "tooltip", "data-original-title" => "Remover", "data-message" => "Deseja realmente remover este serviço?", "data-method-type" => :delete do%>
 											<i class="icol-cross"></i>
 										<%end%>										
 									</div>
