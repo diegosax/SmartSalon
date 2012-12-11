@@ -22,8 +22,7 @@
         </span>
       </div>
       <div class="widget-content form-container">
-        <%= simple_form_for([:admin,@service],:html=>{:class=>"form-horizontal", :id=> "new_admin_service_form"}) do |f| %>
-
+        <%= simple_form_for([:admin,@service],:html=>{:class=>"form-horizontal", :id=> "new_admin_service_form"}) do |f| %>        
         <%=f.input :name, :label => 'Nome'%>
         <div class="control-group">
           <%=f.label :price, "Preço", :class => "control-label"%>

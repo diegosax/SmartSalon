@@ -1,32 +1,61 @@
-<ul>
-	<%@salons.each do |salon|%>
-		<li>
+<%if @salons && @salons.count > 0%>
+	<%=paginate @salons, :remote => true%>
+	
+	<ul>
+		<%@salons.each do |salon|%>
+		<li data-id = "<%=salon.id%>">
 			<div class="item-top">
 				<div class="logo"><%=image_tag salon.logo.url%></div>
 				<div class="item-body">
-					<h3>    
-						<%=salon.name%>
+					<h3>
+					<%=link_to salon.name, salon%>					
 					</h3>
-						<address>        
-							<p><span class="awe-home"></span> <%=salon.address%> - <%=salon.neighborhood%></p>
-							<p><span class="awe-map-marker"></span> <%=salon.city%>, <%=salon.state%> - <%=salon.zipcode%></p>
-							<p><span class="awe-phone"></span> <%=formatted_phone(salon.landphone)%></p>
-						</address>      
+					<address>        
+						<p><span class="awe-home"></span> <%=salon.address%> - <%=salon.neighborhood%></p>
+						<p><span class="awe-map-marker"></span> <%=salon.city%>, <%=salon.state%> - <%=salon.zipcode%></p>
+						<p><span class="awe-phone"></span> <%=formatted_phone(salon.landphone)%></p>
+					</address>      
 
 				</div>
 			</div>
 			<div class="item-bottom">
 
-				<%=link_to "#" do%>
-					<span class="awe-star-empty"></span>
-					Adicionar aos meus salões
+				<%=link_to "#", :class => "star_fav #{is_favorite(salon)}" do%>
+					<%if favorite? salon%>
+						<span class="awe-star"></span>
+						Remover dos meus salões
+					<%else%>
+						<span class="awe-star-empty"></span>
+						Adicionar aos meus salões
+					<%end%>
+					
 				<%end%>
 				<%=link_to "#" do%>
-					<span class="awe-calendar"></span>
-					Agendar Horário
+				<span class="awe-calendar"></span>
+				Agendar Horário
 				<%end%>
 			</div>
 		</li>
-	<%end%>
+		<%end%>
 
-</ul>
+	</ul>
+	<%=paginate @salons, :remote => true%>
+<%elsif @salons%>
+	<div class="no-results">
+		<h4>
+			Sua busca não obteve nenhum resultado
+		</h4>
+		<span>
+			Talvez você tenha digitado errado?
+		</span>
+		<div class="invite_salon">
+			<div class="well">
+				Se o salão que você frequenta ainda não estiver no instanapp...
+				<p>
+					<a href="#" class="btn btn-primary">Convide seu salão</a>	
+				</p>
+				
+			</div>
+		</div>
+	</div>
+<%end%>

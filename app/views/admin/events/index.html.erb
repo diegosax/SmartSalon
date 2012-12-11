@@ -101,7 +101,7 @@
 							<td>
 								<%=e.service.name if e.service%>
 							</td>
-							<td><%=e.start_at.strftime("%d de %B às %H:%Mh") + "  (em #{distance_of_time_in_words(DateTime.now,e.start_at)})"%></td>
+							<td><%=e.start_at.strftime("%d de %B às %H:%Mh")%></td>
 							<td><%=e.end_at.strftime("%d de %B às %H:%Mh")%></td>
 							<td><%=distance_of_time_in_words(e.start_at,e.end_at)%></td>
 							<td class="action-col">

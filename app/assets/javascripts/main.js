@@ -78,6 +78,10 @@ function addLoading(element){
 	var html = "<div class = 'loading'>Processando, por favor aguarde...<br /><img src='/assets/ajax_loader.gif'></img>"
 	$(element).append(html).fadeIn("slow");
 }
+function addLoadingInline(element){
+	var html = "<div class = 'loading'>Processando, por favor aguarde...  <img src='/assets/ajax_loader.gif'></img>"
+	$(element).append(html).fadeIn("slow");
+}
 function addLoadingSimple(element){
 	var html = "<img src='/assets/ajax_loader.gif'></img>"
 	$(element).html(html);
@@ -212,7 +216,7 @@ $(document).ready(function(){
 	});
 
   	//----------------- Favorite salon ----------------------------//
-  	function removeFavorite(element){
+  	function removeFavorite(element){  		
   		var id = element.closest("li").attr("data-id");
   		$.ajax({
   			type: "delete",
@@ -225,22 +229,21 @@ $(document).ready(function(){
   		e.preventDefault();
   		if ($(this).hasClass("favorite")){
   			removeFavorite($(this));
-  		} else{
+  		} else{  			
   			$.ajax({
 	  			type: "post",
 	  			url:"/favorites",
-	  			data: {salon_id: $(this).closest("li").attr("data-id")},      
+	  			data: {salon_id: $(this).closest("li").attr("data-id")},
 	  			dataType: "script"
   			});	
-  		}
-  		
+  		}  		
   	});
 
   	$(".remove_favorite i").tooltip();
 
   	$(".remove_favorite").live("click",function(e){
   		e.preventDefault();
-  		//This is line is necessary beacause there is a tooltip bug, it sticks
+  		//This line is necessary beacause there is a tooltip bug, it sticks
   		$(".remove_favorite i").tooltip("hide");
   		removeFavorite($(this));
   	});
@@ -274,7 +277,7 @@ $(document).ready(function(){
     	        $("#professional_house_number").focus();
     	        e.preventDefault();
     	        return false;
-    	    }
+    		}
     	});
 
   	//------------END Address Loading ------------------------------//
@@ -286,5 +289,10 @@ $(document).ready(function(){
 	});
 
   	//--------------------------------------------------------------//
+
+  	$(".pagination a").live("click", function(e){  		
+  		history.pushState(null,"", $(this).attr("href"));
+  		addLoadingInline($(".search-results"));
+  	});
 
   });

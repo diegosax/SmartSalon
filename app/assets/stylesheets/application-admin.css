@@ -12,7 +12,10 @@
  *= require commom_plugins/manifest
  *= require bootstrap/manifest
  *= require fonts/manifest
- *= require_tree ./admin
+ *= require admin/mooncake/mooncake.min
+ *= require admin/mooncake/plugins.min
+ *= require admin/custom_responsive_admin
+ *= require admin/custom
  */
 
  #client_calendar .not_visible{

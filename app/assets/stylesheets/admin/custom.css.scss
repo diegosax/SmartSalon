@@ -1,0 +1,39 @@
+// Custom styles
+
+//--------------------------General
+
+h1#main-heading{
+	padding: 6px 0 0 0 !important;
+}
+
+#wrapper #content.sidebar-minimized #content-inner{
+	background: none;	
+}
+// -------------------------HEADER ----------------------------//
+#header .navbar-inner, 
+#header .navbar-inner .container, 
+#header #header-right {
+	max-height: 45px;
+}
+
+#header .navbar-inner .brand-img {
+	height: 45px;	
+}
+
+#header #dropdown-lists {	
+	margin-top: 10px;
+}
+
+#user-info span.info > span.name > a{
+	color:#fff;
+}
+
+#wrapper #content-wrap {
+	padding: 46px 0 0 0;	
+}
+
+// ----------------------- SIDEBAR MENU ------------------------//
+
+#wrapper #sidebar #navigation .inner-nav > li > a {
+	padding: 12px 17px 12px 5px;
+}

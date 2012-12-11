@@ -24,14 +24,31 @@
 		overflow: hidden !important;
 	}
 
-	.table-flipscroll td{
+	.table-flipscroll.dashboard-table td{
 		min-height: 1.5em;
 	}
 
-	.table-flipscroll th{
+	.table-flipscroll.dashboard-table th{
 		background-color: #FFF !important;
 	}
+	.dataTables_wrapper .dt_header{
+		display: none !important;
+	}
+}
 
-
-
+@media screen and (max-width: 480px){
+	body.login_page .outer_login_box{
+		width: 90%;
+	}
+	body.login_page .outer_login_box input[type=submit]{
+		width:100%;
+		float:none;
+	}
+	body.login_page .outer_login_box a{
+		text-align: center;
+		float: none;
+	}
+	.dataTables_wrapper .dt_header{
+		display: none !important;
+	}
 }

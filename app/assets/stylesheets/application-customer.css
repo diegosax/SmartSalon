@@ -2,6 +2,7 @@
 
 	*= require_self
 	*= require bootstrap/manifest	
+	*= require commom_plugins/manifest
 	*= require font-awesome
 	*= require customer/fonts	
 	*= require customer/frenzy-blue	
