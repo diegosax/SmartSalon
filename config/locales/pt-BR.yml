@@ -59,7 +59,13 @@ pt-BR:
     - :day
     - :month
     - :year
-  datetime:
+  years: "anos"  
+  months: "mêses"
+  days: "dias"
+  hours: "horas"
+  minutes: "minutos"
+  seconds: "segundos"
+  datetime:    
     distance_in_words:
       about_x_hours:
         one: aproximadamente 1 hora

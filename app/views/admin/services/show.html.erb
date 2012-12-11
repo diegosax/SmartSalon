@@ -12,7 +12,10 @@
 			<div class="widget-header">
 				<span class="title">Informações do Serviço</span>
 				<div class="toolbar">
-					<%=link_to "Alterar Serviço", edit_admin_service_path(@service), :class => "btn btn-gebo btn-mini" %>
+					<%=link_to edit_admin_service_path(@service), :class => "btn btn-gebo btn-mini" do%>
+						<i class="icol-application-edit"></i>
+						Alterar Serviço
+					<%end%>
 				</div>
 			</div>
 
@@ -29,9 +32,29 @@
 						</tr>					
 						<tr>
 							<th>Duração</th>
-							<td><%=distance_of_time_in_words(@service.duration*60)%> (<%=@service.duration%> minutos)</td>
+							<td><%=distance_of_time(@service.duration*60)%></td>
 						</tr>
-					</tbody>					
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="2">
+								<div class="btn-toolbar pull-left">
+									<span style="margin-right:5px;"><strong>Action:</strong></span> 
+									<div class="btn-group">
+										<%=link_to :back, :class => "btn", :rel => "tooltip", "data-original-title" => "Voltar" do%>
+											<i class="icol-arrow-left"></i>
+										<%end%>
+										<%=link_to edit_admin_service_path(@service), :class => "btn", :rel => "tooltip", "data-original-title" => "Alterar" do%>
+											<i class="icol-pencil"></i>
+										<%end%>
+										<%=link_to [:admin, @service], :class => "btn confirmable", :rel => "tooltip", "data-original-title" => "Excluir", "data-message" => "Deseja realmente remover este serviço?", "data-method-type" => :delete do%>
+											<i class="icol-cross"></i>
+										<%end%>										
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tfoot>
 				</table>
 			</div>		
 		</div>

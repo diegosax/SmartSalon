@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email,:landphone,:celphone, :password, :password_confirmation, :remember_me,
                 :address, :complement, :region, :state, :city, :zipcode, :house_number
+  has_many :phones
+
+  mount_uploader :avatar, AvatarUploader
 
   attr_accessor :role #admin professional client
 

@@ -15,7 +15,10 @@
 			<div class="widget-header">
 				<span class="title">Perfil do usuário</span>
 				<div class="toolbar">
-					<%=link_to "Alterar Perfil", edit_admin_professional_path(@professional), :class => "btn btn-gebo btn-mini" %>
+					<%=link_to edit_admin_professional_path(@professional), :class => "btn btn-gebo btn-mini" do%>
+						<i class="icol-application-edit"></i>
+						Alterar Perfil
+					<%end%>					
 				</div>
 			</div>
 

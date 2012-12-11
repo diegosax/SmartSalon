@@ -71,18 +71,21 @@
 						</div>
 						<div id="header-functions" class="pull-right">
 							<div id="user-info" class="clearfix">
-								<span class="info">
-									Seja bem vindo(a)
+								<span class="info">									
 									<span class="name">
-										<%=link_to current_professional.name, [:admin,current_professional]%>
+										<%=link_to [:admin,current_professional], "data-toggle" => "dropdown" do%>
+											<%=current_professional.name%>
+											<b class="carret"></b>
+										<%end%>
+										<ul class="dropdown-menu">
+											<li><a href="#tab-11" data-toggle="tab">First menu</a></li>
+											<li><a href="#tab-12" data-toggle="tab">Second menu</a></li>
+											<li class="divider"></li>
+											<li><%=link_to "Sair", destroy_professional_session_path, :method => :delete%></li>
+										</ul>
 									</span>									
 								</span>						
-							</div>
-							<div id="logout-ribbon">
-								<%=link_to destroy_professional_session_path, :method => :delete do%>
-								<i class="icon-off"></i>
-								<%end%>
-							</div>
+							</div>							
 						</div>
 					</div>
 				</div>
@@ -107,13 +110,13 @@
 									<li class="<%=active_class('events')%>">										
 										<span title="Eventos">
 											<i class="icon-calendar"></i>
-											<span class="nav-title">Eventos</span>
+											<span class="nav-title">Agenda</span>
 										</span>
 										<ul class="inner-nav">
 											<li class="<%=active_action('events', 'new')%>">
 												<%=link_to new_admin_event_path do%>
 												<i class="icol-calendar-1"></i>
-												Agendamento Manual
+												Agendamento Personalizado
 												<%end%>
 											</li>
 											<li class="<%=active_action('events', 'easy_new')%>">
@@ -188,7 +191,7 @@
 											<span class="nav-title">Clientes</span>
 										</span>
 
-											<ul class="inner-nav">
+										<ul class="inner-nav">
 											<li class="<%=active_action('clients', 'index')%>">
 												<%=link_to admin_clients_path do%>
 												<i class="icol-application-view-list"></i>
@@ -206,10 +209,10 @@
 									</li>
 									<li class="<%=active_class('salons')%>">
 										<%=link_to admin_salon_path(current_professional.salon) do%>
-											<span title="Configurações">
-												<i class="icon-cogs"></i>
-												<span class="nav-title">Meu Salão</span>
-											</span>
+										<span title="Configurações">
+											<i class="icon-cogs"></i>
+											<span class="nav-title">Meu Salão</span>
+										</span>
 										<%end%>
 									</li>												
 								</ul>

@@ -9,6 +9,7 @@ class Salon < ActiveRecord::Base
   has_many :clients, :through => :client_salons
   has_many :favorites
   has_many :subscriptions
+  has_many :phones
   belongs_to :manager, :class_name => "Professional"
   mount_uploader :logo, LogoUploader
   geocoded_by :full_address

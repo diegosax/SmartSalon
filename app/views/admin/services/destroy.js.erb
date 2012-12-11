@@ -1,2 +1,7 @@
 $("#confirmation-modal").modal("hide");
-$("#s_<%=escape_javascript(@service.id.to_s)%>").hide("slow");
+var list_item = $("#s_<%=escape_javascript(@service.id.to_s)%>");
+if (list_item.length > 0){
+	list_item.hide("slow");
+} else{
+	window.location = "<%=escape_javascript(admin_services_path)%>";
+}

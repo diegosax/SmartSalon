@@ -4,9 +4,9 @@ class SalonsController < ApplicationController
   before_filter :authenticate_user!
   def index 
     @salons = if params[:location].present?
-      Salon.near(formatted(params[:location]), 30, :order => :distance).page(params[:page])
+      Salon.near(formatted(params[:location]), 30, :order => :distance).page(params[:page]).per(2)
     elsif params[:query].present?
-      Salon.text_search(params[:query]).page(params[:page])
+      Salon.text_search(params[:query]).page(params[:page]).per(2)
     else
       nil
     end    

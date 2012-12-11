@@ -11,7 +11,10 @@
 			<div class="widget-header">
 				<span class="title">Funcionários</span>
 				<div class="toolbar">
-					<%=link_to "Adicionar Funcionário", new_admin_professional_path, :class => "btn btn-gebo btn-mini"%>
+					<%=link_to new_admin_professional_path, :class => "btn btn-gebo btn-mini" do%>
+						<i class="icol-add"></i>
+						Novo Funcionário
+					<%end%>					
 				</div>
 			</div>
 			<div class="widget-content table-container">

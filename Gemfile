@@ -12,10 +12,7 @@ gem 'rails', '3.2.3'
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'therubyracer'
-  gem 'less'
-
+  gem 'coffee-rails', '~> 3.2.1'    
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platform => :ruby
 
@@ -68,6 +65,8 @@ gem 'mail'
 gem 'jquery-timepicker-rails'
 
 gem 'kaminari'
+
+gem 'dotiw'
 
 group :production do
 	gem "pg"
