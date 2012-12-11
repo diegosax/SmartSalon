@@ -23,6 +23,18 @@
       </div>
       <div class="widget-content form-container">
         <%= simple_form_for([:admin,@service],:html=>{:class=>"form-horizontal", :id=> "new_admin_service_form"}) do |f| %>        
+        <% if @service.errors.any? %>
+        <div class="alert alert-danger fade in">
+          <a href="#" class="close" data-dismiss="alert">×</a>
+          <strong>Por favor corrija os error abaixo:</strong><br>
+          <p class="error-message">
+            <% @service.errors.full_messages.each do |msg| %>
+              <%= msg %>
+              <br>
+            <% end %>
+          </p>
+        </div>        
+        <% end %>
         <%=f.input :name, :label => 'Nome'%>
         <div class="control-group">
           <%=f.label :price, "Preço", :class => "control-label"%>

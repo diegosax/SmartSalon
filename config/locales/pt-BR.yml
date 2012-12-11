@@ -216,5 +216,12 @@ pt-BR:
     errors:
       <<: *errors
   activerecord:
+    models:
+      service: 'Serviço'
+    attributes:
+      service:
+        name: 'Nome'
+        duration: 'Duração'  
+        price: 'Preço'
     errors:
       <<: *errors
