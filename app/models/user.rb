@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
                 :address, :complement, :region, :state, :city, :zipcode, :house_number
   has_many :phones
 
-  mount_uploader :avatar, AvatarUploader
+  #mount_uploader :avatar, AvatarUploader
 
   attr_accessor :role #admin professional client
 
