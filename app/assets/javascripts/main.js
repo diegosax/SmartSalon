@@ -265,6 +265,14 @@ $(document).ready(function(){
 
   	//------------END Professional / Services Association ----------//
 
+  	//------------Client / Services Association ----------//
+
+  	$("#new_client_service").live("click",function(){
+  		showDefaultLoadingModel();
+  	});	
+
+  	//------------END Client / Services Association ----------//
+
   	//------------Address Loading ----------------------------------//
 
   		//ao soltar a tecla dentro do campo de cep ele verifica se possui 8 digitos e chama um posto para preenchimento do cep

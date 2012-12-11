@@ -9,6 +9,10 @@ h1#main-heading{
 #wrapper #content.sidebar-minimized #content-inner{
 	background: none;	
 }
+
+.modal .modal-body{
+	overflow: visible;
+}
 // -------------------------HEADER ----------------------------//
 #header .navbar-inner, 
 #header .navbar-inner .container, 

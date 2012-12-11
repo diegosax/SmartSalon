@@ -1,0 +1,13 @@
+<%=hidden_field_tag :service_id, @clientService.service.id%>
+<p><span class="label label-inverse">Selecione o cliente a ser associado ao serviço:</span></p>
+<%= select_tag :client_id, 
+	options_for_select(@salon.clients.collect{ |s| [s.name, s.id] }),	
+	:include_blank => true,
+	:id => "choose_client_service",
+	:class => "chzn_a", 
+	"data-placeholder" => "Selecione o cliente" %>
+<p><span class="label label-inverse">Duração do(a) <strong><%=@service.name%></strong> para o cliente selecionado:</span></p>
+<div class="input-append">              
+	<%=text_field_tag :duration, @service.duration,:class => "input-mini"%>
+	<span class="add-on">minutos</span>  
+</div>

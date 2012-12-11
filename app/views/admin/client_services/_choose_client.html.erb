@@ -1,0 +1,16 @@
+<div class="modal hide fade" id="associate_client_service">
+  <%= form_tag([:admin,@service,@clientService],:html=>{:class=>"form-horizontal", :id=> "new_client_service_form", :remote => true}) do |f| %>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Adicionar tempo de <strong><%=@service.name%></strong> por cliente</h3>
+  </div>
+  <div class="modal-body">    
+    <%= render "/admin/client_services/new_client"%>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss='modal'>Cancelar</a>
+    <%=submit_tag "Associar", :class=> "btn btn-primary"%>    
+  </div>  
+
+  <%end%>
+</div>

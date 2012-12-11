@@ -1,0 +1,33 @@
+<div class="form-horizontal widget">
+	<div class="widget-header">
+		<span class="title">
+			Tempo de serviço específico para cada cliente
+		</span>
+		<div class="toolbar">
+			<%=link_to new_admin_service_client_service_path(@service), :class => "btn btn-gebo btn-mini", :remote => true, :id => "new_client_service" do%>
+			<i class="icol-add"></i>
+			Adicionar cliente ao serviço
+			<%end%>
+		</div>
+
+	</div>
+	<div class="widget-content table-container">
+		<table class="table table-striped form-inline">
+			<thead>
+				<tr>
+					<th>Cliente</th>
+					<th>Tempo</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<%@service.clients.each do |clientService| %>
+				<tr id="client_service_<%=clientService.id%>">
+					<td><%=@clientService.client.name%></td>
+					<td><%=distance_of_time(@clientService.duration*60)%></td>								
+				</tr>
+				<%end%>
+			</tbody>
+		</table>
+	</div>
+</div>
