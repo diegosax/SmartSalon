@@ -1,0 +1,27 @@
+<tr id="client_service_<%=client_service.id%>">
+	<%if @service%>
+	<td><%=client_service.client.name%></td>
+	<%elsif @client%>
+	<td><%=client_service.service.name%></td>
+	<%end%>		
+	<td><%=distance_of_time(client_service.duration*60)%></td>								
+	<td class="action-col">
+		<span class="btn-group visible-phone">			
+			<%if can? :destroy, client_service%>
+				<%=link_to [:admin,client_service], "data-method-type" => :delete, :class => "btn btn-small confirmable",
+				"data-message" => "Deseja realmente remover esta associação?" do%>
+				<i class="icon-trash"></i>											
+				<%end%>
+			<%end%>
+		</span>
+		<span class="btn-group hidden-phone">
+			<%if can? :destroy, client_service%>			
+				<%=link_to [:admin,client_service], "data-method-type" => :delete, :class => "btn btn-small btn-danger confirmable",
+				"data-message" => "Deseja realmente remover esta associação?" do%>
+				<i class="icon-trash"></i>
+				Remover
+				<%end%>
+			<%end%>
+		</span>
+	</td>
+</tr>

@@ -58,6 +58,7 @@ Smartsalon::Application.routes.draw do
       resources :client_services      
     end
     get 'dashboard' => "dashboard#index"
+    resources :client_services
   end
 
   devise_for :clients, :controllers =>

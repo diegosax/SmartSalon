@@ -25,13 +25,25 @@ class Admin::ClientServicesController < Admin::ApplicationController
     respond_to do |format|
       if @client_service.save
         flash[:notice] = "Associação efetuada com sucesso"
-        format.html
+        format.html {redirect_to :back}
         format.js
       else
-        flash[:alert] = "Houve um erro na associação"
-        format.html
+        flash[:alert] = "Erro: #{@client_service.client.name} já está com um tempo personalizado definido para #{@client_service.service.name}"
+        format.html {redirect_to :back}
         format.js {render 'create_error'}
       end
     end    
+  end
+
+  def destroy
+    puts "Caiu no metodo certo!!!"
+    @client_service = ClientService.find(params[:id])
+    @client_service.destroy
+    respond_to do |format|     
+      flash[:notice] = "Associação removida com sucesso!"
+      format.html {redirect_to :back}
+      format.js {render :js => "window.location.reload()"}
+      format.json
+    end       
   end
 end

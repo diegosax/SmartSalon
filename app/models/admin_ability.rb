@@ -21,6 +21,8 @@ class AdminAbility
 
           can :destroy, WorkingTime, :professional_id => user.id 
           can :create, WorkingTime #needs extra check on controller         
+
+          can :manage, ClientService, :service_id => user.salon.service_ids, :client_id => user.salon.client_ids
       else        
         can :create, Event
         can :manage, Event, :user_id => user.id
