@@ -1,28 +1,4 @@
-<div id="main-header" class="page-header">
-  <h1 id="main-heading">
-    <%if action_name == "new" || action_name == "create"%>
-    Novo Serviço
-    <%else%>
-    Alterar Serviço <span><%=@service.name%></span>
-    <%end%>
-
-  </h1>
-</div>
-
-<div id="main-content">
-  <div class="row-fluid">
-    <div class="span12 widget">
-      <div class="widget-header">
-        <span class="title">
-          <%if action_name == "new" || action_name == "create"%>
-          Novo Serviço
-          <%else%>
-          Alterar Serviço
-          <%end%>                    
-        </span>
-      </div>
-      <div class="widget-content form-container">
-        <%= simple_form_for([:admin,@service],:html=>{:class=>"form-horizontal", :id=> "new_admin_service_form"}) do |f| %>        
+<%= simple_form_for([:admin,@service],:html=>{:class=>"form-horizontal", :id=> "new_admin_service_form"}) do |f| %>        
         <% if @service.errors.any? %>
         <div class="alert alert-danger fade in">
           <a href="#" class="close" data-dismiss="alert">×</a>
@@ -60,27 +36,4 @@
           <%=f.submit "Salvar", :class => "btn btn-primary"%>
           <%=link_to "Cancelar", :back, :class => "btn"%>
         </div>
-        <%end%>            
-      </div>
-    </div>
-  </div>
-  <script type="text/javascript">
-  $(document).ready(function(){
-    <%if @service.errors.size == 1 && @service.errors[:base].length > 0%>
-    var hiddenConfirm = "<%=escape_javascript(f.hidden_field(:confirm_conflicts, :value => 1))%>"
-    $("#new_admin_service_form").append(hiddenConfirm);
-    $("#new_admin_service_form .form-content").fadeOut("fast");
-    $("#new_admin_service_form").append(" <%= escape_javascript(render('confirm_conflicts', :f => f)) %>");
-
-    $("#new_admin_service_form .return").live("click",function(e){
-      e.preventDefault();
-      $("#new_admin_service_form #event_confirm_conflicts").remove();
-      $("#new_admin_service_form .alert").slideUp("slow",function(){
-        $("#new_admin_service_form .form-content").slideDown();
-      });
-    });
-    <%end%>     
-  }); 
-  </script>
-</div>
-
+        <%end%>          

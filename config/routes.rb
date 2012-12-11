@@ -1,5 +1,9 @@
 Smartsalon::Application.routes.draw do
 
+  get "client_services/index"
+
+  get "client_services/new"
+
   get "dashboard/index"
 
   get "dashboard" => "dashboard#index"
@@ -23,6 +27,7 @@ Smartsalon::Application.routes.draw do
         get 'get_services'
         get 'search'
       end
+      resources :client_services
     end      
     resources :events do
       collection do
@@ -50,7 +55,7 @@ Smartsalon::Application.routes.draw do
       collection do
         get "search"
       end
-      
+      resources :client_services      
     end
     get 'dashboard' => "dashboard#index"
   end

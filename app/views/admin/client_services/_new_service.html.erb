@@ -1,0 +1,12 @@
+<p><span class="label label-inverse">Selecione o cliente a ser associado ao serviço:</span></p>
+<%= simple_form_for([:admin,@clientService],:html=>{:class=>"form-horizontal", :id=> "new_client_service_form"}) do |f| %>
+
+<%= f.select(
+	:service,
+	options_for_select(@salon.clients.collect{ |s| [s.name, s.id] }),
+	:include_blank => true,
+	:id => "choose_client_service",
+	:class => "chzn_a", 
+	"data-placeholder" => "Selecione o cliente"
+	) %>
+<%end%>

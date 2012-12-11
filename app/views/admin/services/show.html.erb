@@ -13,8 +13,8 @@
 				<span class="title">Informações do Serviço</span>
 				<div class="toolbar">
 					<%=link_to edit_admin_service_path(@service), :class => "btn btn-gebo btn-mini" do%>
-						<i class="icol-application-edit"></i>
-						Alterar Serviço
+					<i class="icol-application-edit"></i>
+					Alterar Serviço
 					<%end%>
 				</div>
 			</div>
@@ -42,13 +42,15 @@
 									<span style="margin-right:5px;"><strong>Action:</strong></span> 
 									<div class="btn-group">
 										<%=link_to :back, :class => "btn", :rel => "tooltip", "data-original-title" => "Voltar" do%>
-											<i class="icol-arrow-left"></i>
+										<i class="icol-arrow-left"></i>
 										<%end%>
 										<%=link_to edit_admin_service_path(@service), :class => "btn", :rel => "tooltip", "data-original-title" => "Alterar" do%>
-											<i class="icol-pencil"></i>
+										<i class="icol-pencil"></i>
 										<%end%>
-										<%=link_to [:admin, @service], :class => "btn confirmable", :rel => "tooltip", "data-original-title" => "Remover", "data-message" => "Deseja realmente remover este serviço?", "data-method-type" => :delete do%>
-											<i class="icol-cross"></i>
+
+										
+										<%=link_to [:admin, @service], :class => "btn confirmable", :rel => "tooltip", "data-original-title" => "Excluir", "data-message" => "Deseja realmente remover este serviço?", "data-method-type" => :delete do%>
+										<i class="icol-cross"></i>
 										<%end%>										
 									</div>
 								</div>
@@ -58,5 +60,10 @@
 				</table>
 			</div>		
 		</div>
+		<!-- Informações dos tempos específicos para o serviço do cliente -->
+		<%=render "/admin/client_services/index"%>
 	</div>
+
+		
+		
 </div>
