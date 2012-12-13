@@ -22,6 +22,9 @@ Smartsalon::Application.routes.draw do
 
   namespace :admin do    
     root :to => "events#index"
+    post "payments/notification" => "payments#notification", :as => "payment_notification"
+    get 'dashboard' => "dashboard#index"
+    
     resources :services do
       collection do
         get 'get_services'
@@ -29,6 +32,7 @@ Smartsalon::Application.routes.draw do
       end
       resources :client_services
     end      
+    
     resources :events do
       collection do
         get "easy/new" => "events#easy_new"
@@ -37,6 +41,7 @@ Smartsalon::Application.routes.draw do
         get 'search'
       end
     end
+    
     resources :professionals do
       collection do
         post "search_zipcode" => "professionals#search_zipcode"
@@ -44,12 +49,12 @@ Smartsalon::Application.routes.draw do
       resources :working_times
       resources :professional_services
     end
+    
     resources :salons do
       post "payments/checkout" => "payments#checkout", :as => "payments_checkout"
       get "payments/:payment_id/invoice" => "payments#invoice", :as => "payments_invoice"
     end
-    post "payments/notification" => "payments#notification", :as => "payment_notification"
-
+    
     resources :clients do
       post "add/to/salon" => "clients#add_to_salon", :as => "add_to_salon"
       collection do
@@ -57,7 +62,7 @@ Smartsalon::Application.routes.draw do
       end
       resources :client_services      
     end
-    get 'dashboard' => "dashboard#index"
+    
     resources :client_services
   end
 

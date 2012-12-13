@@ -11,6 +11,13 @@
           <span class="icon-list"></span>
         <%end%>
       </li>
+      <%if action_name == "show"%>
+        <li>
+        <%=link_to edit_admin_professional_path(@professional), :class => "tip-top", :rel => "tooltip", "data-original-title" => "Editar Funcionário" do%>  
+          <span class="icon-edit"></span>
+        <%end%>
+      </li>
+      <%end%>
    </ul>
  </div>
 </div>

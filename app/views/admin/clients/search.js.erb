@@ -22,8 +22,8 @@ var client_selection = '<div class="w-box"> \
         </div> \
       </div>';
 var shown_div = $("#new_client .modal-body .select_client:not(.hidden)");
-shown_div.find(".loading").fadeOut('slow',function(){
-	$(client_selection).hide().appendTo(shown_div).fadeIn("slow");	
-});
-
+var modal = $("#new_client");
+shown_div.find("form").hide();
+$(client_selection).hide().appendTo(shown_div).fadeIn();
 $("#new_client .modal-footer .btn-primary").text("Adicionar Cliente");
+modal.modal("loading");

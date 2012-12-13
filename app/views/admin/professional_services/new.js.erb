@@ -1,6 +1,4 @@
-var html = "<%=escape_javascript(render '/admin/professionals/choose_service')%>"
-$("#associate_service").remove();
-$(html).prependTo("body");
-$("#loading-modal").modal("hide")
-$("#associate_service").modal("show");
-$(".chzn_a").chosen();
+var modal = $("#ajax-modal");
+var modal_content = "<%=escape_javascript(render '/admin/professionals/choose_service')%>";
+modal.html(modal_content);
+modal.modal();

@@ -7,15 +7,6 @@
 		<span class="item-label">Listar Agendamentos</span>								
 		<%end%>
 	<%end%>	
-	
-	<%if action_name != "new"%>
-		<%=link_to new_admin_event_path, :class => "item" do%>
-		<span class="item-icon">
-			<i class="icon-plus"></i>
-		</span>
-		<span class="item-label">Agendamento Manual</span>								
-		<%end%>
-	<%end%>
 	<%if action_name != "easy_new"%>
 		<%=link_to easy_new_admin_events_path, :class => "item" do%>
 		<span class="item-icon">
@@ -24,4 +15,12 @@
 		<span class="item-label">Agendamento Fácil</span>								
 		<%end%>
 	<%end%>
+	<%if action_name != "new"%>
+		<%=link_to new_admin_event_path, :class => "item" do%>
+		<span class="item-icon">
+			<i class="icon-plus"></i>
+		</span>
+		<span class="item-label">Agendamento Manual</span>								
+		<%end%>
+	<%end%>	
 <%end%>

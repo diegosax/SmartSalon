@@ -11,6 +11,7 @@
  *= require_self
  *= require commom_plugins/manifest
  *= require bootstrap/manifest
+ *= require bootstrap-modal/manifest
  *= require fonts/manifest
  *= require admin/mooncake/mooncake.min
  *= require admin/mooncake/plugins.min
