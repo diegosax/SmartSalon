@@ -126,15 +126,12 @@ class EventsController < ApplicationController
   end
 
   def dayevents
-    @mes = params[:month] || Date.today
+    @mes = params[:month] || Time.zone.today
     @mes = @mes.to_datetime
     if current_user.class == Client
       @events = Event.order("start_at").joins(:client).where("client_id = ? and (start_at = ? or (start_at < ? and end_at >=?)) ",current_user.id, mes,mes,mes).includes(:professional).all
     else
-      @events = Event.order("start_at").where("start_at >= ? and start_at <?", @mes,@mes.end_of_day).includes(:client,:professional)
-      #@month = params[:month] ? Date.parse(params[:month]) : Date.today
-      #@shown_month = Date.civil(@year, @month)
-      #@event_strips = Event.event_strips_for_month(@shown_month)
+      @events = Event.order("start_at").where("start_at >= ? and start_at <?", @mes,@mes.end_of_day).includes(:client,:professional)      
     end
     respond_to do |format|
       format.js

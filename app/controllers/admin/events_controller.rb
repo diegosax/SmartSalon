@@ -9,7 +9,7 @@ class Admin::EventsController < Admin::ApplicationController
     @events = @salon.events.order("start_at").includes(:client,:professional).all
     
 
-    @month = params[:month] ? Date.parse(params[:month]) : Date.today
+    @month = params[:month] ? Time.zone.parse(params[:month]) : Time.zone.today
     @date = @month
     @event = Event.new
     respond_to do |format|
@@ -43,7 +43,7 @@ class Admin::EventsController < Admin::ApplicationController
   end
 
   def search
-    @events = Event.order("start_at").includes(:client,:professional).where("start_at >= ?", Date.today)
+    @events = Event.order("start_at").includes(:client,:professional).where("start_at >= ?", Time.zone.today)
 
     respond_to do |format|
       format.js
@@ -57,7 +57,7 @@ class Admin::EventsController < Admin::ApplicationController
     @event = Event.new
     @clients = current_professional.salon.clients
     @client = Client.find(params[:client]) unless params[:client].blank?
-    delay = (60 - (DateTime.now.min))%5
+    #delay = (60 - (DateTime.now.min))%5
     if !params[:day].nil?
       @event.start_at = params[:day] + " " + DateTime.now.strftime("%H:%M") unless params[:day].nil?
       @event.start_at+=minutes.delay

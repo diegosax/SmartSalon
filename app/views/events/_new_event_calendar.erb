@@ -1,6 +1,4 @@
 <%if @events%>
-<%puts @events.inspect%>
-  <%#@client ||= current_user%>
   <div id="client_calendar">
     <h2 id="month">
       <span class="month_info">
@@ -15,7 +13,7 @@
         <%= date.day %>        
         <div class="not_visible">
           <%if session[:new_start_date] == nil%>
-            <%if date >= Date.today && date.month == @date.month%>
+            <%if date >= Time.zone.today && date.month == @date.month%>
               <%=raw isavailable_mod(events, date, 
                 :professionals => @service_professionals,
                 :service => @service,

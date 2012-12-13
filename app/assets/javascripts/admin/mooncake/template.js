@@ -36,27 +36,7 @@
 			}, this));
 
 			return this;
-		}, 
-
-		attachSidebarToggleButton: function() {
-
-			var toggleButton = $( '<li id="sidebar-toggle-wrap"><span id="sidebar-toggle"><span></span></span></li>' );
-
-			toggleButton
-				.appendTo( '#wrapper #sidebar #navigation > ul' )
-				.children( '#sidebar-toggle' )
-				.on( 'click.template', function(e) {
-					if( !!$( '#sidebar #navigation > ul > li.active:first .inner-nav' ).length ) {
-						$(this).parents( '#content' )
-							.toggleClass( 'sidebar-minimized' )
-						.end()
-							.toggleClass( 'toggled' );
-					}
-					e.preventDefault();
-				})
-				.toggleClass( 'disabled', !$( '#sidebar #navigation > ul > li.active:first .inner-nav' ).length )
-				.toggleClass( 'toggled', $( '#wrapper #content' ).hasClass( 'sidebar-minimized' ) );
-		}, 
+		},		
 
 		bindEventHandlers: function() {
 
@@ -123,9 +103,7 @@
 
 	$.template = new MoonCake( document ).ready( function( template ) {
 
-		template.init({
-			showSidebarToggleButton: true // show or hide the sidebar toggle button
-		});
+		template.init();
 
 	});
 

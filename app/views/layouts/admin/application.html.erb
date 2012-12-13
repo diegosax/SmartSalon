@@ -54,12 +54,7 @@
 					<div id="header-right" class="clearfix">
 						<div id="nav-toggle" data-toggle="collapse" data-target="#navigation" class="collapsed">
 							<i class="icon-caret-down"></i>
-						</div>
-						<div id="header-search">
-							<span id="search-toggle" data-toggle="dropdown">
-								<i class="icon-search"></i>
-							</span>													
-						</div>
+						</div>						
 						<div id="dropdown-lists">
 							<%=link_to :back, :class => "item" do%>
 							<span class="item-icon">
@@ -74,8 +69,8 @@
 								<span class="info">
 									<span class="name">
 										<%=link_to [:admin,current_professional], "data-toggle" => "dropdown" do%>
-											<%=current_professional.name%>
-											<b class="carret"></b>
+										<%=current_professional.name%>
+										<b class="carret"></b>
 										<%end%>
 										<ul class="dropdown-menu">
 											<li><a href="#tab-11" data-toggle="tab">First menu</a></li>
@@ -91,134 +86,67 @@
 				</div>
 			</div>
 		</header>
+		<aside id="sidebar">
+			<nav id="navigation">
+				<ul>
+					<li class="<%=active_class('dashboard')%>">
+						<%=link_to admin_dashboard_path do%>
+						<span title="Dashboard">												
+							<i class="icon-home"></i>
+							<span class="nav-title">Dashboard</span>
+						</span>
+						<%end%>		
+					</li>
+					<li class="<%=active_class('events')%>">
+						<%=link_to admin_events_path do%>
+						<span title="Agenda">
+							<i class="icon-calendar"></i>
+							<span class="nav-title">Agenda</span>
+						</span>
+						<%end%>
+					</li>
 
+					<li class="<%=active_class('professionals')%>">		
+						<%=link_to admin_professionals_path do%>
+						<span title="Funcionários">
+							<i class="icon-official"></i>
+							<span class="nav-title">Funcionários</span>
+						</span>
+						<%end%>
+					</li>
+
+					<li class="<%=active_class('services')%>">
+						<%=link_to admin_services_path(current_professional.salon) do%>
+						<span title="Serviços">
+							<i class="icon-cog-3"></i>
+							<span class="nav-title">Serviços</span>
+						</span>
+						<%end%>
+					</li>
+
+					<li class="<%=active_class('clients')%>">
+						<%=link_to admin_clients_path(current_professional.salon) do%>
+						<span title="Clientes">
+							<i class="icon-users"></i>
+							<span class="nav-title">Clientes</span>
+						</span>
+						<%end%>
+					</li>
+					<li class="<%=active_class('salons')%>">
+						<%=link_to admin_salon_path(current_professional.salon) do%>
+						<span title="Configurações">
+							<i class="icon-cogs"></i>
+							<span class="nav-title">Meu Salão</span>
+						</span>
+						<%end%>
+					</li>												
+				</ul>
+			</nav>
+		</aside>
 		<div id="content-wrap">
-			<div id="content" class="sidebar sidebar-minimized">
+			<div id="content">
 				<div id="content-outer">
-					<div id="content-inner">
-						<aside id="sidebar">
-							<nav id="navigation" class="collapse">
-								<ul>
-									<li class="<%=active_class('dashboard')%>">
-										<%=link_to admin_dashboard_path do%>
-										<span title="Dashboard">												
-											<i class="icon-home"></i>
-											<span class="nav-title">Dashboard</span>
-										</span>								
-										<%end%>		
-									</li>
-									<li class="<%=active_class('events')%>">										
-										<span title="Eventos">
-											<i class="icon-calendar"></i>
-											<span class="nav-title">Agenda</span>
-										</span>
-										<ul class="inner-nav">
-											<li class="<%=active_action('events', 'new')%>">
-												<%=link_to new_admin_event_path do%>
-												<i class="icol-calendar-1"></i>
-												Agendamento Personalizado
-												<%end%>
-											</li>
-											<li class="<%=active_action('events', 'easy_new')%>">
-												<%=link_to easy_new_admin_events_path do%>
-												<i class="icol-calendar-2"></i>
-												Agendamento Fácil
-												<%end%>
-											</li>
-											<li class="<%=active_action('events', 'index')%>">
-												<%=link_to admin_events_path do%>
-												<i class="icol-application-view-list"></i>
-												Todos os Eventos
-												<%end%>
-											</li>
-											<li>
-												<%=link_to admin_events_path(:professional => current_professional) do%>
-												<i class="icol-bricks"></i>
-												Meus Eventos
-												<%end%>
-											</li>
-										</ul>					
-										
-									</li>
-
-									<li class="<%=active_class('professionals')%>">										
-										<span title="Funcionários">
-											<i class="icon-official"></i>
-											<span class="nav-title">Funcionários</span>
-										</span>																
-										<ul class="inner-nav">
-											<li class="<%=active_action('professionals', 'index')%>">
-												<%=link_to admin_professionals_path do%>
-												<i class="icol-application-view-list"></i>
-												Listar Funcionários
-												<%end%>
-											</li>
-											<li class="<%=active_action('professionals', 'new')%>">
-												<%=link_to new_admin_professional_path do%>
-												<i class='icol-add'></i>
-												Novo Funcionário
-												<%end%>
-											</li>
-
-										</ul>
-									</li>
-
-									<li class="<%=active_class('services')%>">										
-										<span title="Serviços">
-											<i class="icon-cog-3"></i>
-											<span class="nav-title">Serviços</span>
-										</span>																
-										<ul class="inner-nav">
-											<li class="<%=active_action('services', 'index')%>">
-												<%=link_to admin_services_path do%>
-												<i class="icol-application-view-list"></i>
-												Listar Serviços
-												<%end%>
-											</li>
-											<li class="<%=active_action('services', 'new')%>">
-												<%=link_to new_admin_service_path do%>
-												<i class='icol-add'></i>
-												Novo Serviço
-												<%end%>
-											</li>
-
-										</ul>
-									</li>
-
-									<li class="<%=active_class('clients')%>">
-										<span title="Clientes">
-											<i class="icon-users"></i>
-											<span class="nav-title">Clientes</span>
-										</span>
-
-										<ul class="inner-nav">
-											<li class="<%=active_action('clients', 'index')%>">
-												<%=link_to admin_clients_path do%>
-												<i class="icol-application-view-list"></i>
-												Listar Clientes
-												<%end%>
-											</li>
-											<li class="<%=active_action('clients', 'new')%>">
-												<%=link_to new_admin_client_path do%>
-												<i class='icol-add'></i>
-												Novo Cliente
-												<%end%>
-											</li>
-
-										</ul>
-									</li>
-									<li class="<%=active_class('salons')%>">
-										<%=link_to admin_salon_path(current_professional.salon) do%>
-										<span title="Configurações">
-											<i class="icon-cogs"></i>
-											<span class="nav-title">Meu Salão</span>
-										</span>
-										<%end%>
-									</li>												
-								</ul>
-							</nav>
-						</aside>
-						<div id="sidebar-separator"></div>
+					<div id="content-inner">						
 						<section class="clearfix" id='main'>
 							<%= yield %>
 						</section>		

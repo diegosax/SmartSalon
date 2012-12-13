@@ -49,7 +49,7 @@ class Salon < ActiveRecord::Base
           :description => "Mensalidade",
           :status => "A Pagar",
           :price => subscription.price,
-          :due_date => Date.today + subscription.trial_period.months + (i-1).month        
+          :due_date => Time.zone.today + subscription.trial_period.months + (i-1).month        
         )
       end
     else

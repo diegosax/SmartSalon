@@ -8,4 +8,13 @@ class Service < ActiveRecord::Base
   belongs_to :salon
   validates :name, :duration, presence: true
   validates :price, numericality: {greater_than: 0}, :allow_blank => true
+
+  def preferred_duration(client)
+  	client_service = self.client_services.where(:client_id => client).first
+  	if client_service
+  		client_service.duration
+  	else
+  		self.duration
+  	end
+  end
 end

@@ -10,6 +10,14 @@ h1#main-heading{
 	background: none;	
 }
 
+#wrapper #content-inner{
+	background:none;
+}
+
+#wrapper #main{
+	margin-left: 70px;
+}
+
 .modal .modal-body{
 	overflow: visible;
 }
@@ -42,10 +50,81 @@ form{
 
 // ----------------------- SIDEBAR MENU ------------------------//
 
+#wrapper #sidebar{
+	background-image: url("/assets/bg_sidebar.png");
+	position: fixed;
+	width:auto;
+	padding-top: 47px;
+	min-height: 100%;
+}
+
 #wrapper #sidebar #navigation .inner-nav > li > a {
 	padding: 12px 17px 12px 5px;
 }
 
 .alert p.error-message{
 	padding-left: 20px;
+}
+
+// ------------------------ Page Top Menu -----------------------//
+
+.switch-board-round ul{
+	text-align: center;
+}
+
+.switch-board-round ul li {
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+	margin: 10px;
+	background: #EBEBEB;
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	overflow: visible;
+	text-align: center;
+	border: #CCC 1px solid;
+}
+
+.switch-board-round ul li a {
+	display: block;
+	width: 44px;
+	height: 44px;
+	text-align: center;
+	background: white;
+	margin: 2px;
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+	border: #BBB 1px solid;
+	font-size: 24px;
+}
+
+.switch-board-round ul li a:hover {
+	background: #f6f6f6;
+	border:#bbb 1px solid;
+	cursor:pointer;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	box-shadow: 0 0 5px #ccc;
+}
+
+.switch-board-round ul li a span{
+	height: 26px;
+	width: 26px;
+	display: inline-block;
+	margin-top: 10px;
+}
+
+
+
+// -----------------------FOOTER --------------------------------//
+
+#footer{
+	margin-left: 70px;
 }
