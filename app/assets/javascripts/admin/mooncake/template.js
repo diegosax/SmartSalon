@@ -22,11 +22,7 @@
 		version: '1.0', 
 
 		init: function( options ) {
-
-			this.bindEventHandlers();
-			options.showSidebarToggleButton && this.attachSidebarToggleButton();
-			this.setSidebarMinHeight( '#wrapper #sidebar #navigation > ul > li.active:first > .inner-nav' );
-			
+			this.bindEventHandlers();									
 			return this;
 		}, 
 

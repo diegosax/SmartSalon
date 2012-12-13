@@ -21,7 +21,7 @@ class Admin::ApplicationController < ActionController::Base
 	end
 
 	def load_salon
-		@salon = current_professional.salon
+		@salon = current_professional.salon if current_professional
 	end
 
 	def current_ability		

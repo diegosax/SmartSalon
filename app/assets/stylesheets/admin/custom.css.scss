@@ -48,6 +48,10 @@ form{
 	padding: 46px 0 0 0;	
 }
 
+#wrapper #main #main-header {	
+	margin: 0 40px 5px 40px;
+}
+
 // ----------------------- SIDEBAR MENU ------------------------//
 
 #wrapper #sidebar{
@@ -77,18 +81,18 @@ form{
 	height: 50px;
 	display: inline-block;
 	margin: 10px;
-	background: #EBEBEB;
+	/* background: #EBEBEB;
 	-webkit-border-radius: 50px;
 	-moz-border-radius: 50px;
 	border-radius: 50px;
-	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
-	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1) inset;
+	-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1) inset;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1) inset;
 	border-left: 1px solid transparent;
 	border-right: 1px solid transparent;
 	overflow: visible;
 	text-align: center;
-	border: #CCC 1px solid;
+	border: #CCC 1px solid; */
 }
 
 .switch-board-round ul li a {
@@ -101,17 +105,19 @@ form{
 	-webkit-border-radius: 50px;
 	-moz-border-radius: 50px;
 	border-radius: 50px;
-	border: #BBB 1px solid;
+	border: #BBB 3px solid;
 	font-size: 24px;
+	color:#010;
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-.switch-board-round ul li a:hover {
-	background: #f6f6f6;
-	border:#bbb 1px solid;
+.switch-board-round ul li a:hover,
+.switch-board-round ul li.active a {
+	//background: #f6f6f6;	
 	cursor:pointer;
-	-webkit-transition: all 0.3s ease-in-out;
-	-moz-transition: all 0.3s ease-in-out;
-	box-shadow: 0 0 5px #ccc;
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;	
+	color: #08C;
 }
 
 .switch-board-round ul li a span{

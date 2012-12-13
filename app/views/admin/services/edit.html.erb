@@ -1,2 +1,19 @@
 <%=render "top_menu"%>
-<%= render 'form' %>
+
+<div id="main-header" class="page-header">
+	<h1 id="main-heading">Alterar Serviço</h1>
+</div>
+
+<div id="main-content">
+	<%=render "context_menu"%>
+	<div class="row-fluid">
+		<div class="span12 widget">
+			<div class="widget-header">
+				<span class="title">Dados do Serviço</span>
+			</div>
+			<div class="widget-content form-container">				
+				<%=render "form"%>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,16 @@
+<div class="row-fluid">
+  <div class="switch-board-round">
+    <ul class="clearfix">
+      <li class="<%=active_action('professionals','new')%>">
+        <%=link_to new_admin_professional_path, :class => "tip-top", :rel => "tooltip", "data-original-title" => "Novo Funcionário" do%>  
+          <span class="icon-plus"></span>
+        <%end%>
+      </li>
+      <li class="<%=active_action('professionals','index')%>">
+        <%=link_to admin_professionals_path, :class => "tip-top", :rel => "tooltip", "data-original-title" => "Listar Funcionários" do%>  
+          <span class="icon-list"></span>
+        <%end%>
+      </li>
+   </ul>
+ </div>
+</div>

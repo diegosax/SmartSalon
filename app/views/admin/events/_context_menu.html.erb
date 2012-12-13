@@ -1,0 +1,21 @@
+<div class="row-fluid">
+  <div class="switch-board-round">
+    <ul class="clearfix">
+      <li class="<%=active_action('events','easy_new')%>">
+        <%=link_to easy_new_admin_events_path, :class => "tip-top", :rel => "tooltip", "data-original-title" => "Agendamento Fácil" do%>	
+          <span class="icon-magic"></span>
+        <%end%>        
+      </li>
+      <li class="<%=active_action('events','new')%>">
+        <%=link_to new_admin_event_path, :class => "tip-top", :rel => "tooltip", "data-original-title" => "Agendamento Manual" do%>  
+          <span class="icon-plus"></span>
+        <%end%>
+      </li>
+      <li class="<%=active_action('events','index')%>">
+        <%=link_to admin_events_path, :class => "tip-top", :rel => "tooltip", "data-original-title" => "Meus Agendamentos" do%>  
+          <span class="icon-list"></span>
+        <%end%>
+      </li>
+   </ul>
+ </div>
+</div>
