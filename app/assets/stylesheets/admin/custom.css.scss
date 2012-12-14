@@ -134,3 +134,212 @@ form{
 #footer{
 	margin-left: 70px;
 }
+
+
+/* Wizard Navigation
+================================================== */
+
+.wizard-nav ul
+{
+    margin: 0;
+    padding: 0;
+    float: left;
+    width:100%;
+}
+
+.wizard-nav
+{
+	margin: -15px -15px 15px -15px;
+    background: #fafafa repeat-x left bottom;
+    background-image: -ms-linear-gradient(top, #ffffff, #f2f2f2);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f2f2f2));
+    background-image: -webkit-linear-gradient(top, #ffffff, #f2f2f2);
+    background-image: -o-linear-gradient(top, #ffffff, #f2f2f2);
+    background-image: -moz-linear-gradient(top, #ffffff, #f2f2f2);
+    background-image: linear-gradient(top, #ffffff, #f2f2f2);
+    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffffff', endColorstr='#f2f2f2', GradientType=0);
+    position: relative;
+    border-bottom: 1px solid #bbb;
+    margin-bottom: -1px;
+}
+
+.wizard-nav
+{
+    *zoom: 1;
+}
+.wizard-nav:before,
+.wizard-nav:after
+{
+    display: table;
+    content: "";
+}
+
+.wizard-nav:after
+{
+    clear: both;
+}
+
+.wizard-nav ul li
+{
+    float: left;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    padding: 0;    
+    display: block;
+    max-height: 50px;
+    overflow: hidden;
+    width:50%;
+    text-align: center;
+}
+
+.wizard-nav ul li:first-child{
+	border-right: 1px solid rgba(223, 231, 177, 0.5);
+	margin-right: -1px;
+}
+
+.wizard-nav ul li.disabled a, 
+.wizard-nav ul li.disabled span
+{
+    color: #999;
+}
+
+.wizard-nav ul li [class^="icon-"]
+{
+    font-size: 18px;
+}
+
+.wizard-nav ul li:not(.active):hover
+{    
+    background-color: #ffffff ;
+    /* background-image: -ms-linear-gradient(top, #f2f2f1, #ffffff);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f2f2f1), to(#ffffff));
+    background-image: -webkit-linear-gradient(top, #f2f2f1, #ffffff);
+    background-image: -o-linear-gradient(top, #f2f2f1, #ffffff);
+    background-image: -moz-linear-gradient(top, #f2f2f1, #ffffff);
+    background-image: linear-gradient(top, #f2f2f1, #ffffff);
+    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#f2f2f1', endColorstr='#ffffff', GradientType=0); */
+}
+
+.wizard-nav ul li.active{
+	background-color: #eaeaea;
+}
+
+.wizard-nav ul li a, 
+.wizard-nav ul li span
+{
+    display: block;
+    line-height: 50px;
+    text-decoration: none;
+    padding: 0 16px;
+    color: #444;
+    cursor: pointer;
+}
+
+
+/* Responsive Wizard
+================================================== */
+
+
+@media (max-width: 767px)
+{
+	
+    .wizard-nav ul
+    {
+        width: 100%;
+    }
+
+    .wizard-nav ul li
+    {
+        display: none;
+    }
+
+    .wizard-nav ul li, 
+	.wizard-nav ul li span, 
+	.wizard-nav ul li a
+    {
+        margin: 0;
+        padding: 0;
+    }
+
+    .wizard-nav ul li.active
+    {
+        display: block !important;
+        width: 100%;
+        text-align: center;
+    }
+
+    .wizard-nav ul li.active, 
+	.wizard-nav ul li.active:hover
+    {
+        background-position: -25px top;
+    }
+
+    .wizard-nav ul li.active
+    {
+        -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1) !important;
+        -moz-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1) !important;
+        box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .wizard-nav ul li:first-child
+    {
+        padding-left: 0;
+    }
+
+    .wizard-nav ul li:last-child
+    {
+        border-right: 0;
+    }
+
+    .wizard-nav .responsive-prev-btn, 
+	.wizard-nav .responsive-next-btn
+    {
+        display: block;
+    }
+
+    .wizard-form.wizard-form-vertical
+    {
+        margin-left: 0;
+        border-left: none;
+    }
+
+    .wizard-nav.wizard-nav-vertical
+    {
+        position: relative;
+        width: auto;
+        left: auto;
+        top: auto;
+        bottom: auto;
+        border-bottom: 1px solid #bbb;
+        margin: 0 0 -1px 0;
+    }
+
+    .wizard-nav.wizard-nav-vertical ul
+    {
+        float: left;
+    }
+
+    .wizard-nav.wizard-nav-vertical ul li
+    {
+        display: none;
+        float: left;
+        border-bottom: none;
+        background-position: -25px -50px;
+    }
+
+    .wizard-nav.wizard-nav-vertical ul li:hover
+    {
+        background-position: -25px -100px;
+    }
+}
+
+// ------------ Custom Modal
+.modal,
+.modal.fade.in {
+    top: 40%;
+}
+.client-manager-model{
+	padding-top: 20px; 
+}
+

@@ -1,0 +1,46 @@
+<%if @client%>
+  <div class="w-box"> 
+    <div class="w-box-header"> 
+      Cliente encontrado no Instanapp 
+      <div class="pull-right">
+        <a href="#" class="back_to_form">
+          <i class="icon-arrow-left">
+            Voltar  
+          </i>          
+        </a>
+      </div> 
+    </div> 
+    <div class="w-box-content"> 
+      <table class="table table-striped table_vam no-th"> 
+        <tbody> 
+          <tr class="client_info" data-id="<%=@client.id%>"> 
+            <td> 
+              <img alt="" src="http://placehold.it/40x40/efefef" class="thumbnail"> 
+            </td> 
+            <td>
+              <%=escape_javascript(@client.name)%>
+            </td> 
+            <td> 
+              <%=formatted_phone(@client.celphone)%> 
+            </td> 
+            <td><%=@client.email%></td> 
+            <td><%=@client.city%></td> 
+          </tr> 
+        </tbody>
+      </table> 
+      <%=link_to 'Adicionar Cliente','#', :class=> 'btn btn-primary', :disable_with => 'Salvando...'%>
+    </div> 
+  </div>
+<%else%>
+  <div>
+    <div class="alert alert-danger fade in">
+      <strong>Cliente não cadastrado</strong><br>
+      O cliente não foi encontrado. É possível que este usuário não possua cadastro no Instanapp
+    </div>
+    <a href="#" class="back_to_form">
+      <i class="icon-arrow-left">
+        Voltar  
+      </i>      
+    </a>
+  </div>
+<%end%>

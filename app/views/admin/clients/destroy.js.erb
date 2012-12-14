@@ -1,0 +1,7 @@
+$("#confirmation-modal").modal("hide");
+var list_item = $("#c_<%=escape_javascript(@clientSalon.client.id.to_s)%>");
+if (list_item.length > 0){
+	list_item.hide("slow");
+} else{
+	window.location = "<%=escape_javascript(admin_clients_path)%>";
+}

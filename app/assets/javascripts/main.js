@@ -86,7 +86,6 @@ function addLoadingSimple(element){
 	var html = "<img src='/assets/ajax_loader.gif'></img>"
 	$(element).html(html);
 }
-
 function removeLoading(){
 	$(".loading").remove().fadeOut("fast");
 }
@@ -100,6 +99,19 @@ function onChooseProfessionalChange(){
 		dataType: "script"
 	});
 	history.pushState(null,"",window.location.pathname + "?" + $("#new-event-form").serialize());
+}
+
+function onChooseClientChange(){
+	console.log("Called");
+	if ($("#client_calendar").length > 0){
+		$("#client_calendar").remove().fadeOut("fast");		
+		addLoading($("#new-event-form"));
+		$.ajax(window.location.pathname, {
+			data: $("#new-event-form").serialize(),
+			dataType: "script"
+		});
+		history.pushState(null,"",window.location.pathname + "?" + $("#new-event-form").serialize());
+	}
 }
 
 userList = null;
@@ -163,7 +175,9 @@ $(document).ready(function(){
 		onChooseProfessionalChange();
 	});
 
-	
+	$("#choose-client .chzn_a").chosen().change(function(){
+		onChooseClientChange();
+	});
 
 	$("#new-event-form").on("submit",function(){
 		history.pushState(null,"",$(this).attr("action") + "?" + $(this).serialize());

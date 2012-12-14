@@ -41,7 +41,7 @@ class Admin::ClientsController < Admin::ApplicationController
         format.js
         format.html
       else        
-        format.js {render :search_not_found}
+        format.js {render :search}
         format.html
       end
     end          
@@ -49,7 +49,7 @@ class Admin::ClientsController < Admin::ApplicationController
 
   def add_to_salon
     @client = Client.find(params[:client_id])
-    @client.salons << current_professional.salon      
+    @client.salons << current_professional.salon
     respond_to do |format|
       if @client.save
         flash[:notice] = "Cliente adicionado com sucesso!"
@@ -57,7 +57,7 @@ class Admin::ClientsController < Admin::ApplicationController
         format.json { render json: @client, status: :created, location: @client }
         format.js
       else
-        puts @client.error.messages
+        puts @client.errors.messages
         format.js {render "add_error"}
         format.html { render action: "new" }
         format.json { render json: @client.errors, status: :unprocessable_entity }
@@ -101,10 +101,11 @@ class Admin::ClientsController < Admin::ApplicationController
 
 def destroy
 
-  clientSalon = ClientSalon.where(:client_id => params[:id], :salon_id => @salon.id).first
-  clientSalon.destroy
+  @clientSalon = ClientSalon.where(:client_id => params[:id], :salon_id => @salon.id).first
+  @clientSalon.destroy
 
   respond_to do |format|
+    format.js
     format.html { redirect_to admin_clients_url }
     format.json { head :no_content }
   end
