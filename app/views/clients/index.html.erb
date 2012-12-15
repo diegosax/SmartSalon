@@ -8,7 +8,7 @@
   </tr>
 
 <% @clients.each do |client| %>
-  <tr>
+  <tr id="c_<%=client.id.to_s%>">
     <td><%= link_to 'Show', client %></td>
     <td><%= link_to 'Edit', edit_client_path(client) %></td>
     <td><%= link_to 'Destroy', client, confirm: 'Are you sure?', method: :delete %></td>
