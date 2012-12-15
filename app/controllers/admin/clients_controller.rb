@@ -70,6 +70,7 @@ class Admin::ClientsController < Admin::ApplicationController
     generated_password = Devise.friendly_token.first(6)
     @client.password = generated_password
     @client.created_by = current_professional.salon.id
+    @client.salons << current_professional.salon
     respond_to do |format|
       if @client.save
         flash[:notice] = "Cliente cadastrado com sucesso!"
