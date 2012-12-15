@@ -48,34 +48,6 @@ $("#payment-modal form .controls img").live("click", function(){
 	$(this).addClass("selected");
 });
 
-/*----------- New Client Modal Search ----------------------*/	
 
-var shown_div = $("#new_client .modal-body .select_client:not(.hidden)");
-shown_div.find("form").submit(function(e){
-	addLoading(shown_div);
-	shown_div.find("form").fadeOut("fast");
-});
-
-shown_div.find("a.back_to_form").live("click", function(){
-	shown_div.children("div").remove();
-	shown_div.children("form").fadeIn();	
-});
-
-$("#new_client .modal-footer a.btn-primary").live("click",function(e){
-	e.preventDefault();		
-	var selectedRadio = $("#new_client input[type=radio]:checked");
-	if (selectedRadio.val() == "registered"){
-		var client_id = $("#new_client tr.client_info").attr("data-id");
-		$.ajax({
-			type: 'POST',
-			url: "/admin/clients/" + client_id + "/add/to/salon",						
-			dataType: "script"
-		});
-	} else if (selectedRadio.val() == "not_registered"){
-
-	} else if (selectedRadio.val() == "not_sure"){
-
-	}
-});
 
 });

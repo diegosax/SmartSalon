@@ -2,7 +2,7 @@
   <div style="position: relative;overflow: hidden">
        <table>
       <tbody>
-        <%myDate = dia ? dia.to_date : Date.today
+        <%myDate = dia ? dia.to_date : Time.zone.today
         myDate = DateTime.new(myDate.year,myDate.month,myDate.day)
         day = myDate.day
         %>

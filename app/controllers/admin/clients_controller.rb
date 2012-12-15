@@ -3,7 +3,7 @@ class Admin::ClientsController < Admin::ApplicationController
   load_and_authorize_resource
 
   def index
-    @clients = current_professional.salon.clients
+    @clients = @salon.clients
 
     respond_to do |format|
         format.html # index.html.erb
@@ -21,7 +21,7 @@ class Admin::ClientsController < Admin::ApplicationController
   end
 
   def new
-    @client = Client.new
+    @client = @salon.clients.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -30,23 +30,26 @@ class Admin::ClientsController < Admin::ApplicationController
   end
 
   def edit
-    @client = Client.find(params[:id])
+    @client = @salon.clients.find(params[:id])
   end
 
   def search
+    sleep 1
     @client = Client.where("email = ? or celphone = ?", params[:email], params[:celphone]).first    
     respond_to do |format|
       if @client        
         format.js
+        format.html
       else        
-        format.js {render :search_not_found}
+        format.js {render :search}
+        format.html
       end
     end          
   end
 
   def add_to_salon
     @client = Client.find(params[:client_id])
-    @client.salons << current_professional.salon      
+    @client.salons << current_professional.salon
     respond_to do |format|
       if @client.save
         flash[:notice] = "Cliente adicionado com sucesso!"
@@ -54,7 +57,7 @@ class Admin::ClientsController < Admin::ApplicationController
         format.json { render json: @client, status: :created, location: @client }
         format.js
       else
-        puts @client.errors
+        puts @client.errors.messages
         format.js {render "add_error"}
         format.html { render action: "new" }
         format.json { render json: @client.errors, status: :unprocessable_entity }
@@ -63,10 +66,9 @@ class Admin::ClientsController < Admin::ApplicationController
   end
 
   def create
-    @client = Client.new(params[:client])
+    @client = @salon.clients.build(params[:client])
     generated_password = Devise.friendly_token.first(6)
     @client.password = generated_password
-    @client.salons << current_professional.salon
     @client.created_by = current_professional.salon.id
     respond_to do |format|
       if @client.save
@@ -83,7 +85,7 @@ class Admin::ClientsController < Admin::ApplicationController
   end
 
   def update
-    @client = Client.find(params[:id])
+    @client = @salon.clients.find(params[:id])
 
     respond_to do |format|
       if @client.update_attributes(params[:client])
@@ -100,10 +102,11 @@ class Admin::ClientsController < Admin::ApplicationController
   def destroy
 
     @client = Client.find(params[:id])
-    clientSalon = ClientSalon.where(:client_id => params[:id], :salon_id => current_professional.salon.id)
-    clientSalon.destroy_all
+    @clientSalon = ClientSalon.where(:client_id => params[:id], :salon_id => @salon.id).first
+    @clientSalon.destroy
 
     respond_to do |format|
+      format.js
       format.html { redirect_to admin_clients_url }
       format.json { head :no_content }
     end

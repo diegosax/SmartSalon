@@ -1,4 +1,5 @@
-$("#associate_service").modal("hide");
+$(".modal").modal("hide");
+$("#ajax-modal").empty();
 $("#associated_services tbody").append("<%=escape_javascript(render @professional_service)%>");
 $("#associated_services tr#ps<%=escape_javascript(@professional_service.id.to_s)%>").effect("highlight", {}, 4000);
 

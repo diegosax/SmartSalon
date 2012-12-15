@@ -2,35 +2,25 @@
 	<%if action_name != "index" || params[:professional].present?%>
 		<%=link_to admin_events_path, :class => "item" do%>
 		<span class="item-icon">
-			<i class="icol-application-view-list"></i>
+			<i class="icon-list"></i>
 		</span>
-		<span class="item-label">Todos os Eventos</span>								
+		<span class="item-label">Listar Agendamentos</span>								
 		<%end%>
-	<%end%>
-
-	<%if action_name != "index" || !params[:professional].present?%>
-		<%=link_to admin_events_path(:professional => current_professional), :class => "item" do%>
-			<span class="item-icon">
-				<i class="icol-brick"></i>
-			</span>
-			<span class="item-label">Meus Eventos</span>
-		<%end%>
-	<%end%>
-	
-	<%if action_name != "new"%>
-		<%=link_to new_admin_event_path, :class => "item" do%>
-		<span class="item-icon">
-			<i class="icol-calendar-1"></i>
-		</span>
-		<span class="item-label">Agendamento Manual</span>								
-		<%end%>
-	<%end%>
+	<%end%>	
 	<%if action_name != "easy_new"%>
 		<%=link_to easy_new_admin_events_path, :class => "item" do%>
 		<span class="item-icon">
-			<i class="icol-calendar-2"></i>
+			<i class="icon-magic"></i>
 		</span>
 		<span class="item-label">Agendamento Fácil</span>								
 		<%end%>
 	<%end%>
+	<%if action_name != "new"%>
+		<%=link_to new_admin_event_path, :class => "item" do%>
+		<span class="item-icon">
+			<i class="icon-plus"></i>
+		</span>
+		<span class="item-label">Agendamento Manual</span>								
+		<%end%>
+	<%end%>	
 <%end%>

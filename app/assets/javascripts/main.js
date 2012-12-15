@@ -86,7 +86,6 @@ function addLoadingSimple(element){
 	var html = "<img src='/assets/ajax_loader.gif'></img>"
 	$(element).html(html);
 }
-
 function removeLoading(){
 	$(".loading").remove().fadeOut("fast");
 }
@@ -96,15 +95,31 @@ function onChooseProfessionalChange(){
 	$("#client_calendar").remove().fadeOut("fast");		
 	addLoading($("#new-event-form"));
 	$.ajax(window.location.pathname, {
+		data: $("#new-event-form").serialize(),
+		dataType: "script"
+	});
+	history.pushState(null,"",window.location.pathname + "?" + $("#new-event-form").serialize());
+}
+
+function onChooseClientChange(){
+	console.log("Called");
+	if ($("#client_calendar").length > 0){
+		$("#client_calendar").remove().fadeOut("fast");		
+		addLoading($("#new-event-form"));
+		$.ajax(window.location.pathname, {
 			data: $("#new-event-form").serialize(),
 			dataType: "script"
 		});
-	history.pushState(null,"",window.location.pathname + "?" + $("#new-event-form").serialize());
+		history.pushState(null,"",window.location.pathname + "?" + $("#new-event-form").serialize());
+	}
 }
 
 userList = null;
 $(document).ready(function(){
-
+	$('body').ajaxComplete(function() {
+		$(".chzn_a").chosen();
+	});
+	
 	$("#client_calendar td").live({
 		//hover in
 		mouseenter:
@@ -160,7 +175,9 @@ $(document).ready(function(){
 		onChooseProfessionalChange();
 	});
 
-	
+	$("#choose-client .chzn_a").chosen().change(function(){
+		onChooseClientChange();
+	});
 
 	$("#new-event-form").on("submit",function(){
 		history.pushState(null,"",$(this).attr("action") + "?" + $(this).serialize());
@@ -231,10 +248,10 @@ $(document).ready(function(){
   			removeFavorite($(this));
   		} else{  			
   			$.ajax({
-	  			type: "post",
-	  			url:"/favorites",
-	  			data: {salon_id: $(this).closest("li").attr("data-id")},
-	  			dataType: "script"
+  				type: "post",
+  				url:"/favorites",
+  				data: {salon_id: $(this).closest("li").attr("data-id")},
+  				dataType: "script"
   			});	
   		}  		
   	});
@@ -250,51 +267,35 @@ $(document).ready(function(){
 
   	//----------- MASKED INPUT ----------------//
 
-  		$("#client_celphone").mask("(99) 9999-9999");
-  		$("#professional_celphone").mask("(99) 9999-9999");
-  		$("#professional_landphone").mask("(99) 9999-9999");
-  		$("#professional_zipcode").mask("99.999-999");
+  	$("#client_celphone").mask("(99) 9999-9999");
+  	$("#professional_celphone").mask("(99) 9999-9999");
+  	$("#professional_landphone").mask("(99) 9999-9999");
+  	$("#professional_zipcode").mask("99.999-999");
 
   	//------------END MASKED INPUT ------------//
-
-  	//------------Professional / Services Association ----------//
-
-  	$("#new_professional_service").live("click",function(){
-  		showDefaultLoadingModel();
-  	});	
-
-  	//------------END Professional / Services Association ----------//
-
-  	//------------Client / Services Association ----------//
-
-  	$("#new_client_service").live("click",function(){
-  		showDefaultLoadingModel();
-  	});	
-
-  	//------------END Client / Services Association ----------//
 
   	//------------Address Loading ----------------------------------//
 
   		//ao soltar a tecla dentro do campo de cep ele verifica se possui 8 digitos e chama um posto para preenchimento do cep
-    	$("#professional_zipcode").keyup(function(e){
-    		var zipcode = $("#professional_zipcode").val().replace(/[^0-9]/g, '');    	    
-    	    if (zipcode.length == 8){    	       	
-    	        $(this).attr("disabled", true);
-    	        $(".zipcode_loading").fadeIn('slow');
-    	        $.post("/admin/professionals/search_zipcode", {zipcode: $(this).val()}, {}, "script");    	        
-    	        $("#professional_house_number").focus();
-    	        e.preventDefault();
-    	        return false;
-    		}
-    	});
+  		$("#professional_zipcode").keyup(function(e){
+  			var zipcode = $("#professional_zipcode").val().replace(/[^0-9]/g, '');    	    
+  			if (zipcode.length == 8){    	       	
+  				$(this).attr("disabled", true);
+  				$(".zipcode_loading").fadeIn('slow');
+  				$.post("/admin/professionals/search_zipcode", {zipcode: $(this).val()}, {}, "script");    	        
+  				$("#professional_house_number").focus();
+  				e.preventDefault();
+  				return false;
+  			}
+  		});
 
   	//------------END Address Loading ------------------------------//
 
   	//------------ Payments Modal ----------------------------------//
 
   	$("#payment_btn").live("click",function(){
-		showDefaultLoadingModel("Inicializando transação, por favor aguarde...");
-	});
+  		showDefaultLoadingModel("Inicializando transação, por favor aguarde...");
+  	});
 
   	//--------------------------------------------------------------//
 

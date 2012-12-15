@@ -15,6 +15,8 @@ class Admin::WorkingTimesController < Admin::ApplicationController
     end
 
   	@working_time = @professional.working_times.new(params[:working_time])
+    puts "Horario a ser salvo no banco"
+    puts @working_time.inspect
     date = Time.zone.parse("2000-01-01")
     @working_time.from = @working_time.from.change(
       :day => date.day,
@@ -30,6 +32,8 @@ class Admin::WorkingTimesController < Admin::ApplicationController
     
   	respond_to do |format|
   		if @working_time.save
+        puts "Horario após salvo no banco"
+        puts @working_time.inspect
   			flash[:notice] = "Horário cadastrado com sucesso"
   			format.js {@working_times = @professional.working_times.order("day, 'from', 'to'")}
   			format.html{redirect_to current_professional}

@@ -1,39 +1,39 @@
 <%= simple_form_for([:admin,@service],:html=>{:class=>"form-horizontal", :id=> "new_admin_service_form"}) do |f| %>        
-        <% if @service.errors.any? %>
-        <div class="alert alert-danger fade in">
-          <a href="#" class="close" data-dismiss="alert">×</a>
-          <strong>Por favor corrija os erros abaixo:</strong><br>
-          <p class="error-message">
-            <% @service.errors.full_messages.each do |msg| %>
-              <%= msg %>
-              <br>
-            <% end %>
-          </p>
-        </div>        
-        <% end %>
-        <%=f.input :name, :label => 'Nome'%>
-        <div class="control-group">
-          <%=f.label :price, "Preço", :class => "control-label"%>
-          <div class="controls">
-            <div class="input-append input-prepend">
-              <span class="add-on">R$</span>
-              <%=f.input_field :price, :class => "span5"%>
-              <span class="add-on">reais</span>  
-            </div>            
-          </div>
-        </div>
-        <div class="control-group">
-          <%=f.label :duration, "Duração", :class => "control-label"%>
-          <div class="controls">
-            <div class="input-append">              
-              <%=f.input_field :duration, :class => "span6"%>
-              <span class="add-on">minutos</span>  
-            </div>            
-          </div>
-        </div>        
+<% if @service.errors.any? %>
+<div class="alert alert-danger fade in">
+  <a href="#" class="close" data-dismiss="alert">×</a>
+  <strong>Por favor corrija os erros abaixo:</strong><br>
+  <p class="error-message">
+    <% @service.errors.full_messages.each do |msg| %>
+    <%= msg %>
+    <br>
+    <% end %>
+  </p>
+</div>        
+<% end %>
+<%=f.input :name, :label => 'Nome'%>
+<div class="control-group">
+  <%=f.label :price, "Preço", :class => "control-label"%>
+  <div class="controls">
+    <div class="input-append input-prepend">
+      <span class="add-on">R$</span>
+      <%=f.input_field :price, :class => "span5"%>
+      <span class="add-on">reais</span>  
+    </div>            
+  </div>
+</div>
+<div class="control-group">
+  <%=f.label :duration, "Duração", :class => "control-label"%>
+  <div class="controls">
+    <div class="input-append">              
+      <%=f.input_field :duration, :class => "span6"%>
+      <span class="add-on">minutos</span>  
+    </div>            
+  </div>
+</div>        
 
-        <div class="form-actions">
-          <%=f.submit "Salvar", :class => "btn btn-primary"%>
-          <%=link_to "Cancelar", :back, :class => "btn"%>
-        </div>
-        <%end%>          
+<div class="form-actions">
+  <%=f.submit "Salvar", :class => "btn btn-primary"%>
+  <%=link_to "Cancelar", :back, :class => "btn"%>
+</div>
+<%end%>          

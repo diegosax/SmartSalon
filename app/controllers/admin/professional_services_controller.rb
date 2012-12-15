@@ -61,7 +61,7 @@ class Admin::ProfessionalServicesController < Admin::ApplicationController
 
 
     if professional.id != current_professional.id
-      raise CanCan::AccessDenied.new("Not authorized!", :create, ProfessionalService)
+      raise CanCan::AccessDenied.new("Not authorized!", :create, ProfessionalService) unless current_professional.role? "admin"
     end
 
     @professional_service = ProfessionalService.new(:service => service, :professional => professional)

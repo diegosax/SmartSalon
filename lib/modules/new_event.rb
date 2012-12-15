@@ -31,7 +31,7 @@ module NewEvent
           :order => "start_at")
       puts "EVENTOS => #{@events}"
 
-      @date = params[:month] ? Date.parse(params[:month]) : Date.today
+      @date = params[:month] ? Date.parse(params[:month]) : Time.zone.today
     end 
   end
 end

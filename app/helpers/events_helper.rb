@@ -13,9 +13,9 @@ module EventsHelper
       end
 
       def format_date_header(date)
-            if date == Date.today
+            if date == Time.zone.today
                   "Hoje"
-            elsif date == Date.tomorrow
+            elsif date == Time.zone.today.tomorrow
                   "Amanhã"
             else
                   date.strftime("%d de %B")
@@ -23,10 +23,11 @@ module EventsHelper
       end
 
       def isavailable_mod(events, myDate, params = {})            
-            puts events.inspect
             start_hour = 0
             start_min = 0      
             professional = params[:professionals]
+            service = params[:service]         
+            client = params[:client]
             @working_times = professional.working_times.where(:day => myDate.wday)
             @valid_times = []
             if 
@@ -39,15 +40,13 @@ module EventsHelper
                         start_hour = session[:new_start_date].hour
                         start_min = session[:new_start_date].min
                         session[:new_start_date] = nil
-            end
-            service = params[:service]            
-            client = params[:client]
+            end            
             end_time = 23
             end_min = 59
-            intervalInMinutes = service.duration
+            intervalInMinutes = service.preferred_duration(client)
             actual_date = Time.zone.local(myDate.year,myDate.month,myDate.day, start_hour, start_min)            
             end_date = Time.zone.local(myDate.year,myDate.month,myDate.day, end_time, end_min)            
-            if actual_date.to_date == Date.today
+            if actual_date.to_date == Time.zone.today
                   actual_date += (DateTime.now.hour).hours
                   actual_date += service.duration.minutes
             end            

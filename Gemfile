@@ -68,6 +68,9 @@ gem 'kaminari'
 
 gem 'dotiw'
 
+gem 'timezone'
+
+
 group :production do
 	gem "pg"
 end

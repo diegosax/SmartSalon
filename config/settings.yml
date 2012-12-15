@@ -1,0 +1,7 @@
+sendgrid:
+  address: "smtp.sendgrid.net"
+  port: '25'
+  authentication: :plain
+  domain: instanapp.com.br
+  user_name: "app6110257@heroku.com"
+  password: "instanapp_dev"

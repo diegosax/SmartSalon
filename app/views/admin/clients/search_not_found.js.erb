@@ -4,6 +4,7 @@ var client_selection = '<div><div class="alert alert-danger fade in"> \
                                     O cliente não foi encontrado. É possível que este usuário não possua cadastro no Instanapp \
                                 </div><a href="#" class="back_to_form">Voltar</a></div>';
 var shown_div = $("#new_client .modal-body .select_client:not(.hidden)");
-shown_div.find(".loading").fadeOut('slow',function(){
-	$(client_selection).hide().appendTo(shown_div).fadeIn("slow");	
-});
+var modal = $("#new_client");
+shown_div.find("form").hide();
+$(client_selection).hide().appendTo(shown_div).fadeIn();
+modal.modal("loading");

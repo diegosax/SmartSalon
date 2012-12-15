@@ -8,7 +8,8 @@ $(document).ready(function(){
 	});
 	$("#confirm-btn").live("click",function(event){
 		event.preventDefault();
-		$("#confirmation-modal .modal-body p").html("Processando, por favor aguarde...<br /><img src='/assets/ajax_loader.gif'></img>");
+		//$("#confirmation-modal .modal-body p").html("Processando, por favor aguarde...<br /><img src='/assets/ajax_loader.gif'></img>");
+		$("#confirmation-modal").modal("loading");
 		var method = "post";
 		if ($("#confirmation-modal .link[data-method-type]").length > 0)
 			method = $("#confirmation-modal .link").attr("data-method-type");

@@ -94,4 +94,8 @@ class SalonsController < ApplicationController
   def formatted(address)
     address.gsub(/^(.{5})(.{3})$/,'\1-\2')
   end
+
+  def closest_timezones(zipcode)
+    
+  end
 end

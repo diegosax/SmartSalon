@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121211154305) do
+ActiveRecord::Schema.define(:version => 20121212153611) do
 
   create_table "client_salons", :force => true do |t|
     t.integer  "client_id"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(:version => 20121211154305) do
     t.float    "longitude"
     t.string   "number"
     t.integer  "professional_id"
+    t.string   "timezone"
   end
 
   create_table "services", :force => true do |t|

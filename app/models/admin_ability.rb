@@ -2,8 +2,7 @@ class AdminAbility
   include CanCan::Ability
   def initialize(user)
     user ||= User.new # Guest user if user hasn't loggend in    
-    
-    if user.role? :admin      
+    if user.role? "admin"
       can :manage, :all
     else      
       if user.is_professional? #user.role?(:professional)          

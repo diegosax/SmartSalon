@@ -15,6 +15,8 @@
 //= require jquery-ui
 //= require commom_plugins/manifest
 //= require bootstrap/manifest
+//= require bootstrap-modal/manifest
 //= require_tree ./admin
 //= require confirmation_modal
 //= require main
+//= require modal_manager

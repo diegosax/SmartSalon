@@ -1,15 +1,14 @@
-<div class="modal hide fade" id="associate_service">
-  <%= form_tag admin_professional_professional_services_path(@professional), :remote => true do%>  
+
+<%= form_tag admin_professional_professional_services_path(@professional), :remote => true do%>  
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h3>Associar serviço</h3>
   </div>
-  <div class="modal-body">    
+  <div class="modal-body"> 
     <%= render "/admin/professional_services/choose_associated_service"%>
   </div>
   <div class="modal-footer">
     <a href="#" class="btn" data-dismiss='modal'>Cancelar</a>
     <%=submit_tag "Associar", :class=> "btn btn-primary"%>    
   </div>  
-  <%end%>
-</div>
+<%end%>
