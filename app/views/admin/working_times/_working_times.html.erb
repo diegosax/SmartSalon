@@ -2,11 +2,12 @@
 	<div class="widget-header">
 		<span class="title">Horário de trabalho</span>
 		<div class="toolbar">
+
 		<%if can? :update, @professional %>
 			<%=link_to "#new_working_time",
 				"data-toggle" => "modal", 
 				:class => "btn btn-gebo btn-mini",				
-				:id => "new_working_time" do%>
+				:id => "new_working_time_link" do%>
 					<i class="icol-add"></i>
 					Criar novo horário de trabalho
 				<%end%>

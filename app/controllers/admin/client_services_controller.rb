@@ -7,6 +7,7 @@ class Admin::ClientServicesController < Admin::ApplicationController
   end
 
   def new
+    sleep 1
   	if params[:service_id]
   		@service = @salon.services.find(params[:service_id])
   		@clientService = @service.client_services.build

@@ -5,10 +5,16 @@ class Admin::EventsController < Admin::ApplicationController
   before_filter :authenticate_professional!
   before_filter :load_salon
 
-  def index
-    @events = @salon.events.order("start_at").includes(:client,:professional).all
-    
+  def index    
+    @events = @salon.events.order("start_at").includes(:client,:professional)
+    @events = @events.today if params[:date] == "today"
+    @events = @events.mine(current_professional.id) if params[:professional]
 
+    if params[:past_events]
+      @events = @events.scoped
+    else
+      @events = @events.from_today_on
+    end
     @month = params[:month] ? Time.zone.parse(params[:month]) : Time.zone.today
     @date = @month
     @event = Event.new

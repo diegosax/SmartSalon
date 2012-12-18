@@ -66,10 +66,11 @@ class Admin::ClientsController < Admin::ApplicationController
   end
 
   def create
-    @client = @salon.clients.build(params[:client])
+    @client = Client.new(params[:client])
     generated_password = Devise.friendly_token.first(6)
     @client.password = generated_password
     @client.created_by = current_professional.salon.id
+    @client.salons << @salon
     respond_to do |format|
       if @client.save
         flash[:notice] = "Cliente cadastrado com sucesso!"

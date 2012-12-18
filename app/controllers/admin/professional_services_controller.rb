@@ -56,6 +56,7 @@ class Admin::ProfessionalServicesController < Admin::ApplicationController
   end
 
   def create
+    sleep 1
     service = Service.find(params[:service])
     professional = Professional.find(params[:professional_id])  
 

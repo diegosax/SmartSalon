@@ -58,15 +58,15 @@
 								</li>
 							<%end%>
 
-							<%if params[:date].present? && params[:past_events]!="true"%>
+							<%if params[:date].present?%>
 								<li class = "active">
 									<%=link_to admin_events_path(params.merge(:date => nil)) do%>
 										Agendamentos de Hoje <span>&times</span>
 									<%end%>
 								</li>
-							<%elsif params[:past_events] != "true"%>
+							<%else%>
 								<li>
-									<%=link_to admin_events_path(params.merge(:date => "hoje")) do%>
+									<%=link_to admin_events_path(params.merge(:date => "today", :past_events => nil)) do%>
 										Agendamentos de Hoje
 									<%end%>
 								</li>

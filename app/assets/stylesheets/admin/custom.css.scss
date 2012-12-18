@@ -72,7 +72,7 @@ form{
 
 // ------------------------ Page Top Menu -----------------------//
 
-.switch-board-round ul{
+/* .switch-board-round ul{
 	text-align: center;
 }
 
@@ -92,10 +92,10 @@ form{
 	border-right: 1px solid transparent;
 	overflow: visible;
 	text-align: center;
-	border: #CCC 1px solid; */
+	border: #CCC 1px solid;
 }
-
-.switch-board-round ul li a {
+/*
+/* .switch-board-round ul li a {
 	display: block;
 	width: 44px;
 	height: 44px;
@@ -125,7 +125,103 @@ form{
 	width: 26px;
 	display: inline-block;
 	margin-top: 10px;
-}
+} */
+
+/* user-nav  */
+    .switch-board-round { 
+        text-align: center; padding-top: 4px; 
+    }
+    .switch-board-round ul { 
+        height: 36px; 
+        display: inline-block; 
+        margin: 0; 
+        text-align: left; 
+        list-style: none; 
+    }
+    .switch-board-round ul > li, 
+    .switch-board-round ul:active > .active { 
+        float: left; 
+        position: relative; 
+        height: 30px; 
+        color: #595959; 
+        text-shadow: 0 1px white; 
+    }
+    .switch-board-round ul > li > a, 
+    .switch-board-round ul > li > span { 
+        position: relative; 
+        border: 1px solid; 
+        border-color: #cfcfcf #d6d6d6 #c8c8c8; 
+        background: rgba(255, 255, 255, 0.6); 
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.6)), 
+            color-stop(100%, rgba(255, 255, 255, 0.25))); 
+        background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.6), 
+            rgba(255, 255, 255, 0.25)); 
+        background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.6), 
+            rgba(255, 255, 255, 0.25)); 
+        background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.6), 
+            rgba(255, 255, 255, 0.25)); 
+        background: -o-linear-gradient(top, rgba(255, 255, 255, 0.6), 
+            rgba(255, 255, 255, 0.25)); 
+        background: linear-gradient(top, rgba(255, 255, 255, 0.6), 
+            rgba(255, 255, 255, 0.25)); 
+        -webkit-box-shadow: inset 0 1px white, inset 0 0 0 1px rgba(255, 255, 255, 0.7), 
+            0 2px #dadada, 0 3px #c4c4c4, 0 4px 3px rgba(0, 0, 0, 0.1); 
+        box-shadow: inset 0 1px white, inset 0 0 0 1px rgba(255, 255, 255, 0.7), 
+            0 2px #dadada, 0 3px #c4c4c4, 0 4px 3px rgba(0, 0, 0, 0.1); 
+        }
+    .switch-board-round ul > li:hover > a { 
+        color: #2BA6CB; 
+        text-shadow: 0 1px #fff, 
+        0 0 20px #fff; 
+        background: inherit; 
+    }
+    .switch-board-round ul > li.active, 
+    .switch-board-round ul > li:active { 
+        z-index: 2; 
+        margin: 4px 0 0; 
+        height: 29px; 
+        color: #404040; 
+    }
+    .switch-board-round ul > li.active > span, 
+    .switch-board-round ul > li.active > a,
+    .switch-board-round ul > li:active > a { 
+        border-color: #ccc; 
+        border-width: 1px 0; 
+        background-color: transparent; 
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0.04)), color-stop(100%, rgba(0, 0, 0, 0))); background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0) 100%); background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0) 100%); background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0) 100%); background: -o-linear-gradient(top, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0) 100%); background: linear-gradient(top, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0) 100%); -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.35), inset 0 -1px 1px rgba(0, 0, 0, 0.05), 1px 0 rgba(0, 0, 0, 0.05), -1px 0 rgba(0, 0, 0, 0.05), 0 1px rgba(255, 255, 255, 0.4); box-shadow: inset 0 1px rgba(255, 255, 255, 0.35), inset 0 -1px 1px rgba(0, 0, 0, 0.05), 1px 0 rgba(0, 0, 0, 0.05), -1px 0 rgba(0, 0, 0, 0.05), 0 1px rgba(255, 255, 255, 0.4); }
+    .switch-board-round ul > li:active > a, .switch-board-round ul > li:active > span { z-index: 3 }
+    .switch-board-round ul > li.active > span,
+    .switch-board-round ul > li.active > a,
+    .switch-board-round ul > li:active > a { 
+        line-height: 29px 
+    }
+    .switch-board-round ul > li:first-child > a, .switch-board-round ul > li:first-child > span { border-left-width: 1px !important; border-left-color: #c6c6c6; border-radius: 5px 0 0 5px; }
+    .switch-board-round ul > li:last-child > a, .switch-board-round ul > li:last-child > span { border-right-width: 1px !important; border-right-color: #c6c6c6; border-radius: 0 5px 5px 0; }
+    .switch-board-round ul > li + li a, 
+    .switch-board-round ul > li + li > span { 
+        border-left-width: 0 
+    }
+    .switch-board-round ul > .active + li > a, 
+    .switch-board-round ul > .active:active + li > a, 
+    .switch-board-round ul > li:active + li > a, 
+    .switch-board-round ul > li:active + .active > a, 
+    .switch-board-round ul > li:active + li > span, 
+    .switch-board-round ul > li:active + .active > span { 
+        border-left-width: 1px 
+    }
+    .switch-board-round ul > li > a, 
+    .switch-board-round ul > li > span { 
+        position: relative; 
+        display: block; 
+        line-height: 30px; 
+        padding: 0 18px; 
+        font-size: 12px; 
+        font-weight: 700; 
+        color: inherit; 
+        text-decoration: none; 
+        outline: none; 
+        font-size: 12px; 
+    }    
 
 
 
@@ -343,3 +439,8 @@ form{
 	padding-top: 20px; 
 }
 
+// ----------------Dashboard
+
+.stats-container > li > .stat {
+    padding:5px;
+}

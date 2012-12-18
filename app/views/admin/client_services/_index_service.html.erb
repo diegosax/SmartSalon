@@ -4,7 +4,7 @@
 			Duração do(a) <strong><%=@service.name%></strong> de cada cliente
 		</span>
 		<div class="toolbar">
-			<%=link_to new_admin_service_client_service_path(@service), :class => "btn btn-gebo btn-mini", :remote => true, :id => "new_client_service" do%>
+			<%=link_to new_admin_service_client_service_path(@service), :class => "btn btn-gebo btn-mini", "data-toggle" => "remote-modal", :remote => true, :id => "new_client_service" do%>
 			<i class="icol-add"></i>
 			Adicionar cliente ao serviço
 			<%end%>
