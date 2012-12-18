@@ -100,15 +100,16 @@ class Admin::ClientsController < Admin::ApplicationController
     end
   end
 
-def destroy
+  def destroy
 
-  @clientSalon = ClientSalon.where(:client_id => params[:id], :salon_id => @salon.id).first
-  @clientSalon.destroy
+    @client = Client.find(params[:id])
+    @clientSalon = ClientSalon.where(:client_id => params[:id], :salon_id => @salon.id).first
+    @clientSalon.destroy
 
-  respond_to do |format|
-    format.js
-    format.html { redirect_to admin_clients_url }
-    format.json { head :no_content }
+    respond_to do |format|
+      format.js
+      format.html { redirect_to admin_clients_url }
+      format.json { head :no_content }
+    end
   end
-end
 end
