@@ -74,7 +74,7 @@ class Admin::ClientsController < Admin::ApplicationController
     respond_to do |format|
       if @client.save
         flash[:notice] = "Cliente cadastrado com sucesso!"
-        format.html { redirect_to @client }
+        format.html { redirect_to admin_client_path(@client) }
         format.json { render json: @client, status: :created, location: @client }
         format.js
       else
@@ -91,8 +91,9 @@ class Admin::ClientsController < Admin::ApplicationController
     respond_to do |format|
       if @client.update_attributes(params[:client])
         flash[:notice] = "Cliente atualizado com sucesso!"
-        format.html { redirect_to admin_client_url }
-        format.json { head :no_content }
+        format.html { redirect_to admin_client_path(@client) }
+        format.json { render json: @client, status: :updated, location: @client }
+        format.js
       else
         format.html { render action: "edit" }
         format.json { render json: @client.errors, status: :unprocessable_entity }
