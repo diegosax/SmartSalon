@@ -74,8 +74,8 @@
 										<b class="carret"></b>
 										<%end%>
 										<ul class="dropdown-menu">
-											<li><a href="#tab-11" data-toggle="tab">First menu</a></li>
-											<li><a href="#tab-12" data-toggle="tab">Second menu</a></li>
+											<li><%= link_to "Vizualizar Perfil", admin_professional_path(current_professional)  %> <!--<a href="#tab-11" data-toggle="tab">Vizualizar Perfil</a>--></li>
+											<!--<li><a href="#tab-12" data-toggle="tab">Second menu</a></li>-->
 											<li class="divider"></li>
 											<li><%=link_to "Sair", destroy_professional_session_path, :method => :delete%></li>
 										</ul>

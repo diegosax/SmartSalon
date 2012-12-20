@@ -105,4 +105,16 @@ class Admin::ProfessionalsController < Admin::ApplicationController
       format.js
     end
   end
+
+   def update_password
+    @professional = Professional.find(current_professional.id)
+    if @professional.update_attributes(params[:professional])
+      # Sign in the user by passing validation in case his password changed
+      sign_in @professional, :bypass => true
+      redirect_to [:admin, @professional], :notice => "Senha alterada com sucesso"
+    else
+      redirect_to [:admin, @professional], :notice => "Houve um erro ao tentar alterar sua senha"
+    end
+  end
+
 end

@@ -1,6 +1,10 @@
 <%=render "top_menu"%>
 
+<%= render "change_password"%>
+
 <%=render "/admin/working_times/modal_form"%>
+
+
 
 
 <div id="main-header" class="page-header">
@@ -38,7 +42,7 @@
 						</tr>					
 						<tr>
 							<th>Senha</th>
-							<td>******** | <%=link_to "Alterar minha senha", "#"%></td>
+							<td>******** | <%=link_to "Alterar Senha", "#change_password", :data => {:toggle => "modal"}%></td>
 						</tr>
 						<tr>
 							<th>Telefone Fixo</th>

@@ -48,12 +48,10 @@
  			</div>  
  			<%end%>
 
- 			<%@client = Client.new%>
- 			<%= form_for(@client, :html => { :method => :post, :id => "pass_form", :style => "display:none" }) do |f| %>
+
+ 			<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post , :id=> "pass_form" , :style=> "display:none", :remote=> true }) do |f| %>
  			<div class="top_b">Não consegue fazer login?</div>    
- 			<div class="alert alert-info alert-login">
- 				Por favor, digite seu email e você receberá instruções para recuperar sua senha
- 			</div>
+ 			
  			<div class="cnt_b">
  				<div class="formRow clearfix">
  					<div class="input-prepend">
@@ -129,8 +127,16 @@
 						});
 					});
 					e.preventDefault();
-				});						
+				});
+
+				// -----------------------------
+				$("form[data-remote=true]").submit(function(e){
+					$(this).find("input[type=submit]").text("Carregando ...").attr("disabled", "disabled");
+				});
+
 			});
+
+
 
  </script>
 </body>
