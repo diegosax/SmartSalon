@@ -1,0 +1,8 @@
+$("#pass_form .alert").remove();
+
+<%if @user.errors.blank?%>
+	var div = '<div class="alert alert-login alert-success">As instruções para recuperação de sua senha foram enviadas para seu email!</div>'
+<%else%>
+	var div = '<div class="alert alert-login alert-error">Email não encontrado</div>'
+<%end%>
+$(div).insertBefore("#pass_form .cnt_b");
