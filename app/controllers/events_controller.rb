@@ -101,11 +101,13 @@ class EventsController < ApplicationController
     @event.client = current_user
     respond_to do |format|
       if @event.save        
-        format.html { redirect_to(@event, :notice => 'Event was successfully updated.') }
+        flash[:notice] = "Evento alterado com sucesso"
+        format.html { redirect_to(@event)}
         format.xml  { head :ok }
-        format.js {flash[:notice] = "Evento alterado com sucesso"}
+        format.js {redirect_to @event}
       else
-        format.js
+        flash[:alert] = "Houve um erro ao tentar alterar seu evento"
+        format.js {render :js => "window.location.reload()"}
         format.html { render :action => "edit" }
         format.xml  { render :xml => @event.errors, :status => :unprocessable_entity }
       end

@@ -33,12 +33,15 @@ Smartsalon::Application.routes.draw do
       resources :client_services
     end      
     
-    resources :events do
+    resources :events do      
       collection do
         get "easy/new" => "events#easy_new"
         post "easy/new" => "events#easy_create"
         get 'get_events'
         get 'search'
+      end
+      member do
+        post "edit" => "events#update"
       end
     end
     

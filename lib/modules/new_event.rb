@@ -17,8 +17,7 @@ module NewEvent
       end
     else      
       @my_salons_and_favorites = current_user.my_salons_and_favorites if current_user
-    end
-    puts "FINDING EVENTS FOR #{@service_professionals}"
+    end    
     if @service_professionals && @salon
       @events = Event.find(
         :all,
@@ -28,9 +27,7 @@ module NewEvent
           Time.zone.now.end_of_day,
           @service_professionals
           ],
-          :order => "start_at")
-      puts "EVENTOS => #{@events}"
-
+          :order => "start_at")      
       @date = params[:month] ? Date.parse(params[:month]) : Time.zone.today
     end 
   end

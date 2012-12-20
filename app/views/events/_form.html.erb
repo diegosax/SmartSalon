@@ -1,8 +1,9 @@
 <div class="row-fluid">
   <div class="span12">      
-    <%= form_for(@event, {:html => {:id => "new-event-form", :remote => true}}) do %>
+    <%form_path = current_professional ? [:admin,@event] : @event%>
+    <%= form_for(form_path, {:html => {:id => "new-event-form", :remote => true}}) do %>
       <%if @salon%>        
-        <%if isClient?%>          
+        <%if isClient?%>
           <div class="alert alert-block alert-info fade in">            
             <h4 class="alert-heading"><%=@salon.name%></h4>
             <p>

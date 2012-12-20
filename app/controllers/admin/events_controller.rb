@@ -61,7 +61,7 @@ class Admin::EventsController < Admin::ApplicationController
 
   def new
     @event = Event.new
-    @clients = current_professional.salon.clients
+    @clients = @salon.clients
     @client = Client.find(params[:client]) unless params[:client].blank?
     #delay = (60 - (DateTime.now.min))%5
     if !params[:day].nil?
@@ -77,7 +77,7 @@ class Admin::EventsController < Admin::ApplicationController
 
   def easy_new
     @event = Event.new
-    @clients = current_professional.salon.clients
+    @clients = @salon.clients
     @client = Client.find(params[:client]) unless params[:client].blank?
     find_new_event
     respond_to do |format|
@@ -156,7 +156,7 @@ class Admin::EventsController < Admin::ApplicationController
       :end_at => params[:end_at], 
       :start_at => params[:start_at]
       )
-    salon = current_professional.salon
+    salon = @salon
     professional = salon.professionals.find(params[:professionals])
     service = professional.services.find(params[:service])
     client = salon.clients.find(params[:client])
@@ -189,6 +189,48 @@ class Admin::EventsController < Admin::ApplicationController
       end
     end
   end
+
+  def edit
+    @event = Event.includes(:client,:professional,:service).find(params[:id])        
+    if !params[:service] && !params[:professionals]
+      @service = @event.service
+      @service_professionals = @event.professional
+    end
+    @client = @event.client unless params[:client]
+    @clients = @salon.clients    
+    find_new_event    
+    respond_to do |format|
+      format.html
+      format.js {render "/events/new"}
+      format.xml  { render :xml => @event }
+    end    
+  end
+
+    # PUT /events/1
+  # PUT /events/1.xml
+  def update
+    @event = Event.find(params[:id])
+    @event.professional = @salon.professionals.find(params[:professionals])
+    @event.service = @event.professional.services.find(params[:service])
+    @event.client = @salon.clients.find(params[:client])
+    @event.end_at = params[:end_at]
+    @event.start_at = params[:start_at]
+    @event.reschedule = false
+    respond_to do |format|
+      if @event.save        
+        flash[:notice] = "Evento alterado com sucesso"
+        format.html { redirect_to([:admin,@event])}
+        format.xml  { head :ok }
+        format.js {render "update"}
+      else
+        flash[:alert] = "Houve um erro ao tentar alterar seu evento"
+        format.js {render :js => "window.location.reload()"}
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @event.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
 
   def show
     @event = Event.find(params[:id])

@@ -84,19 +84,20 @@ module EventsHelper
                   )
                   session[:new_start_date] = actual_date;
             end
-            html = "<ul>"            
+            html = "<ul>"
+            
             @valid_times.each do |time|
                   html << "<li>"
-                  link_params = {                                    
-                                    :start_at => time,
-                                    :end_at => intervalInMinutes.minutes.since(time),
-                                    :professionals => professional,
-                                    :service => service,
-                                    :client => client
-                              }
+                  link_params = {
+                              :professionals => professional,
+                              :service => service,
+                              :client => client,
+                              :start_at => time,
+                              :end_at => intervalInMinutes.minutes.since(time)                                    
+                  }
                   html << link_to(
-                              time.strftime("%H:%M"),link_params,
-                              {
+                              time.strftime("%H:%M"), link_params,
+                              {                                    
                                     "data-message" => "Deseja realmente marcar um(a) <b>#{service.name}</b> com <b>#{professional.name}</b> para #{time.strftime('%A, dia %d de %B às %H:%M')}?",
                                     :class => "new-event-link confirmable"
                               } 
