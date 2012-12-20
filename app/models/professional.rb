@@ -4,7 +4,7 @@ class Professional < User
   has_many :working_times, :dependent => :destroy
   has_many :professional_services, :dependent => :destroy
   has_many :services, :through => :professional_services
-  validates :name,:email, :password, :password_confirmation, :presence => true
+  validates :name,:email, :presence => true
   belongs_to :salon
   after_create :init
 

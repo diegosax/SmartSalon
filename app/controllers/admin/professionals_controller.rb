@@ -50,8 +50,7 @@ class Admin::ProfessionalsController < Admin::ApplicationController
   end
 
   def update
-    @professional = Professional.find(params[:id])
-    @professional.salon = current_professional.salon
+    @professional = Professional.find(params[:id])    
     @working_times = @professional.working_times.order("day, 'from', 'to'")
     respond_to do |format|
       if @professional.update_attributes(params[:professional])
