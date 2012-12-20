@@ -1,19 +1,15 @@
-
 function showNoticeMessage(msg){
 	var noty = noty({text: 'noty - a jquery notification library!'});	
 }
-
 function showDefaultLoadingModel(message){
 	if (message){
 		$("#loading-modal .modal-body p").text(message);
 	}
 	$("#loading-modal").modal();
 }
-
 function clearSalonSearchResults(){
 	$("#large_grid").empty();
 }
-
 function forceResize(){
 	if($(window).width() <= 979){
 		$(".chzn-done").show();
@@ -21,11 +17,9 @@ function forceResize(){
 		$(".chzn-done").hide();
 	}
 }
-
 function addToHourList(item,period,calendarItem){	
 	$(calendarItem).find("div." + period + " ul").append(item);
 }
-
 function prettyCalendar(){
 	if ($("#client_calendar").length > 0){
 		$("#client_calendar tr td").addClass("unavailable");
@@ -73,7 +67,6 @@ function prettyCalendar(){
 
 	}	
 }
-
 function addLoading(element){
 	var html = "<div class = 'loading'>Processando, por favor aguarde...<br /><img src='/assets/ajax_loader.gif'></img>"
 	$(element).append(html).fadeIn("slow");
@@ -89,8 +82,6 @@ function addLoadingSimple(element){
 function removeLoading(){
 	$(".loading").remove().fadeOut("fast");
 }
-
-
 function onChooseProfessionalChange(){
 	$("#client_calendar").remove().fadeOut("fast");		
 	addLoading($("#new-event-form"));
@@ -100,7 +91,6 @@ function onChooseProfessionalChange(){
 	});
 	history.pushState(null,"",window.location.pathname + "?" + $("#new-event-form").serialize());
 }
-
 function onChooseClientChange(){
 	console.log("Called");
 	if ($("#client_calendar").length > 0){
@@ -115,6 +105,8 @@ function onChooseClientChange(){
 }
 
 userList = null;
+
+
 $(document).ready(function(){
 	$('body').ajaxComplete(function() {
 		$(".chzn_a").chosen();
@@ -303,5 +295,8 @@ $(document).ready(function(){
   		history.pushState(null,"", $(this).attr("href"));
   		addLoadingInline($(".search-results"));
   	});
+
+  	// ----------- Salons Sign Up -----------------------------------//
+  	
 
   });

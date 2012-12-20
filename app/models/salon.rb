@@ -1,7 +1,8 @@
 #encoding: utf-8
 
 class Salon < ActiveRecord::Base
-  attr_accessible :address,:number, :city, :complement, :email, :landphone,:celphone, :logo, :name, :state, :username, :zipcode, :neighborhood, :remote_logo_url
+  attr_accessible :address,:number, :city, :complement, :email, :landphone,:celphone, 
+                  :logo, :name, :state, :username, :zipcode, :neighborhood, :remote_logo_url, :manager_attributes
   has_many :services, :dependent => :destroy
   has_many :professionals, :dependent => :destroy
   has_many :events, :through => :professionals
@@ -10,7 +11,10 @@ class Salon < ActiveRecord::Base
   has_many :favorites
   has_many :subscriptions
   has_many :phones
-  belongs_to :manager, :class_name => "Professional"
+  has_one :manager, :class_name => "Professional"
+  validates :name, :username, :presence => true
+  validates :username, :uniqueness => true
+  accepts_nested_attributes_for :manager
   mount_uploader :logo, LogoUploader
   geocoded_by :full_address
   after_validation :geocode, :if => :address_changed?
@@ -18,6 +22,18 @@ class Salon < ActiveRecord::Base
 
   def full_address
   	self.address + ", " + self.city + " - " + self.state + " - " + (self.zipcode ? self.zipcode : "")
+  end
+
+  def is_incomplete?
+    incomplete_address? || no_services?
+  end
+
+  def incomplete_address?
+    !(self.zipcode && self.address && self.city && self.landphone)
+  end
+
+  def no_services?
+    self.services.length == 0
   end
 
   def self.text_search(query)

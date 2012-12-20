@@ -321,13 +321,13 @@ input.friendly_date{
 .ui-timepicker-div dl dd{ margin: -25px 0 10px 65px; }
 .ui-timepicker-div td { font-size: 90%; }
 
-label.control-label{
+/*label.control-label{
     width:70px !important;
-}
+}*/
 
-div.controls{
+/*div.controls{
     margin-left: 100px !important;
-}
+}*/
 
 .modal{
     overflow: visible !important;

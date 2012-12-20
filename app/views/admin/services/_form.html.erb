@@ -12,26 +12,15 @@
 </div>        
 <% end %>
 <%=f.input :name, :label => 'Nome'%>
-<div class="control-group">
-  <%=f.label :price, "Preço", :class => "control-label"%>
-  <div class="controls">
-    <div class="input-append input-prepend">
-      <span class="add-on">R$</span>
-      <%=f.input_field :price, :class => "span5"%>
-      <span class="add-on">reais</span>  
-    </div>            
-  </div>
-</div>
-<div class="control-group">
-  <%=f.label :duration, "Duração", :class => "control-label"%>
-  <div class="controls">
-    <div class="input-append">              
-      <%=f.input_field :duration, :class => "span6"%>
-      <span class="add-on">minutos</span>  
-    </div>            
-  </div>
-</div>        
-
+<%=f.input :price, :label => "Preço", :wrapper => :append_prepend do %>
+  <span class="add-on">R$</span>
+  <%=f.input_field :price, :class => "input-mini"%>
+  <span class="add-on">reais</span> 
+<%end%>
+<%=f.input :duration, :label => "Duração", :wrapper => :append do%>
+  <%=f.input_field :duration, :class => "input-mini"%>
+  <span class="add-on">minutos</span>  
+<%end%>
 <div class="form-actions">
   <%=f.submit "Salvar", :class => "btn btn-primary"%>
   <%=link_to "Cancelar", :back, :class => "btn"%>

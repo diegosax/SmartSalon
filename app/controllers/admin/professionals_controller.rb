@@ -28,7 +28,6 @@ class Admin::ProfessionalsController < Admin::ApplicationController
   end
 
   def create
-
     @professional = Professional.new(params[:professional])
     @professional.salon = current_professional.salon
 

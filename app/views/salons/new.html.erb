@@ -1,5 +1,109 @@
-<h1>New salon</h1>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Instanapp - Cadastro de Salão</title>
+	<%= stylesheet_link_tag    "application-admin", :media => "all" %>
+	<%= javascript_include_tag "application-admin" %>
+	<%= csrf_meta_tags %>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
-<%= render 'form' %>
+<body id="salon-sign-up">
+	<header id="header">
+		<div id="navigation" class="container">
+			<div class="brand-wrap pull-left">
+				<div class="brand-img">
+					<a class="brand" href="#">
+						<%=image_tag "/assets/logo.png"%>
+					</a>
+				</div>
+			</div>
+			<ul class="nav nav-pills pull-right">
+				<li class="active">
+					<%=link_to "Login", new_user_session_path%>
+				</li>					
+			</ul>
+		</div>
+	</header>
+	<div class="container">
+		<div id="content">
+			<div class="row-fluid">
+				<div class="span12 form-title">
+					<h1>Experimente o instanapp por 30 dias</h1>
+					<p>Cadastre seu salão agora e só comece a pagar daqui a mês, sem compromisso!</p>
+				</div>
+			</div>			
+			<div class="row-fluid top-divider">
+				<div class="span7">
+					<%=simple_form_for @salon, :html =>{:class => "form-vertical"} do |f|%>
+					<fieldset>
+						<legend>Dados do Salão</legend>
 
-<%= link_to 'Back', salons_path %>
+						<%=f.input :name, :label => "Nome do Salão", :input_html => {
+								:rel => "popover", :data => {
+									:trigger => "focus",
+									:placement => "right", 
+									:content => "Este é o nome que aparecerá nas buscas",
+									"original-title" => "Nome" }
+								}%>
+						<%=f.input :username, :label => "Nome de usuário", 
+									:hint => "Este nome irá aparecer no endereço do site. Ex: www.instanapp.com.br/meusalao",
+									:input_html => {
+									:rel => "popover", :data => {
+									:trigger => "focus",
+									:placement => "right", 
+									:content => "Deve ser apenas com letras minúsculas, sem espaço e sem caracteres especiais",
+									"original-title" => "Nome de usuário" }}%>															
+					</fieldset>
+					<fieldset>
+						<legend>Dados do contato administrativo do salão</legend>
+						<%=f.fields_for :manager do |builder|%>
+							<%=builder.input :name, :label => "Nome Completo", :input_html => {
+								:rel => "popover", :data => {
+									:trigger => "focus",
+									:placement => "right", 
+									:content => "Digite o nome da pessoa responsável pelo gerenciamento do salão",
+									"original-title" => "Nome"
+								}
+							}%>
+							<%=builder.input :email, :label => "Email"%>
+							<%=builder.input :password, :label => "Senha"%>
+							<%=builder.input :password_confirmation, :label => "Confirme sua Senha"%>							
+						<%end%>
+
+					</fieldset>
+					<%=f.button :submit, "Efetuar Cadastro", :class => "btn btn-large btn-success"%>
+					<%end%>
+				</div>
+				<div class="span5 side-info">
+					<h4>
+						Preencha seus dados básicos e complete seu perfil mais tarde
+					</h4>
+					<p>
+						<span><strong>Após seu cadastro, complete suas informações:</strong></span> 
+						<ul>
+							<li>Adicione serviços</li>
+							<li>Cadastre funcionários</li>
+							<li>Adicione seus clientes</li>
+							<li>Nos avise que está tudo ok</li>
+						</ul>
+					</p>
+
+					<p>
+						<span>
+							<strong>Cancele sua conta a qualquer momento</strong>
+						</span>
+						<br>
+						Ao se cadastrar você não estará assinando um contrato de um ano ou coisa parecida. 
+						Você poderá cancelar sua conta a qualquer momento.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer container">
+    <div class="row">      
+      <a href="http://www.metalabdesign.com/"><img id="metalab" src="https://d2yfu8hh8wxlw0.cloudfront.net/assets/marketing/madebymetalab-aa02cb6feffdf168aa5836b68d6cd156.png" width="169" height="36" alt="Made by MetaLab"></a>
+    </div>
+  </div>
+</body>

@@ -106,10 +106,10 @@ class Admin::EventsController < Admin::ApplicationController
       conflicted_events.each do |e|
         e.update_attributes(:reschedule => true)
         if(e.client)
-          Notifier.client_event_reschedule_notification(e).deliver
+          #Notifier.client_event_reschedule_notification(e).deliver
         end
         if(e.professional)   
-          Notifier.professional_event__reschedule_notification(e).deliver
+          #Notifier.professional_event__reschedule_notification(e).deliver
         end
 
       end      
@@ -117,10 +117,10 @@ class Admin::EventsController < Admin::ApplicationController
       respond_to do |format|  
         
         if(@event.client)
-          Notifier.client_event_created(@event).deliver
+          #Notifier.client_event_created(@event).deliver
         end
         if(@event.professional)   
-          Notifier.professional_event_created(@event).deliver
+          #Notifier.professional_event_created(@event).deliver
         end
 
         format.js
@@ -132,10 +132,10 @@ class Admin::EventsController < Admin::ApplicationController
         if @event.save
 
           if(@event.client)
-            Notifier.client_event_created(@event).deliver
+            #Notifier.client_event_created(@event).deliver
           end
           if(@event.professional)   
-            Notifier.professional_event_created(@event).deliver
+            #Notifier.professional_event_created(@event).deliver
           end
         
           format.js
@@ -172,10 +172,10 @@ class Admin::EventsController < Admin::ApplicationController
       if @event.save
 
         if(@event.client)
-          Notifier.client_event_created(@event).deliver
+          #Notifier.client_event_created(@event).deliver
         end
         if(@event.professional)   
-          Notifier.professional_event_created(@event).deliver
+          #Notifier.professional_event_created(@event).deliver
         end
         
         format.js

@@ -90,15 +90,17 @@
                                                 <p>
                                                     <%=event.start_at.strftime("%H:%M h")%>        
                                                 </p>
-                                                <small>
-                                                    em <%=distance_of_time_in_words(Time.zone.now,event.start_at)%>
-                                                </small>
+                                                <%if event.start_at > Time.zone.now%>
+                                                    <small>                                                        
+                                                        em <%=distance_of_time_in_words(Time.zone.now,event.start_at)%>
+                                                    </small>
+                                                <%end%>
                                             </blockquote>
 
                                         </td>
                                         <td><%=event.service.name if event.service%></td>
                                         <td><%=event.client.name if event.client%></td>
-                                        <td><%=distance_of_time_in_words(event.start_at,event.end_at) + " ( termina às #{event.end_at.strftime('%H:%M')} )"%></td>
+                                        <td><%=distance_of_time_in_words(event.start_at,event.end_at)%></td>
                                         <td>
                                             <span class="badge badge-<%=event_type(event)%>">
                                                 <%=event.status%>

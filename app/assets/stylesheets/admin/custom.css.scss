@@ -128,67 +128,67 @@ form{
 } */
 
 /* user-nav  */
-    .switch-board-round { 
-        text-align: center; padding-top: 4px; 
-    }
-    .switch-board-round ul { 
-        height: 36px; 
-        display: inline-block; 
-        margin: 0; 
-        text-align: left; 
-        list-style: none; 
-    }
-    .switch-board-round ul > li, 
-    .switch-board-round ul:active > .active { 
-        float: left; 
-        position: relative; 
-        height: 30px; 
-        color: #595959; 
-        text-shadow: 0 1px white; 
-    }
-    .switch-board-round ul > li > a, 
-    .switch-board-round ul > li > span { 
-        position: relative; 
-        border: 1px solid; 
-        border-color: #cfcfcf #d6d6d6 #c8c8c8; 
-        background: rgba(255, 255, 255, 0.6); 
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.6)), 
-            color-stop(100%, rgba(255, 255, 255, 0.25))); 
-        background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.6), 
-            rgba(255, 255, 255, 0.25)); 
-        background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.6), 
-            rgba(255, 255, 255, 0.25)); 
-        background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.6), 
-            rgba(255, 255, 255, 0.25)); 
-        background: -o-linear-gradient(top, rgba(255, 255, 255, 0.6), 
-            rgba(255, 255, 255, 0.25)); 
-        background: linear-gradient(top, rgba(255, 255, 255, 0.6), 
-            rgba(255, 255, 255, 0.25)); 
-        -webkit-box-shadow: inset 0 1px white, inset 0 0 0 1px rgba(255, 255, 255, 0.7), 
-            0 2px #dadada, 0 3px #c4c4c4, 0 4px 3px rgba(0, 0, 0, 0.1); 
-        box-shadow: inset 0 1px white, inset 0 0 0 1px rgba(255, 255, 255, 0.7), 
-            0 2px #dadada, 0 3px #c4c4c4, 0 4px 3px rgba(0, 0, 0, 0.1); 
-        }
-    .switch-board-round ul > li:hover > a { 
-        color: #2BA6CB; 
-        text-shadow: 0 1px #fff, 
-        0 0 20px #fff; 
-        background: inherit; 
-    }
-    .switch-board-round ul > li.active, 
-    .switch-board-round ul > li:active { 
-        z-index: 2; 
-        margin: 4px 0 0; 
-        height: 29px; 
-        color: #404040; 
-    }
-    .switch-board-round ul > li.active > span, 
-    .switch-board-round ul > li.active > a,
-    .switch-board-round ul > li:active > a { 
-        border-color: #ccc; 
-        border-width: 1px 0; 
-        background-color: transparent; 
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0.04)), color-stop(100%, rgba(0, 0, 0, 0))); background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0) 100%); background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0) 100%); background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0) 100%); background: -o-linear-gradient(top, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0) 100%); background: linear-gradient(top, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0) 100%); -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.35), inset 0 -1px 1px rgba(0, 0, 0, 0.05), 1px 0 rgba(0, 0, 0, 0.05), -1px 0 rgba(0, 0, 0, 0.05), 0 1px rgba(255, 255, 255, 0.4); box-shadow: inset 0 1px rgba(255, 255, 255, 0.35), inset 0 -1px 1px rgba(0, 0, 0, 0.05), 1px 0 rgba(0, 0, 0, 0.05), -1px 0 rgba(0, 0, 0, 0.05), 0 1px rgba(255, 255, 255, 0.4); }
+.switch-board-round { 
+    text-align: center; padding-top: 4px; 
+}
+.switch-board-round ul { 
+    height: 36px; 
+    display: inline-block; 
+    margin: 0; 
+    text-align: left; 
+    list-style: none; 
+}
+.switch-board-round ul > li, 
+.switch-board-round ul:active > .active { 
+    float: left; 
+    position: relative; 
+    height: 30px; 
+    color: #595959; 
+    text-shadow: 0 1px white; 
+}
+.switch-board-round ul > li > a, 
+.switch-board-round ul > li > span { 
+    position: relative; 
+    border: 1px solid; 
+    border-color: #cfcfcf #d6d6d6 #c8c8c8; 
+    background: rgba(255, 255, 255, 0.6); 
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.6)), 
+        color-stop(100%, rgba(255, 255, 255, 0.25))); 
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.6), 
+        rgba(255, 255, 255, 0.25)); 
+    background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.6), 
+        rgba(255, 255, 255, 0.25)); 
+    background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.6), 
+        rgba(255, 255, 255, 0.25)); 
+    background: -o-linear-gradient(top, rgba(255, 255, 255, 0.6), 
+        rgba(255, 255, 255, 0.25)); 
+    background: linear-gradient(top, rgba(255, 255, 255, 0.6), 
+        rgba(255, 255, 255, 0.25)); 
+    -webkit-box-shadow: inset 0 1px white, inset 0 0 0 1px rgba(255, 255, 255, 0.7), 
+    0 2px #dadada, 0 3px #c4c4c4, 0 4px 3px rgba(0, 0, 0, 0.1); 
+    box-shadow: inset 0 1px white, inset 0 0 0 1px rgba(255, 255, 255, 0.7), 
+    0 2px #dadada, 0 3px #c4c4c4, 0 4px 3px rgba(0, 0, 0, 0.1); 
+}
+.switch-board-round ul > li:hover > a { 
+    color: #2BA6CB; 
+    text-shadow: 0 1px #fff, 
+    0 0 20px #fff; 
+    background: inherit; 
+}
+.switch-board-round ul > li.active, 
+.switch-board-round ul > li:active { 
+    z-index: 2; 
+    margin: 4px 0 0; 
+    height: 29px; 
+    color: #404040; 
+}
+.switch-board-round ul > li.active > span, 
+.switch-board-round ul > li.active > a,
+.switch-board-round ul > li:active > a { 
+    border-color: #ccc; 
+    border-width: 1px 0; 
+    background-color: transparent; 
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0.04)), color-stop(100%, rgba(0, 0, 0, 0))); background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0) 100%); background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0) 100%); background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0) 100%); background: -o-linear-gradient(top, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0) 100%); background: linear-gradient(top, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0) 100%); -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.35), inset 0 -1px 1px rgba(0, 0, 0, 0.05), 1px 0 rgba(0, 0, 0, 0.05), -1px 0 rgba(0, 0, 0, 0.05), 0 1px rgba(255, 255, 255, 0.4); box-shadow: inset 0 1px rgba(255, 255, 255, 0.35), inset 0 -1px 1px rgba(0, 0, 0, 0.05), 1px 0 rgba(0, 0, 0, 0.05), -1px 0 rgba(0, 0, 0, 0.05), 0 1px rgba(255, 255, 255, 0.4); }
     .switch-board-round ul > li:active > a, .switch-board-round ul > li:active > span { z-index: 3 }
     .switch-board-round ul > li.active > span,
     .switch-board-round ul > li.active > a,
@@ -351,8 +351,8 @@ form{
     }
 
     .wizard-nav ul li, 
-	.wizard-nav ul li span, 
-	.wizard-nav ul li a
+    .wizard-nav ul li span, 
+    .wizard-nav ul li a
     {
         margin: 0;
         padding: 0;
@@ -366,7 +366,7 @@ form{
     }
 
     .wizard-nav ul li.active, 
-	.wizard-nav ul li.active:hover
+    .wizard-nav ul li.active:hover
     {
         background-position: -25px top;
     }
@@ -389,7 +389,7 @@ form{
     }
 
     .wizard-nav .responsive-prev-btn, 
-	.wizard-nav .responsive-next-btn
+    .wizard-nav .responsive-next-btn
     {
         display: block;
     }
@@ -443,4 +443,110 @@ form{
 
 .stats-container > li > .stat {
     padding:5px;
+}
+
+
+
+// -------------------Custom Sign Up Salon Style -----------------------------//
+
+body#salon-sign-up{
+    background: #F1F3F4;
+    #header{
+        -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        background: white;        
+    }
+
+    #header #navigation{
+        padding: 13px 20px;        
+        width:85%;
+        margin: 0 auto;
+    }
+
+    ul.nav{
+        margin: 0;
+    }
+
+    ul.nav > li > a{
+        color: #666;
+        text-shadow: none;
+    }
+
+    ul.nav > li.active > a{
+        color: #fff;
+        text-shadow: none;
+    }
+
+    .container {
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-top: 8em;
+    }
+
+    #content {
+        -webkit-border-radius: 3px;
+        -khtml-border-radius: 3px;
+        -moz-border-radius: 3px;
+        -ms-border-radius: 3px;
+        -o-border-radius: 3px;
+        border-radius: 3px;
+        -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        margin-top: 50px;
+        margin-bottom: 25px;
+        background: white;
+        padding: 1.5em;
+        width: 80%;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .row-fluid{
+        width:90%;
+        margin:0 auto;        
+    }
+
+    .row-fluid .form-title{
+        text-align: center;
+        line-height: 24px;
+        color: #888;
+    }
+
+    .row-fluid h1{
+        font-family: ProximaNova-Bold,"Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 42px;
+        font-weight: normal;
+        font-style: normal;
+        line-height: 1.2em;
+        color: #222;
+        margin-bottom: 5px;
+    }
+    .top-divider{
+        padding-top:2em;
+        background: url(/assets/layout/dotted_border.png) repeat-x left top;
+    }
+
+    legend + .control-group{
+        margin:0;
+    }
+
+    .side-info{
+        border-left: 1px solid whiteSmoke;
+        padding-left: 1em;
+        height: 45em;
+    }
+    .side-info h4{
+        text-align: center;
+    }
+
+    .footer{
+        text-align: center;
+    }
+
+    .footer img{
+        margin-bottom:2em;
+    }
+
 }
