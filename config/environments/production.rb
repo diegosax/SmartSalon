@@ -1,3 +1,5 @@
+require "moip"
+
 Smartsalon::Application.configure do
   Moip.setup do |config|
     config.uri = "https://desenvolvedor.moip.com.br/sandbox"
