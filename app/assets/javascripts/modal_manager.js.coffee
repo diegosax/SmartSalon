@@ -5,6 +5,8 @@ $ ->
 
 	# this sets up the ajax loader, and it will stay until the method specific js removes it
 	$('a[data-toggle=remote-modal]').on 'click', (e) ->		
+		$('body').modalmanager('loading')
+	$("form[data-remote=true").submit ->
 		$('body').modalmanager('loading')	
 	
 	#----------- New Client Modal Search ----------------------
