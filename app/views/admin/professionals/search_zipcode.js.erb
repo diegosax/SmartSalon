@@ -1,5 +1,5 @@
 <%if @address%>
-	$("#professional_address").val("<%=escape_javascript(@address[:logradouro])%>");
+	$("#professional_address").val("<%=escape_javascript(@address[:tipo_logradouro] + ' ' + @address[:logradouro])%>");
 	$("#professional_region").val("<%=escape_javascript(@address[:bairro])%>");
 	$("#professional_city").val("<%=escape_javascript(@address[:cidade])%>");
 	$("#professional_state").val("<%=escape_javascript(@address[:uf])%>");

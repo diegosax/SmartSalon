@@ -84,11 +84,13 @@
 						<tr>
 							<th>Endereço</th>
 							<td>
-								<address>                
-									<%=@salon.address%>                
-									<br />
-									<%=@salon.city%>/<%=@salon.state%>  <%=@salon.zipcode%>								
-								</address>
+								<%if @salon.address%>
+									<address>                
+										<%=@salon.address%>                
+										<br />
+										<%=@salon.city%>/<%=@salon.state%>  <%=@salon.zipcode%>								
+									</address>
+								<%end%>
 							</td>
 						</tr>
 					</tbody>

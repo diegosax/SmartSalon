@@ -11,7 +11,10 @@
   </p>
 </div>        
 <% end %>
+
 <%=f.input :name, :label => 'Nome'%>
+
+
 <%=f.input :price, :label => "Preço", :wrapper => :append_prepend do %>
   <span class="add-on">R$</span>
   <%=f.input_field :price, :class => "input-mini"%>

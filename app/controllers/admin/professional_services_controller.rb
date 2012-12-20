@@ -56,14 +56,8 @@ class Admin::ProfessionalServicesController < Admin::ApplicationController
   end
 
   def create
-    sleep 1
     service = Service.find(params[:service])
     professional = Professional.find(params[:professional_id])  
-
-
-    if professional.id != current_professional.id
-      raise CanCan::AccessDenied.new("Not authorized!", :create, ProfessionalService) unless current_professional.role? "admin"
-    end
 
     @professional_service = ProfessionalService.new(:service => service, :professional => professional)
 
@@ -72,10 +66,10 @@ class Admin::ProfessionalServicesController < Admin::ApplicationController
         flash[:notice] = "Associação efetuada com sucesso"
         format.html
         format.js
-      else
+      else        
         flash[:alert] = "Houve um erro na associação"
         format.html
-        format.js {render 'create_error'}
+        format.js {render :js => "window.location.reload()"}
       end
     end    
   end
