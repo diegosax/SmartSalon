@@ -1,5 +1,5 @@
 class WorkingTime < ActiveRecord::Base
-  attr_accessible :day, :'from', :to
+  attr_accessible :day, :from, :to
   validates :day, :'from', :to, presence: true
   belongs_to :professional
   validates_with ConflictValidator
