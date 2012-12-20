@@ -46,6 +46,7 @@ Smartsalon::Application.routes.draw do
       collection do
         post "search_zipcode" => "professionals#search_zipcode"
       end
+      put "update_password" => "professionals#update_password", :as => "update_password", :on => :member
       resources :working_times
       resources :professional_services
     end
