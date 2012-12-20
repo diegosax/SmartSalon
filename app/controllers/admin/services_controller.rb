@@ -48,7 +48,7 @@ class Admin::ServicesController < Admin::ApplicationController
 
     respond_to do |format|
       if @service.save
-        format.html { redirect_to admin_service_path(@service), notice: 'Service was successfully created.' }
+        format.html { redirect_to admin_service_path(@service), notice: 'Serviço criado com sucesso' }
         format.json { render json: @service, status: :created, location: @service }
       else
         format.html { render action: "new" }
@@ -65,7 +65,7 @@ class Admin::ServicesController < Admin::ApplicationController
 
     respond_to do |format|
       if @service.update_attributes(params[:service])
-        format.html { redirect_to admin_service_url, notice: 'Service was successfully updated.' }
+        format.html { redirect_to admin_service_url, notice: 'Serviço atualizado com sucesso' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
