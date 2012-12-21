@@ -1,0 +1,11 @@
+<%if @address%>
+	$("#salon_address").val("<%=escape_javascript(@address[:tipo_logradouro] + ' ' + @address[:logradouro])%>");
+	$("#salon_neighborhood").val("<%=escape_javascript(@address[:bairro])%>");
+	$("#salon_city").val("<%=escape_javascript(@address[:cidade])%>");
+	$("#salon_state").val("<%=escape_javascript(@address[:uf])%>");
+<%else%>
+
+
+<%end%>
+$("#salon_zipcode").removeAttr("disabled");
+$(".zipcode_loading").fadeOut('slow');
