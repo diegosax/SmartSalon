@@ -258,15 +258,6 @@ $(document).ready(function(){
   		removeFavorite($(this));
   	});
 
-  	//----------- MASKED INPUT ----------------//
-
-  	$("#client_celphone").mask("(99) 9999-9999");
-  	$("#professional_celphone").mask("(99) 9999-9999");
-  	$("#professional_landphone").mask("(99) 9999-9999");
-  	$("#professional_zipcode").mask("99.999-999");
-
-  	//------------END MASKED INPUT ------------//
-
   	//------------Address Loading ----------------------------------//
 
 	//ao soltar a tecla dentro do campo de cep ele verifica se possui 8 digitos e chama um post para preenchimento do cep
@@ -281,6 +272,19 @@ $(document).ready(function(){
 			return false;
 		}
 	});
+
+  		//ao soltar a tecla dentro do campo de cep ele verifica se possui 8 digitos e chama um posto para preenchimento do cep
+  		$("#salon_zipcode").keyup(function(e){
+  			var zipcode = $("#salon_zipcode").val().replace(/[^0-9]/g, '');    	    
+  			if (zipcode.length == 8){    	       	
+  				$(this).attr("disabled", true);
+  				$(".zipcode_loading").fadeIn('slow');
+  				$.post("/admin/salons/search_zipcode", {zipcode: $(this).val()}, {}, "script");    	        
+  				$("#salon_number").focus();
+  				e.preventDefault();
+  				return false;
+  			}
+  		});
 
   	//------------END Address Loading ------------------------------//
 

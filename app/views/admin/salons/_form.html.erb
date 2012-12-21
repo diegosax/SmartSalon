@@ -1,57 +1,56 @@
-<%= form_for @salon, :html => {:multipart => true} do |f| %>
-  <% if @salon.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@salon.errors.count, "error") %> prohibited this salon from being saved:</h2>
+<div id="main-header" class="page-header">
+    <h1 id="main-heading">
+        Alterar Salão <span><%=@salon.name%></span>
+    </h1>
+</div>
 
-      <ul>
-      <% @salon.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<div id="main-content">
+    <div class="row-fluid">
+        <div class="span12 widget">
+            <div class="widget-header">
+                <span class="title">
+                    Alterar Salão                                     
+                </span>
+            </div>
+            <div class="widget-content form-container">
+                <%= simple_form_for([:admin,@salon],:html=>{:class=>"form-horizontal", :id=> "new_admin_professional_form"}) do |f| %>
+                
+                <fieldset>
+                    <legend>Dados do Salão</legend>
+                    <%=f.input :name, :label => 'Nome'%>
+                    <%=f.input :email, :label => 'E-mail'%>    
+                    <div class="control-group">
+                        <%=f.label :zipcode, "CEP", :class => "control-label"%>
+                        <div class="controls">
+                            <%=f.input_field :zipcode ,:class => 'zipcode' %><%=image_tag "/assets/small_loader.gif", :class => 'zipcode_loading'%>
+                        </div>
+                    </div>
+                    <%=f.input :address, :label => "Endereço"%>
+                    <%=f.input :number, :label => "Número"%>
+                    <%=f.input :complement, :label => 'Compelemento'%>
+                    <%=f.input :neighborhood, :label => 'Bairro'%>
+                    <%=f.input :city, :label => 'Cidade'%>
+                    <%=f.input :state, :label => 'Estado'%>
+                    <%=f.input :landphone, :label => 'Telefone Fixo', :input_html => { :class => 'phone'} %>
+                    <%=f.input :celphone, :label => 'Celular', :input_html => { :class => 'phone'} %>
+
+                </fieldset>
+
+                <fieldset>
+                    <legend>Dados de Administrador do Salão</legend>
+                    <%=f.input :username, :label => "Login"%>
+                                    
+                </fieldset>                
+
+                <div class="form-actions">
+                    <%=f.submit "Salvar", :class => "btn btn-primary"%>
+                    <%=link_to "Cancelar", :back, :class => "btn"%>
+                </div>
+           
+                <%end%>
+            </div>
+        </div>
+
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username %>
-  </div>
-  <div class="field">
-    <%= f.label :celphone %><br />
-    <%= f.text_field :celphone %>
-  </div>
-  <div class="field">
-    <%= f.label :address %><br />
-    <%= f.text_field :address %>
-  </div>
-  <div class="field">
-    <%= f.label :city %><br />
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :state %><br />
-    <%= f.text_field :state %>
-  </div>
-  <div class="field">
-    <%= f.label :zipcode %><br />
-    <%= f.text_field :zipcode %>
-  </div>
-  <div class="field">
-    <%= f.label :complement %><br />
-    <%= f.text_field :complement %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :logo %><br />
-    <%= f.file_field :logo %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+    
+</div>
