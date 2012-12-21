@@ -14,4 +14,24 @@ class Admin::SalonsController < Admin::ApplicationController
     end
   end
 
+  # GET /Salons/1/edit
+  def edit
+    @salon = Salon.find(params[:id])
+  end
+
+  # PUT /salons/1
+  # PUT /salons/1.json
+  def update
+    @salon = Salon.find(params[:id])
+
+    respond_to do |format|
+      if @salon.update_attributes(params[:salon])
+        format.html { redirect_to [:admin,@salon], notice: 'Salao atualizado com sucesso.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @salon.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 end

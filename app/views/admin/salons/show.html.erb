@@ -62,7 +62,7 @@
 							<td><%=@salon.name%></td>
 						</tr>
 						<tr>
-							<th>Nome de usuário</th>
+							<th>Login</th>
 							<td><%=@salon.username%></td>
 						</tr>
 						<tr>
@@ -86,7 +86,7 @@
 							<td>
 								<%if @salon.address%>
 									<address>                
-										<%=@salon.address%>                
+										<%=@salon.address%> , <%=@salon.number%>                
 										<br />
 										<%=@salon.city%>/<%=@salon.state%>  <%=@salon.zipcode%>								
 									</address>
