@@ -1,7 +1,7 @@
 $(document).ready(function(){	
 	// -----------Masks ---------------------------------//
 	$("input.phone").mask("(99) 9999-9999");
-
+	$("input.zipcode").mask("99.999-999");
 
 	//------------Filterable Tables ---------------------//
 	$(function(){		

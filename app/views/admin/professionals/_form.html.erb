@@ -39,7 +39,7 @@
                     <div class="control-group">
                         <%=f.label :zipcode, "CEP", :class => "control-label"%>
                         <div class="controls">
-                            <%=f.input_field :zipcode%><%=image_tag "/assets/small_loader.gif", :class => 'zipcode_loading'%>
+                            <%=f.input_field :zipcode , :class=>'zipcode'%><%=image_tag "/assets/small_loader.gif", :class => 'zipcode_loading'%>
                         </div>
                     </div>
                     <%=f.input :address, :label => "Endereço"%>
@@ -48,8 +48,8 @@
                     <%=f.input :region, :label => 'Bairro'%>
                     <%=f.input :city, :label => 'Cidade'%>
                     <%=f.input :state, :label => 'Estado'%>
-                    <%=f.input :landphone, :label => 'Telefone Fixo'%>
-                    <%=f.input :celphone, :label => 'Celular'%>                                
+                    <%=f.input :landphone, :label => 'Telefone Fixo', :input_html => {:class=> 'phone'} %>
+                    <%=f.input :celphone, :label => 'Celular' , :input_html => {:class=> 'phone'} %>                                
                 </fieldset>                
 
                 <div class="form-actions">

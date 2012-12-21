@@ -34,4 +34,16 @@ class Admin::SalonsController < Admin::ApplicationController
       end
     end
   end
+  
+  #busca de cep - endereco
+  def search_zipcode
+    begin
+      @address = BuscaEndereco.cep(params[:zipcode])      
+    rescue
+      @address = nil      
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
 end
