@@ -68,17 +68,15 @@
 						<div id="header-functions" class="pull-right">
 							<div id="user-info" class="clearfix">
 								<span class="info">
+																	
+
 									<span class="name">
-										<%=link_to [:admin,current_professional], "data-toggle" => "dropdown" do%>
-										<%=current_professional.name%>
-										<b class="carret"></b>
+										<%=link_to [:admin,current_professional] do%>
+											<%=current_professional.name%> 
 										<%end%>
-										<ul class="dropdown-menu">
-											<li><%= link_to "Vizualizar Perfil", admin_professional_path(current_professional)  %> <!--<a href="#tab-11" data-toggle="tab">Vizualizar Perfil</a>--></li>
-											<!--<li><a href="#tab-12" data-toggle="tab">Second menu</a></li>-->
-											<li class="divider"></li>
-											<li><%=link_to "Sair", destroy_professional_session_path, :method => :delete%></li>
-										</ul>
+									</span>	
+									<span class="logout sair">
+										<%=link_to "Sair", destroy_professional_session_path, :method => :delete%>
 									</span>
 								</span>
 							</div>
