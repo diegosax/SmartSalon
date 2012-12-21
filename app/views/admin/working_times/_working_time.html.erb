@@ -1,7 +1,7 @@
 <tr id="wt<%=working_time.id%>">
 	<td><%=working_time.day_name%></td>
-	<td><%=working_time.from.strftime("%H:%Mh")%></td>
-	<td><%=working_time.to.strftime("%H:%Mh")%></td>
+	<td><%=working_time.from_time.strftime("%H:%Mh")%></td>
+	<td><%=working_time.to_time.strftime("%H:%Mh")%></td>
 	<td>
 	<%if can? :update, @professional %>
 			<%=link_to admin_professional_working_time_path(current_professional,working_time), 

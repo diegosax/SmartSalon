@@ -445,6 +445,21 @@ form{
     padding:5px;
 }
 
+// ------------------- Professional show special menu ------------------------//
+
+.task-list > ul > li .text {
+    margin-left: 0;    
+}
+
+.task-list a{
+    color:#444;
+}
+
+.task-list a:hover{
+    text-decoration: none;
+    color:#888;
+}
+
 
 
 // -------------------Custom Sign Up Salon Style -----------------------------//
@@ -549,4 +564,11 @@ body#salon-sign-up{
         margin-bottom:2em;
     }
 
+}
+
+
+// -------------------------------Custom Timepicker Styles -------------------
+div.time-picker {
+    z-index: 99999;
+    width: 6.5em;
 }

@@ -3,13 +3,16 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h3>Novo Horário</h3>
   </div>
-  <div class="modal-body">
-    <%@working_time = WorkingTime.new%>
-    <%= simple_form_for([:admin,@professional,@working_time],:html=>{:class=>"form-horizontal",:remote=>true}) do |f| %>
+  <div class="modal-body">    
+    <%@working_time = WorkingTime.new(
+      :from_time => Time.zone.parse("08:00").strftime("%H:%M"),
+      :to_time => Time.zone.parse("18:00").strftime("%H:%M")
+    )%>
+    <%= simple_form_for([:admin,@professional,@working_time],:html=>{:class=>"form-vertical",:remote=>true}) do |f| %>
     <div class="form-content">
-      <%=f.input :day, :collection => Date::DAYNAMES.collect.with_index{|a,i| [a,i]}, :include_blank => false%>
-      <%=f.input :from, :as => :string%>
-      <%=f.input :to, :as => :string%>
+      <%=f.input :day, :label => "Dia da semana", :collection => Date::DAYNAMES.collect.with_index{|a,i| [a,i]}, :include_blank => false%>
+      <%=f.input :from_time, :label => "Início", :as => :string, :input_html => {:class => 'timepicker'}%>
+      <%=f.input :to_time,:label => "Fim", :as => :string, :input_html => {:class => 'timepicker'}%>
     </div>
   </div>
   <div class="modal-footer">

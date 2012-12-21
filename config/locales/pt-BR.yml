@@ -218,10 +218,15 @@ pt-BR:
   activerecord:
     models:
       service: 'Serviço'
+      working_time: 'Horário de trabalho'
     attributes:
       service:
         name: 'Nome'
         duration: 'Duração'  
         price: 'Preço'
+      working_time:
+        day: 'Dia'
+        from_time: 'Início'
+        to_time: 'Fim'
     errors:
       <<: *errors
