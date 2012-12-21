@@ -1,6 +1,6 @@
 class WorkingTime < ActiveRecord::Base
-  attr_accessible :day, :from, :to
-  validates :day, :'from', :to, presence: true
+  attr_accessible :day, :from_time, :to_time, :professional
+  validates :day, :from_time, :to_time, presence: true
   belongs_to :professional
   validates_with ConflictValidator
 
@@ -11,13 +11,15 @@ class WorkingTime < ActiveRecord::Base
   def find_conflicts
   	self.professional.working_times.where(
       "
-        'from' > ? and 'from' < ? OR
-        'to' > ? and 'to' < ? OR
-        'from' <= ? and 'to' >= ?
+        day = ? AND
+        (
+          (from_time <= ? AND to_time > ?) OR
+          (from_time <= ? AND to_time > ?)
+        )
       ",
-      self.from,self.to,
-      self.from,self.to,
-      self.from,self.to      
+      self.day,
+      self.from_time,self.from_time,
+      self.to_time,self.to_time
     ).all
   end
 end

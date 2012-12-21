@@ -109,8 +109,9 @@ userList = null;
 
 $(document).ready(function(){
 	$('body').ajaxComplete(function() {
-		$(".chzn_a").chosen();
+		$(".chzn_a").chosen();		
 	});
+	$(".timepicker").timePicker();
 	
 	$("#client_calendar td").live({
 		//hover in
@@ -259,18 +260,18 @@ $(document).ready(function(){
 
   	//------------Address Loading ----------------------------------//
 
-  		//ao soltar a tecla dentro do campo de cep ele verifica se possui 8 digitos e chama um posto para preenchimento do cep
-  		$("#professional_zipcode").keyup(function(e){
-  			var zipcode = $("#professional_zipcode").val().replace(/[^0-9]/g, '');    	    
-  			if (zipcode.length == 8){    	       	
-  				$(this).attr("disabled", true);
-  				$(".zipcode_loading").fadeIn('slow');
-  				$.post("/admin/professionals/search_zipcode", {zipcode: $(this).val()}, {}, "script");    	        
-  				$("#professional_house_number").focus();
-  				e.preventDefault();
-  				return false;
-  			}
-  		});
+	//ao soltar a tecla dentro do campo de cep ele verifica se possui 8 digitos e chama um post para preenchimento do cep
+	$("#professional_zipcode").keyup(function(e){
+		var zipcode = $("#professional_zipcode").val().replace(/[^0-9]/g, '');
+		if (zipcode.length == 8){    	       	
+			$(this).attr("disabled", true);
+			$(".zipcode_loading").fadeIn('slow');
+			$.post("/admin/professionals/search_zipcode", {zipcode: $(this).val()}, {}, "script");    	        
+			$("#professional_house_number").focus();
+			e.preventDefault();
+			return false;
+		}
+	});
 
   		//ao soltar a tecla dentro do campo de cep ele verifica se possui 8 digitos e chama um posto para preenchimento do cep
   		$("#salon_zipcode").keyup(function(e){

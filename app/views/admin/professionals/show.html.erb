@@ -1,11 +1,8 @@
 <%=render "top_menu"%>
 
-<%= render "change_password"%>
+<%=render "change_password"%>
 
 <%=render "/admin/working_times/modal_form"%>
-
-
-
 
 <div id="main-header" class="page-header">
 	<h1 id="main-heading">
@@ -15,8 +12,8 @@
 </div>
 <div id="main-content">
 	<%=render "context_menu"%>
-	<div class="row-fluid">
-		<div class="form-horizontal widget">
+	<div class="row-fluid">		
+		<div class="form-horizontal widget span6">
 			<div class="widget-header">
 				<span class="title">Perfil do usuário</span>
 				<div class="toolbar">
@@ -67,7 +64,9 @@
 				</table>
 			</div>		
 		</div>
-		<%=render "professional_services"%>
+		<%=render "professional_services"%>								
+	</div>
+	<div class="row-fluid">
 		<%=render "/admin/working_times/working_times"%>	
 	</div>
 </div>

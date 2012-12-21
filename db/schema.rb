@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121212153611) do
+ActiveRecord::Schema.define(:version => 20121221122638) do
 
   create_table "client_salons", :force => true do |t|
     t.integer  "client_id"
@@ -174,8 +174,8 @@ ActiveRecord::Schema.define(:version => 20121212153611) do
 
   create_table "working_times", :force => true do |t|
     t.integer  "day"
-    t.datetime "from"
-    t.datetime "to"
+    t.datetime "from_time"
+    t.datetime "to_time"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.integer  "professional_id"
