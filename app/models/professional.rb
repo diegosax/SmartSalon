@@ -17,13 +17,13 @@ class Professional < User
   	for i in 1..5
   		self.working_times.create(
   			:day => i,
-  			:from => Time.zone.parse("2000-01-01 08:00"),
-  			:to => Time.zone.parse("2000-01-01 12:00")
+  			:from_time => Time.zone.parse("2000-01-01 08:00"),
+  			:to_time => Time.zone.parse("2000-01-01 12:00")
   		)
   		self.working_times.create(
   			:day => i,
-  			:from => Time.zone.parse("2000-01-01 13:00"),
-  			:to => Time.zone.parse("2000-01-01 17:00")
+  			:from_time => Time.zone.parse("2000-01-01 13:00"),
+  			:to_time => Time.zone.parse("2000-01-01 17:00")
   		)
   	end
   end
