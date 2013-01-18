@@ -27,39 +27,7 @@
     <div class="tab-content client-manager-model">
       <div id="registered" class="select_client tab-pane active">
         <div class="registered-search">
-          <ul id="myTab" class="nav nav-tabs">
-            <li class="active">
-              <a href="#email-search" data-toggle="tab">Busca por Email</a>
-            </li>
-            <li class="">
-              <a href="#phone-search" data-toggle="tab">Busca por Celular</a>
-            </li>          
-          </ul>
-          <div class="tab-content">          
-            <div class="tab-pane fade active in" id="email-search">
-              <%=form_tag search_admin_clients_path, :class => "form-vertical", :remote => true, :method => :get do |f|%>
-              <div class="formSep">
-                <label>Digite o email do cliente</label>
-                <div class="input-append">
-                  <%=text_field_tag :email%><%=submit_tag "Buscar", :class => "btn"%>  
-                </div>                
-                <span class="help-block">Deve ser o mesmo usado no Instanapp</span>                
-              </div>
-              <%end%>    
-            </div>
-
-            <div class="tab-pane fade" id="phone-search">
-              <%=form_tag search_admin_clients_path, :class => "form-vertical", :remote => true, :method => :get do |f|%>
-              <div class="formSep">
-                <label>Digite o celular do cliente</label>
-                <div class="input-append">
-                  <%=text_field_tag :celphone,"", :class => "phone"%> <%=submit_tag "Buscar", :class => "btn"%>  
-                </div>                
-                <span class="help-block">Deve ser o mesmo usado no Instanapp</span>                
-              </div>    
-              <%end%>
-            </div>          
-          </div>                          
+          <%=render "admin/clients/search_registered_client"%>                          
         </div>
         <div class="registered-result"></div>
 

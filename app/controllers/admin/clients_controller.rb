@@ -34,13 +34,12 @@ class Admin::ClientsController < Admin::ApplicationController
   end
 
   def search
-    sleep 1
     @client = Client.where("email = ? or celphone = ?", params[:email], params[:celphone]).first    
     respond_to do |format|
-      if @client        
+      if @client
         format.js
         format.html
-      else        
+      else
         format.js {render :search}
         format.html
       end

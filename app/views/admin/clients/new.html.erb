@@ -7,20 +7,39 @@
 <div id="main-content">
 	<%=render "context_menu"%>
 	<div class="row-fluid">
-		<div class="span12 widget">
+		<div class="span12 widget new-client">
 			<div class="widget-header">
 				<span class="title">Dados do Cliente</span>
 			</div>
 			<div class="widget-content form-container">
-				<%@new_client = Client.new%>
-				<%= simple_form_for([:admin,@new_client],:html=>{:class=>"form-horizontal"}) do |f| %>
-				<%=f.input :name, :label => "Nome"%>
-				<%=f.input :celphone, :label => "Celular"%>                      
-				<%=f.input :email, :label => "E-mail"%>      				
+				<%= simple_form_for([:admin,@client],:html=>{:class=>"form-horizontal"}) do |f| %>
+				<fieldset>
+					<legend>Dados Obrigatórios</legend>
+					<%=f.input :name, :label => "Nome"%>
+					<%=f.input :celphone, :label => "Celular", :input_html => {:class => "phone"}%>
+					<%=f.input :email, :label => "E-mail"%>
+				</fieldset>
+				<fieldset>
+					<legend>Dados Adicionais</legend>
+					<div class="control-group">
+                        <%=f.label :zipcode, "CEP", :class => "control-label"%>
+                        <div class="controls">
+                            <%=f.input_field :zipcode , :class=>'zipcode'%><%=image_tag "/assets/small_loader.gif", :class => 'zipcode_loading'%>
+                        </div>
+                    </div>
+                    <%=f.input :address, :label => "Endereço", :input_html => {:class => "address"}%>
+                    <%=f.input :house_number, :label => 'Número', :input_html => {:class => "house_number"}%>
+                    <%=f.input :complement, :label => 'Compelemento', :input_html => {:class => "complement"}%>
+                    <%=f.input :region, :label => 'Bairro', :input_html => {:class => "neighborhood"}%>
+                    <%=f.input :city, :label => 'Cidade', :input_html => {:class => "city"}%>
+                    <%=f.input :state, :label => 'Estado', :input_html => {:class => "state"}%>
+                    <%=f.input :landphone, :label => 'Telefone Fixo', :input_html => {:class=> 'phone'} %>                    
+				</fieldset>
+				
 				<div class="form-actions">
 					<%=f.submit "Salvar", :class => "btn btn-primary", :disable_with => "Salvando..."%>
 					<%=link_to "Cancelar", :back, :class => "btn"%>
-				</div>			
+				</div>
 				<%end%>
 			</div>
 		</div>

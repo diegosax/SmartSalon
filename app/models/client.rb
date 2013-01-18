@@ -5,8 +5,8 @@ class Client < User
   has_many :favorites
   has_many :client_services
   has_many :services, :through => :client_services
-  validates :name, :presence => true  
-  validates :celphone, :presence => true
+  validates :name,:celphone,:email, :presence => true
+  validates :celphone, :email, :uniqueness => true  
   after_create :send_email_notice
 
   def my_salons_and_favorites

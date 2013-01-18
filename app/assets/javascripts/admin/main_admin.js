@@ -3,6 +3,15 @@ $(document).ready(function(){
 	$("input.phone").mask("(99) 9999-9999");
 	$("input.zipcode").mask("99.999-999");
 
+	//------------ Client Management | Search Registered --------//
+
+	$("#client_celphone").blur(function(){
+		var celphone = $(this).val();
+		$.get("/admin/clients/search", {celphone: celphone}, {}, "script");
+	});
+
+	// ----------------------------------------------------------//
+
 	//------------Filterable Tables ---------------------//
 	$(function(){		
 		var activeTab = $('[href=' + location.hash + ']');
