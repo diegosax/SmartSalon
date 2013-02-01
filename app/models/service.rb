@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class Service < ActiveRecord::Base
   attr_accessible :duration, :name, :price
   has_many :professional_services, :dependent => :destroy
@@ -8,6 +10,7 @@ class Service < ActiveRecord::Base
   belongs_to :salon
   validates :name, :duration, presence: true
   validates :price, numericality: {greater_than: 0}, :allow_blank => true
+  validates :duration, numericality: {greater_than: 0}
 
   def preferred_duration(client)
   	client_service = self.client_services.where(:client_id => client).first
