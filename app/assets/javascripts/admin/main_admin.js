@@ -5,12 +5,17 @@ $(document).ready(function(){
 
 	//------------ Client Management | Search Registered --------//
 
-	$("#client_celphone").blur(function(){
-		var celphone = $(this).val();
-		$.get("/admin/clients/search", {celphone: celphone}, {}, "script");
+	$("#client_email").blur(function(){
+		var email = $("#client_email").val();
+		if (email.length > 3){
+			$("#client_email").parent().find("img").fadeIn();
+			$.get("/admin/clients/search", {email: email}, {}, "script");	
+		}
+		
 	});
 
 	// ----------------------------------------------------------//
+
 
 	//------------Filterable Tables ---------------------//
 	$(function(){		

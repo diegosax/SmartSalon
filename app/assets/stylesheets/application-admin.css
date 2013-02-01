@@ -484,7 +484,7 @@ input.friendly_date{
 }
 
 
-.zipcode_loading{
+.input_ajax_loading{
     display: none;
     margin-left: 10px;
 }

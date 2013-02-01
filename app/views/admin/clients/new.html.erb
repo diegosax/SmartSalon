@@ -15,16 +15,23 @@
 				<%= simple_form_for([:admin,@client],:html=>{:class=>"form-horizontal"}) do |f| %>
 				<fieldset>
 					<legend>Dados Obrigatórios</legend>
-					<%=f.input :name, :label => "Nome"%>
-					<%=f.input :celphone, :label => "Celular", :input_html => {:class => "phone"}%>
-					<%=f.input :email, :label => "E-mail"%>
+					<%=f.input :name, :label => "Nome"%>					
+					<div class="control-group string required">
+                        <%=f.label :email, "Email", :class => "control-label required string"%>
+                        <div class="controls">
+                            <%=f.input_field :email%><%=image_tag "/assets/small_loader.gif", :class => "input_ajax_loading"%>
+                            <p class="help-block">Se o cliente não possuir email deixe esse campo em branco</p>
+                        </div>
+                    </div>
+                    <%=f.input :celphone, :label => "Telefone Principal", :hint => "de preferência o número do seu celular", :input_html => {:class => "phone"}%>
+					<%=f.input :landphone, :label => 'Telefone Adicional', :hint => "seu telefone fixo, de trabalho ou um segundo número de celular", :input_html => {:class=> 'phone'} %>					
 				</fieldset>
 				<fieldset>
 					<legend>Dados Adicionais</legend>
 					<div class="control-group">
                         <%=f.label :zipcode, "CEP", :class => "control-label"%>
                         <div class="controls">
-                            <%=f.input_field :zipcode , :class=>'zipcode'%><%=image_tag "/assets/small_loader.gif", :class => 'zipcode_loading'%>
+                            <%=f.input_field :zipcode , :class=>'zipcode'%><%=image_tag "/assets/small_loader.gif", :class => 'zipcode_loading input_ajax_loading'%>
                         </div>
                     </div>
                     <%=f.input :address, :label => "Endereço", :input_html => {:class => "address"}%>
@@ -32,8 +39,7 @@
                     <%=f.input :complement, :label => 'Compelemento', :input_html => {:class => "complement"}%>
                     <%=f.input :region, :label => 'Bairro', :input_html => {:class => "neighborhood"}%>
                     <%=f.input :city, :label => 'Cidade', :input_html => {:class => "city"}%>
-                    <%=f.input :state, :label => 'Estado', :input_html => {:class => "state"}%>
-                    <%=f.input :landphone, :label => 'Telefone Fixo', :input_html => {:class=> 'phone'} %>                    
+                    <%=f.input :state, :label => 'Estado', :input_html => {:class => "state"}%>                    
 				</fieldset>
 				
 				<div class="form-actions">

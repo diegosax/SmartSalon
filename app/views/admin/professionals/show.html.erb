@@ -48,18 +48,19 @@
 						<tr>
 							<th>Telefone Celular</th>
 							<td><%=@professional.celphone%></td>
-						</tr>
-						<tr>
-						<tr>
-							<th>Endereço</th>
-							<td>
-								<address>                
-									<%=@professional.address%>, <%=@professional.house_number%>                 
-									<br />
-									<%=@professional.city%>/<%=@professional.state%>   <%=@professional.zipcode%>								
-								</address>
-							</td>
-						</tr>
+						</tr>						
+						<%if @professional.address%>
+							<tr>
+								<th>Endereço</th>
+								<td>
+									<address>                										
+										<%=@professional.address%>, <%=@professional.house_number%>               
+										<br />
+										<%=@professional.city%>/<%=@professional.state%>   <%=@professional.zipcode%>
+									</address>
+								</td>
+							</tr>
+						<%end%>
 					</tbody>					
 				</table>
 			</div>		

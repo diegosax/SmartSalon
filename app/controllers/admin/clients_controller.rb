@@ -34,29 +34,26 @@ class Admin::ClientsController < Admin::ApplicationController
   end
 
   def search
-    @client = Client.where("email = ? or celphone = ?", params[:email], params[:celphone]).first    
-    respond_to do |format|
-      if @client
-        format.js
-        format.html
-      else
-        format.js {render :search}
-        format.html
-      end
+    @client = Client.where("email = ? or celphone = ?", params[:email], params[:celphone]).first
+    respond_to do |format|      
+      format.js {render :search}
+      format.html      
     end          
   end
 
   def add_to_salon
     @client = Client.find(params[:client_id])
-    @client.salons << current_professional.salon
+    if !@client.salons.include? current_professional.salon
+      @client.salons << current_professional.salon
+    end
+    
     respond_to do |format|
       if @client.save
         flash[:notice] = "Cliente adicionado com sucesso!"
-        format.html { redirect_to @client }
+        format.html { redirect_to [:admin,@client] }
         format.json { render json: @client, status: :created, location: @client }
         format.js
-      else
-        puts @client.errors.messages
+      else        
         format.js {render "add_error"}
         format.html { render action: "new" }
         format.json { render json: @client.errors, status: :unprocessable_entity }
@@ -65,7 +62,7 @@ class Admin::ClientsController < Admin::ApplicationController
   end
 
   def create
-    @client = Client.new(params[:client])
+    @client = Client.new(params[:client])    
     generated_password = Devise.friendly_token.first(6)
     @client.password = generated_password
     @client.created_by = current_professional.salon.id

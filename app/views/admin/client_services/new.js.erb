@@ -1,10 +1,34 @@
 <%if @service%>
-	var html = "<%=escape_javascript(render '/admin/client_services/choose_client')%>";
+var html = "<%=escape_javascript(render '/admin/client_services/choose_client')%>";
 <%elsif @client%>
-	var html = "<%=escape_javascript(render '/admin/client_services/choose_service')%>";
+var html = "<%=escape_javascript(render '/admin/client_services/choose_service')%>";
 <%end%>
 $("#associate_client_service").remove();
 $(html).prependTo("body");
 $("#loading-modal").modal("hide")
 $("#associate_client_service").modal("show");
 $(".chzn_a").chosen();
+// ----- Custom Validation: Add service duration to client --//
+console.log("HERRE");
+$("#new_client_service_form").validate({	
+	errorPlacement: function(error, element) {
+		var isInputAppend = ($(element).parent('div.input-append').length > 0);
+		var isRadio = ($(element).attr('type') == 'radio');
+		if(isRadio){
+			afterElement = $(element).closest('div.controls').children("label").filter(":last");
+			error.insertAfter(afterElement);
+		}else if (isInputAppend) {
+			appendElement = $(element).next('span.add-on');
+			error.insertAfter(appendElement);
+		}else {
+			error.insertAfter(element);
+		}
+	},
+	rules: {
+		duration: {
+			required: true,
+			digits:true
+		}
+	}
+});
+//-----------------------------------------------------------//
