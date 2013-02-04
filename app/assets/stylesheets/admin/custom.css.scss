@@ -54,7 +54,105 @@ form{
 
 // ----------------------- SIDEBAR MENU ------------------------//
 
-#wrapper #sidebar{
+/* ----------- Side menu ----------- */
+.accordion-sidemenu a:hover, .accordion-sidemenu a.active{
+  border-left: 2px solid #F79999;
+}
+
+.accordion-sidemenu{
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.accordion-heading{
+  background: #292A2F;
+}
+.accordion-heading a{
+  border-left: 2px solid #292A2F;
+  border-bottom: 1px dashed #313131;
+}
+.accordion-group a{
+  display: block;
+  padding: 8px 15px;
+  color: #FFFFFF;
+  text-decoration: none;
+  position: relative;
+}
+.accordion-group{
+  border: none;
+  border-radius: 0;
+}
+.accordion-inner{
+  background-color: #3D3E43;
+  border: none;
+  padding: 9px 0;
+}
+.accordion-inner a{
+  border-left: 2px solid #3D3E43;
+}
+.accordion-inner a:hover, .accordion-inner a.active{
+  border-left: 2px solid #76777C;
+}
+.sidebar-nav .accordion-toggle.collapsed[data-toggle]:before, .sidebar-nav .accordion-toggle[data-toggle]:before{
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}
+.sidebar-nav .accordion-toggle.collapsed[data-toggle]:before{
+  content:"\f054";
+}
+.sidebar-nav .accordion-toggle[data-toggle]:before{
+  content:"\f078";
+}
+
+
+/* Large desktop */
+@media (min-width: 1200px) {
+    .nav-collapse.collapse {      
+      position: fixed;
+      padding-top: 47px;
+      width: 200px;
+      height: 100% !important;
+      background: #292A2F; 
+      left: 0!important;
+      z-index:999;
+    }
+    #main{
+      margin-left: 200px!important;
+      left: 0!important;
+    }
+    .logo {
+      margin: 0 90px 0 15px;
+    }    
+}
+
+/* user side */
+.user_side{
+  padding: 15px 15px;
+  margin: 0;
+  background-color: #3D3E43;
+}
+.user_side img{
+  float:left;
+  width:50px;
+  height:50px;
+  -moz-border-radius:150px;
+  -webkit-border-radius:150px;
+  border-radius:150px;
+  margin: 0 15px 0 0;
+}
+.user_side h5{
+  color: #E28271;
+  line-height: 16px;
+  margin: 8px 0 0;
+}
+.user_side a{
+  color:#FFFFFF;
+  font-size: 11px;
+}
+
+
+/* #wrapper #sidebar{
 	background-image: url("/assets/bg_sidebar.png");
 	position: fixed;
 	width:auto;
@@ -64,7 +162,7 @@ form{
 
 #wrapper #sidebar #navigation .inner-nav > li > a {
 	padding: 12px 17px 12px 5px;
-}
+} */
 
 .alert p.error-message{
 	padding-left: 20px;

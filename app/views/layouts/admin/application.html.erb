@@ -68,11 +68,11 @@
 						<div id="header-functions" class="pull-right">
 							<div id="user-info" class="clearfix">
 								<span class="info">
-																	
+
 
 									<span class="name">
 										<%=link_to [:admin,current_professional] do%>
-											<%=current_professional.name%> 
+										<%=current_professional.name%> 
 										<%end%>
 									</span>	
 									<span class="logout sair">
@@ -85,7 +85,66 @@
 				</div>
 			</div>
 		</header>
-		<aside id="sidebar">
+		<div class="sidebar-nav nav-collapse collapse">
+			<div class="user_side clearfix">
+				<img src="/assets/gCons/agent.png" alt="">
+				<h5><%=current_professional.name%></h5>
+				<a href="#"><i class="icon-cog"></i> Alterar Perfil</a>        
+			</div>
+			<div class="accordion-sidemenu" id="accordion2">
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<%=link_to admin_dashboard_path, :class => "accordion-toggle #{active_class('dashboard')}" do%>							
+								<i class="icon-home"></i>
+								<span>Dashboard</span>							
+						<%end%>						
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<%=link_to "#collapse1", :class => "accordion-toggle collapsed", :data => {:toggle => "collapse", :parent => "#accordion2"} do%>
+							<span title="Agenda">
+								<i class="icon-calendar"></i>
+								<span>Agenda</span>
+							</span>
+						<%end%>						
+					</div>
+					<div id="collapse1" class="accordion-body collapse">
+						<div class="accordion-inner">
+							<%=link_to admin_events_path, :class => "accordion-toggle" do %>
+								<i class="icon-list"></i>
+								Listar Agendamentos
+							<%end%>					
+							<%=link_to easy_new_admin_events_path, :class => "accordion-toggle" do %>
+								<i class="icon-magic"></i>
+								Agendamento Fácil
+							<%end%>
+							<%=link_to new_admin_event_path, :class => "accordion-toggle" do %>
+								<i class="icon-plus"></i>
+								Agendamento Manual
+							<%end%>
+						</div>
+					</div>
+				</div>				
+				
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle b_C1F8A9" href="analytics.html"><i class="icon-bar-chart"></i> <span>Analytics</span></a>
+					</div>
+				</div> 
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle b_9FDDF6" href="tickets.html"><i class="icon-bullhorn"></i> <span>Support Tickets</span></a>
+					</div>
+				</div> 
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle b_F5C294" href="users.html"><i class="icon-user"></i> <span>Users</span></a>
+					</div>
+				</div>      
+			</div>
+		</div>
+		<!-- <aside id="sidebar">
 			<nav id="navigation">
 				<ul>
 					<li class="<%=active_class('dashboard')%>">
@@ -141,7 +200,7 @@
 					</li>												
 				</ul>
 			</nav>
-		</aside>
+		</aside> -->
 		<div id="content-wrap">
 			<div id="content">
 				<div id="content-outer">
