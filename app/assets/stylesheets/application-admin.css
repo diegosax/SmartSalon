@@ -9,10 +9,8 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require commom_plugins/manifest
- *= require bootstrap/manifest
- *= require bootstrap-modal/manifest
- *= require fonts/manifest
+ *= require bootstrap-modal
+ *= require chosen
  *= require admin/mooncake/mooncake.min
  *= require admin/mooncake/plugins.min
  *= require admin/custom_responsive_admin

@@ -1,11 +1,11 @@
 <div class="form-horizontal widget span6">
 	<div class="widget-header">
 		<span class="title">
-			Cada duração de serviço específico para <%=@client.name%>
+			Duração de serviço específica para este cliente
 		</span>
 		<div class="toolbar">
 			<%=link_to new_admin_client_client_service_path(@client), :class => "btn btn-gebo btn-mini", "data-toggle" => "remote-modal",:remote => true, :id => "new_client_service" do%>
-			<i class="icol-add"></i>
+			<i class="icon-plus"></i>
 			Adicionar serviço ao cliente
 			<%end%>
 		</div>

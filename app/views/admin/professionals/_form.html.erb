@@ -1,14 +1,13 @@
-<div id="main-header" class="page-header">
-    <h1 id="main-heading">
+<header>
+    <h2>
         <%if action_name == "new" || action_name == "create"%>
-        Novo Funcionário
+            Novo Funcionário
         <%else%>
-        Alterar Funcionário <span><%=@professional.name%></span>
+            Editar Funcionário
         <%end%>
-
-    </h1>
-</div>
-
+    </h2>
+</header>
+        
 <div id="main-content">
     <%=render "context_menu"%>
     <div class="row-fluid">
@@ -30,7 +29,7 @@
                     <%=f.input :celphone, :label => 'Telefone Principal' , :input_html => {:class=> 'phone'} %>
                     <%=f.input :landphone, :label => 'Telefone Adicional', :input_html => {:class=> 'phone'} %>
                     
-                    <%=f.input :email, :label => 'E-mail', :hint => "Caso o funcionário não possua um email, coloque qualquer outro email que não esteja sendo utilizado"%>
+                    <%=f.input :email, :label => 'E-mail', :hint => "Este email será utilizado pelo funcionário para acesso ao sistema"%>
                     <%if action_name == "new" || action_name == "create"%>
                         <%=f.input :password, :label => "Senha"%>
                         <%=f.input :password_confirmation, :label => "Confirme sua Senha"%>

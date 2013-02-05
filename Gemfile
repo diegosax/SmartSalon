@@ -11,7 +11,7 @@ gem 'rails', '3.2.3'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
+  gem 'sass-rails',   '~> 3.2.3'  
   gem 'coffee-rails', '~> 3.2.1'    
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platform => :ruby
@@ -21,7 +21,16 @@ end
 
 gem 'jquery-rails'
 
+# JS and CSS Plugins
+gem 'bootstrap-sass', '~> 2.2.2.0'
+
+gem 'font-awesome-sass-rails'
+
+gem 'chosen-rails'
+
 gem 'rails3-jquery-autocomplete'
+
+#End of Plugins
 
 gem "watu_table_builder", :require => "table_builder"
 

@@ -5,11 +5,9 @@
 
 <!-- Fim do modal -->
 
-<div id="main-header" class="page-header">
-	<h1 id="main-heading">
-		Informações sobre o salão <span> <%=@salon.name%></span>
-	</h1>
-</div>
+<header>
+	<h2>Gerenciamento do Salão</h2>
+</header>
 
 <div id="main-content">
 	<%if @salon.is_incomplete?%>
@@ -47,7 +45,10 @@
 					Detalhes do Salão
 				</span>
 				<div class="toolbar">
-					<%=link_to "Editar Salão", edit_admin_salon_path(@salon), :class => "btn btn-gebo btn-mini" %>
+					<%=link_to edit_admin_salon_path(@salon), :class => "btn btn-gebo btn-mini" do%>
+						<i class="icon-edit"></i>
+						Editar Salão
+					<%end%>
 				</div>
 			</div>
 			<div class="widget-content table-container">
@@ -105,7 +106,7 @@
 					Pagamentos
 				</span>
 				<div class="toolbar">
-					<%=link_to "Efetuar Pagamento", "#", :class => "btn btn-mini"%>
+
 				</div>
 			</div>
 			<div class="widget-content table-container">
@@ -130,8 +131,8 @@
 								<%if Payment::STATUS.key(p.status) != 1 && Payment::STATUS.key(p.status) != 4%>
 								<span class="btn-group">
 									<%=link_to admin_salon_payments_checkout_path(@salon, :payment => p.id), :remote => true, :class => "btn btn-primary", :id => "payment_btn", :method => :post do%>
-									<i class="icon-search"></i>
-									Efetuar Pagamento
+									<i class="icon-money"></i>
+									Pagar
 									<%end%>									
 								</span>
 								<%end%>

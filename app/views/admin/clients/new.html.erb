@@ -1,8 +1,8 @@
 <%=render "top_menu"%>
 
-<div id="main-header" class="page-header">
-	<h1 id="main-heading">Novo Cliente</h1>
-</div>
+<header>
+	<h2>Detalhes do cliente</h2>	
+</header>
 
 <div id="main-content">
 	<%=render "context_menu"%>
@@ -14,8 +14,8 @@
 			<div class="widget-content form-container">
 				<%= simple_form_for([:admin,@client],:html=>{:class=>"form-horizontal"}) do |f| %>
 				<fieldset>
-					<legend>Dados Obrigatórios</legend>
-					<%=f.input :name, :label => "Nome"%>					
+					<legend>Dados de Contato</legend>
+					<%=f.input :name, :label => "Nome", :hint => "Digite apenas o primeiro e o último nome"%>					
 					<div class="control-group string required">
                         <%=f.label :email, "Email", :class => "control-label required string"%>
                         <div class="controls">
@@ -23,8 +23,8 @@
                             <p class="help-block">Se o cliente não possuir email deixe esse campo em branco</p>
                         </div>
                     </div>
-                    <%=f.input :celphone, :label => "Telefone Principal", :hint => "de preferência o número do seu celular", :input_html => {:class => "phone"}%>
-					<%=f.input :landphone, :label => 'Telefone Adicional', :hint => "seu telefone fixo, de trabalho ou um segundo número de celular", :input_html => {:class=> 'phone'} %>					
+                    <%=f.input :celphone, :label => "Telefone Principal", :hint => "de preferência o número do celular", :input_html => {:class => "phone"}%>
+					<%=f.input :landphone, :label => 'Telefone Adicional', :hint => "telefone fixo, de trabalho ou um segundo número de celular", :input_html => {:class=> 'phone'} %>					
 				</fieldset>
 				<fieldset>
 					<legend>Dados Adicionais</legend>

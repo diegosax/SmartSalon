@@ -1,11 +1,9 @@
 <%=render "top_menu"%>
 
-<div id="main-header" class="page-header">
-	<h1 id="main-heading">
-		Detalhes do Cliente <span><%=@client.name%></span>
-	</h1>
+<header>
+	<h2>Detalhes do cliente</h2>	
+</header>
 
-</div>
 <div id="main-content">
 	<%=render "context_menu"%>
 	<div class="row-fluid">
@@ -14,7 +12,7 @@
 				<span class="title">Informações do Cliente</span>
 				<div class="toolbar">
 					<%=link_to edit_admin_client_path(@client), :class => "btn btn-gebo btn-mini" do%>
-						<i class="icol-application-edit"></i> Alterar Dados
+					<i class="icon-edit"></i> Editar Cliente
 					<%end%>
 				</div>
 			</div>
@@ -36,22 +34,22 @@
 							<td><%=@client.celphone%></td>
 						</tr>						
 						<%if @client.landphone%>
-							<tr>
-								<th>Telefone Adicional</th>
-								<td><%=@client.landphone%></td>
-							</tr>
+						<tr>
+							<th>Telefone Adicional</th>
+							<td><%=@client.landphone%></td>
+						</tr>
 						<%end%>		
 						<%if @client.address%>
-							<tr>
-								<th>Endereço</th>
-								<td>
-									<address>                										
-										<%=@client.address%>, <%=@client.house_number%>               
-										<br />
-										<%=@client.city%>/<%=@client.state%>   <%=@client.zipcode%>
-									</address>
-								</td>
-							</tr>
+						<tr>
+							<th>Endereço</th>
+							<td>
+								<address>                										
+									<%=@client.address%>, <%=@client.house_number%>               
+									<br />
+									<%=@client.city%>/<%=@client.state%>   <%=@client.zipcode%>
+								</address>
+							</td>
+						</tr>
 						<%end%>
 					</tbody>					
 				</table>

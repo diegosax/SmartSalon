@@ -39,196 +39,160 @@
 		</div>
 		<div style="display:none" class="link" data-destination="">
 		</div>		
-	</div>	
-	<div id="wrapper">		
-		<!-- main content -->
-		<header id="header" class="navbar navbar-inverse">
-			<div class="navbar-inner">
-				<div class="container">
-					<div class="brand-wrap pull-left">
-						<div class="brand-img">
-							<a class="brand" href="#">
-								<%=image_tag "/assets/logo.png"%>
-							</a>
-						</div>
-					</div>
-					<div id="header-right" class="clearfix">
-						<div id="nav-toggle" data-toggle="collapse" data-target="#navigation" class="collapsed">
-							<i class="icon-caret-down"></i>
-						</div>						
-						<div id="dropdown-lists">
-							<%=link_to :back, :class => "item" do%>
+	</div>		
+	<aside id="aside_sidebar" class="collapse">
+		<div class="logo">
+			<a href="index.html"></a>
+		</div>
+		<ul id="sidebar_menu" class="navbar nav nav-list sidebar_box">
+			<li class="accordion-group <%=active_class('dashboard')%>">
+				<%=link_to admin_dashboard_path do%>	
+					<%=image_tag "/assets/menu_icons/dashboard.png"%>								
+					Dashboard
+				<%end%>				
+			</li>
+			<li class="accordion-group <%=active_class('events')%>">
+				<%=link_to "#collapse1", :class => "accordion-toggle widgets collapsed", :data => {:toggle => "collapse", :parent => "#sidebar_menu"} do%>	
+					<%=image_tag "/assets/menu_icons/calendar.png"%>								
+					Agenda
+					<i class="icon-chevron-right carret"></i>
+				<%end%>					
+				<ul id="collapse1" class="accordion-body collapse">
+					<li>
+						<%=link_to admin_events_path do%>
+							<i class="icon-list"></i>
+							Listar Agendamentos
+						<%end%>
+					</li>		
+					<li>
+						<%=link_to easy_new_admin_events_path do%>
+							<i class="icon-magic"></i>
+							Agendamento Fácil
+						<%end%>
+					</li>			
+					<li>
+						<%=link_to new_admin_event_path do%>
+							<i class="icon-plus"></i>
+							Novo Agendamento
+						<%end%>
+					</li>
+				</ul>
+			</li>
+			<li class="accordion-group <%=active_class('services')%>">
+				<%=link_to "#collapse3", :class => "accordion-toggle widgets collapsed", :data => {:toggle => "collapse", :parent => "#sidebar_menu"} do%>	
+					<%=image_tag "/assets/menu_icons/tools.png"%>								
+					Serviços
+					<i class="icon-chevron-right carret"></i>
+				<%end%>					
+				<ul id="collapse3" class="accordion-body collapse">
+					<li>
+						<%=link_to admin_services_path do%>
+							<i class="icon-list"></i>
+							Listar Serviços
+						<%end%>
+					</li>							
+					<li>
+						<%=link_to new_admin_service_path do%>
+							<i class="icon-plus"></i>
+							Novo Serviço
+						<%end%>
+					</li>
+				</ul>
+			</li>
+			<li class="accordion-group <%=active_class('professionals')%>">
+				<%=link_to "#collapse2", :class => "accordion-toggle widgets collapsed", :data => {:toggle => "collapse", :parent => "#sidebar_menu"} do%>	
+					<%=image_tag "/assets/menu_icons/profile.png"%>								
+					Funcionários
+					<i class="icon-chevron-right carret"></i>
+				<%end%>					
+				<ul id="collapse2" class="accordion-body collapse">
+					<li>
+						<%=link_to admin_professionals_path do%>
+							<i class="icon-list"></i>
+							Listar Funcionários
+						<%end%>
+					</li>							
+					<li>
+						<%=link_to new_admin_professional_path do%>
+							<i class="icon-plus"></i>
+							Novo Funcionário
+						<%end%>
+					</li>
+				</ul>
+			</li>
+			<li class="accordion-group <%=active_class('clients')%>">
+				<%=link_to "#collapse4", :class => "accordion-toggle widgets collapsed", :data => {:toggle => "collapse", :parent => "#sidebar_menu"} do%>	
+					<%=image_tag "/assets/menu_icons/users.png"%>								
+					Clientes
+					<i class="icon-chevron-right carret"></i>
+				<%end%>					
+				<ul id="collapse4" class="accordion-body collapse">
+					<li>
+						<%=link_to admin_clients_path do%>
+							<i class="icon-list"></i>
+							Listar Clientes
+						<%end%>
+					</li>							
+					<li>
+						<%=link_to new_admin_client_path do%>
+							<i class="icon-plus"></i>
+							Novo Cliente
+						<%end%>
+					</li>
+				</ul>
+			</li>
+			<li class="accordion-group <%=active_class('salons')%>">
+				<%=link_to [:admin, @salon] do%>	
+					<%=image_tag "/assets/menu_icons/settings.png"%>								
+					Gerenciar Salão
+				<%end%>									
+			</li>
+
+		</ul>
+		<!-- End sidebar_box -->
+	</aside>
+	<div id="main">		
+		<div class="container">				
+			<div class="container_top" id="header">
+				<div class="row-fluid ">
+					<div id="dropdown-lists">
+						<%=link_to :back, :class => "item" do%>
 							<span class="item-icon">
 								<i class="icon-arrow-left"></i>
 							</span>
 							<span class="item-label">Voltar</span>								
 							<%end%>
-							<%=yield(:top_menu)%>
-						</div>
-						<div id="header-functions" class="pull-right">
-							<div id="user-info" class="clearfix">
-								<span class="info">
-
-
-									<span class="name">
-										<%=link_to [:admin,current_professional] do%>
-										<%=current_professional.name%> 
-										<%end%>
-									</span>	
-									<span class="logout sair">
-										<%=link_to "Sair", destroy_professional_session_path, :method => :delete%>
-									</span>
-								</span>
-							</div>
-						</div>
+					<%=yield(:top_menu)%>						
 					</div>
+					
+					<div class="top_right">     
+						<ul class="nav nav_menu">                
+						</ul>
+					</div> <!-- End top-right -->
 				</div>
 			</div>
-		</header>
-		<div class="sidebar-nav nav-collapse collapse">
-			<div class="user_side clearfix">
-				<img src="/assets/gCons/agent.png" alt="">
-				<h5><%=current_professional.name%></h5>
-				<a href="#"><i class="icon-cog"></i> Alterar Perfil</a>        
-			</div>
-			<div class="accordion-sidemenu" id="accordion2">
-				<div class="accordion-group">
-					<div class="accordion-heading">
-						<%=link_to admin_dashboard_path, :class => "accordion-toggle #{active_class('dashboard')}" do%>							
-								<i class="icon-home"></i>
-								<span>Dashboard</span>							
-						<%end%>						
-					</div>
-				</div>
-				<div class="accordion-group">
-					<div class="accordion-heading">
-						<%=link_to "#collapse1", :class => "accordion-toggle collapsed", :data => {:toggle => "collapse", :parent => "#accordion2"} do%>
-							<span title="Agenda">
-								<i class="icon-calendar"></i>
-								<span>Agenda</span>
-							</span>
-						<%end%>						
-					</div>
-					<div id="collapse1" class="accordion-body collapse">
-						<div class="accordion-inner">
-							<%=link_to admin_events_path, :class => "accordion-toggle" do %>
-								<i class="icon-list"></i>
-								Listar Agendamentos
-							<%end%>					
-							<%=link_to easy_new_admin_events_path, :class => "accordion-toggle" do %>
-								<i class="icon-magic"></i>
-								Agendamento Fácil
-							<%end%>
-							<%=link_to new_admin_event_path, :class => "accordion-toggle" do %>
-								<i class="icon-plus"></i>
-								Agendamento Manual
-							<%end%>
-						</div>
-					</div>
-				</div>				
-				
-				<div class="accordion-group">
-					<div class="accordion-heading">
-						<a class="accordion-toggle b_C1F8A9" href="analytics.html"><i class="icon-bar-chart"></i> <span>Analytics</span></a>
-					</div>
-				</div> 
-				<div class="accordion-group">
-					<div class="accordion-heading">
-						<a class="accordion-toggle b_9FDDF6" href="tickets.html"><i class="icon-bullhorn"></i> <span>Support Tickets</span></a>
-					</div>
-				</div> 
-				<div class="accordion-group">
-					<div class="accordion-heading">
-						<a class="accordion-toggle b_F5C294" href="users.html"><i class="icon-user"></i> <span>Users</span></a>
-					</div>
-				</div>      
+			<div id="container2">
+				<%= yield %>	
 			</div>
 		</div>
-		<!-- <aside id="sidebar">
-			<nav id="navigation">
-				<ul>
-					<li class="<%=active_class('dashboard')%>">
-						<%=link_to admin_dashboard_path do%>
-						<span title="Dashboard">												
-							<i class="icon-home"></i>
-							<span class="nav-title">Dashboard</span>
-						</span>
-						<%end%>		
-					</li>
-					<li class="<%=active_class('events')%>">
-						<%=link_to admin_events_path do%>
-						<span title="Agenda">
-							<i class="icon-calendar"></i>
-							<span class="nav-title">Agenda</span>
-						</span>
-						<%end%>
-					</li>
-
-					<li class="<%=active_class('professionals')%>">		
-						<%=link_to admin_professionals_path do%>
-						<span title="Funcionários">
-							<i class="icon-official"></i>
-							<span class="nav-title">Funcionários</span>
-						</span>
-						<%end%>
-					</li>
-
-					<li class="<%=active_class('services')%>">
-						<%=link_to admin_services_path do%>
-						<span title="Serviços">
-							<i class="icon-cog-3"></i>
-							<span class="nav-title">Serviços</span>
-						</span>
-						<%end%>
-					</li>
-
-					<li class="<%=active_class('clients')%>">
-						<%=link_to admin_clients_path do%>
-						<span title="Clientes">
-							<i class="icon-users"></i>
-							<span class="nav-title">Clientes</span>
-						</span>
-						<%end%>
-					</li>
-					<li class="<%=active_class('salons')%>">
-						<%=link_to admin_salon_path(current_professional.salon) do%>
-						<span title="Configurações">
-							<i class="icon-cogs"></i>
-							<span class="nav-title">Meu Salão</span>
-						</span>
-						<%end%>
-					</li>												
-				</ul>
-			</nav>
-		</aside> -->
-		<div id="content-wrap">
-			<div id="content">
-				<div id="content-outer">
-					<div id="content-inner">						
-						<section class="clearfix" id='main'>
-							<%= yield %>
-						</section>		
-					</div>
-				</div>
-
-			</div>
+		<div id="footer">
+			<p>
+				© Bird Admin Template 2012
+			</p>
+			<span class="company_logo"><a href="http://www.pixelgrade.com"></a></span>
 		</div>
+	</div>
+</body>
+<script type="text/javascript">
+<% flash.each do |name, msg| %>		
+var noty = noty(
+{
+	text: '<%=escape_javascript(msg)%>',
+	type: "<%= escape_javascript(name.to_s == 'notice' ? 'success' : 'error')%>",
+	timeout: 4000
+}
+);
+<%end%>				
+</script>
 
-		<footer id="footer">
-			<div class="footer-left">MoonCake - Responsive Admin Template</div>
-			<div class="footer-right"><p>Copyright 2012. All Rights Reserved.</p></div>
-		</footer>
-	</body>
-	<script type="text/javascript">
-	<% flash.each do |name, msg| %>		
-	var noty = noty(
-	{
-		text: '<%=escape_javascript(msg)%>',
-		type: "<%= escape_javascript(name.to_s == 'notice' ? 'success' : 'error')%>",
-		timeout: 4000
-	}
-	);
-	<%end%>				
-	</script>
-
-	</html>
+</html>

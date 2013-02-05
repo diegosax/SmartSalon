@@ -4,22 +4,20 @@
 
 <%=render "/admin/working_times/modal_form"%>
 
-<div id="main-header" class="page-header">
-	<h1 id="main-heading">
-		Detalhes do funcionário <span><%=@professional.name%></span>
-	</h1>
+<header>
+	<h2>Detalhes de Funcionário</h2>
+</header>
 
-</div>
 <div id="main-content">
 	<%=render "context_menu"%>
 	<div class="row-fluid">		
 		<div class="form-horizontal widget span6">
 			<div class="widget-header">
-				<span class="title">Perfil do usuário</span>
+				<span class="title">Perfil do Funcionário</span>
 				<div class="toolbar">
 					<% if can? :update, @professional %>
 						<%=link_to edit_admin_professional_path(@professional), :class => "btn btn-gebo btn-mini" do%>
-							<i class="icol-application-edit"></i>
+							<i class="icon-edit"></i>
 							Alterar Perfil
 						<%end%>
 					<%end%>					
