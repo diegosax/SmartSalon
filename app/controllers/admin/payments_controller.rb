@@ -65,5 +65,9 @@ class Admin::PaymentsController < Admin::ApplicationController
 
   def invoice
     @payment = Payment.find(params[:payment_id])
+   # if(@payment.status != Payment::STATUS[4])
+   #   @payment = nil
+   #   redirect_to admin_path
+   # end
   end
 end
