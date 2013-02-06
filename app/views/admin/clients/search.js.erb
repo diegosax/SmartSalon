@@ -1,8 +1,21 @@
-var client_selection = "<%= escape_javascript(render 'search_result')%>";
+var modal_search = "<%=escape_javascript(params[:modal_search])%>";
 
-var shown_div = $("#new_client .modal-body .select_client.active");
-var modal = $("#new_client");
-shown_div.find(".registered-search").hide();
-$(shown_div).find(".registered-result").html(client_selection).fadeIn();
-var submit_button = "<%=escape_javascript(link_to('Adicionar Cliente','#', :class=> 'btn btn-primary', :disable_with => 'Salvando...'))%>"
-modal.modal("loading");
+//There are 2 types of search, the search when adding an event and the normal search when adding a user
+if (modal_search == 1){
+	var client_selection = "<%= escape_javascript(render 'search_result')%>";
+	var shown_div = $("#new_client .modal-body .select_client.active");
+	var modal = $("#new_client");
+	shown_div.find(".registered-search").hide();
+	$(shown_div).find(".registered-result").html(client_selection).fadeIn();
+	var submit_button = "<%=escape_javascript(link_to('Adicionar Cliente','#', :class=> 'btn btn-primary', :disable_with => 'Salvando...'))%>"
+	modal.modal("loading");	
+} else {
+	$("#client_email").parent().find("img").fadeOut();	
+	<%if @client%>		
+		var modal = "<%=escape_javascript(render('client_details_modal'))%>";
+		$("#client_details").remove();
+		$("body").prepend(modal);
+		$("#client_details").modal();		
+	<%end%>
+}
+

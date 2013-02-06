@@ -1,14 +1,13 @@
-<div id="main-header" class="page-header">
-    <h1 id="main-heading">
+<header>
+    <h2>
         <%if action_name == "new" || action_name == "create"%>
-        Novo Funcionário
+            Novo Funcionário
         <%else%>
-        Alterar Funcionário <span><%=@professional.name%></span>
+            Editar Funcionário
         <%end%>
-
-    </h1>
-</div>
-
+    </h2>
+</header>
+        
 <div id="main-content">
     <%=render "context_menu"%>
     <div class="row-fluid">
@@ -26,8 +25,11 @@
                 <%= simple_form_for([:admin,@professional],:html=>{:class=>"form-horizontal", :id=> "new_admin_professional_form"}) do |f| %>
                 <fieldset>
                     <legend>Dados Pessoais</legend>
-                    <%=f.input :name, :label => 'Nome'%>
-                    <%=f.input :email, :label => 'E-mail'%>    
+                    <%=f.input :name, :label => 'Nome'%>                    
+                    <%=f.input :celphone, :label => 'Telefone Principal' , :input_html => {:class=> 'phone'} %>
+                    <%=f.input :landphone, :label => 'Telefone Adicional', :input_html => {:class=> 'phone'} %>
+                    
+                    <%=f.input :email, :label => 'E-mail', :hint => "Este email será utilizado pelo funcionário para acesso ao sistema"%>
                     <%if action_name == "new" || action_name == "create"%>
                         <%=f.input :password, :label => "Senha"%>
                         <%=f.input :password_confirmation, :label => "Confirme sua Senha"%>
@@ -39,7 +41,7 @@
                     <div class="control-group">
                         <%=f.label :zipcode, "CEP", :class => "control-label"%>
                         <div class="controls">
-                            <%=f.input_field :zipcode , :class=>'zipcode'%><%=image_tag "/assets/small_loader.gif", :class => 'zipcode_loading'%>
+                            <%=f.input_field :zipcode , :class=>'zipcode'%><%=image_tag "/assets/small_loader.gif", :class => 'zipcode_loading input_ajax_loading'%>
                         </div>
                     </div>
                     <%=f.input :address, :label => "Endereço", :input_html => {:class => "address"}%>
@@ -47,9 +49,7 @@
                     <%=f.input :complement, :label => 'Compelemento', :input_html => {:class => "complement"}%>
                     <%=f.input :region, :label => 'Bairro', :input_html => {:class => "neighborhood"}%>
                     <%=f.input :city, :label => 'Cidade', :input_html => {:class => "city"}%>
-                    <%=f.input :state, :label => 'Estado', :input_html => {:class => "state"}%>
-                    <%=f.input :landphone, :label => 'Telefone Fixo', :input_html => {:class=> 'phone'} %>
-                    <%=f.input :celphone, :label => 'Celular' , :input_html => {:class=> 'phone'} %>                                
+                    <%=f.input :state, :label => 'Estado', :input_html => {:class => "state"}%>                                                    
                 </fieldset>                
 
                 <div class="form-actions">

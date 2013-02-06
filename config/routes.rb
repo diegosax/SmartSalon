@@ -21,7 +21,7 @@ Smartsalon::Application.routes.draw do
   end
 
   namespace :admin do    
-    root :to => "events#index"
+    root :to => "dashboard#index"
     post "payments/notification" => "payments#notification", :as => "payment_notification"
     get 'dashboard' => "dashboard#index"
     

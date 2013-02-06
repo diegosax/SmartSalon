@@ -1,10 +1,9 @@
 <%=render "top_menu"%>
 
-<div id="main-header" class="page-header">
-	<h1 id="main-heading">
-		Serviços
-	</h1>
-</div>
+<header>
+	<h2>Listar Serviços</h2>
+</header>
+
 <div id="main-content">
 	<%=render "context_menu"%>
 	<div class="row-fluid">		
@@ -13,7 +12,7 @@
 				<span class="title">Serviços</span>
 				<div class="toolbar">					
 					<%=link_to new_admin_service_path, :class => "btn btn-gebo btn-mini" do%>
-						<i class="icol-add"></i>
+						<i class="icon-plus"></i>
 						Novo Serviço
 					<%end%>
 				</div>

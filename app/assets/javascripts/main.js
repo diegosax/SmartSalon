@@ -108,10 +108,11 @@ userList = null;
 
 
 $(document).ready(function(){
+
+	// After every ajax request is complete, activate the chosen plugin
 	$('body').ajaxComplete(function() {
 		$(".chzn_a").chosen();		
-	});
-	$(".timepicker").timePicker();
+	});	
 	
 	$("#client_calendar td").live({
 		//hover in
@@ -261,15 +262,19 @@ $(document).ready(function(){
   	//------------Address Loading ----------------------------------//
 	//ao soltar a tecla dentro do campo de cep ele verifica se possui 8 digitos e chama um posto para preenchimento do cep
 	$(".zipcode").keyup(function(e){
-		var zipcode = $(this).val().replace(/[^0-9]/g, '');    	    
-		if (zipcode.length == 8){    	       	
-			$(this).attr("disabled", true);
-			$(".zipcode_loading").fadeIn('slow');
-			$.post("/admin/salons/search_zipcode", {zipcode: $(this).val()}, {}, "script");    	        
-			$(".house_number").focus();
-			e.preventDefault();
-			return false;
+		//If key isn't 'tab' then loads address		
+		if (e.keyCode != 9 && e.keyCode != 16){
+			var zipcode = $(this).val().replace(/[^0-9]/g, '');    	    
+			if (zipcode.length == 8){    	       	
+				$(this).attr("disabled", true);
+				$(".zipcode_loading").fadeIn('slow');
+				$.post("/admin/salons/search_zipcode", {zipcode: $(this).val()}, {}, "script");    	        
+				$(".house_number").focus();
+				e.preventDefault();
+				return false;
+			}	
 		}
+		
 	});
 
   	//------------END Address Loading ------------------------------//

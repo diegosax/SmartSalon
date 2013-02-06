@@ -1,10 +1,10 @@
 <%=render "top_menu"%>
 
-<div id="main-header" class="page-header">
-	<h1 id="main-heading">
-		Detalhes do Agendamento <span> em <%=distance_of_time_in_words(Time.zone.now,@event.start_at)%></span>
-	</h1>
-</div>
+<header>
+	<h2>
+		Detalhes do agendamento
+	</h2>
+</header>
 
 <div id="main-content">
 	<%=render "context_menu"%>

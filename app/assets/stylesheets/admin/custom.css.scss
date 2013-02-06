@@ -1,4 +1,41 @@
+@import "bootstrap";
+@import "bootstrap-responsive";
+@import 'font-awesome';
+
 // Custom styles
+
+html {
+  background: url(/assets/background/whitey.png);
+  font-size: 62.5%;
+  text-rendering: optimizeLegibility;
+  height: 100%;
+}
+
+body {
+    font-size: 13px;
+    font-size: 1.3rem;
+    font-family: Arial,sans-serif;    
+    float: left;
+    width:100%;
+    height: 100%;
+//    overflow-x: hidden;
+    padding: 15px 0 0 0;
+//    background: url(/assets/background/bg_dark.png) top left repeat-y;
+    background: none;
+}
+
+
+.logo{
+    margin:0;
+}
+
+.logo a{
+    background: url(/assets/logo.png) 0 0 no-repeat;
+    height: 44px;
+    width: 157px;
+    float: left;
+    margin: 0 15px 15px;
+}
 
 //--------------------------General
 
@@ -40,6 +77,11 @@ form{
 	margin-top: 10px;
 }
 
+#header #dropdown-lists a.list:hover{
+  opacity: 0.5;
+
+}
+
 #user-info span.info > span.name > a{
 	color:#fff;
 }
@@ -52,80 +94,215 @@ form{
 	margin: 0 40px 5px 40px;
 }
 
+// -------------------------MAIN--------------------------------//
+
+#main {  
+  width: 81%;
+  float: left;
+  margin-left: 1%;
+}
+#main .container {
+  float: left;
+  background: white;
+  padding: 10px;
+  width: 100%;
+  overflow: visible;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0px 1px 2px 1px #afafaf;
+  -moz-box-shadow: 0px 1px 2px 1px #afafaf;
+  box-shadow: 0px 1px 2px 1px #afafaf;
+}
+#main .container_top {
+  background: url("/assets/patterns/blackorchid.png");
+  height: 50px;
+  -webkit-border-radius: 3px 3px 0 0;
+  -moz-border-radius: 3px 3px 0 0;
+  border-radius: 3px 3px 0 0;
+  margin: -9px -9px 15px -9px;
+  position: relative;
+  padding: 5px 30px;
+}
+
+#main .container_top a{
+  color: #fff;
+  margin-right: 5px;
+  text-decoration: none;  
+  float: left;
+}
+
+#container2{
+    padding: 0 20px;
+    background: white;
+}
+
+//--------------------------------------------------------------//
+
 // ----------------------- SIDEBAR MENU ------------------------//
 
-#wrapper #sidebar{
-	background-image: url("/assets/bg_sidebar.png");
-	position: fixed;
-	width:auto;
-	padding-top: 47px;
-	min-height: 100%;
+/* #wrapper #sidebar{
+    background-image: url("/assets/bg_sidebar.png");
+    position: fixed;
+    width:auto;
+    padding-top: 47px;
+    min-height: 100%;
 }
 
 #wrapper #sidebar #navigation .inner-nav > li > a {
-	padding: 12px 17px 12px 5px;
+    padding: 12px 17px 12px 5px;
 }
+
+.alert p.error-message{
+    padding-left: 20px;
+} */
+
+#aside_sidebar {
+  float: left;
+  width: 14%;
+  margin: 0 0 0 1%;
+  height: auto;
+  overflow: hidden;
+}
+#aside_sidebar.collapse.in {
+  overflow: hidden;
+}
+
+.sidebar_box {
+  float: left;
+  width: 100%;
+  margin: 0 0 0 2px;
+  padding: 0;
+  display: block;
+}
+
+.sidebar_box a i.carret{
+    font-size: 14px;
+    margin-top: 6px;
+    float: right;
+}
+
+.sidebar_box .container {
+  padding: 0;
+  margin-top: 5px;
+  overflow: hidden;
+}
+.sidebar_box .container .title {
+  padding: 3px 5px;
+  background: url("../img/gradient1.png") left bottom repeat-x #e9ecf1;
+  box-shadow: inset 0 1px 0 white, 0 1px 2px rgba(0, 0, 0, 0.02);
+  border-radius: 2px 2px 0 0;
+  border-bottom: 1px solid #C0C8D0;
+}
+.sidebar_box .container h1, .sidebar_box .container h2, .sidebar_box .container h3, .sidebar_box .container h4, .sidebar_box .container h5, .sidebar_box .container h6 {
+  margin: 0;
+  padding: 0;
+}
+.sidebar_box .container > .row-fluid {
+  padding: 5px;
+}
+.sidebar_box .container .row-fluid {
+  min-height: auto;
+}
+.sidebar_box .container .row-fluid [class*="span"] {
+  min-height: 20px;
+}
+
+#sidebar_menu > li.active, #sidebar_menu > li:hover, #sidebar_menu > li.opened {  
+  opacity: 1;
+}
+#sidebar_menu > li > a {
+  float: left;
+  width: 100%;
+}
+#sidebar_menu > li > a img {
+  float: left;
+  margin-right: 10px;
+}
+#sidebar_menu li {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 2px;
+  list-style: none;
+  padding: 0 0 0 10px;
+  float: left;
+  width: 95%;
+  opacity: 0.75;
+  overflow: hidden;
+  -webkit-transition: .2s all ease-in-out;
+  -moz-transition: .2s all ease-in-out;
+  -o-transition: .2s all ease-in-out;
+  transition: .2s all ease-in-out;
+}
+#sidebar_menu li:hover {
+  opacity: 1;
+}
+
+#sidebar_menu li.accordion-group{
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+.button a, 
+.sidebar_box .container a, 
+#sidebar_menu > li.active a, 
+#sidebar_menu > li:hover a, 
+#sidebar_menu > li.opened a, 
+#main .top_right ul.nav > li a {
+    background: white;
+    color: #483734;
+    text-shadow: none;
+    padding: 10px;
+    color: #483734;
+    position: relative;
+    display: block;    
+}
+#sidebar_menu li a {
+  -webkit-transition: .2s all ease-out;
+  -moz-transition: .2s all ease-out;
+  -o-transition: .2s all ease-out;
+  transition: .2s all ease-out;
+  padding: 10px;
+  color: #483734;
+  position: relative;
+}
+#sidebar_menu > li {
+    background: #fff url(/assets/background/bg_dark2.png) top right repeat-y;
+}
+#sidebar_menu li ul {
+  margin: 0;
+  margin-left: -10px;
+  padding: 0;
+  width: 100%;
+  float: left;
+}
+#sidebar_menu li ul li {
+  padding: 0;
+  margin: 0;
+  border:none;
+}
+#sidebar_menu li ul li a {
+  margin: 0;
+  float: left;
+  width: 100%;
+}
+#sidebar_menu li ul li a:before {
+  width: 0;
+  height: 0;
+}
+#sidebar_menu li ul li a:hover {
+  text-decoration: none;
+  background: #e3e3e3;
+  padding: 10px 5px 10px 15px;  
+}
+
+//----------------------------------------------------------------//
+
+//------------------- Inner Menu ---------------------------------//
 
 .alert p.error-message{
 	padding-left: 20px;
 }
-
-// ------------------------ Page Top Menu -----------------------//
-
-/* .switch-board-round ul{
-	text-align: center;
-}
-
-.switch-board-round ul li {
-	width: 50px;
-	height: 50px;
-	display: inline-block;
-	margin: 10px;
-	/* background: #EBEBEB;
-	-webkit-border-radius: 50px;
-	-moz-border-radius: 50px;
-	border-radius: 50px;
-	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1) inset;
-	-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1) inset;
-	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1) inset;
-	border-left: 1px solid transparent;
-	border-right: 1px solid transparent;
-	overflow: visible;
-	text-align: center;
-	border: #CCC 1px solid;
-}
-/*
-/* .switch-board-round ul li a {
-	display: block;
-	width: 44px;
-	height: 44px;
-	text-align: center;
-	background: white;
-	margin: 2px;
-	-webkit-border-radius: 50px;
-	-moz-border-radius: 50px;
-	border-radius: 50px;
-	border: #BBB 3px solid;
-	font-size: 24px;
-	color:#010;
-	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-}
-
-.switch-board-round ul li a:hover,
-.switch-board-round ul li.active a {
-	//background: #f6f6f6;	
-	cursor:pointer;
-	-webkit-transition: all 0.4s ease-in-out;
-	-moz-transition: all 0.4s ease-in-out;	
-	color: #08C;
-}
-
-.switch-board-round ul li a span{
-	height: 26px;
-	width: 26px;
-	display: inline-block;
-	margin-top: 10px;
-} */
 
 /* user-nav  */
 .switch-board-round { 
@@ -231,6 +408,10 @@ form{
     border-top: 0;
     padding: 0;    
 }
+
+
+
+
 
 // -----------------------FOOTER --------------------------------//
 
@@ -578,4 +759,73 @@ body#salon-sign-up{
 div.time-picker {
     z-index: 99999;
     width: 6.5em;
+}
+
+//--------------------------------Clients details modal -----------------------
+
+.profile{
+    margin-bottom: 0;
+    position: none;
+}
+
+.profile .profile-head{
+    padding-left: 20px;
+}
+
+// ----------------------- Genral Content --------------------------------------
+
+
+.container header{
+  border-bottom: 1px solid #dedede;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  color: #525459;
+}
+
+.container header h2{
+  margin: 0;
+  display: inline-block;
+  line-height: normal;
+  font-size: 16.25px;
+  font-weight: bold;
+}
+
+.widget .form-container .form-horizontal .control-label {
+  font-size: 13px;
+}
+
+.day-view .btn-group{
+  padding: 10px;
+}
+
+.task-list{
+  max-height: 340px;
+  overflow-y: scroll;
+  cursor: auto;
+}
+
+.task-list li.ui-selected,
+.task-list li.ui-selecting{
+  background: #DEF;
+}
+
+.task-list span.time{
+  border-right: 1px solid #f4cfcf;
+  float: left;
+  width: 47px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  vertical-align: middle;
+  padding: 9px 3px;
+  font-size: 15px
+}
+
+.task-list span.text{
+  text-align: center;
+  cursor: default;
+}
+
+.task-list > ul > li .text{
+  cursor: default;
 }

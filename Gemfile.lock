@@ -31,6 +31,12 @@ GEM
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
     bcrypt-ruby (3.0.1-x86-mingw32)
+    better_errors (0.3.2)
+      coderay (>= 1.0.0)
+      erubis (>= 2.7.0)
+    binding_of_caller (0.6.8)
+    bootstrap-sass (2.2.2.0)
+      sass (~> 3.2)
     brI18n (3.3.0)
       actionpack (>= 3.0.0)
       activerecord (>= 3.0.0)
@@ -70,7 +76,12 @@ GEM
     celluloid (0.12.3)
       facter (>= 1.6.12)
       timers (>= 1.0.0)
+    chosen-rails (0.9.11.2)
+      coffee-rails (>= 3.2)
+      railties (>= 3.0)
+      sass-rails (>= 3.2)
     client_side_validations (3.2.1)
+    coderay (1.0.8)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -104,6 +115,9 @@ GEM
       net-ssh (>= 2.1.3)
       nokogiri (~> 1.5.0)
       ruby-hmac
+    font-awesome-sass-rails (3.0.0.1)
+      railties (>= 3.1.1)
+      sass-rails (>= 3.1.1)
     formatador (0.2.4)
     geocoder (1.1.5)
     gmaps4rails (1.5.6)
@@ -126,6 +140,9 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    meta_request (0.2.1)
+      rack-contrib
+      rails
     mime-types (1.19)
     mini_magick (3.4)
       subexec (~> 0.2.1)
@@ -145,6 +162,8 @@ GEM
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
+    rack-contrib (1.1.0)
+      rack (>= 0.9.1)
     rack-ssl (1.3.2)
       rack
     rack-test (0.6.2)
@@ -219,15 +238,20 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
+  better_errors
+  binding_of_caller
+  bootstrap-sass (~> 2.2.2.0)
   brazilian-rails
   breadcrumbs_on_rails
   cancan
   carrierwave
+  chosen-rails
   client_side_validations
   coffee-rails (~> 3.2.1)
   devise
   dotiw
   fog (~> 1.3.1)
+  font-awesome-sass-rails
   geocoder
   gmaps4rails
   httparty
@@ -235,6 +259,7 @@ DEPENDENCIES
   jquery-timepicker-rails
   kaminari
   mail
+  meta_request
   mini_magick
   pg
   quiet_assets

@@ -4,8 +4,8 @@ module EventsHelper
       
       def add_to_valid_times(time)            
             @working_times.each do |wt|
-                  if time.hour >= wt.from.hour &&
-                        time.hour < wt.to.hour
+                  if time.hour >= wt.from_time.hour &&
+                        time.hour < wt.to_time.hour
                         @valid_times << time
                         return
                   end
@@ -22,7 +22,7 @@ module EventsHelper
             end
       end
 
-      def isavailable_mod(events, myDate, params = {})            
+      def isavailable_mod(events, myDate, params = {})                        
             start_hour = 0
             start_min = 0      
             professional = params[:professionals]
@@ -49,12 +49,18 @@ module EventsHelper
             if actual_date.to_date == Time.zone.today
                   actual_date += (DateTime.now.hour).hours
                   actual_date += service.duration.minutes
-            end            
+            end                       
             i = 0;            
+            puts actual_date
             while i < events.length && actual_date <= (end_date - intervalInMinutes.minutes) do
-                  diference = (events[i].start_at.minus_with_coercion(actual_date)/60).to_i
+                  puts events[i].start_at
+                  puts actual_date
+                  diference = (events[i].start_at - actual_date)/60
+                  puts diference
+                  puts "Entrou no while"
                   if diference >= intervalInMinutes
                         add_to_valid_times(actual_date)
+                        puts "Adicionou o #{actual_date} aos horarios válidos"
                         if diference < (intervalInMinutes * 2)
                               actual_date = events[i].end_at
                               i+=1
@@ -62,6 +68,8 @@ module EventsHelper
                               actual_date += intervalInMinutes.minutes
                         end
                   else
+                        puts "Caiu no else ao inves de adicionar aos validos"
+                        puts "#{diference} | #{intervalInMinutes}"
                         if (events[i].end_at.minus_with_coercion(actual_date)/60).to_i > 0
                               actual_date = events[i].end_at      
                         else
@@ -73,6 +81,7 @@ module EventsHelper
 
             while actual_date <= (end_date - intervalInMinutes.minutes) do
                   add_to_valid_times(actual_date)
+                  #puts "Adicionou p #{actual_date} aos horarios validos pq nao existem mais eventos"
                   actual_date += intervalInMinutes.minutes
             end
 

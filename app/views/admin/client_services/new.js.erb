@@ -1,10 +1,21 @@
 <%if @service%>
-	var html = "<%=escape_javascript(render '/admin/client_services/choose_client')%>";
+var html = "<%=escape_javascript(render '/admin/client_services/choose_client')%>";
 <%elsif @client%>
-	var html = "<%=escape_javascript(render '/admin/client_services/choose_service')%>";
+var html = "<%=escape_javascript(render '/admin/client_services/choose_service')%>";
 <%end%>
 $("#associate_client_service").remove();
 $(html).prependTo("body");
 $("#loading-modal").modal("hide")
 $("#associate_client_service").modal("show");
 $(".chzn_a").chosen();
+
+// ----- Custom Validation: Add service duration to client --//
+$("#new_client_service_form").validate({	
+	rules: {
+		duration: {
+			required: true,
+			digits:true
+		}
+	}
+});
+//-----------------------------------------------------------//

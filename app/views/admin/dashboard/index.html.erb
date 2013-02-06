@@ -1,46 +1,11 @@
-<div id="main-header" class="page-header">    
-    <h1 id="main-heading">
-        Dashboard <span>Aqui você encontra tudo que você precisa saber sobre seu sistema</span>
-    </h1>
-</div>
+<header>
+    <h2>Dashboard</h2>
+</header>
 
 <div id="main-content">
-    <div class="span9">
-        <ul class="stats-container">
-            <li>
-                <a href="#my_today_events" class="stat summary">
-                    <span class="icon icon-circle bg-green">
-                        <i class="icon-stats"></i>
-                    </span>
-                    <span class="digit">
-                        <span class="text">Meus Agendamentos de Hoje</span>
-                        <%=@my_today_events.length%>
-                    </span>
-                </a>
-            </li>
-            <li>
-                <a href="#all_today_events" class="stat summary">
-                    <span class="icon icon-circle bg-blue">
-                        <i class="icon-stats-up"></i>
-                    </span>
-                    <span class="digit">
-                        <span class="text">Todos os Agendamentos de hoje</span>
-                        <%=@all_today_events.length%>
-                    </span>
-                </a>
-            </li>        
-            <li>
-                <a href="#today_canceled_events" class="stat summary">
-                    <span class="icon icon-circle bg-red">
-                        <i class="icon-user"></i>
-                    </span>
-                    <span class="digit">
-                        <span class="text">Angendamentos de Hoje Cancelados</span>
-                        <%=@today_canceled_events.length%>
-                    </span>
-                </a>
-            </li>
-        </ul>
+    <div class="row-fluid">
+        <%=render "next_events"%>
+    <div class="span9">        
         <div class="tabbable analytics-tab paper-stack dashboard_tables">
             <ul class="nav nav-tabs">
                 <li class="active">
@@ -306,7 +271,9 @@
                 </div>
             </div>
         </div>        
+    </div>    
     </div>
-    <%=render "next_events"%>
+    
+    
 </div>
 

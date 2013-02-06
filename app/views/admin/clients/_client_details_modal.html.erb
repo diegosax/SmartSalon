@@ -1,0 +1,49 @@
+<div class="modal hide fade" id="client_details" data-backdrop="static">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Adicionar Cliente</h3>
+    </div>
+<div class="modal-body">
+    <h4 class="sub">
+        <span>
+            Client cadastrado no Instanapp
+        </span>
+    </h4>      
+            <p>
+            Esse email já se encontra cadastrado no Instanapp, esse cliente abaixo é o seu cliente? 
+            <dl>
+                <dt>Se Sim</dt>
+                <dd>Por favor clique no link abaixo que diz "Adicionar aos meus clientes"</dd>
+                <dt>Se Não</dt>
+                <dd>Clique em "Cancelar" e digite um endereço de email diferente</dd>
+            </dl>            
+        </p>  
+    <div class="profile">
+        <%=form_tag "/admin/clients/#{@client.id}/add/to/salon" do %>
+            <%=hidden_field_tag :client_id, @client.id%>
+            <div class="profile-head clearfix">
+                <div class="profile-info pull-left">
+                    <h1 class="profile-username"><%=@client.name%></h1>
+                    <ul class="profile-attributes">
+                        <%if @client.city%>
+                            <li><i class="icon-map-marker"></i>
+                            <%=@client.city%>, <%=@client.state%></li>
+                        <%end%>
+                        <li><i class="icos-phone-2"></i> <%=formatted_phone(@client.celphone)%></li>
+                    </ul>
+                </div>
+                <div class="btn-toolbar pull-right">  
+                    <%=button_tag :type => "submit", :class => "btn btn-success" do %>
+                        <i class='icon-users'></i> Adicionar aos meus clientes</a>
+                    <%end%>
+                </div>
+            </div>                
+        <%end%>
+        
+    </div>
+</div>
+<div class="modal-footer">
+    <a href="#" class="btn" data-dismiss='modal'>Cancelar</a>    
+</div>  
+</div>
+
