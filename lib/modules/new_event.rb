@@ -19,15 +19,11 @@ module NewEvent
       @my_salons_and_favorites = current_user.my_salons_and_favorites if current_user
     end    
     if @service_professionals && @salon
-      @events = Event.find(
-        :all,
-        :conditions => ["
-          (start_at >= ? OR end_at >= ?) AND professional_id in (?)", 
+      @events = Event.active.where(        
+        "(start_at >= ? OR end_at >= ?) AND professional_id in (?)", 
           Time.zone.now.beginning_of_day,
           Time.zone.now.end_of_day,
-          @service_professionals
-          ],
-          :order => "start_at")      
+          @service_professionals).order("start_at")          
       @date = params[:month] ? Date.parse(params[:month]) : Time.zone.today
     end 
   end
