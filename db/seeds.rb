@@ -144,6 +144,7 @@ puts "Criando profissionais dos saloes"
 espaco560.professionals.create(
 	:name => "Jessica Almeida",
 	:email => "jessica@instanap.com",
+  :celphone => "81818181",
 	:password => "123456",
 	:password_confirmation => "123456"
 )
@@ -152,6 +153,7 @@ puts "primeiro profissional criado"
 espaco560.professionals.create(
 	:name => "Vanessa Alves",
 	:email => "vanessa@instanap.com",
+  :celphone => "81818182",
 	:password => "123456",
 	:password_confirmation => "123456"
 )
@@ -159,18 +161,21 @@ espaco560.professionals.create(
 espaco560.professionals.create(
 	:name => "Carla Mendes",
 	:email => "carla@instanap.com",
+  :celphone => "81818183",
 	:password => "123456",
 	:password_confirmation => "123456"
 )
 espaco560.professionals.create(
 	:name => "Roberta Justus",
 	:email => "roberta@instanap.com",
+  :celphone => "81818184",
 	:password => "123456",
 	:password_confirmation => "123456"
 )
 espaco560.professionals.create(
 	:name => "Karen Something",
 	:email => "karen@instanap.com",
+  :celphone => "81818185",
 	:password => "123456",
 	:password_confirmation => "123456"
 )
@@ -242,6 +247,10 @@ professionals = espaco560.professionals
 services = espaco560.services
 i = 0
 max = professionals.count
+
+puts '--------------------------------------------------------------'
+puts max
+
 services.each do |p|
 	p.professionals.push professionals[i%max]
 	i=i+1
