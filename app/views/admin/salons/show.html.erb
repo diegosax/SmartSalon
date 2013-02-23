@@ -136,6 +136,14 @@
 									<%end%>									
 								</span>
 								<%end%>
+                <%if Payment::STATUS.key(p.status) == 4%>
+								<span class="btn-group">
+									<%=link_to admin_salon_payments_receipt_path(@salon, :payment_id => p.id), :class => "btn btn-primary", :id => "invoice_btn", :method => :get do%>
+                  <i class="icon-search"></i>																				
+                  Recibo
+									<%end%>									
+								</span>
+								<%end%>
 							</td>
 						</tr>						
 						<%end%>

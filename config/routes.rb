@@ -59,7 +59,7 @@ Smartsalon::Application.routes.draw do
         post "search_zipcode" => "salons#search_zipcode"
       end
       post "payments/checkout" => "payments#checkout", :as => "payments_checkout"
-      get "payments/:payment_id/invoice" => "payments#invoice", :as => "payments_invoice"
+      get "payments/:payment_id/receipt" => "payments#receipt", :as => "payments_receipt"
     end
     
     resources :clients do

@@ -63,11 +63,11 @@ class Admin::PaymentsController < Admin::ApplicationController
     render :nothing => true, :status => 200
   end
 
-  def invoice
+  def receipt
     @payment = Payment.find(params[:payment_id])
-   # if(@payment.status != Payment::STATUS[4])
-   #   @payment = nil
-   #   redirect_to admin_path
-   # end
+    if(@payment.status != Payment::STATUS[4]) #4 => "Pagamento Recebido"
+      @payment = nil
+      redirect_to [:admin, current_professional.salon]
+    end
   end
 end
