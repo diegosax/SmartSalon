@@ -1,0 +1,7 @@
+removeLoading();
+$(".task-list").replaceWith("<%=escape_javascript(render('next_events'))%>");
+if ($(".task-list td.event_col li").length > 0){
+	var scroolPosition = $(".task-list td.event_col li")[0].scrollHeight * 33;
+	$(".task-list").scrollTop(scroolPosition);
+}
+$(".task-list .busy").popover();

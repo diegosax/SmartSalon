@@ -93,14 +93,36 @@ $(document).ready(function(){
 		$("#payment-modal form").submit();		
 	});
 */
-$("#payment-modal form").submit(function(){		
-	return false;
-});
+	$("#payment-modal form").submit(function(){		
+		return false;
+	});
 
-$("#payment-modal form .controls img").live("click", function(){
-	$("#payment-modal form .controls img").removeClass("selected");
-	$(this).addClass("selected");
-});
+	$("#payment-modal form .controls img").live("click", function(){
+		$("#payment-modal form .controls img").removeClass("selected");
+		$(this).addClass("selected");
+	});
+
+	/*----------- Dashboard Events --------------------------*/
+	if ($(".task-list td.event_col li").length > 0){
+		var scroolPosition = $(".task-list td.event_col li")[0].scrollHeight * 33;
+		$(".task-list").scrollTop(scroolPosition);
+	}
+	$(".task-list .busy").popover();
+
+	$("#chosen_professional_day_view").chosen().change(function(){
+        addLoading($(".day-view .toolbar"));
+        history.pushState(null,"",window.location.pathname + "?professional=" + $("#chosen_professional_day_view").val());
+		$.ajax({
+			url: window.location.pathname,
+			data: {
+				professional: $("#chosen_professional_day_view").val()
+			},
+			dataType: "script"
+		});
+	});
+	
+
+	/*-------------------------------------------------------*/
 
 
 

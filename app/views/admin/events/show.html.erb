@@ -39,7 +39,7 @@
 						</tr>
 						<tr>
 							<th>Início</th>
-							<td><%=@event.start_at.strftime("%d de %B às %H:%Mh") + "  (em #{distance_of_time_in_words(Time.zone.now,@event.start_at)})" if @event.salon%></td>
+							<td><%=@event.start_at.strftime("%d de %B às %H:%Mh")%></td>
 						</tr>
 						<tr>
 							<th>Fim</th>

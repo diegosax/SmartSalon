@@ -39,7 +39,7 @@
             <%@new_client = Client.new%>
             <%= simple_form_for([:admin,@new_client],:html=>{:class=>"form-horizontal",:remote=>true}) do |f| %>
             <%=f.input :name, :label => "Nome"%>
-            <%=f.input :celphone, :label => "Celular", :class => "phone"%>                      
+            <%=f.input :celphone, :label => "Celular", :input_html=>{:class => "phone"}%>                      
             <%=f.input :email, :label => "E-mail"%>             
             <div class="form-actions">
               <%=f.submit "Salvar", :class => "btn btn-primary", :disable_with => "Salvando..."%>              

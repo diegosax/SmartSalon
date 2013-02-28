@@ -18,6 +18,10 @@ class Event < ActiveRecord::Base
 	validates :end_at, :range => true
 	after_save :add_client_to_salon	
 
+	def duration_in_minutes
+		(self.end_at - self.start_at)/60
+	end
+
 	def client_name
 		self.client.name if self.client
 	end
@@ -61,5 +65,7 @@ class Event < ActiveRecord::Base
 			puts "Salon/Client already exists"
 		end
 	end
+
+
 
 end

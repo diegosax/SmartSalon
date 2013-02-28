@@ -798,10 +798,17 @@ div.time-picker {
   padding: 10px;
 }
 
+.day-view .loading{
+  text-align: center;
+  padding: 0;
+  font-size: 12px;
+}
+
 .task-list{
   max-height: 340px;
   overflow-y: scroll;
   cursor: auto;
+  position: static !important;
 }
 
 .task-list li.ui-selected,
@@ -810,15 +817,7 @@ div.time-picker {
 }
 
 .task-list span.time{
-  border-right: 1px solid #f4cfcf;
-  float: left;
-  width: 47px;
-  height: 24px;
-  line-height: 24px;
-  text-align: center;
-  vertical-align: middle;
-  padding: 9px 3px;
-  font-size: 15px
+  
 }
 
 .task-list span.text{
@@ -828,4 +827,54 @@ div.time-picker {
 
 .task-list > ul > li .text{
   cursor: default;
+}
+
+.task-list table td ul{
+  margin: 0;
+  list-style: none;
+  float:left;
+}
+
+.task-list table td.event_col ul{
+  
+}
+
+.task-list table td ul li{
+  float: left;
+  border-top: 1px solid #f4cfcf;
+  height: 18px;
+  line-height: 18px;
+  text-align: center;
+  vertical-align: middle;
+  padding: 9px 3px;
+  font-size: 13px
+}
+
+.task-list table td ul li:first-child{
+  border-top: none;
+}
+
+.task-list td.time_col{
+  float:left;
+  width:53px;
+  background-color: #eee;
+}
+
+.task-list td.time_col li{
+  border-right: 1px solid #f4cfcf;  
+  width: 47px;  
+}
+
+.task-list td.event_col li{
+  width:97%;
+  overflow-y: visible;
+}
+
+.task-list td.event_col li.busy{
+  background-color: #eef;
+  cursor: pointer;
+}
+
+.task-list td.event_col li.empty_busy{
+  border-top: none;
 }

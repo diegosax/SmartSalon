@@ -1,41 +1,26 @@
-<div class="span3 widget day-view">
-    <div class="widget-header">
-        <span class="title">            
-            Eventos de Hoje
-        </span>
-        <div class="toolbar">
-            <span class="btn" rel="tooltip" data-original-title="Add New Task"><i class="icon-plus"></i></span>
-        </div>
-    </div>
-    <div class="toolbar btn-toolbar">
-        <div class="btn-group">            
-            <%= select_tag(
-                :professionals, 
-                options_for_select(@salon.professionals.collect{ |s| [s.name, s.id] }, (current_professional.id)),
-                :include_blank => true, 
-                :class => "chzn_a day_view", 
-                "data-placeholder" => "Selecione o funcionário"
-            ) %>
-        </div>
-    </div>
-    <div class="widget-content task-list">
-        <ul>            
-            <%current_time = DateTime.parse("08:00")%>
-            <%end_time = DateTime.parse("18:00")%>            
-            <%while current_time < end_time %>
-                <li>
-                    <span class="time">
-                       <%=current_time.strftime("%H:%M")%> 
-                    </span>
-                    <span class="text">
-                        <span class="text-nowrap">
-                            Corte Masculino
-                        </span>
-                    </span>            
-                </li>       
-                <%current_time+= 15.minutes%>
-            <%end%>
-
-        </ul>
-    </div>
+<div class="widget-content task-list">
+    <table>
+        <tr>
+            <td class="time_col">
+                <ul>
+                    <%current_time = Time.zone.parse("00:00")%>
+                    <%end_time = Time.zone.parse("24:00")%>            
+                    <%interval = 15%>            
+                    <%while current_time < end_time%>
+                    <li>
+                        <span class="time">
+                            <%=current_time.strftime("%H:%M")%>    
+                        </span>                                
+                    </li>
+                    <%current_time += interval.minutes%>
+                    <%end%>
+                </ul>
+            </td>
+            <td class="event_col">
+                <ul>
+                    <%=day_view_events.html_safe%>    
+                </ul>    
+            </td>                
+        </tr>
+    </table>
 </div>
