@@ -1,0 +1,40 @@
+<div class="modal-body">
+    <h4 class="sub">
+        <span>
+            <strong><%=@event.client.name%></strong>
+        </span>
+    </h4>
+    <%=@event.service.name%>, 
+    <%=@event.start_at.strftime("%H:%Mh")%> -
+    <%=@event.end_at.strftime("%H:%Mh")%>
+    <p>
+        com <strong><%=@event.professional.name%></strong>
+    </p>
+
+</div>
+<div class="modal-footer">
+    <div class="pull-left">
+        <span class="btn-group">
+            <%=link_to edit_admin_event_path(@event), :class => "btn btn-small btn-warning" do%>            
+                <i class="icon-pencil"></i>
+                Editar
+            <%end%>
+            <%=link_to @event, :class => "btn btn-small btn-danger confirmable", :data => {
+                :message => "Deseja realmente remover este agendamento?",
+                :method_type => "delete"
+            } do%>
+        
+                <i class="icon-trash"></i>
+                Remover
+            <%end%>
+        </span>
+    </div>
+
+    <a href="#" class="btn" data-dismiss='modal'>Cancelar</a>     
+</div>  
+
+
+
+
+
+

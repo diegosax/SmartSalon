@@ -93,37 +93,59 @@ $(document).ready(function(){
 		$("#payment-modal form").submit();		
 	});
 */
-	$("#payment-modal form").submit(function(){		
-		return false;
+$("#payment-modal form").submit(function(){		
+	return false;
+});
+
+$("#payment-modal form .controls img").live("click", function(){
+	$("#payment-modal form .controls img").removeClass("selected");
+	$(this).addClass("selected");
+});
+
+/*----------- Dashboard Events --------------------------*/
+if ($(".task-list td.event_col li").length > 0){
+	var scroolPosition = $(".task-list td.event_col li")[0].scrollHeight * 33;
+	$(".task-list").scrollTop(scroolPosition);
+}
+$(".task-list .busy").popover();
+
+$("#chosen_professional_day_view").chosen().change(function(){
+	addLoading($(".day-view .toolbar"));
+	history.pushState(null,"",window.location.pathname + "?professional=" + $("#chosen_professional_day_view").val());
+	$.ajax({
+		url: window.location.pathname,
+		data: {
+			professional: $("#chosen_professional_day_view").val()
+		},
+		dataType: "script"
 	});
+});
 
-	$("#payment-modal form .controls img").live("click", function(){
-		$("#payment-modal form .controls img").removeClass("selected");
-		$(this).addClass("selected");
+
+/*-------------------------------------------------------*/
+
+/*---------------------Events Page --------------------- */
+
+if ($("#calendar_view .event_col li").length > 0){
+	var scroolPosition = $("#calendar_events_list .event_col li")[0].scrollHeight * 33;
+	$("#calendar_events_list").scrollTop(scroolPosition);
+	$('#professionals_header').css({position: 'absolute', top: $("#calendar_events_list").scrollTop()});			
+}
+$("#calendar_view .busy").popover();
+
+$("#calendar_events_list").scroll(function(){	
+	$('#professionals_header').css({position: 'absolute', top: $(this).scrollTop()});			
+	$("#time_col").css({position: 'absolute', left: $(this).scrollLeft()});			
+});
+
+$(".busy").on("click",function(){
+	var id = $(this).attr("data-event-id");
+	$.ajax({
+		url: "/admin/events/" + id,		
+		dataType: "script"
 	});
+});
 
-	/*----------- Dashboard Events --------------------------*/
-	if ($(".task-list td.event_col li").length > 0){
-		var scroolPosition = $(".task-list td.event_col li")[0].scrollHeight * 33;
-		$(".task-list").scrollTop(scroolPosition);
-	}
-	$(".task-list .busy").popover();
-
-	$("#chosen_professional_day_view").chosen().change(function(){
-        addLoading($(".day-view .toolbar"));
-        history.pushState(null,"",window.location.pathname + "?professional=" + $("#chosen_professional_day_view").val());
-		$.ajax({
-			url: window.location.pathname,
-			data: {
-				professional: $("#chosen_professional_day_view").val()
-			},
-			dataType: "script"
-		});
-	});
-	
-
-	/*-------------------------------------------------------*/
-
-
+/*-------------------------------------------------------*/
 
 });

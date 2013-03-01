@@ -6,10 +6,11 @@ class Admin::EventsController < Admin::ApplicationController
   before_filter :load_salon
 
   def index    
+
     @events = @salon.events.order("start_at").includes(:client,:professional)
     @events = @events.today if params[:date] == "today"
-    @events = @events.mine(current_professional.id) if params[:professional]
-
+    @events = @events.mine(current_professional.id) if params[:professional]    
+    @professionals_with_services = current_professional.salon.professionals.includes(:professional_services).includes(:events).where("professional_services.service_id is not null")
     if params[:past_events]
       @events = @events.scoped
     else
@@ -17,7 +18,6 @@ class Admin::EventsController < Admin::ApplicationController
     end
     @month = params[:month] ? Time.zone.parse(params[:month]) : Time.zone.today
     @date = @month
-    @event = Event.new
     respond_to do |format|
      format.js
      format.json
@@ -236,6 +236,7 @@ class Admin::EventsController < Admin::ApplicationController
     @event = Event.find(params[:id])
     respond_to do |format|
       format.html
+      format.js
       format.xml  { render :xml => @event }
     end
   end

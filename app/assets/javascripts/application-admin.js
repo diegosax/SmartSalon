@@ -18,6 +18,7 @@
 //= require bootstrap-modalmanager
 //= require chosen-jquery
 //= require jquery.maskedinput-1.3
+//= require jquery.fixedtables
 //= require validator/jquery.validate.min
 //= require validator/messages_pt_BR
 //= require confirmation_modal

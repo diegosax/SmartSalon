@@ -1,27 +1,10 @@
-<p id="notice"><%= notice %></p>
 <div class="show-event">
-<p>
-  <b><strong><%= @event.title %></strong></b>
-</p>
 
-<p>
-  <b>Descrição: </b>
-  <span><%= @event.description %></span>
-</p>
-
-<p>
-  <b>Início: </b>
-  <span><%= @event.start_at.strftime("%d de %B às %H:%M") %></span>
-</p>
-
-<p>
-  <b>Fim: </b>
-  <span><%= @event.end_at.strftime("%d de %B às %H:%M") %></span>
-</p>
+	
 
 </div>
 <div style="float: right">
-    <%=link_to "Excluir", @event, :method => :delete, :remote => :true, :class => "delete-contact gradient-btn",:confirm => "Tem certeza?"%>
+	<%=link_to "Excluir", @event, :method => :delete, :remote => :true, :class => "delete-contact gradient-btn",:confirm => "Tem certeza?"%>
 </div>
 
 

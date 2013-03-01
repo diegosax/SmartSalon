@@ -1,0 +1,142 @@
+<div class="row-fluid">		
+	<div class="span12 widget">
+		<div class="widget-header">
+			<span class="title">
+				<%if params[:professional].present? && params[:date].present?%>
+				Visualizando os MEUS agendamentos para <%=params[:date].capitalize%>
+				<%elsif params[:professional].present?%>
+				Visualizando apenas os meus agendamentos
+				<%elsif params[:date].present?%>
+				Visualizando TODOS os agendamentos de <%=params[:date].capitalize%>
+				<%else%>
+				Todos os agendamentos
+				<%end%>	
+			</span>
+			<div class="toolbar">
+				<%=link_to easy_new_admin_events_path, :class => "btn btn-mini" do%>
+				<i class="icon-plus"></i>  Novo Agendamento
+				<%end%>
+			</div>
+		</div>
+		<div class="widget-content table-container">
+			<table class="table table-striped form-inline" id="events_list">
+				<thead>
+					<tr>
+						<th style="width:45px">Código</th>							
+						<th>Cliente</th>
+						<th>Funcionário</th>
+						<th>Serviço</th>
+						<th>Início</th>
+						<th>Fim</th>
+						<th>Duração</th>
+						<th></th>		
+					</tr>
+				</thead>										
+				<tbody>
+					
+					<ul class="nav nav-pills" id="additional_filters">
+						<%if params[:professional].present?%>
+						<li class = "active">
+							<%=link_to admin_events_path(params.merge(:professional => nil)) do%>
+							Meus Agendamentos <span>&times</span>
+							<%end%>
+						</li>
+						<%else%>
+						<li>
+							<%=link_to admin_events_path(params.merge(:professional => current_professional)) do%>
+							Meus Agendamentos
+							<%end%>
+						</li>
+						<%end%>
+
+						<%if params[:date].present?%>
+						<li class = "active">
+							<%=link_to admin_events_path(params.merge(:date => nil)) do%>
+							Agendamentos de Hoje <span>&times</span>
+							<%end%>
+						</li>
+						<%else%>
+						<li>
+							<%=link_to admin_events_path(params.merge(:date => "today", :past_events => nil)) do%>
+							Agendamentos de Hoje
+							<%end%>
+						</li>
+						<%end%>
+
+						<%if params[:past_events] == "true"%>
+						<li class = "active">
+							<%=link_to admin_events_path(params.merge(:past_events => nil)) do%>
+							Agendamentos Passados <span>&times</span>
+							<%end%>
+						</li>
+						<%else%>
+						<li>
+							<%=link_to admin_events_path(params.merge({:past_events => true,:date => nil})) do%>
+							Agendamentos Passados
+							<%end%>
+						</li>
+						<%end%>
+
+
+					</ul>
+
+					
+					<%@events.each do |e|%>
+					<tr id="e_<%=e.id.to_s%>">					
+						<td>
+							<%=e.id%>
+						</td>							
+						<td>
+							<%=e.client.name if e.client%>
+						</td>
+						<td>
+							<%=e.professional.name if e.professional%>
+						</td>
+						<td>
+							<%=e.service.name if e.service%>
+						</td>
+						<td><%=e.start_at.strftime("%d de %B às %H:%Mh")%></td>
+						<td><%=e.end_at.strftime("%d de %B às %H:%Mh")%></td>
+						<td><%=distance_of_time_in_words(e.start_at,e.end_at)%></td>
+						<td class="action-col">
+							<span class="btn-group">
+								<%=link_to [:admin, e], 
+								:class => "btn btn-small" do%>
+								<i class="icon-search"></i>
+
+								<%end%>
+								<%=link_to edit_admin_event_path(e), 
+								:class => "btn btn-small" do%>
+								<i class="icon-pencil"></i>
+								
+								<%end%>
+								<%=link_to [:admin,e], 
+								"data-method-type" => :delete, 
+								:class => "btn btn-small confirmable",
+								"data-message" => "Deseja realmente remover este evento?" do%>
+								<i class="icon-trash"></i>
+								
+								<%end%>
+							</span>
+						</td>
+					</tr>
+					<%end%>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th>Código</th>							
+						<th>Cliente</th>
+						<th>Funcionário</th>
+						<th>Serviço</th>
+						<th>Início</th>
+						<th>Fim</th>
+						<th>Duração</th>
+						<th></th>
+					</tr>
+				</tfoot>
+			</table>	
+		</div>
+
+
+	</div>
+</div>			

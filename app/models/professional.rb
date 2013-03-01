@@ -4,6 +4,7 @@ class Professional < User
   has_many :working_times, :dependent => :destroy
   has_many :professional_services, :dependent => :destroy
   has_many :services, :through => :professional_services
+  scope :has_services
   validates :name,:email,:celphone, :password, :password_confirmation, :presence => true
   belongs_to :salon
   after_create :init
@@ -28,3 +29,4 @@ class Professional < User
   	end
   end
 end
+

@@ -1,0 +1,47 @@
+<div class="row-fluid">
+	<div class="widget span12 day-view">
+		<div class="widget-header light">
+			<span class="title">            
+				Eventos de Hoje
+			</span>
+		</div>
+		<div class="widget-content events_date_list" id="calendar_events_list">
+			
+				<div class="time_col" id="time_col">
+					<ul>
+						<%current_time = Time.zone.parse("00:00")%>
+						<%end_time = Time.zone.parse("24:00")%>            
+						<%interval = 15%>							
+						<%while current_time < end_time%>
+						<li>
+							<span class="time">
+								<%=current_time.strftime("%H:%M")%>    
+							</span>                                
+						</li>
+						<%current_time += interval.minutes%>
+						<%end%>
+					</ul>
+				</div>
+				<div class="events_area">
+					<ul class="professionals_header" id="professionals_header">						
+						<%@professionals_with_services.each do |professional|%>
+						<li>
+							<%=professional.name%>
+						</li>
+						<%end%>
+					</ul>					
+
+					<%@professionals_with_services.each do |professional|%>
+					<div class="event_col">
+						<ul>
+							<%=day_view_events(professional.events).html_safe%>    
+						</ul>
+					</div>											
+					<%end%>
+				</div>	
+				
+			
+		</div>
+
+	</div>
+</div>
