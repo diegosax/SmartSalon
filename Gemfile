@@ -24,6 +24,8 @@ gem 'jquery-rails'
 # JS and CSS Plugins
 gem 'bootstrap-sass', '~> 2.2.2.0'
 
+gem 'bootstrap-datepicker-rails'
+
 gem 'font-awesome-sass-rails'
 
 gem 'chosen-rails'
@@ -58,6 +60,8 @@ gem 'client_side_validations'
 gem 'mini_magick'
 
 gem 'carrierwave'
+
+gem 'carrierwave_direct'
 
 gem 'sidekiq'
 

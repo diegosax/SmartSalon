@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121221122638) do
+ActiveRecord::Schema.define(:version => 20130423220344) do
 
   create_table "client_salons", :force => true do |t|
     t.integer  "client_id"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20121221122638) do
     t.integer  "service_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "salon_id"
   end
 
   create_table "events", :force => true do |t|
@@ -33,17 +34,19 @@ ActiveRecord::Schema.define(:version => 20121221122638) do
     t.text     "description"
     t.integer  "client_id"
     t.integer  "professional_id"
-    t.string   "status",          :default => "Agendado"
+    t.string   "status",                  :default => "Agendado"
     t.datetime "start_at"
     t.integer  "duration"
     t.boolean  "changeable"
-    t.datetime "created_at",                              :null => false
-    t.datetime "updated_at",                              :null => false
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
     t.datetime "end_at"
     t.integer  "service_id"
     t.integer  "salon_id"
     t.string   "created_by"
-    t.boolean  "reschedule",      :default => false
+    t.boolean  "reschedule",              :default => false
+    t.integer  "creator"
+    t.boolean  "service_to_client_event", :default => false
   end
 
   create_table "favorites", :force => true do |t|

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Instanapp - Administrativo</title>
+	<title>Instanapp - Salão</title>
 	<%= stylesheet_link_tag    "application-admin", :media => "all" %>
 	<%= javascript_include_tag "application-admin" %>
 	<%= csrf_meta_tags %>
@@ -47,104 +47,38 @@
 		<ul id="sidebar_menu" class="navbar nav nav-list sidebar_box">
 			<li class="accordion-group <%=active_class('dashboard')%>">
 				<%=link_to admin_dashboard_path do%>	
-					<%=image_tag "/assets/menu_icons/dashboard.png"%>								
-					Dashboard
+				<%=image_tag "/assets/menu_icons/dashboard.png"%>								
+				Dashboard
 				<%end%>				
 			</li>
 			<li class="accordion-group <%=active_class('events')%>">
-				<%=link_to "#collapse1", :class => "accordion-toggle widgets collapsed", :data => {:toggle => "collapse", :parent => "#sidebar_menu"} do%>	
-					<%=image_tag "/assets/menu_icons/calendar.png"%>								
-					Agenda
-					<i class="icon-chevron-right carret"></i>
-				<%end%>					
-				<ul id="collapse1" class="accordion-body collapse">
-					<li>
-						<%=link_to admin_events_path do%>
-							<i class="icon-list"></i>
-							Listar Agendamentos
-						<%end%>
-					</li>		
-					<li>
-						<%=link_to easy_new_admin_events_path do%>
-							<i class="icon-magic"></i>
-							Agendamento Fácil
-						<%end%>
-					</li>			
-					<li>
-						<%=link_to new_admin_event_path do%>
-							<i class="icon-plus"></i>
-							Novo Agendamento
-						<%end%>
-					</li>
-				</ul>
+				<%=link_to admin_events_path do%>	
+				<%=image_tag "/assets/menu_icons/calendar.png"%>								
+				Agenda					
+				<%end%>									
 			</li>
 			<li class="accordion-group <%=active_class('services')%>">
-				<%=link_to "#collapse3", :class => "accordion-toggle widgets collapsed", :data => {:toggle => "collapse", :parent => "#sidebar_menu"} do%>	
-					<%=image_tag "/assets/menu_icons/tools.png"%>								
-					Serviços
-					<i class="icon-chevron-right carret"></i>
-				<%end%>					
-				<ul id="collapse3" class="accordion-body collapse">
-					<li>
-						<%=link_to admin_services_path do%>
-							<i class="icon-list"></i>
-							Listar Serviços
-						<%end%>
-					</li>							
-					<li>
-						<%=link_to new_admin_service_path do%>
-							<i class="icon-plus"></i>
-							Novo Serviço
-						<%end%>
-					</li>
-				</ul>
+				<%=link_to admin_services_path do%>	
+				<%=image_tag "/assets/menu_icons/tools.png"%>								
+				Serviços					
+				<%end%>									
 			</li>
 			<li class="accordion-group <%=active_class('professionals')%>">
-				<%=link_to "#collapse2", :class => "accordion-toggle widgets collapsed", :data => {:toggle => "collapse", :parent => "#sidebar_menu"} do%>	
-					<%=image_tag "/assets/menu_icons/profile.png"%>								
-					Funcionários
-					<i class="icon-chevron-right carret"></i>
-				<%end%>					
-				<ul id="collapse2" class="accordion-body collapse">
-					<li>
-						<%=link_to admin_professionals_path do%>
-							<i class="icon-list"></i>
-							Listar Funcionários
-						<%end%>
-					</li>							
-					<li>
-						<%=link_to new_admin_professional_path do%>
-							<i class="icon-plus"></i>
-							Novo Funcionário
-						<%end%>
-					</li>
-				</ul>
+				<%=link_to admin_professionals_path do%>	
+				<%=image_tag "/assets/menu_icons/profile.png"%>								
+				Funcionários					
+				<%end%>									
 			</li>
 			<li class="accordion-group <%=active_class('clients')%>">
-				<%=link_to "#collapse4", :class => "accordion-toggle widgets collapsed", :data => {:toggle => "collapse", :parent => "#sidebar_menu"} do%>	
-					<%=image_tag "/assets/menu_icons/users.png"%>								
-					Clientes
-					<i class="icon-chevron-right carret"></i>
-				<%end%>					
-				<ul id="collapse4" class="accordion-body collapse">
-					<li>
-						<%=link_to admin_clients_path do%>
-							<i class="icon-list"></i>
-							Listar Clientes
-						<%end%>
-					</li>							
-					<li>
-						<%=link_to new_admin_client_path do%>
-							<i class="icon-plus"></i>
-							Novo Cliente
-						<%end%>
-					</li>
-				</ul>
+				<%=link_to admin_clients_path do%>	
+				<%=image_tag "/assets/menu_icons/users.png"%>								
+				Clientes					
+				<%end%>									
 			</li>
 			<li class="accordion-group <%=active_class('salons')%>">
 				<%=link_to [:admin, @salon] do%>	
-					<%=image_tag "/assets/menu_icons/settings.png"%>								
-					Gerenciar Salão
+				<%=image_tag "/assets/menu_icons/settings.png"%>								
+				Gerenciar Salão
 				<%end%>									
 			</li>
 
@@ -157,12 +91,12 @@
 				<div class="row-fluid ">
 					<div id="dropdown-lists">
 						<%=link_to :back, :class => "item" do%>
-							<span class="item-icon">
-								<i class="icon-arrow-left"></i>
-							</span>
-							<span class="item-label">Voltar</span>								
-							<%end%>
-					<%=yield(:top_menu)%>						
+						<span class="item-icon">
+							<i class="icon-arrow-left"></i>
+						</span>
+						<span class="item-label">Voltar</span>								
+						<%end%>
+						<%=yield(:top_menu)%>						
 					</div>
 					
 					<div class="top_right">     
@@ -184,15 +118,49 @@
 	</div>
 </body>
 <script type="text/javascript">
-<% flash.each do |name, msg| %>		
-var noty = noty(
-{
-	text: '<%=escape_javascript(msg)%>',
-	type: "<%= escape_javascript(name.to_s == 'notice' ? 'success' : 'error')%>",
-	timeout: 4000
+function displayAllRailsNotification(){
+	<% flash.each do |name, msg| %>			
+		// ----------- Notification Settings ----------------//			
+		text = "<%=escape_javascript(msg)%>";
+		type = "<%= escape_javascript(name.to_s == 'notice' ? 'success' : 'error')%>";		
+		$.pnotify({			
+			text: text,
+			type: type			
+		});
+		//---------------------------------------------------//		
+	<%end%>					
+	<%flash.discard%>	
 }
-);
-<%end%>				
+
+function displayOneRailsNotification(msg,type){
+	type = type == "notice" ? "success" : "error";
+	$.pnotify({			
+		text: msg,
+		type: type			
+	});	
+}
+
+jQuery(document).ready(function($) {
+	var text;
+	var type;
+	$.pnotify.defaults.history = false;
+	$.pnotify.defaults.delay = 4000; // 4 Seconds to fade out notification
+	$.pnotify.defaults.title = false;
+	$.pnotify.defaults.width = "30%";
+	$.pnotify.defaults.sticker = false;
+	displayAllRailsNotification();
+	
+	$(document).ajaxComplete(function(event, request) {
+	    var msg = request.getResponseHeader('X-Message');
+	    var type = request.getResponseHeader('X-Message-Type');
+	    if (msg){
+	    	displayOneRailsNotification(msg, type);
+	    }
+	    	
+
+	});	
+});
+
 </script>
 
 </html>

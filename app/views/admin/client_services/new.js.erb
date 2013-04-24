@@ -1,7 +1,7 @@
 <%if @service%>
-var html = "<%=escape_javascript(render '/admin/client_services/choose_client')%>";
+	var html = "<%=escape_javascript(render '/admin/client_services/choose_client')%>";
 <%elsif @client%>
-var html = "<%=escape_javascript(render '/admin/client_services/choose_service')%>";
+	var html = "<%=escape_javascript(render '/admin/client_services/choose_service')%>";
 <%end%>
 $("#associate_client_service").remove();
 $(html).prependTo("body");
@@ -14,7 +14,8 @@ $("#new_client_service_form").validate({
 	rules: {
 		duration: {
 			required: true,
-			digits:true
+			digits:true,
+			multiple: 15
 		}
 	}
 });

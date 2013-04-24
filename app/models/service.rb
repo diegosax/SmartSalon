@@ -1,6 +1,8 @@
 #encoding: utf-8
 
 class Service < ActiveRecord::Base
+  include ActiveModel::Validations
+  
   attr_accessible :duration, :name, :price
   has_many :professional_services, :dependent => :destroy
   has_many :professionals, :through => :professional_services
@@ -11,6 +13,7 @@ class Service < ActiveRecord::Base
   validates :name, :duration, presence: true
   validates :price, numericality: {greater_than: 0}, :allow_blank => true
   validates :duration, numericality: {greater_than: 0}
+  validates_with DivisibleValidator
 
   def preferred_duration(client)
   	client_service = self.client_services.where(:client_id => client).first
@@ -19,5 +22,9 @@ class Service < ActiveRecord::Base
   	else
   		self.duration
   	end
+  end
+
+  def associated_clients
+    self.client_services.joins(:salon)
   end
 end

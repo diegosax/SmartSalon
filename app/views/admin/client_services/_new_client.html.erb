@@ -3,7 +3,7 @@
 <p><span class="label label-inverse">Selecione o cliente a ser associado ao serviço:</span></p>
 <%= select_tag :client_id, 
 	options_for_select(@salon.clients.collect{ |s| [s.name, s.id] }),	
-	:include_blank => true,
+	:include_blank => false,
 	:id => "choose_client_service",
 	:class => "chzn_a", 
 	"data-placeholder" => "Selecione o cliente" %>

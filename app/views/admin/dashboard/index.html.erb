@@ -27,7 +27,7 @@
         </div>
         
         <div class="span9">        
-            <div class="tabbable analytics-tab paper-stack dashboard_tables">
+            <div class="tabbable analytics-tab dashboard_tables">
                 <ul class="nav nav-tabs">
                     <li class="active">
                         <a href="#my_today_events" data-target="#my_today_events" data-toggle="tab">
@@ -66,7 +66,7 @@
                                     <tbody>
                                         <tr class="tr_info">
                                             <th colspan="6">
-                                                <i class="icon-stats"></i> Meus Agendamentos de Hoje
+                                                <i class="icon-calendar"></i> Meus Agendamentos de Hoje
                                             </th>
                                         </tr>
                                         <%@my_today_events.each do |event|%>
@@ -149,7 +149,7 @@
                                     <tbody>
                                         <tr class="tr_info">
                                             <th colspan="7">
-                                                <i class="icon-stats-up"></i> Todos os Agendamentos de Hoje
+                                                <i class="icon-tasks"></i> Todos os Agendamentos de Hoje
                                             </th>
                                         </tr>
                                         <%@all_today_events.each do |event|%>
@@ -197,7 +197,7 @@
                                         <tr>
                                             <td colspan=7>
                                                 <div class="alert alert-danger">
-                                                    Você não possui nenhum agendamento para hoje
+                                                    Não existe nenhum agendamento para hoje
                                                 </div>    
                                             </td>
 
@@ -227,7 +227,7 @@
                                     <tbody>
                                         <tr class="tr_info">
                                             <th colspan="7">
-                                                <i class="icon-user"></i> Agendamentos Cancelados de Hoje
+                                                <i class="icon-off"></i> Agendamentos Cancelados de Hoje
                                             </th>
                                         </tr>
                                         <%@today_canceled_events.each do |event|%>

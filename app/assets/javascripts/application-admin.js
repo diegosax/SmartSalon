@@ -16,9 +16,15 @@
 //= require bootstrap
 //= require bootstrap-modal
 //= require bootstrap-modalmanager
+//= require bootstrap-datepicker
+//= require bootstrap-datepicker.pt-BR
+//= require jquery.ui.timepicker
+//= require jquery.ui.timepicker-pt-BR
 //= require chosen-jquery
 //= require jquery.maskedinput-1.3
 //= require jquery.fixedtables
+//= require bootstrap-datetimepicker.min
+//= require jquery.pnotify.min
 //= require validator/jquery.validate.min
 //= require validator/messages_pt_BR
 //= require confirmation_modal

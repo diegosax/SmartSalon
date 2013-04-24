@@ -1,8 +1,8 @@
 <tr id="client_service_<%=client_service.id%>">
 	<%if @service%>
-		<td><%=link_to client_service.client.name, [:admin,client_service.client]%></td>
+		<td><%=link_to client_service.client.name, [:admin,client_service.client] if client_service.client%></td>
 	<%elsif @client%>
-		<td><%=link_to client_service.service.name, [:admin,client_service.service]%></td>
+		<td><%=link_to client_service.service.name, [:admin,client_service.service] if client_service.service%></td>
 	<%end%>		
 	<td><%=distance_of_time(client_service.duration*60)%></td>								
 	<td class="action-col">

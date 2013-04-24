@@ -1,0 +1,4 @@
+var modal = $("#ajax-modal");
+var modal_content = "<%=escape_javascript(render(:partial => 'confirm_conflicts', :layout => false))%>";
+modal.html(modal_content);
+modal.modal();

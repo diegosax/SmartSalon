@@ -1,0 +1,16 @@
+<%@professionals ||= @salon.professionals%>
+<%@professional ||= current_professional%>
+<div class="formSep" id="manual-event-choose-professional">
+	<div class="row-fluid form-inline">
+		<p>
+			<span class="label label-inverse">Selecione o funcionário:</span>
+		</p>
+		
+		<%= select_tag(:professional, 
+			options_for_select(@professionals.collect{ |s| [s.name, s.id] }, @professional.id),
+			:include_blank => true, 
+			:class => "chzn_a", 
+			"data-placeholder" => "Selecione o funcionário"
+			) %>				
+		</div>
+	</div>

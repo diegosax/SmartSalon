@@ -1,0 +1,80 @@
+<div class="span12 widget ">        
+		<div class="widget-header">
+			<span class="title">
+				Próximos agendamentos de <%=@client.name%>
+			</span>
+			<div class="toolbar">
+				<%=link_to admin_events_path(:client => @client), :class => "btn btn-mini" do%>
+					<i class="icon-list"></i>  Mais Agendamentos
+				<%end%>
+				<%=link_to easy_new_admin_events_path(:client => @client), :class => "btn btn-mini" do%>
+					<i class="icon-plus"></i>  Novo Agendamento
+				<%end%>				
+			</div>
+		</div>
+		<div class="widget-content table-container">
+			<table class="table table-striped dashboard-table table-flipscroll">
+				<thead>
+					<tr>
+						<th style="width:20%">Horário</th>
+						<th>Serviço</th>
+						<th>Funcionário</th>
+						<th>Duração</th>
+						<th>Status</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>					
+					<%@client.events.from_today_on.each do |event|%>
+					<tr>
+						<td>							
+							<blockquote>
+								<small>
+									<%=event.start_at.strftime("%d de %B")%>        
+								</small>
+								<p>
+									<%=event.start_at.strftime("%H:%M h")%>        
+								</p>
+								<%if event.start_at > Time.zone.now%>
+								<small>                                                        
+									em <%=distance_of_time_in_words(Time.zone.now,event.start_at)%>
+								</small>
+								<%end%>
+							</blockquote>
+
+						</td>
+						<td><%=event.service.name if event.service%></td>
+						<td><%=event.professional.name if event.client%></td>
+						<td><%=distance_of_time_in_words(event.start_at,event.end_at)%></td>
+						<td>
+							<span class="badge badge-<%=event_type(event)%>">
+								<%=event.status%>
+							</span>
+						</td>
+						<td class="action-col">
+							<span class="btn-group">
+								<%=link_to [:admin, event], 
+								:class => "btn btn-small" do%>
+								<i class="icon-search"></i>
+
+								<%end%>
+								<%=link_to edit_admin_event_path(event), 
+								:class => "btn btn-small" do%>
+								<i class="icon-pencil"></i>
+
+								<%end%>
+								<%=link_to [:admin,event], 
+								"data-method-type" => :delete, 
+								:class => "btn btn-small confirmable",
+								"data-message" => "Deseja realmente remover este evento?" do%>
+								<i class="icon-trash"></i>
+
+								<%end%>
+							</span>
+						</td>
+					</tr>
+					<%end%>					
+				</tbody>
+			</table>
+		</div>	
+</div>

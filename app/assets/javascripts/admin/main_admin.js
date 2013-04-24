@@ -2,6 +2,10 @@ $(document).ready(function(){
 
 	// ----------- Validation Defaults ------------------//
 
+	jQuery.validator.addMethod("multiple", function(value, element, param) { 		
+		return value % param == 0; 
+	}, jQuery.format("Deve ser um múltiplo de {0}"));
+
 	jQuery.validator.setDefaults({
 		errorPlacement: function(error, element) {
 			var isInputAppend = ($(element).parent('div.input-append').length > 0);
@@ -17,8 +21,40 @@ $(document).ready(function(){
 			}
 		}
 	});
+	
 
 	// --------------------------------------------------//
+
+	//------------ Date and Time Pickers ----------------//
+
+	$("[data-behaviour~='datepicker']").datepicker({
+		language: "pt-BR",
+		format: "dd/mm/yyyy"
+	}).on("changeDate", function(){
+		updateDatetime();
+	});
+	$("[data-behaviour~='timepicker']").timepicker({		
+		minutes: {
+	        starts: 0,                // First displayed minute
+	        ends: 45,                 // Last displayed minute
+	        interval: 15              // Interval of displayed minutes
+	    },
+	    onClose: function(){
+	    	updateDatetime();
+	    }
+	});
+
+	var updateDatetime = function(){		
+		var from_date = $("#date_from_picker").val();
+		var from_time = $("#time_from_picker").val();
+		$("#datetime_from").val(from_date + " " + from_time);
+		var to_date = $("#date_to_picker").val();
+		var to_time = $("#time_to_picker").val();
+		$("#datetime_to").val(to_date + " " + to_time);
+		console.log("update called");
+	}
+
+	//---------------------------------------------------//
 
 	// -----------Masks ---------------------------------//
 	$("input.phone").mask("(99) 9999-9999");
@@ -131,20 +167,33 @@ if ($("#calendar_view .event_col li").length > 0){
 	$("#calendar_events_list").scrollTop(scroolPosition);
 	$('#professionals_header').css({position: 'absolute', top: $("#calendar_events_list").scrollTop()});			
 }
-$("#calendar_view .busy").popover();
 
 $("#calendar_events_list").scroll(function(){	
 	$('#professionals_header').css({position: 'absolute', top: $(this).scrollTop()});			
 	$("#time_col").css({position: 'absolute', left: $(this).scrollLeft()});			
 });
 
-$(".busy").on("click",function(){
+$(".busy").live("click",function(){
 	var id = $(this).attr("data-event-id");
 	$.ajax({
 		url: "/admin/events/" + id,		
 		dataType: "script"
 	});
 });
+
+$("a[data-toggle=tab]").live("click",function(e){
+	history.pushState(null,"",e.target.href);	
+});
+
+/*-------------------------------------------------------*/
+
+/*-------------------New Event --------------------------*/
+/*$("#new_admin_event_form").submit(function(e){
+	e.preventDefault();
+	console.log('Trying to submit!');
+});*/
+
+/*-------------------------------------------------------*/
 
 /*-------------------------------------------------------*/
 

@@ -91,8 +91,7 @@ function onChooseProfessionalChange(){
 	});
 	history.pushState(null,"",window.location.pathname + "?" + $("#new-event-form").serialize());
 }
-function onChooseClientChange(){
-	console.log("Called");
+function onChooseClientChange(){	
 	if ($("#client_calendar").length > 0){
 		$("#client_calendar").remove().fadeOut("fast");		
 		addLoading($("#new-event-form"));

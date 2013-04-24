@@ -4,5 +4,5 @@ CarrierWave.configure do |config|
     aws_access_key_id: "AKIAIA5GE5E7QJQCGAAA",
     aws_secret_access_key: "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"
   }
-  config.fog_directory = "instanap"
+  config.fog_directory = "Instanapp"
 end

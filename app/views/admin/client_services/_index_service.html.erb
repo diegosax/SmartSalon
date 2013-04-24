@@ -13,21 +13,29 @@
 	</div>
 	<div class="widget-content table-container">
 		<table class="table table-striped form-inline" id="associated_services">
-			<thead>
-				<tr>
-					<th colspan="3"><i class="icol-exclamation"></i> <strong>Serviço: </strong> <%=@service.name%></th>
-				</tr>
-				<tr>
-					<th>Cliente</th>
-					<th>Duração especial</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<%@service.client_services.each do |clientService| %>
-					<%=render clientService%>
-				<%end%>
-			</tbody>
+			<%if @associated_clients.length > 0%>
+				<thead>
+					<tr>
+						<th colspan="3"><i class="icol-exclamation"></i> <strong>Serviço: </strong> <%=@service.name%></th>
+					</tr>
+					<tr>
+						<th>Cliente</th>
+						<th>Duração especial</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<%@associated_clients.each do |clientService| %>
+						<%=render clientService%>
+					<%end%>
+				</tbody>
+			<%else%>
+				<div class="alert alert-info alert-block">
+					<h4>Ainda não existem associações criadas</h4>
+					<i class="icon-info-sign"></i>
+					Aqui você define quanto tempo determinado cliente gasta em um serviço
+				</div>
+			<%end%>
 		</table>
 	</div>
 </div>

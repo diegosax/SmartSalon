@@ -51,13 +51,18 @@ class Admin::ProfessionalsController < Admin::ApplicationController
 
   def update
     @professional = Professional.find(params[:id])
+    if params[:professional][:password].blank? && params[:professional][:password_confirmation].blank?
+      params[:professional].delete(:password)
+      params[:professional].delete(:password_confirmation)
+    end
     respond_to do |format|
       if @professional.update_attributes(params[:professional])
         format.html { redirect_to admin_professional_url, notice: 'Profissional atualizado com sucesso.' }
         format.json { head :no_content }
       else
+        puts @professional.errors.inspect
         format.html { render action: "edit" }
-        format.json { render json: @service.errors, status: :unprocessable_entity }
+        format.json { render json: @professional.errors, status: :unprocessable_entity }
       end
     end
   end

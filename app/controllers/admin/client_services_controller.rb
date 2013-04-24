@@ -9,40 +9,38 @@ class Admin::ClientServicesController < Admin::ApplicationController
   def new    
   	if params[:service_id]
   		@service = @salon.services.find(params[:service_id])
-  		@clientService = @service.client_services.build
+  		@clientService = @salon.client_services.build(:service => @service)      
   	elsif params[:client_id]
   		@client = @salon.clients.find(params[:client_id])
-  		@clientService = @client.client_services.build
+  		@clientService = @salon.client_services.build(:client => @client)
   	end  	  	
   end
 
   def create
-    service = @salon.services.find(params[:service_id])
-    client = @salon.clients.find(params[:client_id])
+    service = @salon.services.find(params[:service_id]) if params[:service_id] != ""
+    client = @salon.clients.find(params[:client_id]) if params[:client_id] != ""
 
-    @client_service = ClientService.new(:service => service, :client => client, :duration => params[:duration])
-
+    @client_service = @salon.client_services.new(:service => service, :client => client, :duration => params[:duration])    
     respond_to do |format|
       if @client_service.save
         flash[:notice] = "Associação efetuada com sucesso"
         format.html {redirect_to :back}
         format.js
       else
-        flash[:alert] = "Erro: #{@client_service.client.name} já está com um tempo personalizado definido para #{@client_service.service.name}"
+        flash[:alert] = "Houve um erro ao definir o tempo de serviço para esse cliente."
         format.html {redirect_to :back}
         format.js {render 'create_error'}
       end
     end    
   end
 
-  def destroy
-    puts "Caiu no metodo certo!!!"
-    @client_service = ClientService.find(params[:id])
+  def destroy    
+    @client_service = @salon.client_services.find(params[:id])
     @client_service.destroy
     respond_to do |format|     
       flash[:notice] = "Associação removida com sucesso!"
       format.html {redirect_to :back}
-      format.js {render :js => "window.location.reload()"}
+      format.js #{render :js => "window.location.reload()"}
       format.json
     end       
   end

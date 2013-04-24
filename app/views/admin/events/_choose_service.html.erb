@@ -1,0 +1,15 @@
+<%@services ||= @salon.services%>
+<div class="formSep" id="manual-event-choose-service">
+	<div class="row-fluid form-inline">
+		<p>
+			<span class="label label-inverse">Selecione o serviço:</span>
+		</p>
+		
+		<%= select_tag(:service,
+			options_for_select(@services.collect{ |s| [s.name, s.id] }, (@service.id if @service)),
+			:include_blank => true, 
+			:class => "chzn_a", 
+			"data-placeholder" => "Selecione o serviço"
+			) %>				
+		</div>
+	</div>

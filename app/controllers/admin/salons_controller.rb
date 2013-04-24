@@ -6,8 +6,10 @@ class Admin::SalonsController < Admin::ApplicationController
   # GET /services/1.json
   def show
     @salon = Salon.find(params[:id])
-    @currentSubscription = @salon.subscriptions.last
-    @payments = @currentSubscription.payments.order(:due_date)
+    #@currentSubscription = @salon.subscriptions.last
+    #@payments = @currentSubscription.payments.order(:due_date)
+    @uploader = Salon.new.logo
+    @uploader.success_action_redirect = salons_url(@salon)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @service }
@@ -16,7 +18,7 @@ class Admin::SalonsController < Admin::ApplicationController
 
   # GET /Salons/1/edit
   def edit
-    @salon = Salon.find(params[:id])
+    @salon = current_professional.salon    
   end
 
   # PUT /salons/1

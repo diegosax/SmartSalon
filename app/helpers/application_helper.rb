@@ -1,6 +1,7 @@
 #encoding: utf-8
 
-module ApplicationHelper
+module ApplicationHelper	
+
 	def isClient?
 		return current_user.class == Client
 	end
@@ -60,9 +61,9 @@ module ApplicationHelper
 				end
 			else
 				event = events[i]
-				event_html = content_tag(:p, content_tag(:strong, "Cliente: ") + event.client.name)
-				event_html += content_tag(:p, content_tag(:strong, "Funcionário: ") + event.professional.name)
-				event_html += content_tag(:p, content_tag(:strong, "Serviço: ") + event.service.name)
+				event_html = content_tag(:p, content_tag(:strong, "Cliente: ") + event.client.name) if event.client
+				event_html += content_tag(:p, content_tag(:strong, "Funcionário: ") + event.professional.name) if event.professional
+				event_html += content_tag(:p, content_tag(:strong, "Serviço: ") + event.service.name) if event.service
 				event_html += content_tag(:p, content_tag(:strong, "Início: ") + event.start_at.strftime("%H:%M"))
 				event_html += content_tag(:p, content_tag(:strong, "Fim: ") + event.end_at.strftime("%H:%M"))
 				while current_time < event.start_at

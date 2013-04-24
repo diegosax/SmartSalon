@@ -2,11 +2,13 @@
 
 class Salon < ActiveRecord::Base
   attr_accessible :address,:number, :city, :complement, :email, :landphone,:celphone, 
-                  :logo, :name, :state, :username, :zipcode, :neighborhood, :remote_logo_url, :manager_attributes
+                  :logo, :name, :state, :username, :zipcode, :neighborhood, :remote_logo_url, :manager_attributes,
+                  :logo_cache, :remove_logo
   has_many :services, :dependent => :destroy
   has_many :professionals, :dependent => :destroy
   has_many :events, :through => :professionals
   has_many :client_salons
+  has_many :client_services
   has_many :clients, :through => :client_salons
   has_many :favorites
   has_many :subscriptions
@@ -18,7 +20,7 @@ class Salon < ActiveRecord::Base
   mount_uploader :logo, LogoUploader
   geocoded_by :full_address
   after_validation :geocode, :if => :address_changed?
-  after_create :create_subscription
+  #after_create :create_subscription
 
   def full_address
   	self.address + ", " + self.city + " - " + self.state + " - " + (self.zipcode ? self.zipcode : "")
@@ -67,9 +69,7 @@ class Salon < ActiveRecord::Base
           :price => subscription.price,
           :due_date => Time.zone.today + subscription.trial_period.months + (i-1).month        
         )
-      end
-    else
-      p "Caiu no else"
+      end    
     end
   end
 

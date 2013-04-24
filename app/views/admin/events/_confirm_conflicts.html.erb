@@ -1,10 +1,28 @@
-<div class="alert alert-block alert-warning fade in">
-	<h4 class="alert-heading">Atenção!</h4>
-	<p>
-		<%=@event.errors[:base][0]%>
-	</p>	
-	<p>
-		<%=f.submit "Confirmar agendamento e marcar conflitos para serem reagendados", :class => "btn btn-inverse"%>					
-		ou 
-		<a href="#" class="btn return">Voltar</a></p>
+
+<%= simple_form_for([:admin,@event], :id=> "confirm_create_event_form") do |f| %>
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	<h3>A criação desse evento gerará conflitos</h3>
 </div>
+<div class="modal-body">
+	<div class="hide">
+		<%=f.input :title%>
+		<%=f.input :start_at, :as => :string%>
+		<%=f.input :end_at, :as => :string%>
+		<%=f.association :client %>
+		<%=f.association :service %>
+		<%=f.association :professional %>
+		<%=hidden_field_tag "confirm_conflicts", 1%>
+	</div>
+	<div class="alert alert-block alert-warning fade in">
+		<h4 class="alert-heading">Atenção!</h4>
+		<p>
+			<%=@event.errors[:base][0]%>
+		</p>			    
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn btn-inverse" data-dismiss='modal'>Cancelar</a>
+		<%=f.submit "Confirmar Agendamento", :class=> "btn btn-primary"%>    
+	</div>		
+</div>
+<%end%>

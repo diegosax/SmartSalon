@@ -88,62 +88,56 @@ class Admin::EventsController < Admin::ApplicationController
   end
 
   def create
-    confirm_conflicts = params[:event][:confirm_conflicts]
-    params[:event].delete(:confirm_conflicts)
-    @event = Event.new(params[:event])    
-    @event.created_by = current_professional.class
-    if params[:professional] 
-      @event.professional_id = params[:professional]
-    else
-      @event.professional = current_professional
-    end
-
-    @event.salon = @event.professional.salon
-    @event.client = @event.salon.clients.find(params[:client])
+    confirm_conflicts = params[:confirm_conflicts]    
+    #params[:event].delete(:confirm_conflicts)    
+    @event = Event.new(params[:event])
+    @event.salon = @salon    
     
+    #Adding the professional to the event        
+    @event.professional_id = params[:professional] || current_professional.id    
+    
+    #Adding the service to the event
+    @event.service_id = params[:service] if params[:service] && params[:service] != ""
+
+    #Adding the client to the event if exists
+    @event.client_id = params[:client] if params[:client] && params[:client] != ""
+
+    #Checking if it's to save the event event with conflicts    
     if confirm_conflicts == "1"
-      conflicted_events = @event.find_conflicts
-      conflicted_events.each do |e|
-        e.update_attributes(:reschedule => true)
-        if(e.client)
-          #Notifier.client_event_reschedule_notification(e).deliver
+      if @event.save(:validate => false)
+        conflicted_events = @event.find_conflicts
+        conflicted_events.each do |e|
+          e.update_attributes(:reschedule => true)
+          if(e.client)
+            puts "Notify client about canceled event"
+            #Notifier.client_event_reschedule_notification(e).deliver
+          end
+          if(e.professional)   
+            puts "notify professional about canceled event"
+            #Notifier.professional_event__reschedule_notification(e).deliver
+          end
         end
-        if(e.professional)   
-          #Notifier.professional_event__reschedule_notification(e).deliver
+        respond_to do |format|                
+          format.html { redirect_to([:admin,@event], :notice => 'Agendamento criado com sucesso') }
+          format.xml  { render :xml => @event, :status => :created, :location => @event }
         end
-
-      end      
-      @event.save(:validate => false)
-      respond_to do |format|  
-        
-        if(@event.client)
-          #Notifier.client_event_created(@event).deliver
-        end
-        if(@event.professional)   
-          #Notifier.professional_event_created(@event).deliver
-        end
-
-        format.js
-        format.html { redirect_to([:admin,@event], :notice => 'Event was successfully created.') }
-        format.xml  { render :xml => @event, :status => :created, :location => @event }
       end
     else
       respond_to do |format|
         if @event.save
-
-          if(@event.client)
-            #Notifier.client_event_created(@event).deliver
-          end
-          if(@event.professional)   
-            #Notifier.professional_event_created(@event).deliver
-          end
-        
-          format.js
-          format.html { redirect_to(@event, :notice => 'Event was successfully created.') }
+          flash[:notice] = 'Agendamento criado com sucesso!'
+          format.js { render js: %(window.location.href='#{admin_event_path @event}')}
+          format.html { redirect_to( [:admin, @event] ) }
           format.xml  { render :xml => @event, :status => :created, :location => @event }
-        else        
-          puts @event.errors
-          format.js { render "create_error"}
+        else          
+          format.js do 
+            #Check if there are errors            
+            if @event.errors[:base].empty? || @event.errors.size > 1
+              render "create_error"
+            else
+              render "confirm_conflicts"
+            end            
+          end
           format.html { render :action => "new" }
           format.xml  { render :xml => @event.errors, :status => :unprocessable_entity }
         end
@@ -168,16 +162,9 @@ class Admin::EventsController < Admin::ApplicationController
     @event.salon = salon
     @event.professional = professional
     @event.client = client
+    @event.service_to_client_event = true
     respond_to do |format|
       if @event.save
-
-        if(@event.client)
-          #Notifier.client_event_created(@event).deliver
-        end
-        if(@event.professional)   
-          #Notifier.professional_event_created(@event).deliver
-        end
-        
         format.js
         format.html { redirect_to([:admin,@event], :notice => 'Event was successfully created.') }
         format.xml  { render :xml => @event, :status => :created, :location => @event }
@@ -233,7 +220,7 @@ class Admin::EventsController < Admin::ApplicationController
 
 
   def show
-    @event = Event.find(params[:id])
+    @event = @salon.events.find(params[:id])
     respond_to do |format|
       format.html
       format.js

@@ -5,13 +5,3 @@ if ($("#associated_services").length > 0){
 	var table_body = $("#associated_clients tbody");
 }
 table_body.append("<%=escape_javascript(render @client_service)%>");
-
-//$("#associated_services tr#ps<%=escape_javascript(@professional_service.id.to_s)%>").effect("highlight", {}, 4000);
-
-var noty = noty(
-	{
-		text: '<%=flash.discard(:notice)%>',
-		type: 'success',
-		timeout: 4000
-	}
-);

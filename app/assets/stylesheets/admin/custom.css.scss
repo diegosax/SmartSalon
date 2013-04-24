@@ -62,6 +62,19 @@ h1#main-heading{
 form{
 	margin: 0;
 }
+.controls .customfile {
+  margin-bottom: 0;
+}
+.customfile {
+  position: relative;
+  float: left;
+  cursor: pointer;
+  margin-bottom: 18px;
+}
+
+.controls.file-controls{
+  margin-left: 0 !important;
+}
 // -------------------------HEADER ----------------------------//
 #header .navbar-inner, 
 #header .navbar-inner .container, 
@@ -1022,3 +1035,7 @@ div.time-picker {
 }
 
 /*-------------------------------------------------------------*/
+
+#footer{
+  margin-bottom: 10em;
+}

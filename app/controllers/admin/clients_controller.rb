@@ -12,8 +12,8 @@ class Admin::ClientsController < Admin::ApplicationController
   end
 
   def show
-    @client = Client.find(params[:id])
-
+    @client = @salon.clients.find(params[:id])
+    @associated_services = @client.associated_services.where(:salon_id => @salon)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @client }

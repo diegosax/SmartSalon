@@ -4,7 +4,7 @@ class Admin::ServicesController < Admin::ApplicationController
   load_and_authorize_resource
 
   def index
-    @services = current_professional.salon.services
+    @services = @salon.services
     
     respond_to do |format|
       format.html # index.html.erb
@@ -16,8 +16,8 @@ class Admin::ServicesController < Admin::ApplicationController
   # GET /services/1
   # GET /services/1.json
   def show
-    @service = Service.find(params[:id])
-
+    @service = @salon.services.find(params[:id])
+    @associated_clients = @service.associated_clients.where(:salon_id => @salon)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @service }

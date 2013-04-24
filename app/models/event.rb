@@ -1,6 +1,6 @@
 #encoding: utf-8
 class Event < ActiveRecord::Base
-	attr_accessible :changeable, :client_id, :description, :duration, :professional_id, :service_id, :salon_id, :start_at, :status, :title, :end_at, :confirm_conflicts, :reschedule	
+	attr_accessible :changeable, :client_id, :description, :duration, :professional_id, :service_id, :salon_id, :start_at, :status, :title, :end_at, :confirm_conflicts, :reschedule
 	scope :active, :conditions => {:status => "Agendado"}
 	scope :canceled, :conditions => {:status => "Cancelado"}
 	scope :past, :conditions => ["start_at < ?",Time.zone.now]
@@ -10,13 +10,12 @@ class Event < ActiveRecord::Base
 	belongs_to :client
 	belongs_to :professional
 	belongs_to :service
-	belongs_to :salon
-	validates :title, :presence => true
+	belongs_to :salon	
 	validates :start_at, :presence => true
 	validates :end_at, :presence => true
 	validates_with IsBusyValidator
-	validates :end_at, :range => true
-	after_save :add_client_to_salon	
+	validates :end_at, :range => true	
+	after_save :add_client_to_salon
 
 	def duration_in_minutes
 		(self.end_at - self.start_at)/60
@@ -51,11 +50,9 @@ class Event < ActiveRecord::Base
 	      self.start_at,self.end_at,
 	      self.start_at,self.end_at,
 	      self.start_at,self.end_at,
-	      self.professional.id, self.salon.id
+	      self.professional, self.salon
 	    ).all
 	end
-
-
 
 	private
 	def add_client_to_salon		

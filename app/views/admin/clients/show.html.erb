@@ -18,7 +18,7 @@
 			</div>
 
 			<div class="widget-content table-container">
-				<table class="table table-striped table-detail-view">
+				<table class="table table-detail-view">
 					<tbody>
 						<tr>
 							<th>Nome</th>
@@ -56,5 +56,10 @@
 			</div>		
 		</div>
 		<%=render "/admin/client_services/index"%>
-	</div>	
+	</div>
+	<%if @client.events.from_today_on.length > 0%>
+		<div class="row-fluid">
+			<%=render "next_events"%>	
+		</div>
+	<%end%>
 </div>

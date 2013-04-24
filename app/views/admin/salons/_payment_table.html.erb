@@ -1,0 +1,47 @@
+<table class="table table-striped table-flipscroll form-inline">
+					<thead>
+						<tr>
+							
+							<th>Data de Vencimento</th>
+							<th>Data de Pagamento</th>
+							<th>Status</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>						
+						<%@payments.each do |p| %>
+						<tr id="p<%=@currentSubscription.id%>">
+							
+							<td><%=p.due_date.strftime("%d de %B de %Y")%></td>
+							<td><%=p.payment_date%></td>							
+							<td> <span class="badge badge-<%=payment_status_type(p.status)%>"><%=p.status%></span></td>	
+							<td class="action-col">
+								<%if Payment::STATUS.key(p.status) != 1 && Payment::STATUS.key(p.status) != 4%>
+								<span class="btn-group">
+									<%=link_to admin_salon_payments_checkout_path(@salon, :payment => p.id), :remote => true, :class => "btn btn-primary", :id => "payment_btn", :method => :post do%>
+									<i class="icon-money"></i>
+									Pagar
+									<%end%>									
+								</span>
+								<%end%>
+                <%if Payment::STATUS.key(p.status) == 4%>
+								<span class="btn-group">
+									<%=link_to admin_salon_payments_receipt_path(@salon, :payment_id => p.id), :class => "btn btn-primary", :id => "invoice_btn", :method => :get do%>
+                  <i class="icon-search"></i>																				
+                  Recibo
+									<%end%>									
+								</span>
+								<%end%>
+							</td>
+						</tr>						
+						<%end%>
+						<%if @currentSubscription.payments.size == 0%>
+						<tr>
+							<td colspan="5">
+								Você não possui mensalidades
+							</td>
+						</tr>
+
+						<%end%>
+					</tbody>
+				</table>

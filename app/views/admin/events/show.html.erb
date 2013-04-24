@@ -19,7 +19,7 @@
 				</div>
 			</div>
 			<div class="widget-content table-container">
-				<table class="table table-striped table-detail-view">
+				<table class="table table-detail-view">
 					<tbody>
 						<tr>
 							<th>Código</th>
@@ -35,7 +35,7 @@
 						</tr>
 						<tr>
 							<th>Serviço</th>
-							<td><%=@event.service.name if @event.service%></td>
+							<td><%=link_to @event.service.name, [:admin, @event.service] if @event.service%></td>
 						</tr>
 						<tr>
 							<th>Início</th>

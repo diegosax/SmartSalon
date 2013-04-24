@@ -1,6 +1,6 @@
 <%=render "top_menu"%>
 <%=render "/admin/clients/modal_form"%>
-
+<%puts @event.errors.messages%>
 <header>
 	<h2>Agendamento Manual</h2>
 </header>
@@ -12,24 +12,57 @@
 			<div class="widget-header">
 				<span class="title">Dados do Evento</span>
 			</div>
-			<div class="widget-content form-container">
-				<%= simple_form_for([:admin,@event],:html=>{:class=>"form-horizontal", :id=> "new_admin_event_form"}) do |f| %>
-				<%=f.input :title, :label => "Título"%>                
-				<%=f.input :description, :label => "Descrição",:input_html => {:rows => "8"} %>
+			<div class="widget-content form-container form-content">
+				<%= simple_form_for([:admin,@event],:html=>{:class=>"form-horizontal", :id=> "new_admin_event_form", :data => {:remote => true}}) do |f| %>				
+				<div class="hidden">
+					<%=f.input :start_at, :input_html => {:id => "datetime_from"}, :as => :string%>
+					<%=f.input :end_at, :input_html => {:id => "datetime_to"}, :as => :string%>    
+				</div>
+				<div class="control-group string required">
+					<label for="" class="control-label">
+						<abbr title="Obrigatório">*</abbr> Horário
+					</label>
+					
+					<div class="controls">
+						
+						<input class="string required input-small" data-behaviour="datepicker" id="date_from_picker" type="text">
+						-
+						<input class="string required input-mini" data-behaviour="timepicker" id="time_from_picker" type="text">
+
+						até
+
+						<input class="string required input-mini" data-behaviour="timepicker" id="time_to_picker" type="text">
+						-
+						<input class="string required input-small" data-behaviour="datepicker" id="date_to_picker" type="text">
+
+					</div>
+				</div>				
 				<div class="control-group">
 					<label for="" class="control-label">
 						Cliente
 					</label>
 					<div class="controls">
 						<%=render "/admin/events/choose_client"%>  		
-					</div>
-					
+					</div>					
 				</div>
-				
-				<%=f.input :start_at,:label => "Início", :input_html => {:id => "datetime_from"}, :as => :string%>
-				<%=f.input :end_at,:label => "Fim",  :input_html => {:id => "datetime_to"}, :as => :string%>    
+				<div class="control-group">
+					<label for="" class="control-label">
+						Funcionário
+					</label>
+					<div class="controls">
+						<%=render "/admin/events/choose_professional"%>  		
+					</div>					
+				</div>
+				<div class="control-group">
+					<label for="" class="control-label">
+						Serviço
+					</label>
+					<div class="controls">
+						<%=render "/admin/events/choose_service"%>  		
+					</div>					
+				</div>								
 				<div class="form-actions">
-					<%=f.submit "Salvar", :class => "btn btn-primary", :disable_with => "Salvando..."%>
+					<%=f.submit "Salvar", :class => "btn btn-primary"%>
 					<%=link_to "Cancelar", :back, :class => "btn"%>
 				</div>			
 				<%end%>
@@ -37,27 +70,3 @@
 		</div>
 	</div>
 </div>
-
-
-
-
-
-
-<script type="text/javascript">
-$(document).ready(function(){
-	<%if @event.errors.size == 1 && @event.errors[:base].length > 0%>
-	var hiddenConfirm = "<%=escape_javascript(f.hidden_field(:confirm_conflicts, :value => 1))%>"
-	$("#new_admin_event_form").append(hiddenConfirm);
-	$("#new_admin_event_form .form-content").fadeOut("fast");
-	$("#new_admin_event_form").append(" <%= escape_javascript(render('confirm_conflicts', :f => f)) %>");
-
-	$("#new_admin_event_form .return").live("click",function(e){
-		e.preventDefault();
-		$("#new_admin_event_form #event_confirm_conflicts").remove();
-		$("#new_admin_event_form .alert").slideUp("slow",function(){
-			$("#new_admin_event_form .form-content").slideDown();
-		});
-	});
-	<%end%>		
-});
-</script>

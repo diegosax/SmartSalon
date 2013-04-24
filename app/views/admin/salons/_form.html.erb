@@ -21,38 +21,33 @@
                 </fieldset>
                 <fieldset>
                     <legend>Dados de Contato</legend>
-                        <%=f.input :landphone, :label => 'Telefone Fixo', :input_html => { :class => 'phone'} %>
-                        <%=f.input :celphone, :label => 'Celular', :input_html => { :class => 'phone'} %>
+                    <%=f.input :landphone, :label => 'Telefone Fixo', :input_html => { :class => 'phone'} %>
+                    <%=f.input :celphone, :label => 'Celular', :input_html => { :class => 'phone'} %>
                 </fieldset>
                 <fieldset>
-                        <legend>Dados de Endereço</legend>
-                        <div class="control-group">
-                            <%=f.label :zipcode, "CEP", :class => "control-label"%>
-                            <div class="controls">
+                    <legend>Dados de Endereço</legend>
+                    <div class="control-group">
+                        <%=f.label :zipcode, "CEP", :class => "control-label"%>
+                        <div class="controls">
                             <%=f.input_field :zipcode ,:class => 'zipcode' %><%=image_tag "/assets/small_loader.gif", :class => 'zipcode_loading input_ajax_loading'%> 
-                            </div>
                         </div>
-                        <%=f.input :address, :label => "Endereço"%>
-                        <%=f.input :number, :label => "Número"%>
-                        <%=f.input :complement, :label => 'Compelemento'%>
-                        <%=f.input :neighborhood, :label => 'Bairro'%>
-                        <%=f.input :city, :label => 'Cidade'%>
-                        <%=f.input :state, :label => 'Estado'%>
-                </fieldset>                
-                    
-                <fieldset>
-                    <legend>Logotipo do Salão</legend>
-                        <%= f.file_field :logo, :label=> "Logotipo"%>
-                </fieldset>
-                <div class="form-actions">
-                    <%=f.submit "Salvar", :class => "btn btn-primary"%>
-                    <%=link_to "Cancelar", :back, :class => "btn"%>
-                </div>
-           
-                <%end%>
-            </div>
+                    </div>
+                    <%=f.input :address, :label => "Endereço"%>
+                    <%=f.input :number, :label => "Número"%>
+                    <%=f.input :complement, :label => 'Compelemento'%>
+                    <%=f.input :neighborhood, :label => 'Bairro'%>
+                    <%=f.input :city, :label => 'Cidade'%>
+                    <%=f.input :state, :label => 'Estado'%>
+                </fieldset>                            
+          <div class="form-actions">
+            <%=f.submit "Salvar", :class => "btn btn-primary"%>
+            <%=link_to "Cancelar", :back, :class => "btn"%>
         </div>
 
+        <%end%>
     </div>
-    
+</div>
+
+</div>
+
 </div>

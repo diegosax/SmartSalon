@@ -1,10 +1,2 @@
 $("#confirmation-modal").modal("hide");
 $("#wt<%=escape_javascript(@working_time.id.to_s)%>").hide("slow");
-
-var noty = noty(
-	{
-		text: '<%=flash.discard(:notice)%>',
-		type: 'success',
-		timeout: 4000
-	}
-);
