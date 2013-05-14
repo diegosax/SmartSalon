@@ -18,6 +18,7 @@
 				</div>
 			</div>
 			<div class="widget-content table-container">
+				<%if @clients.length > 0%>
 				<table class="table table-striped form-inline" id="services_list">
 					<thead>
 						<tr>
@@ -61,7 +62,12 @@
 							</td>
 						</tr>
 						<%end%>
-					</tbody>					
+					</tbody>
+				<%else%>
+					<div class="alert alert-info alert-block">
+						<h4>Ainda não existem clientes cadastrados</h4>
+					</div>					
+				<%end%>
 				</table>	
 			</div>
 		</div>

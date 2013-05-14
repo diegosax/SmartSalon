@@ -2,8 +2,9 @@
 
 class Salon < ActiveRecord::Base
   attr_accessible :address,:number, :city, :complement, :email, :landphone,:celphone, 
-                  :logo, :name, :state, :username, :zipcode, :neighborhood, :remote_logo_url, :manager_attributes,
+                  :logo, :name, :state, :username, :zipcode, :neighborhood, :manager_attributes,
                   :logo_cache, :remove_logo
+  mount_uploader :logo, LogoUploader
   has_many :services, :dependent => :destroy
   has_many :professionals, :dependent => :destroy
   has_many :events, :through => :professionals
@@ -17,7 +18,7 @@ class Salon < ActiveRecord::Base
   validates :name, :username, :presence => true
   validates :username, :uniqueness => true
   accepts_nested_attributes_for :manager
-  mount_uploader :logo, LogoUploader
+  
   geocoded_by :full_address
   after_validation :geocode, :if => :address_changed?
   #after_create :create_subscription

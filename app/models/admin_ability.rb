@@ -12,7 +12,8 @@ class AdminAbility
 
           can :manage, Service
           can :read, Professional#, :id => user.id #only if it is the professional profile
-          can :update, Professional, :id => user.id          
+          can :update, Professional, :id => user.id
+                    
           can :read, Salon, :id => user.salon.id
 
           can :destroy, ProfessionalService, :professional_id => user.id 

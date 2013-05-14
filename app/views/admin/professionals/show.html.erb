@@ -40,12 +40,12 @@
 							<td>******** | <%=link_to "Alterar Senha", "#change_password", :data => {:toggle => "modal"}%></td>
 						</tr>
 						<tr>
-							<th>Telefone Fixo</th>
-							<td><%=@professional.landphone%></td>
+							<th>Telefone Principal</th>
+							<td><%=@professional.celphone%></td>
 						</tr>
 						<tr>
-							<th>Telefone Celular</th>
-							<td><%=@professional.celphone%></td>
+							<th>Telefone Adicional</th>
+							<td><%=@professional.landphone%></td>
 						</tr>						
 						<%if @professional.address%>
 							<tr>

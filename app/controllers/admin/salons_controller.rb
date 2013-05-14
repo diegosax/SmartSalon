@@ -1,5 +1,6 @@
 class Admin::SalonsController < Admin::ApplicationController
   before_filter :authenticate_professional!
+  skip_authorize_resource :only => :search_zipcode
   load_and_authorize_resource
 
   # GET /services/1
@@ -8,8 +9,6 @@ class Admin::SalonsController < Admin::ApplicationController
     @salon = Salon.find(params[:id])
     #@currentSubscription = @salon.subscriptions.last
     #@payments = @currentSubscription.payments.order(:due_date)
-    @uploader = Salon.new.logo
-    @uploader.success_action_redirect = salons_url(@salon)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @service }

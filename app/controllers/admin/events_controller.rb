@@ -6,23 +6,29 @@ class Admin::EventsController < Admin::ApplicationController
   before_filter :load_salon
 
   def index    
-
-    @events = @salon.events.order("start_at").includes(:client,:professional)
+    @events = @salon.events.includes(:client,:professional)
     @events = @events.today if params[:date] == "today"
     @events = @events.mine(current_professional.id) if params[:professional]    
-    @professionals_with_services = current_professional.salon.professionals.includes(:professional_services).includes(:events).where("professional_services.service_id is not null")
+    
+    
     if params[:past_events]
       @events = @events.scoped
     else
       @events = @events.from_today_on
     end
-    @month = params[:month] ? Time.zone.parse(params[:month]) : Time.zone.today
-    @date = @month
     respond_to do |format|
-     format.js
-     format.json
+      format.js      
+      format.json {render json: EventsDatatable.new(view_context,@salon)}
       format.html # index.html.erb
       format.xml  { render :xml => @events }
+    end
+  end
+
+  def calendar
+    @events = @salon.events.order("start_at").includes(:client,:professional).today
+    @professionals_with_services = current_professional.salon.professionals.includes(:professional_services).includes(:events).where("professional_services.service_id is not null")  
+    respond_to do |format|
+      format.html
     end
   end
 

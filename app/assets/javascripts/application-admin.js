@@ -23,6 +23,8 @@
 //= require chosen-jquery
 //= require jquery.maskedinput-1.3
 //= require jquery.fixedtables
+//= require dataTables/jquery.dataTables
+//= require dataTables/jquery.dataTables.bootstrap
 //= require bootstrap-datetimepicker.min
 //= require jquery.pnotify.min
 //= require validator/jquery.validate.min

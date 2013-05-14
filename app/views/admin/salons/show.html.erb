@@ -44,12 +44,14 @@
 				<span class="title">
 					Detalhes do Salão
 				</span>
-				<div class="toolbar">
-					<%=link_to edit_admin_salon_path(@salon), :class => "btn btn-gebo btn-mini" do%>
-					<i class="icon-edit"></i>
-					Editar Salão
-					<%end%>
-				</div>
+				<%if can? :update,@professional%>
+					<div class="toolbar">
+						<%=link_to edit_admin_salon_path(@salon), :class => "btn btn-gebo btn-mini" do%>
+						<i class="icon-edit"></i>
+						Editar Salão
+						<%end%>
+					</div>
+				<%end%>
 			</div>
 			<div class="widget-content table-container">
 				<table class="table table-detail-view">
@@ -76,13 +78,7 @@
 						</tr>
 						<tr>
 							<th>Logo</th>
-							<td><%=image_tag @salon.logo.url(:thumb) if @salon.logo%></td>
-							<td>
-								<%= direct_upload_form_for @uploader do |f| %>
-								<p><%= f.file_field :logo %></p>
-								<p><%= f.submit "Upload Image" %></p>
-								<% end %>
-							</td>
+							<td><%=image_tag @salon.logo.url(:thumb) if @salon.logo%></td>							
 						</tr>
 						<tr>
 							<th>Email</th>
@@ -105,21 +101,22 @@
 			</div>
 		</div>
 
-		<% if can? :read, @professional%>
-		<div class="form-horizontal widget span6">
-			<div class="widget-header">
-				<span class="title">
-					Pagamentos
-				</span>
-				<div class="toolbar">
+		<% if can? :update, @professional%>
+			<div class="form-horizontal widget span6">
+				<div class="widget-header">
+					<span class="title">
+						Pagamentos
+					</span>
+					<div class="toolbar">
 
+					</div>
+				</div>
+				<div class="widget-content">
+					<%#=render "payment_table"%>
+					<h5>Você está isento de pagamento até o início do lançamento para todo o público</h5>			
 				</div>
 			</div>
-			<div class="widget-content">
-				<%#=render "payment_table"%>
-				<h5>Você está isento de pagamento até o início do lançamento para todo o público</h5>			
-			</div>
-		</div>
+		<%end%>		
 	</div>
-	<%end%>	
+	
 </div>

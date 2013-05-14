@@ -23,8 +23,7 @@ Salon.create(
 	:city => "São Paulo",
 	:state => "SP",
 	:zipcode => "05651001",
-	:email => "contato@openhair.com.br",
-	:remote_logo_url => "http://www.openhair.com.br/logoopen.jpg"
+	:email => "contato@openhair.com.br"
 )
 
 Salon.create(
@@ -37,8 +36,7 @@ Salon.create(
 	:city => "São Paulo",
 	:state => "SP",
 	:zipcode => "05422002",
-	:email => "sohoacademy@sohohair.com.br",
-	:remote_logo_url => "http://www.sohohair.com.br/site/wp-content/themes/soho2009/images/fixos/logo.png"
+	:email => "sohoacademy@sohohair.com.br"
 )
 
 Salon.create(
@@ -51,8 +49,7 @@ Salon.create(
 	:city => "São Paulo",
 	:state => "SP",
 	:zipcode => "01545000",
-	:email => "spettacolo@spettacolo.com.br",
-	:remote_logo_url => "http://www.spettacolo.com.br/wp-content/uploads/2012/04/logo250.png"
+	:email => "spettacolo@spettacolo.com.br"
 )
 
 Salon.create(
@@ -119,8 +116,7 @@ Salon.create(
 	:city => "Recife",
 	:state => "PE",
 	:zipcode => "51020900",
-	:email => "shoppingrecife@jacquesjanine.com.br",
-	:remote_logo_url => "http://jacquesjanine.com.br/wp-content/themes/janine/assets/images/jacques_logo.png"
+	:email => "shoppingrecife@jacquesjanine.com.br"
 )
 
 Salon.create(
@@ -133,8 +129,7 @@ Salon.create(
 	:city => "São Paulo",
 	:state => "SP",
 	:zipcode => "03690000",
-	:email => "studioneide@gmail.com",
-	:remote_logo_url => "http://www.studioneide.com.br/templates/gk_cherrydesign/images/style1/logo.png"
+	:email => "studioneide@gmail.com"
 )
 
 

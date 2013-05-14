@@ -1,5 +1,18 @@
 $(document).ready(function(){	
 
+	//-------------Datatables initialization-------------//
+
+	// For fluid containers
+	$('.datatable').dataTable({
+	  	"sDom": "<'row-fluid'r>t<'row-fluid'<'span6'i><'span6'p>>",
+	  	"sPaginationType": "bootstrap",
+	  	"bProcessing": "true",
+    	"bServerSide": "true",
+    	"sAjaxSource": $('#events_list').data('source')
+	});
+
+	//---------------------------------------------------//
+
 	// ----------- Validation Defaults ------------------//
 
 	jQuery.validator.addMethod("multiple", function(value, element, param) { 		

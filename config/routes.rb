@@ -39,6 +39,7 @@ Smartsalon::Application.routes.draw do
         post "easy/new" => "events#easy_create"
         get 'get_events'
         get 'search'
+        get 'calendar'
       end
       member do
         post "edit" => "events#update"

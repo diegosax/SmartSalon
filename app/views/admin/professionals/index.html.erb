@@ -20,6 +20,7 @@
 			</div>
 			<div class="widget-content table-container">
 				<table class="table table-striped form-inline" id="professionals_list">
+					<%if @professionals.length > 0%>
 					<thead>
 						<tr>
 							<th>Nome</th>
@@ -73,7 +74,12 @@
 							</td>
 						</tr>
 						<%end%>
-					</tbody>					
+					</tbody>
+					<%else%>
+						<div class="alert alert-info alert-block">
+							<h4>Você ainda não possui nenhum funcionário cadastrado</h4>
+						</div>
+					<%end%>					
 				</table>	
 			</div>
 

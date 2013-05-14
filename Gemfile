@@ -32,6 +32,8 @@ gem 'chosen-rails'
 
 gem 'rails3-jquery-autocomplete'
 
+gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
+
 #End of Plugins
 
 gem "watu_table_builder", :require => "table_builder"
@@ -60,8 +62,6 @@ gem 'client_side_validations'
 gem 'mini_magick'
 
 gem 'carrierwave'
-
-gem 'carrierwave_direct'
 
 gem 'sidekiq'
 
